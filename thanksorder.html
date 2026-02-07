@@ -175,20 +175,21 @@
     function updateStatus(stageIndex) {
       if (stageIndex >= stages.length) return;
 
-      const id = stages[stageIndex];
-      const el = document.getElementById(id);
-
-      // Mark previous as completed
-      if (stageIndex > 0) {
-        const prevId = stages[stageIndex - 1];
-        document.getElementById(prevId).classList.add('step-completed');
-        document.getElementById(prevId).classList.remove('step-active');
+      // Mark all previous stages as completed
+      for (let i = 0; i < stageIndex; i++) {
+        const prevId = stages[i];
+        const prevEl = document.getElementById(prevId);
+        prevEl.classList.add('step-completed');
+        prevEl.classList.remove('step-active');
       }
 
-      // Mark current as active
-      el.classList.add('step-active');
+      // Mark current stage as active
+      const currentId = stages[stageIndex];
+      const currentEl = document.getElementById(currentId);
+      currentEl.classList.add('step-active');
 
-      if (stageIndex === 1) document.getElementById("time2").innerText = "Estimated: 2 mins";
+      // Update estimated times
+      if (stageIndex === 1) document.getElementById("time2").innerText = "Started Recently";
       if (stageIndex === 2) document.getElementById("time3").innerText = "Estimated: 10 mins";
       if (stageIndex === 3) document.getElementById("time4").innerText = "Pending";
     }
