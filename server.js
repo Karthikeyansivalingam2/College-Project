@@ -241,7 +241,9 @@ app.get('/api/partner/dashboard/:id', async (req, res) => {
         const partner = await Partner.findOne({ partnerId: req.params.id });
         if (!partner) return res.status(404).json({ message: "Not found" });
 
-        const partnerOrders = await Order.find({ city: partner.city });
+        const partnerOrders = await Order.find({
+            city: { $regex: new RegExp(`^${partner.city}$`, 'i') }
+        });
         const totalEarnings = partnerOrders.filter(o => o.status === 'Completed').reduce((sum, o) => sum + parseFloat(o.total || 0), 0);
         const pendingCount = partnerOrders.filter(o => o.status === 'Pending').length;
 

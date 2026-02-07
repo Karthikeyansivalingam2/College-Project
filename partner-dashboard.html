@@ -292,6 +292,30 @@
 
             if (id === 'live-orders') renderLiveOrders();
             if (id === 'menu') fetchMenuItems();
+
+            // Re-render dashboard if switching back
+            if (id === 'dashboard' && dashboardData) {
+                renderDashboardOrders();
+            }
+        }
+
+        function renderDashboardOrders() {
+            if (!dashboardData) return;
+            const tbody = document.getElementById('ordersTableBody');
+            tbody.innerHTML = dashboardData.recentOrders.slice(0, 5).map(order => `
+                <tr class="hover:bg-gray-50 transition">
+                    <td class="px-6 py-4 font-mono text-sm text-gray-900">${order.id}</td>
+                    <td class="px-6 py-4 text-sm font-medium text-gray-800">${order.customer}</td>
+                    <td class="px-6 py-4 text-sm font-bold text-amber-800">₹${order.total}</td>
+                    <td class="px-6 py-4">
+                        <span
+                            class="px-2 py-1 ${order.status === 'Completed' ? 'bg-green-100 text-green-700' : (order.status === 'Pending' ? 'bg-yellow-100 text-yellow-700' : 'bg-blue-100 text-blue-700')} rounded-lg text-xs font-bold">
+                            ${order.status}
+                        </span>
+                    </td>
+                    <td class="px-6 py-4 text-xs text-gray-400">${order.time}</td>
+                </tr>
+            `).join('');
         }
 
         async function initDashboard() {
@@ -314,27 +338,21 @@
                 document.getElementById('statRating').innerText = dashboardData.stats.rating;
                 document.getElementById('partnerStatus').innerText = dashboardData.status || 'Active';
 
-                // Update Dashboard Table
-                const tbody = document.getElementById('ordersTableBody');
-                tbody.innerHTML = dashboardData.recentOrders.map(order => `
-    <tr class="hover:bg-gray-50 transition">
-        <td class="px-6 py-4 font-mono text-sm text-gray-900">${order.id}</td>
-        <td class="px-6 py-4 text-sm font-medium text-gray-800">${order.customer}</td>
-        <td class="px-6 py-4 text-sm font-bold text-amber-800">₹${order.total}</td>
-        <td class="px-6 py-4">
-            <span
-                class="px-2 py-1 ${order.status === 'Completed' ? 'bg-green-100 text-green-700' : 'bg-blue-100 text-blue-700'} rounded-lg text-xs font-bold">
-                ${order.status}
-            </span>
-        </td>
-        <td class="px-6 py-4 text-xs text-gray-400">${order.time}</td>
-    </tr>
-    `).join('');
+                renderDashboardOrders();
+
+                // Also update live orders if that section is visible
+                const liveOrdersSection = document.getElementById('section-live-orders');
+                if (!liveOrdersSection.classList.contains('hidden')) {
+                    renderLiveOrders();
+                }
 
             } catch (err) {
                 console.error(err);
-                alert("Session expired. Please login again.");
-                logout();
+                // Only logout if it's a 404 or persistent error
+                if (err.message && err.message.includes('404')) {
+                    alert("Session expired. Please login again.");
+                    logout();
+                }
             }
         }
 
@@ -476,6 +494,11 @@
         }
 
         initDashboard();
+
+        // Auto-refresh every 5 seconds to show new orders
+        setInterval(() => {
+            initDashboard();
+        }, 5000);
     </script>
 </body>
 
