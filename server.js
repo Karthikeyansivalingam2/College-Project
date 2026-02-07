@@ -241,9 +241,13 @@ app.get('/api/partner/dashboard/:id', async (req, res) => {
         const partner = await Partner.findOne({ partnerId: req.params.id });
         if (!partner) return res.status(404).json({ message: "Not found" });
 
-        const partnerOrders = await Order.find({
-            city: { $regex: new RegExp(`^${partner.city}$`, 'i') }
-        });
+        // Match by city (case-insensitive)
+        let query = { city: { $regex: new RegExp(`^${partner.city || 'Chennai'}$`, 'i') } };
+
+        // If no city is associated with partner, show all orders as fallback
+        if (!partner.city) query = {};
+
+        const partnerOrders = await Order.find(query);
         const totalEarnings = partnerOrders.filter(o => o.status === 'Completed').reduce((sum, o) => sum + parseFloat(o.total || 0), 0);
         const pendingCount = partnerOrders.filter(o => o.status === 'Pending').length;
 

@@ -91,6 +91,7 @@
                                     <th class="p-4">Order ID</th>
                                     <th class="p-4">Customer</th>
                                     <th class="p-4">Items</th>
+                                    <th class="p-4">City</th>
                                     <th class="p-4 text-right">Total</th>
                                     <th class="p-4 text-center">Status</th>
                                 </tr>
@@ -237,6 +238,7 @@
                                     ${Object.keys(order.items).map(k => `<li>${k} x${order.items[k].qty}</li>`).join('')}
                                 </ul>
                             </td>
+                            <td class="p-4 text-gray-500">${order.city || '<span class="text-red-400">Missing</span>'}</td>
                             <td class="p-4 font-bold text-right">₹${order.total}</td>
                             <td class="p-4 text-center"><span class="px-3 py-1 rounded-full text-xs font-bold ${getStatusColor(order.status)}">${order.status}</span></td>
                         </tr>
