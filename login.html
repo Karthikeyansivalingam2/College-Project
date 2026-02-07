@@ -64,11 +64,19 @@
             placeholder="Enter your details">
         </div>
 
-        <div>
+        <div class="relative">
           <label class="block text-sm font-medium text-gray-700">Password</label>
-          <input type="password" class="w-full border rounded-lg p-3 bg-gray-50 focus:outline-amber-700"
-            placeholder="••••••••">
-          <a href="#" class="text-xs text-amber-700 float-right mt-1">Forgot Password?</a>
+          <input type="password" id="loginPass"
+            class="w-full border rounded-lg p-3 bg-gray-50 focus:outline-amber-700 pr-10" placeholder="••••••••">
+          <i class="fa-solid fa-eye absolute right-4 top-9 text-gray-400 cursor-pointer" id="toggleLoginPass"></i>
+
+          <div class="flex justify-between items-center mt-2">
+            <label class="flex items-center gap-2 text-sm text-gray-600 cursor-pointer">
+              <input type="checkbox" id="userRememberMe" class="w-4 h-4 rounded border-gray-300 text-amber-600">
+              Remember me
+            </label>
+            <a href="#" class="text-xs text-amber-700">Forgot Password?</a>
+          </div>
         </div>
 
         <button type="button" onclick="handleLogin()"
@@ -108,7 +116,25 @@
     </div>
   </div>
 
+  </div>
+
   <script>
+    // Load Remembered User
+    const savedUser = localStorage.getItem('rememberedUserEmail');
+    if (savedUser) {
+      document.getElementById('loginUser').value = savedUser;
+      document.getElementById('userRememberMe').checked = true;
+    }
+
+    // Toggle Password Visibility
+    document.getElementById('toggleLoginPass').addEventListener('click', function () {
+      const input = document.getElementById('loginPass');
+      const type = input.getAttribute('type') === 'password' ? 'text' : 'password';
+      input.setAttribute('type', type);
+      this.classList.toggle('fa-eye');
+      this.classList.toggle('fa-eye-slash');
+    });
+
     function switchTab(tab) {
       const loginForm = document.getElementById('loginForm');
       const signupForm = document.getElementById('signupForm');
@@ -164,8 +190,8 @@
 
     async function handleLogin() {
       const user = document.getElementById('loginUser').value;
-      const passInput = document.querySelector('input[type="password"]');
-      const pass = passInput ? passInput.value : '';
+      const pass = document.getElementById('loginPass').value;
+      const rememberMe = document.getElementById('userRememberMe').checked;
 
       if (!user) {
         alert("Please enter username");
@@ -184,6 +210,13 @@
           const data = await res.json();
           if (data.success) {
             localStorage.setItem('currentUser', JSON.stringify(data.user));
+
+            if (rememberMe) {
+              localStorage.setItem('rememberedUserEmail', user);
+            } else {
+              localStorage.removeItem('rememberedUserEmail');
+            }
+
             window.location.href = 'index.html';
             return;
           } else {

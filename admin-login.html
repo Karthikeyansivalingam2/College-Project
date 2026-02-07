@@ -51,8 +51,17 @@
 
                 <div>
                     <label class="block text-sm font-medium text-gray-700">Password</label>
-                    <input type="password" id="adminPass" class="w-full border rounded p-3 focus:outline-amber-700"
-                        placeholder="••••••••">
+                    <div class="relative">
+                        <input type="password" id="adminPass"
+                            class="w-full border rounded p-3 focus:outline-amber-700 pr-10" placeholder="••••••••">
+                        <i class="fa-solid fa-eye absolute right-4 top-4 text-gray-400 cursor-pointer"
+                            id="toggleAdminPass"></i>
+                    </div>
+                    <label class="flex items-center gap-2 text-sm text-gray-600 mt-2 cursor-pointer">
+                        <input type="checkbox" id="adminRememberMe"
+                            class="w-4 h-4 rounded border-gray-300 text-amber-600">
+                        Remember me
+                    </label>
                 </div>
 
                 <button type="submit"
@@ -94,14 +103,38 @@
             document.querySelector('.nav-login').style.display = 'none';
         }
 
+        // Check for remembered admin
+        const savedAdmin = localStorage.getItem('rememberedAdminUser');
+        if (savedAdmin) {
+            document.getElementById('adminUser').value = savedAdmin;
+            document.getElementById('adminRememberMe').checked = true;
+        }
+
+        // Toggle Password
+        document.getElementById('toggleAdminPass').addEventListener('click', function () {
+            const input = document.getElementById('adminPass');
+            const type = input.getAttribute('type') === 'password' ? 'text' : 'password';
+            input.setAttribute('type', type);
+            this.classList.toggle('fa-eye');
+            this.classList.toggle('fa-eye-slash');
+        });
+
         document.getElementById('adminLoginForm').addEventListener('submit', function (e) {
             e.preventDefault();
 
             const user = document.getElementById('adminUser').value;
             const pass = document.getElementById('adminPass').value;
+            const rememberMe = document.getElementById('adminRememberMe').checked;
 
             if (user === 'karthikeyan' && pass === 'karthi123') {
                 localStorage.setItem('adminLoggedIn', 'true');
+
+                if (rememberMe) {
+                    localStorage.setItem('rememberedAdminUser', user);
+                } else {
+                    localStorage.removeItem('rememberedAdminUser');
+                }
+
                 window.location.href = 'admin.html';
             } else {
                 alert('Invalid Admin Credentials!');
