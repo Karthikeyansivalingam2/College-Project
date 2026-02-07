@@ -20,6 +20,38 @@
       background-size: cover;
       background-position: center;
     }
+
+    /* Dark Mode Overrides */
+    body.dark-mode {
+      background-color: #111827;
+      color: #f3f4f6;
+    }
+
+    body.dark-mode .bg-white {
+      background-color: #1f2937;
+      color: #e5e7eb;
+    }
+
+    body.dark-mode .text-gray-800,
+    body.dark-mode .text-gray-900 {
+      color: #f3f4f6;
+    }
+
+    body.dark-mode .text-gray-500,
+    body.dark-mode .text-gray-600 {
+      color: #9ca3af;
+    }
+
+    body.dark-mode .navbar,
+    body.dark-mode .footer {
+      background-color: #0f172a;
+      color: #cbd5e1;
+    }
+
+    body.dark-mode .shadow-lg,
+    body.dark-mode .shadow-sm {
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+    }
   </style>
 </head>
 
@@ -38,6 +70,13 @@
         <a href="partner.html">Partner with Us</a>
         <a href="careers.html">Job Careers</a>
         <a href="login.html" class="nav-login">Login</a>
+
+        <!-- Toggle Theme -->
+        <button onclick="toggleTheme()"
+          class="ml-4 p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition" title="Toggle Theme">
+          <i class="fa-solid fa-moon text-amber-700" id="themeIcon"></i>
+        </button>
+
         <a href="profile.html" id="navProfile"
           class="hidden items-center justify-center w-10 h-10 rounded-full border border-white/30 bg-white/10 text-white hover:bg-white/20 hover:scale-105 transition-all shadow-lg backdrop-blur-sm group">
           <span id="navUserInitial" class="font-bold text-base"></span>
@@ -367,16 +406,47 @@
             const select = document.getElementById('searchLocation');
             select.value = 'Chennai'; // Simulating result
             select.classList.add('text-amber-700', 'font-bold');
-            alert("Location detected: Chennai");
+            showToast("Location detected: Chennai", 'success');
           },
           (error) => {
-            alert("Unable to retrieve your location");
+            showToast("Unable to retrieve your location", 'error');
           }
         );
       } else {
-        alert("Geolocation is not supported by your browser");
+        showToast("Geolocation is not supported by your browser", 'error');
       }
     }
+  </script>
+
+  <script src="./assets/js/toast.js"></script>
+  <script>
+    // Dark Mode Logic
+    function toggleTheme() {
+      document.body.classList.toggle('dark-mode');
+      const isDark = document.body.classList.contains('dark-mode');
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+      updateThemeIcon(isDark);
+    }
+
+    function updateThemeIcon(isDark) {
+      const icon = document.getElementById('themeIcon');
+      if (isDark) {
+        icon.classList.remove('fa-moon', 'text-amber-700');
+        icon.classList.add('fa-sun', 'text-yellow-400');
+      } else {
+        icon.classList.remove('fa-sun', 'text-yellow-400');
+        icon.classList.add('fa-moon', 'text-amber-700');
+      }
+    }
+
+    // Init Theme
+    if (localStorage.getItem('theme') === 'dark') {
+      document.body.classList.add('dark-mode');
+      updateThemeIcon(true);
+    }
+
+    // Override alert with toast
+    window.alert = function (msg) { showToast(msg, msg.includes('success') || msg.includes('Success') ? 'success' : 'info'); };
   </script>
 </body>
 

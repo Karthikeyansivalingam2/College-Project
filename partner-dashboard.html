@@ -18,6 +18,24 @@
             background-color: #78350f;
             color: white;
         }
+
+        /* Skeleton Animation */
+        @keyframes shimmer {
+            0% {
+                background-position: -200% 0;
+            }
+
+            100% {
+                background-position: 200% 0;
+            }
+        }
+
+        .skeleton {
+            background: linear-gradient(90deg, #f3f4f6 25%, #e5e7eb 50%, #f3f4f6 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+            border-radius: 0.5rem;
+        }
     </style>
 </head>
 
@@ -299,6 +317,21 @@
             }
         }
 
+
+
+        function renderSkeleton() {
+            const tbody = document.getElementById('ordersTableBody');
+            tbody.innerHTML = Array(5).fill(0).map(() => `
+                <tr>
+                    <td class="px-6 py-4"><div class="skeleton h-4 w-16"></div></td>
+                    <td class="px-6 py-4"><div class="skeleton h-4 w-32"></div></td>
+                    <td class="px-6 py-4"><div class="skeleton h-4 w-12"></div></td>
+                    <td class="px-6 py-4"><div class="skeleton h-6 w-20 rounded-full"></div></td>
+                    <td class="px-6 py-4"><div class="skeleton h-3 w-16"></div></td>
+                </tr>
+            `).join('');
+        }
+
         function renderDashboardOrders() {
             if (!dashboardData) return;
             const tbody = document.getElementById('ordersTableBody');
@@ -319,6 +352,9 @@
         }
 
         async function initDashboard() {
+            // Show Skeleton if no data yet
+            if (!dashboardData) renderSkeleton();
+
             try {
                 const res = await fetch(`/api/partner/dashboard/${partner.partnerId}`);
                 if (!res.ok) throw new Error('Failed to fetch');
@@ -500,6 +536,12 @@
         setInterval(() => {
             initDashboard();
         }, 5000);
+    </script>
+    <script src="assets/js/common.js"></script>
+    <script src="assets/js/toast.js"></script>
+    <script>
+        // Use Global Toast instead of alert
+        window.alert = function (msg) { showToast(msg, msg.includes('success') || msg.includes('Success') || msg.includes('accepted') ? 'success' : 'info'); };
     </script>
 </body>
 

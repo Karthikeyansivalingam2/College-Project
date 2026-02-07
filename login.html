@@ -118,7 +118,11 @@
 
   </div>
 
+  <script src="assets/js/toast.js"></script>
   <script>
+    // Use Global Toast instead of alert
+    window.alert = function (msg) { showToast(msg, msg.includes('success') || msg.includes('Success') || msg.includes('accepted') ? 'success' : 'info'); };
+
     // Load Remembered User
     const savedUser = localStorage.getItem('rememberedUserEmail');
     if (savedUser) {
