@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Partner Dashboard - Foodie Zone</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: #f8fafc;
+        }
+
+        .sidebar-link.active {
+            background-color: #78350f;
+            color: white;
+        }
+    </style>
+</head>
+
+<body class="min-h-screen flex">
+
+    <!-- Sidebar -->
+    <aside class="w-64 bg-amber-900 text-amber-100 hidden lg:flex flex-col sticky top-0 h-screen">
+        <div class="p-6 border-b border-amber-800">
+            <h1 class="text-xl font-bold text-white flex items-center gap-2">
+                <i class="fa-solid fa-utensils"></i> Partner Center
+            </h1>
+        </div>
+
+        <nav class="flex-grow p-4 space-y-2">
+            <button onclick="showSection('dashboard')"
+                class="sidebar-link active flex items-center gap-3 w-full p-3 rounded-xl transition text-left">
+                <i class="fa-solid fa-chart-line w-5"></i> Dashboard
+            </button>
+            <button onclick="showSection('live-orders')"
+                class="sidebar-link flex items-center gap-3 w-full p-3 rounded-xl hover:bg-amber-800 transition text-left">
+                <i class="fa-solid fa-list-check w-5"></i> Live Orders
+            </button>
+            <button onclick="showSection('menu')"
+                class="sidebar-link flex items-center gap-3 w-full p-3 rounded-xl hover:bg-amber-800 transition text-left">
+                <i class="fa-solid fa-book-open w-5"></i> Menu Manager
+            </button>
+            <button onclick="showSection('earnings')"
+                class="sidebar-link flex items-center gap-3 w-full p-3 rounded-xl hover:bg-amber-800 transition text-left">
+                <i class="fa-solid fa-wallet w-5"></i> Earnings
+            </button>
+            <button onclick="showSection('reviews')"
+                class="sidebar-link flex items-center gap-3 w-full p-3 rounded-xl hover:bg-amber-800 transition text-left">
+                <i class="fa-solid fa-comments w-5"></i> Reviews
+            </button>
+        </nav>
+
+        <div class="p-4 border-t border-amber-800">
+            <button onclick="logout()"
+                class="flex items-center gap-3 w-full p-3 rounded-xl hover:bg-red-800/50 text-red-100 transition">
+                <i class="fa-solid fa-right-from-bracket"></i> Logout
+            </button>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-grow">
+        <!-- Header -->
+        <header class="bg-white border-b sticky top-0 z-30 px-6 py-4 flex justify-between items-center">
+            <div>
+                <h2 class="text-2xl font-bold text-gray-800" id="businessName">Loading...</h2>
+                <p class="text-sm text-gray-500">Partner ID: <span id="partnerIdDisplay" class="font-mono">...</span>
+                </p>
+            </div>
+
+            <div class="flex items-center gap-4">
+                <div class="text-right hidden sm:block">
+                    <p class="text-xs text-gray-400">Store Status</p>
+                    <p class="text-sm font-bold text-green-600 flex items-center gap-1">
+                        <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span> Open
+                    </p>
+                </div>
+                <img id="partnerAvatar" src="https://ui-avatars.com/api/?name=Partner"
+                    class="w-10 h-10 rounded-full border-2 border-amber-100">
+            </div>
+        </header>
+
+        <!-- Dynamic Content -->
+        <div class="p-6">
+
+            <!-- DASHBOARD SECTION -->
+            <div id="section-dashboard">
+                <!-- Quick Stats -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+                        <p class="text-gray-400 text-sm mb-1 uppercase tracking-wider font-semibold">Today's Orders</p>
+                        <div class="flex items-baseline gap-2">
+                            <span class="text-3xl font-bold text-gray-800" id="statOrders">0</span>
+                            <span class="text-green-500 text-xs font-bold font-mono">+12%</span>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+                        <p class="text-gray-400 text-sm mb-1 uppercase tracking-wider font-semibold">Today's Earnings
+                        </p>
+                        <div class="flex items-baseline gap-2">
+                            <span class="text-3xl font-bold text-gray-800">₹<span id="statEarnings">0</span></span>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+                        <p class="text-gray-400 text-sm mb-1 uppercase tracking-wider font-semibold">Pending Requests
+                        </p>
+                        <div class="flex items-baseline gap-2">
+                            <span class="text-3xl font-bold text-amber-600" id="statPending">0</span>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+                        <p class="text-gray-400 text-sm mb-1 uppercase tracking-wider font-semibold">Average Rating</p>
+                        <div class="flex items-baseline gap-2">
+                            <span class="text-3xl font-bold text-amber-800" id="statRating">0.0</span>
+                            <i class="fa-solid fa-star text-amber-400 text-xs"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <!-- Recent Orders -->
+                    <div class="lg:col-span-2 bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                        <div class="p-6 border-b flex justify-between items-center">
+                            <h3 class="font-bold text-gray-800">Recent Live Orders</h3>
+                            <button onclick="showSection('live-orders')"
+                                class="text-sm text-amber-700 hover:underline">View All</button>
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left">
+                                <thead class="bg-gray-50 text-xs text-gray-400 uppercase">
+                                    <tr>
+                                        <th class="px-6 py-4 font-semibold">Order ID</th>
+                                        <th class="px-6 py-4 font-semibold">Customer</th>
+                                        <th class="px-6 py-4 font-semibold">Total</th>
+                                        <th class="px-6 py-4 font-semibold">Status</th>
+                                        <th class="px-6 py-4 font-semibold">Time</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="ordersTableBody" class="divide-y divide-gray-50">
+                                    <!-- Loaded via JS -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Profile Info -->
+                    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+                        <h3 class="font-bold text-gray-800 mb-6 flex items-center gap-2">
+                            <i class="fa-solid fa-circle-info text-amber-700"></i> Business Profile
+                        </h3>
+
+                        <div class="space-y-4">
+                            <div>
+                                <p class="text-xs text-gray-400">Account Status</p>
+                                <span
+                                    class="inline-block px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs font-bold mt-1"
+                                    id="partnerStatus">Active</span>
+                            </div>
+                            <div>
+                                <p class="text-xs text-gray-400">Commission Rate</p>
+                                <p class="text-sm font-bold text-gray-800">10% per order</p>
+                            </div>
+                            <div>
+                                <p class="text-xs text-gray-400">Settlement Cycle</p>
+                                <p class="text-sm font-bold text-gray-800">Weekly (Every Monday)</p>
+                            </div>
+                            <div class="pt-4 mt-6 border-t border-dashed">
+                                <button
+                                    class="w-full bg-gray-50 text-gray-600 font-bold py-3 rounded-xl hover:bg-gray-100 transition border">Edit
+                                    Profile</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LIVE ORDERS SECTION -->
+            <div id="section-live-orders" class="hidden">
+                <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                    <div class="p-6 border-b">
+                        <h3 class="font-bold text-gray-800 text-xl">All Live Orders</h3>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left">
+                            <thead class="bg-gray-50 text-xs text-gray-400 uppercase">
+                                <tr>
+                                    <th class="px-6 py-4 font-semibold">Order ID</th>
+                                    <th class="px-6 py-4 font-semibold">Customer</th>
+                                    <th class="px-6 py-4 font-semibold">Items</th>
+                                    <th class="px-6 py-4 font-semibold">Total</th>
+                                    <th class="px-6 py-4 font-semibold">Status</th>
+                                    <th class="px-6 py-4 font-semibold">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="fullOrdersTableBody" class="divide-y divide-gray-50 text-sm">
+                                <!-- Loaded via JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MENU MANAGER SECTION -->
+            <div id="section-menu" class="hidden">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="font-bold text-gray-800 text-xl">Menu Manager</h3>
+                    <button onclick="addNewItem()"
+                        class="bg-amber-700 text-white px-4 py-2 rounded-lg font-bold text-sm">+ Add Item</button>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="menuGrid">
+                    <!-- Loaded via JS -->
+                </div>
+            </div>
+
+            <!-- EARNINGS SECTION -->
+            <div id="section-earnings" class="hidden">
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
+                    <h3 class="font-bold text-gray-800 text-xl mb-6">Earnings Overview</h3>
+                    <div class="h-64 bg-gray-50 rounded-xl flex items-center justify-center text-gray-400 font-medium">
+                        [ Earnings Chart Placeholder ]
+                    </div>
+                    <div class="mt-8 grid grid-cols-3 gap-4">
+                        <div class="p-4 bg-amber-50 rounded-xl">
+                            <p class="text-xs text-amber-600 font-bold uppercase">This Month</p>
+                            <p class="text-2xl font-bold">₹42,940</p>
+                        </div>
+                        <div class="p-4 bg-green-50 rounded-xl">
+                            <p class="text-xs text-green-600 font-bold uppercase">Total Payout</p>
+                            <p class="text-2xl font-bold">₹1,28,400</p>
+                        </div>
+                        <div class="p-4 bg-blue-50 rounded-xl">
+                            <p class="text-xs text-blue-600 font-bold uppercase">Commission</p>
+                            <p class="text-2xl font-bold">₹12,840</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <script>
+        // Auth Check
+        const partnerStr = localStorage.getItem('currentPartner');
+        if (!partnerStr) {
+            window.location.href = 'partner-login.html';
+        }
+        const partner = JSON.parse(partnerStr);
+
+        // Global Data Variable
+        let dashboardData = null;
+
+        function showSection(id) {
+            // Hide all
+            document.querySelectorAll('[id^="section-"]').forEach(el => el.classList.add('hidden'));
+            // Show target
+            document.getElementById('section-' + id).classList.remove('hidden');
+
+            // Update Sidebar UI
+            document.querySelectorAll('.sidebar-link').forEach(link => {
+                link.classList.remove('active', 'bg-amber-800');
+                if (link.getAttribute('onclick').includes(id)) link.classList.add('active');
+            });
+
+            if (id === 'live-orders') renderLiveOrders();
+            if (id === 'menu') fetchMenuItems();
+        }
+
+        async function initDashboard() {
+            try {
+                const res = await fetch(`/api/partner/dashboard/${partner.partnerId}`);
+                if (!res.ok) throw new Error('Failed to fetch');
+
+                dashboardData = await res.json();
+
+                // Update Header
+                document.getElementById('businessName').innerText = dashboardData.businessName;
+                document.getElementById('partnerIdDisplay').innerText = dashboardData.partnerId;
+                document.getElementById('partnerAvatar').src =
+                    `https://ui-avatars.com/api/?name=${encodeURIComponent(dashboardData.businessName)}&background=random`;
+
+                // Update Stats
+                document.getElementById('statOrders').innerText = dashboardData.stats.todayOrders;
+                document.getElementById('statEarnings').innerText = dashboardData.stats.totalEarnings;
+                document.getElementById('statPending').innerText = dashboardData.stats.pendingOrders;
+                document.getElementById('statRating').innerText = dashboardData.stats.rating;
+                document.getElementById('partnerStatus').innerText = dashboardData.status || 'Active';
+
+                // Update Dashboard Table
+                const tbody = document.getElementById('ordersTableBody');
+                tbody.innerHTML = dashboardData.recentOrders.map(order => `
+    <tr class="hover:bg-gray-50 transition">
+        <td class="px-6 py-4 font-mono text-sm text-gray-900">${order.id}</td>
+        <td class="px-6 py-4 text-sm font-medium text-gray-800">${order.customer}</td>
+        <td class="px-6 py-4 text-sm font-bold text-amber-800">₹${order.total}</td>
+        <td class="px-6 py-4">
+            <span
+                class="px-2 py-1 ${order.status === 'Completed' ? 'bg-green-100 text-green-700' : 'bg-blue-100 text-blue-700'} rounded-lg text-xs font-bold">
+                ${order.status}
+            </span>
+        </td>
+        <td class="px-6 py-4 text-xs text-gray-400">${order.time}</td>
+    </tr>
+    `).join('');
+
+            } catch (err) {
+                console.error(err);
+                alert("Session expired. Please login again.");
+                logout();
+            }
+        }
+
+        function renderLiveOrders() {
+            const tbody = document.getElementById('fullOrdersTableBody');
+            if (!dashboardData) return;
+
+            tbody.innerHTML = dashboardData.recentOrders.map(order => `
+    <tr class="hover:bg-gray-50 transition">
+        <td class="px-6 py-4 font-mono font-bold text-amber-700">${order.id}</td>
+        <td class="px-6 py-4 font-bold text-gray-800">${order.customer}</td>
+        <td class="px-6 py-4 text-gray-500">${order.itemsSummary || 'Varies'}</td>
+        <td class="px-6 py-4 font-bold">₹${order.total}</td>
+        <td class="px-6 py-4">
+            <span
+                class="px-2 py-1 rounded text-xs font-bold ${order.status === 'Completed' ? 'bg-green-100 text-green-700' : (order.status === 'Out for Delivery' ? 'bg-blue-100 text-blue-700' : 'bg-yellow-100 text-yellow-700')} mb-2 inline-block">
+                ${order.status}
+            </span>
+        </td>
+        <td class="px-6 py-4">
+            ${order.status === 'Pending' ? `
+            <button onclick="acceptOrder('${order.id}')"
+                class="bg-green-600 text-white px-3 py-1 rounded-lg text-xs font-bold hover:bg-green-700">Accept</button>
+            ` : '<span class="text-gray-400">Processed</span>'}
+        </td>
+    </tr>
+    `).join('');
+        }
+
+        async function acceptOrder(orderId) {
+            try {
+                const res = await fetch('/api/order/status', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ orderId, status: 'Out for Delivery' })
+                });
+                const data = await res.json();
+                if (data.success) {
+                    alert("Order accepted!");
+                    initDashboard(); // Refresh
+                    setTimeout(() => showSection('live-orders'), 500); // Re-render table
+                }
+            } catch (err) {
+                console.error(err);
+            }
+        }
+
+        // Global Menu State
+        let menuItems = [];
+
+        async function fetchMenuItems() {
+            try {
+                const res = await fetch('/api/menu');
+                menuItems = await res.json();
+                renderMenuManager();
+            } catch (err) {
+                console.error("Failed to fetch menu items", err);
+            }
+        }
+
+        function renderMenuManager() {
+            const grid = document.getElementById('menuGrid');
+            grid.innerHTML = menuItems.map(item => `
+                <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 transition-all ${item.active ? '' : 'opacity-60 grayscale'}">
+                    <div class="relative">
+                        <img src="${item.image}" class="w-full h-36 object-cover rounded-xl mb-4">
+                        <span class="absolute top-2 right-2 px-2 py-1 bg-white/90 rounded-lg text-[10px] font-bold uppercase tracking-wider text-gray-600 shadow-sm">${item.category}</span>
+                    </div>
+                    <div class="flex justify-between items-start mb-1">
+                        <h4 class="font-bold text-gray-800">${item.name}</h4>
+                        <span class="text-xs font-bold ${item.active ? 'text-green-500' : 'text-red-500'}">
+                            ${item.active ? 'Available' : 'Disabled'}
+                        </span>
+                    </div>
+                    <p class="text-amber-700 font-bold mb-4">₹${item.price}</p>
+                    <div class="flex gap-2">
+                        <button onclick="editItem(${item.id})" class="flex-1 bg-gray-50 text-gray-600 py-2 rounded-lg text-xs font-bold border hover:bg-gray-100 transition">Edit</button>
+                        <button onclick="toggleItemStatus(${item.id}, ${item.active})" 
+                            class="flex-1 py-2 rounded-lg text-xs font-bold border transition ${item.active ? 'bg-red-50 text-red-600 border-red-100 hover:bg-red-100' : 'bg-green-50 text-green-600 border-green-100 hover:bg-green-100'}">
+                            ${item.active ? 'Disable' : 'Enable'}
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        async function toggleItemStatus(id, currentStatus) {
+            try {
+                const res = await fetch('/api/menu/update', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ id, active: !currentStatus })
+                });
+                const data = await res.json();
+                if (data.success) fetchMenuItems();
+            } catch (err) { console.error(err); }
+        }
+
+        async function editItem(id) {
+            const item = menuItems.find(i => i.id === id);
+            if (item) {
+                const newPrice = prompt(`Enter new price for ${item.name}:`, item.price);
+                if (newPrice && !isNaN(newPrice)) {
+                    try {
+                        const res = await fetch('/api/menu/update', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ id, price: parseFloat(newPrice) })
+                        });
+                        const data = await res.json();
+                        if (data.success) fetchMenuItems();
+                    } catch (err) { console.error(err); }
+                }
+            }
+        }
+
+        async function addNewItem() {
+            const name = prompt("Enter Item Name:");
+            const price = prompt("Enter Price:");
+            const category = prompt("Enter Category (Beverage/Breakfast/Lunch/Snacks):", "Beverage");
+            const image = prompt("Enter Image URL (or leave blank for placeholder):", "https://placehold.co/400x300");
+
+            if (name && price) {
+                try {
+                    const res = await fetch('/api/menu/add', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ name, price: parseFloat(price), category, image: image || "https://placehold.co/400x300" })
+                    });
+                    const data = await res.json();
+                    if (data.success) fetchMenuItems();
+                } catch (err) { console.error(err); }
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem('currentPartner');
+            window.location.href = 'partner-login.html';
+        }
+
+        initDashboard();
+    </script>
+</body>
+
+</html>

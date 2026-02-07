@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login - Foodie Zone</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/css/common.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+
+<body class="bg-gray-50 flex flex-col min-h-screen">
+
+    <!-- Navbar -->
+    <header class="navbar">
+        <div class="nav-container">
+            <div class="logo">Foodie Zone</div>
+
+            <nav class="nav-links" id="navLinks">
+                <a href="index.html">Home</a>
+                <a href="order.html">Order</a>
+                <a href="halls.html">Party Halls</a>
+                <a href="review.html">Reviews</a>
+                <a href="partner.html">Partner with Us</a>
+                <a href="careers.html">Job Careers</a>
+                <a href="contact.html">Contact</a>
+                <a href="login.html" class="nav-login">Login</a>
+                <a href="profile.html" id="navProfile"
+                    class="hidden items-center justify-center w-10 h-10 bg-amber-700 text-white rounded-full hover:bg-amber-800 transition shadow-md">
+                    <i class="fa-solid fa-user"></i>
+                </a>
+            </nav>
+            <div class="menu-icon" onclick="toggleMenu()">☰</div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow flex items-center justify-center py-10 px-4">
+        <div class="bg-white p-8 rounded-xl shadow-lg w-full max-w-md border border-gray-100">
+            <h1 class="text-2xl font-bold text-center text-amber-800 mb-6">Admin Login</h1>
+
+            <form id="adminLoginForm" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Username</label>
+                    <input type="text" id="adminUser" class="w-full border rounded p-3 focus:outline-amber-700"
+                        placeholder="Enter username">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Password</label>
+                    <input type="password" id="adminPass" class="w-full border rounded p-3 focus:outline-amber-700"
+                        placeholder="••••••••">
+                </div>
+
+                <button type="submit"
+                    class="w-full bg-amber-800 text-white font-bold py-3 rounded hover:bg-amber-900 transition">Login</button>
+            </form>
+
+            <p class="text-center mt-4 text-sm">
+                <a href="index.html" class="text-gray-500 hover:text-gray-800">Back to Website</a>
+            </p>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer mt-auto">
+        <div class="footer-container">
+            <div class="footer-box">
+                <h3>Semma Taste</h3>
+                <p>One stop for Food, Halls, and Catering.</p>
+            </div>
+            <div class="footer-box">
+                <h4>Quick Links</h4>
+                <a href="index.html">Home</a><br>
+                <a href="order.html">Order</a><br>
+                <a href="halls.html">Party Halls</a>
+            </div>
+            <div class="footer-box">
+                <h4>Contact</h4>
+                <p>Email: careers@foodiezone.com</p>
+
+            </div>
+        </div>
+    </footer>
+
+    <script src="./assets/js/common.js"></script>
+    <script>
+        // Check for current user to show profile icon
+        if (localStorage.getItem('currentUser')) {
+            document.getElementById('navProfile').style.display = 'inline-block';
+            document.querySelector('.nav-login').style.display = 'none';
+        }
+
+        document.getElementById('adminLoginForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const user = document.getElementById('adminUser').value;
+            const pass = document.getElementById('adminPass').value;
+
+            if (user === 'karthikeyan' && pass === 'karthi123') {
+                localStorage.setItem('adminLoggedIn', 'true');
+                window.location.href = 'admin.html';
+            } else {
+                alert('Invalid Admin Credentials!');
+            }
+        });
+    </script>
+</body>
+
+</html>

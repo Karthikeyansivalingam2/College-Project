@@ -1,0 +1,263 @@
+/* =====================================================
+   GLOBAL RESET
+   ===================================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+/* Accessibility focus */
+a:focus,
+button:focus {
+  outline: 2px dashed #ffffff;
+  outline-offset: 4px;
+}
+
+/* =====================================================
+   THEME VARIABLES (TEAM STANDARD)
+   ===================================================== */
+:root {
+  --primary-color: #C97A3D;
+  --primary-dark: #8B4A1F;
+
+  --text-light: #ffffff;
+  --text-dark: #222222;
+  --text-muted: #666666;
+
+  --bg-main: #f6f7f9;
+  --bg-section: #fbfbfc;
+  --bg-card: #ffffff;
+}
+
+/* =====================================================
+   BODY BASE STYLE
+   ===================================================== */
+body {
+  font-family: 'Poppins', Arial, sans-serif;
+  background-color: var(--bg-main);
+  color: var(--text-dark);
+  line-height: 1.6;
+}
+
+/* =====================================================
+   NAVBAR (GLOBAL)
+   ===================================================== */
+.navbar {
+  background: linear-gradient(90deg, var(--primary-dark), var(--primary-color));
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
+}
+
+.nav-container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 16px 22px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  color: var(--text-light);
+  font-size: 22px;
+  font-weight: 600;
+}
+
+/* Links */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 26px;
+}
+
+.nav-links a {
+  color: var(--text-light);
+  text-decoration: none;
+  font-size: 14px;
+  position: relative;
+  transition: color 0.2s ease;
+}
+
+/* underline hover */
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 0;
+  height: 2px;
+  background: #fff;
+  transition: 0.25s;
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* login pill */
+.nav-login {
+  padding: 8px 18px;
+  border-radius: 22px;
+  border: 1px solid rgba(255, 255, 255, .6);
+  background: rgba(255, 255, 255, .18);
+  transition: background 0.2s ease;
+}
+
+/* hamburger */
+.menu-icon {
+  display: none;
+  font-size: 26px;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+/* =====================================================
+   MOBILE NAVBAR
+   ===================================================== */
+@media (max-width:768px) {
+
+  .menu-icon {
+    display: block;
+  }
+
+  .nav-links {
+    position: absolute;
+    top: 64px;
+    left: 0;
+    width: 100%;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    background: linear-gradient(180deg, var(--primary-dark), var(--primary-color));
+    padding: 16px 0;
+  }
+
+  .nav-links.active {
+    display: flex;
+  }
+
+  .nav-links a {
+    width: 100%;
+    text-align: center;
+    padding: 14px 0;
+    font-size: 16px;
+  }
+
+  .nav-login {
+    width: 100%;
+    text-align: center;
+    border-radius: 0;
+    margin-top: 8px;
+  }
+}
+
+/* =====================================================
+   FOOTER (GLOBAL)
+   ===================================================== */
+.footer {
+  background: linear-gradient(180deg, #9b5b2e, #5a2f17);
+  color: #eaded3;
+  margin-top: 90px;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 54px 22px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 36px;
+}
+
+.footer-box h3,
+.footer-box h4 {
+  color: #ffffff;
+  margin-bottom: 14px;
+}
+
+.footer-box a {
+  color: #eaded3;
+  text-decoration: none;
+  line-height: 1.8;
+  transition: color 0.2s ease;
+}
+
+.footer-box a:hover {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+/* social */
+.social-icons {
+  display: flex;
+  gap: 14px;
+}
+
+.social-icons a {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 2px solid var(--primary-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.25s;
+}
+
+.social-icons a i {
+  color: var(--primary-color);
+}
+
+.social.whatsapp:hover {
+  background: #25D366;
+  border-color: #25D366;
+}
+
+.social.instagram:hover {
+  background: #E4405F;
+  border-color: #E4405F;
+}
+
+.social.facebook:hover {
+  background: #1877F2;
+  border-color: #1877F2;
+}
+
+.social-icons a:hover i {
+  color: #ffffff;
+}
+
+.footer-bottom {
+  text-align: center;
+  padding: 18px;
+  font-size: 13px;
+  border-top: 1px solid rgba(255, 255, 255, .18);
+}
+
+/* =====================================================
+   RECOMMENDED ANIMATIONS
+   ===================================================== */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease-out forwards;
+}

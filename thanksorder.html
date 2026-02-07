@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Track Order - Foodie Zone</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f9fafb;
+    }
+
+    .step-active .icon-box {
+      background-color: #b45309;
+      color: white;
+      border-color: #b45309;
+    }
+
+    .step-completed .icon-box {
+      background-color: #b45309;
+      color: white;
+      border-color: #b45309;
+    }
+
+    .step-completed .line {
+      background-color: #b45309;
+    }
+
+    .animate-pulse-slow {
+      animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- JAVA SCRIPT TO GET URL PARAMS -->
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const orderId = urlParams.get('orderId') || 'ORD-' + Math.floor(Math.random() * 10000);
+  </script>
+
+  <!-- Navbar -->
+  <nav class="bg-white shadow-sm p-4 sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto flex justify-between items-center">
+      <div class="text-2xl font-bold text-amber-800">Foodie Zone</div>
+      <a href="index.html" class="text-gray-600 hover:text-amber-800 font-medium">Home</a>
+    </div>
+  </nav>
+
+  <div class="max-w-3xl mx-auto mt-10 p-6">
+
+    <!-- Order Header -->
+    <div class="bg-white rounded-2xl shadow-lg p-8 mb-8 text-center relative overflow-hidden">
+      <div class="absolute top-0 left-0 w-full h-2 bg-amber-700"></div>
+
+      <div class="inline-block p-4 rounded-full bg-green-100 text-green-600 mb-4 animate-bounce">
+        <i class="fa-solid fa-check text-3xl"></i>
+      </div>
+
+      <h1 class="text-3xl font-bold text-gray-800 mb-2">Order Confirmed!</h1>
+      <p class="text-gray-500 mb-6">Order ID: <span class="font-mono font-bold text-black"
+          id="dispOrderId">#LOADING</span></p>
+
+      <div class="bg-gray-50 rounded-lg p-4 inline-block text-left w-full md:w-2/3">
+        <h3 class="text-sm uppercase tracking-wide text-gray-400 font-semibold mb-2">Estimated Delivery</h3>
+        <div class="flex items-center justify-between">
+          <span class="text-2xl font-bold text-gray-800" id="timeRemaining">15-20 mins</span>
+          <span class="text-amber-600 font-medium"><i class="fa-solid fa-motorcycle"></i> On Time</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tracking Timeline -->
+    <div class="bg-white rounded-2xl shadow-lg p-8">
+      <h2 class="text-xl font-bold mb-6 border-b pb-4">Live Tracking</h2>
+
+      <!-- Vertical Timeline for Mobile / Horizontal for Desktop -->
+      <div class="relative">
+
+        <!-- Step 1 -->
+        <div class="flex gap-6 pb-8 h-full step-completed" id="step1">
+          <div class="flex flex-col items-center">
+            <div
+              class="icon-box w-12 h-12 rounded-full border-4 border-gray-200 flex items-center justify-center bg-white text-gray-400 z-10 transition-all duration-500">
+              <i class="fa-solid fa-clipboard-check"></i>
+            </div>
+            <div class="line w-1 h-full bg-gray-200 -mt-2 -mb-2 z-0 transition-all duration-500"></div>
+          </div>
+          <div>
+            <h3 class="text-lg font-bold">Order Placed</h3>
+            <p class="text-gray-500 text-sm">We have received your order.</p>
+            <p class="text-xs text-gray-400 mt-1" id="time1"></p>
+          </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="flex gap-6 pb-8 h-full" id="step2">
+          <div class="flex flex-col items-center">
+            <div
+              class="icon-box w-12 h-12 rounded-full border-4 border-gray-200 flex items-center justify-center bg-white text-gray-400 z-10 transition-all duration-500">
+              <i class="fa-solid fa-mug-hot"></i>
+            </div>
+            <div class="line w-1 h-full bg-gray-200 -mt-2 -mb-2 z-0 transition-all duration-500"></div>
+          </div>
+          <div>
+            <h3 class="text-lg font-bold">Preparing</h3>
+            <p class="text-gray-500 text-sm">Your tea is being brewed with love.</p>
+            <p class="text-xs text-gray-400 mt-1" id="time2"></p>
+          </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="flex gap-6 pb-8 h-full" id="step3">
+          <div class="flex flex-col items-center">
+            <div
+              class="icon-box w-12 h-12 rounded-full border-4 border-gray-200 flex items-center justify-center bg-white text-gray-400 z-10 transition-all duration-500">
+              <i class="fa-solid fa-person-biking"></i>
+            </div>
+            <div class="line w-1 h-full bg-gray-200 -mt-2 -mb-2 z-0 transition-all duration-500"></div>
+          </div>
+          <div>
+            <h3 class="text-lg font-bold">Out for Delivery</h3>
+            <p class="text-gray-500 text-sm">Our partner is on the way.</p>
+            <p class="text-xs text-gray-400 mt-1" id="time3"></p>
+          </div>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="flex gap-6 h-full" id="step4">
+          <div class="flex flex-col items-center">
+            <div
+              class="icon-box w-12 h-12 rounded-full border-4 border-gray-200 flex items-center justify-center bg-white text-gray-400 z-10 transition-all duration-500">
+              <i class="fa-solid fa-house-chimney"></i>
+            </div>
+          </div>
+          <div>
+            <h3 class="text-lg font-bold">Delivered</h3>
+            <p class="text-gray-500 text-sm">Enjoy your tea!</p>
+            <p class="text-xs text-gray-400 mt-1" id="time4"></p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="mt-8 flex flex-col md:flex-row gap-4">
+        <a href="tel:919876543210"
+          class="flex-1 bg-white border border-gray-300 text-gray-700 py-3 rounded-lg text-center font-semibold hover:bg-gray-50">
+          <i class="fa-solid fa-phone mr-2"></i> Call Support
+        </a>
+        <a href="index.html"
+          class="flex-1 bg-amber-700 text-white py-3 rounded-lg text-center font-semibold hover:bg-amber-800 shadow-md">
+          Order More
+        </a>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    document.getElementById("dispOrderId").innerText = orderId;
+
+    // Simulate Time Setting
+    document.getElementById("time1").innerText = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+    // Simulation Logic
+    const stages = ['step1', 'step2', 'step3', 'step4'];
+    let currentStage = 0;
+
+    function updateStatus(stageIndex) {
+      if (stageIndex >= stages.length) return;
+
+      const id = stages[stageIndex];
+      const el = document.getElementById(id);
+
+      // Mark previous as completed
+      if (stageIndex > 0) {
+        const prevId = stages[stageIndex - 1];
+        document.getElementById(prevId).classList.add('step-completed');
+        document.getElementById(prevId).classList.remove('step-active');
+      }
+
+      // Mark current as active
+      el.classList.add('step-active');
+
+      if (stageIndex === 1) document.getElementById("time2").innerText = "Estimated: 2 mins";
+      if (stageIndex === 2) document.getElementById("time3").innerText = "Estimated: 10 mins";
+      if (stageIndex === 3) document.getElementById("time4").innerText = "Pending";
+    }
+
+    // Live Polling Logic
+    async function checkStatus() {
+      try {
+        const res = await fetch(`/api/order/${orderId}`);
+        const order = await res.json();
+
+        if (order.status === 'Pending') {
+          updateStatus(0);
+        } else if (order.status === 'Preparing') {
+          updateStatus(1);
+        } else if (order.status === 'Out for Delivery') {
+          updateStatus(2);
+        } else if (order.status === 'Completed' || order.status === 'Delivered') {
+          updateStatus(3);
+          document.getElementById("time4").innerText = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+          document.querySelector("h1").innerText = "Order Delivered!";
+          document.querySelector(".text-green-600").classList.remove("animate-bounce");
+          clearInterval(statusInterval);
+        }
+      } catch (e) {
+        console.error("Status check failed", e);
+      }
+    }
+
+    const statusInterval = setInterval(checkStatus, 3000);
+    checkStatus();
+
+    function confettiEffect() {
+      // Simple visual queue, could add canvas confetti here if needed
+    }
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Party Halls - Foodie Zone</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/css/common.css">
+    <style>
+        body {
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .hall-card:hover .hall-img {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50">
+
+    <!-- Navbar -->
+    <header class="navbar">
+        <div class="nav-container">
+            <div class="logo">Foodie Zone</div>
+
+            <nav class="nav-links" id="navLinks">
+                <a href="index.html">Home</a>
+                <a href="order.html">Order</a>
+                <a href="halls.html" class="active">Party Halls</a>
+                <a href="review.html">Reviews</a>
+                <a href="partner.html">Partner with Us</a>
+                <a href="careers.html">Job Careers</a>
+                <a href="login.html" class="nav-login">Login</a>
+                <a href="profile.html" id="navProfile"
+                    class="hidden items-center justify-center w-10 h-10 rounded-full border border-white/30 bg-white/10 text-white hover:bg-white/20 hover:scale-105 transition-all shadow-lg backdrop-blur-sm group">
+                    <span id="navUserInitial" class="font-bold text-base"></span>
+                    <i id="navUserIcon" class="fa-solid fa-user text-sm group-hover:rotate-12 transition-transform"></i>
+                </a>
+            </nav>
+            <div class="menu-icon" onclick="toggleMenu()">☰</div>
+        </div>
+    </header>
+
+    <script>
+        const user = JSON.parse(localStorage.getItem('currentUser'));
+        if (user) {
+            const profileBtn = document.getElementById('navProfile');
+            if (profileBtn) {
+                profileBtn.classList.remove('hidden');
+                profileBtn.style.display = 'flex';
+                document.querySelector('.nav-login').style.display = 'none';
+
+                if (user.username) {
+                    document.getElementById('navUserInitial').innerText = user.username.charAt(0).toUpperCase();
+                    document.getElementById('navUserIcon').classList.add('hidden');
+                }
+            }
+        }
+    </script>
+
+    <!-- Hero -->
+    <section class="bg-amber-900 text-white py-16 px-4 text-center">
+        <h1 class="text-4xl font-bold mb-2">Celebrate with Foodie Zone</h1>
+
+        <p class="text-amber-100">Premium Party Halls & Banquet Spaces for your Special Moments</p>
+    </section>
+
+    <!-- Filter -->
+    <section class="max-w-6xl mx-auto px-4 py-8">
+        <div class="flex gap-4 overflow-x-auto pb-4">
+            <button onclick="filterHalls('all')"
+                class="filter-btn bg-amber-700 text-white px-6 py-2 rounded-full whitespace-nowrap shadow-md">All
+                Halls</button>
+            <button onclick="filterHalls('wedding')"
+                class="filter-btn bg-white border border-gray-300 px-6 py-2 rounded-full whitespace-nowrap hover:bg-gray-100 shadow-sm">Wedding
+                Halls</button>
+            <button onclick="filterHalls('birthday')"
+                class="filter-btn bg-white border border-gray-300 px-6 py-2 rounded-full whitespace-nowrap hover:bg-gray-100 shadow-sm">Birthday
+                Party</button>
+            <button onclick="filterHalls('corporate')"
+                class="filter-btn bg-white border border-gray-300 px-6 py-2 rounded-full whitespace-nowrap hover:bg-gray-100 shadow-sm">Corporate
+                Events</button>
+        </div>
+    </section>
+
+    <!-- Halls Grid -->
+    <section class="max-w-6xl mx-auto px-4 pb-20">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="hallsGrid">
+
+            <!-- Hall 1 -->
+            <div class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition hall-card group"
+                data-category="wedding">
+                <div class="h-48 overflow-hidden relative">
+                    <img src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?q=80&w=800"
+                        class="w-full h-full object-cover hall-img transition duration-500">
+                    <div class="absolute top-3 right-3 bg-white px-2 py-1 rounded text-xs font-bold shadow">
+                        <i class="fa-solid fa-user-group"></i> 200 Pax
+                    </div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-gray-800 mb-1">Golden Banquet Hall</h3>
+                    <p class="text-gray-500 text-sm mb-4"><i class="fa-solid fa-location-dot"></i> Anna Nagar, Chennai
+                    </p>
+
+                    <div class="flex gap-2 mb-4 text-xs text-gray-600">
+                        <span class="bg-gray-100 px-2 py-1 rounded">AC</span>
+                        <span class="bg-gray-100 px-2 py-1 rounded">Parking</span>
+                        <span class="bg-gray-100 px-2 py-1 rounded">Stage</span>
+                    </div>
+
+                    <div class="flex justify-between items-center mt-4">
+                        <div>
+                            <span class="text-xs text-gray-400">Starting from</span>
+                            <div class="text-lg font-bold text-amber-700">₹15,000</div>
+                        </div>
+                        <button onclick="bookHall('Golden Banquet Hall')"
+                            class="bg-black text-white px-4 py-2 rounded-lg hover:bg-amber-700 transition">Book
+                            Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hall 2 -->
+            <div class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition hall-card group"
+                data-category="wedding">
+                <div class="h-48 overflow-hidden relative">
+                    <img src="https://images.unsplash.com/photo-1527529482837-4698179dc6ce?q=80&w=800"
+                        class="w-full h-full object-cover hall-img transition duration-500">
+                    <div class="absolute top-3 right-3 bg-white px-2 py-1 rounded text-xs font-bold shadow">
+                        <i class="fa-solid fa-user-group"></i> 500 Pax
+                    </div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-gray-800 mb-1">Royal Grand Palace</h3>
+                    <p class="text-gray-500 text-sm mb-4"><i class="fa-solid fa-location-dot"></i> Salem Main Road</p>
+
+                    <div class="flex gap-2 mb-4 text-xs text-gray-600">
+                        <span class="bg-gray-100 px-2 py-1 rounded">AC</span>
+                        <span class="bg-gray-100 px-2 py-1 rounded">Dining Hall</span>
+                        <span class="bg-gray-100 px-2 py-1 rounded">Rooms</span>
+                    </div>
+
+                    <div class="flex justify-between items-center mt-4">
+                        <div>
+                            <span class="text-xs text-gray-400">Starting from</span>
+                            <div class="text-lg font-bold text-amber-700">₹40,000</div>
+                        </div>
+                        <button onclick="bookHall('Royal Grand Palace')"
+                            class="bg-black text-white px-4 py-2 rounded-lg hover:bg-amber-700 transition">Book
+                            Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hall 3 -->
+            <div class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition hall-card group"
+                data-category="birthday">
+                <div class="h-48 overflow-hidden relative">
+                    <img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?q=80&w=800"
+                        class="w-full h-full object-cover hall-img transition duration-500">
+                    <div class="absolute top-3 right-3 bg-white px-2 py-1 rounded text-xs font-bold shadow">
+                        <i class="fa-solid fa-user-group"></i> 50 Pax
+                    </div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-gray-800 mb-1">Mini Party Roof</h3>
+                    <p class="text-gray-500 text-sm mb-4"><i class="fa-solid fa-location-dot"></i> Erode Bypass</p>
+
+                    <div class="flex gap-2 mb-4 text-xs text-gray-600">
+                        <span class="bg-gray-100 px-2 py-1 rounded">Open Air</span>
+                        <span class="bg-gray-100 px-2 py-1 rounded">Music</span>
+                    </div>
+
+                    <div class="flex justify-between items-center mt-4">
+                        <div>
+                            <span class="text-xs text-gray-400">Starting from</span>
+                            <div class="text-lg font-bold text-amber-700">₹8,000</div>
+                        </div>
+                        <button onclick="bookHall('Mini Party Roof')"
+                            class="bg-black text-white px-4 py-2 rounded-lg hover:bg-amber-700 transition">Book
+                            Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hall 4: Grand Marriage Hall -->
+            <div class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition hall-card group"
+                data-category="wedding">
+                <div class="h-48 overflow-hidden relative">
+                    <img src="https://images.unsplash.com/photo-1519225448526-0a09ad386b19?q=80&w=800"
+                        class="w-full h-full object-cover hall-img transition duration-500">
+                    <div class="absolute top-3 right-3 bg-white px-2 py-1 rounded text-xs font-bold shadow">
+                        <i class="fa-solid fa-user-group"></i> 1000 Pax
+                    </div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-gray-800 mb-1">Grand Wedding Palace</h3>
+                    <p class="text-gray-500 text-sm mb-4"><i class="fa-solid fa-location-dot"></i> ECR, Chennai</p>
+
+                    <div class="flex gap-2 mb-4 text-xs text-gray-600">
+                        <span class="bg-gray-100 px-2 py-1 rounded">Central AC</span>
+                        <span class="bg-gray-100 px-2 py-1 rounded">Valet Parking</span>
+                        <span class="bg-gray-100 px-2 py-1 rounded">Luxury Rooms</span>
+                    </div>
+
+                    <div class="flex justify-between items-center mt-4">
+                        <div>
+                            <span class="text-xs text-gray-400">Starting from</span>
+                            <div class="text-lg font-bold text-amber-700">₹1,50,000</div>
+                        </div>
+                        <button onclick="bookHall('Grand Wedding Palace')"
+                            class="bg-black text-white px-4 py-2 rounded-lg hover:bg-amber-700 transition">Book
+                            Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hall 5: Baby Shower / Compact Hall -->
+            <div class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition hall-card group"
+                data-category="birthday">
+                <div class="h-48 overflow-hidden relative">
+                    <img src="https://images.unsplash.com/photo-1464366400600-7168b8af0bc3?q=80&w=800"
+                        class="w-full h-full object-cover hall-img transition duration-500">
+                    <div class="absolute top-3 right-3 bg-white px-2 py-1 rounded text-xs font-bold shadow">
+                        <i class="fa-solid fa-user-group"></i> 150 Pax
+                    </div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-gray-800 mb-1">Lotus Mini Hall</h3>
+                    <p class="text-gray-500 text-sm mb-4"><i class="fa-solid fa-location-dot"></i> T.Nagar, Chennai</p>
+
+                    <div class="flex gap-2 mb-4 text-xs text-gray-600">
+                        <span class="bg-gray-100 px-2 py-1 rounded">Baby Shower</span>
+                        <span class="bg-gray-100 px-2 py-1 rounded">Birthday</span>
+                        <span class="bg-gray-100 px-2 py-1 rounded">Lift</span>
+                    </div>
+
+                    <div class="flex justify-between items-center mt-4">
+                        <div>
+                            <span class="text-xs text-gray-400">Starting from</span>
+                            <div class="text-lg font-bold text-amber-700">₹25,000</div>
+                        </div>
+                        <button onclick="bookHall('Lotus Mini Hall')"
+                            class="bg-black text-white px-4 py-2 rounded-lg hover:bg-amber-700 transition">Book
+                            Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hall 6: Corporate Conference -->
+            <div class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition hall-card group"
+                data-category="corporate">
+                <div class="h-48 overflow-hidden relative">
+                    <img src="https://images.unsplash.com/photo-1505373877841-8d25f7d46678?q=80&w=800"
+                        class="w-full h-full object-cover hall-img transition duration-500">
+                    <div class="absolute top-3 right-3 bg-white px-2 py-1 rounded text-xs font-bold shadow">
+                        <i class="fa-solid fa-user-group"></i> 100 Pax
+                    </div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-gray-800 mb-1">Elite Conference Center</h3>
+                    <p class="text-gray-500 text-sm mb-4"><i class="fa-solid fa-location-dot"></i> OMR IT Corridor</p>
+
+                    <div class="flex gap-2 mb-4 text-xs text-gray-600">
+                        <span class="bg-gray-100 px-2 py-1 rounded">Projector</span>
+                        <span class="bg-gray-100 px-2 py-1 rounded">Hi-Tea</span>
+                        <span class="bg-gray-100 px-2 py-1 rounded">WiFi</span>
+                    </div>
+
+                    <div class="flex justify-between items-center mt-4">
+                        <div>
+                            <span class="text-xs text-gray-400">Starting from</span>
+                            <div class="text-lg font-bold text-amber-700">₹30,000</div>
+                        </div>
+                        <button onclick="bookHall('Elite Conference Center')"
+                            class="bg-black text-white px-4 py-2 rounded-lg hover:bg-amber-700 transition">Book
+                            Now</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Hall 7: Green Garden Party Lawn (Wedding) -->
+            <div class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition hall-card group"
+                data-category="wedding">
+                <div class="h-48 overflow-hidden relative">
+                    <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?q=80&w=800"
+                        class="w-full h-full object-cover hall-img transition duration-500">
+                    <div class="absolute top-3 right-3 bg-white px-2 py-1 rounded text-xs font-bold shadow">
+                        <i class="fa-solid fa-user-group"></i> 800 Pax
+                    </div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-gray-800 mb-1">Green Garden Lawn</h3>
+                    <p class="text-gray-500 text-sm mb-4"><i class="fa-solid fa-location-dot"></i> Bypass Road, Madurai
+                    </p>
+
+                    <div class="flex gap-2 mb-4 text-xs text-gray-600">
+                        <span class="bg-gray-100 px-2 py-1 rounded">Outdoor</span>
+                        <span class="bg-gray-100 px-2 py-1 rounded">Stage Decoration</span>
+                        <span class="bg-gray-100 px-2 py-1 rounded">Buffet Area</span>
+                    </div>
+
+                    <div class="flex justify-between items-center mt-4">
+                        <div>
+                            <span class="text-xs text-gray-400">Starting from</span>
+                            <div class="text-lg font-bold text-amber-700">₹60,000</div>
+                        </div>
+                        <button onclick="bookHall('Green Garden Lawn')"
+                            class="bg-black text-white px-4 py-2 rounded-lg hover:bg-amber-700 transition">Book
+                            Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hall 8: Sapphire Convention (Corporate) -->
+            <div class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition hall-card group"
+                data-category="corporate">
+                <div class="h-48 overflow-hidden relative">
+                    <img src="https://images.unsplash.com/photo-1504384308090-c54be385509c?q=80&w=800"
+                        class="w-full h-full object-cover hall-img transition duration-500">
+                    <div class="absolute top-3 right-3 bg-white px-2 py-1 rounded text-xs font-bold shadow">
+                        <i class="fa-solid fa-user-group"></i> 300 Pax
+                    </div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-gray-800 mb-1">Sapphire Convention</h3>
+                    <p class="text-gray-500 text-sm mb-4"><i class="fa-solid fa-location-dot"></i> Cantonment, Trichy
+                    </p>
+
+                    <div class="flex gap-2 mb-4 text-xs text-gray-600">
+                        <span class="bg-gray-100 px-2 py-1 rounded">Auditorium</span>
+                        <span class="bg-gray-100 px-2 py-1 rounded">Sound System</span>
+                        <span class="bg-gray-100 px-2 py-1 rounded">Lounge</span>
+                    </div>
+
+                    <div class="flex justify-between items-center mt-4">
+                        <div>
+                            <span class="text-xs text-gray-400">Starting from</span>
+                            <div class="text-lg font-bold text-amber-700">₹45,000</div>
+                        </div>
+                        <button onclick="bookHall('Sapphire Convention')"
+                            class="bg-black text-white px-4 py-2 rounded-lg hover:bg-amber-700 transition">Book
+                            Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hall 9: Moonlit Roof Deck (Birthday) -->
+            <div class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition hall-card group"
+                data-category="birthday">
+                <div class="h-48 overflow-hidden relative">
+                    <img src="https://images.unsplash.com/photo-1514525253440-b393452e8d26?q=80&w=800"
+                        class="w-full h-full object-cover hall-img transition duration-500">
+                    <div class="absolute top-3 right-3 bg-white px-2 py-1 rounded text-xs font-bold shadow">
+                        <i class="fa-solid fa-user-group"></i> 80 Pax
+                    </div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-gray-800 mb-1">Moonlit Roof Deck</h3>
+                    <p class="text-gray-500 text-sm mb-4"><i class="fa-solid fa-location-dot"></i> Besant Nagar, Chennai
+                    </p>
+
+                    <div class="flex gap-2 mb-4 text-xs text-gray-600">
+                        <span class="bg-gray-100 px-2 py-1 rounded">Sea View</span>
+                        <span class="bg-gray-100 px-2 py-1 rounded">Breeze</span>
+                        <span class="bg-gray-100 px-2 py-1 rounded">Private</span>
+                    </div>
+
+                    <div class="flex justify-between items-center mt-4">
+                        <div>
+                            <span class="text-xs text-gray-400">Starting from</span>
+                            <div class="text-lg font-bold text-amber-700">₹12,000</div>
+                        </div>
+                        <button onclick="bookHall('Moonlit Roof Deck')"
+                            class="bg-black text-white px-4 py-2 rounded-lg hover:bg-amber-700 transition">Book
+                            Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hall 10: Royal Springs (Wedding) -->
+            <div class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition hall-card group"
+                data-category="wedding">
+                <div class="h-48 overflow-hidden relative">
+                    <img src="https://images.unsplash.com/photo-1544819667-977a22589dd5?q=80&w=800"
+                        class="w-full h-full object-cover hall-img transition duration-500">
+                    <div class="absolute top-3 right-3 bg-white px-2 py-1 rounded text-xs font-bold shadow">
+                        <i class="fa-solid fa-user-group"></i> 600 Pax
+                    </div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-gray-800 mb-1">Royal Springs Palace</h3>
+                    <p class="text-gray-500 text-sm mb-4"><i class="fa-solid fa-location-dot"></i> Yercaud Footshills,
+                        Salem</p>
+
+                    <div class="flex gap-2 mb-4 text-xs text-gray-600">
+                        <span class="bg-gray-100 px-2 py-1 rounded">Hill View</span>
+                        <span class="bg-gray-100 px-2 py-1 rounded">Large Parking</span>
+                        <span class="bg-gray-100 px-2 py-1 rounded">Resort</span>
+                    </div>
+
+                    <div class="flex justify-between items-center mt-4">
+                        <div>
+                            <span class="text-xs text-gray-400">Starting from</span>
+                            <div class="text-lg font-bold text-amber-700">₹90,000</div>
+                        </div>
+                        <button onclick="bookHall('Royal Springs Palace')"
+                            class="bg-black text-white px-4 py-2 rounded-lg hover:bg-amber-700 transition">Book
+                            Now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Modal -->
+    <div id="bookingModal" class="fixed inset-0 bg-black/70 hidden items-center justify-center z-50 backdrop-blur-sm">
+        <div class="bg-white rounded-2xl w-full max-w-md p-6 relative">
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-400 hover:text-black"><i
+                    class="fa-solid fa-xmark text-xl"></i></button>
+            <h2 class="text-2xl font-bold mb-1">Book Hall</h2>
+            <p class="text-gray-500 text-sm mb-4" id="hallNameDisplay">Select a hall</p>
+
+            <form class="space-y-4">
+                <input type="date" class="w-full border rounded-lg p-3 bg-gray-50" required>
+                <div class="grid grid-cols-2 gap-4">
+                    <input type="text" placeholder="Your Name" class="w-full border rounded-lg p-3 bg-gray-50" required>
+                    <input type="text" placeholder="Mobile" class="w-full border rounded-lg p-3 bg-gray-50" required>
+                </div>
+                <select class="w-full border rounded-lg p-3 bg-gray-50">
+                    <option>Wedding</option>
+                    <option>Birthday</option>
+                    <option>Corporate</option>
+                    <option>Get-together</option>
+                </select>
+                <button type="button" onclick="confirmBooking()"
+                    class="w-full bg-amber-700 text-white font-bold py-3 rounded-lg hover:bg-amber-800">Request
+                    Booking</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-box">
+                <h3>Foodie Zone</h3>
+
+                <p>One stop for Food, Halls, and Catering.</p>
+            </div>
+            <div class="footer-box">
+                <h4>Quick Links</h4>
+                <a href="index.html">Home</a><br>
+                <a href="order.html">Order</a><br>
+                <a href="halls.html">Party Halls</a>
+            </div>
+            <div class="footer-box">
+                <h4>Contact</h4>
+                <p>Email: bookingsupport@foodiezone.com</p>
+
+            </div>
+        </div>
+    </footer>
+    </footer>
+
+    <script src="./assets/js/common.js"></script>
+    <script>
+        const modal = document.getElementById('bookingModal');
+
+        function bookHall(name) {
+            document.getElementById('hallNameDisplay').innerText = name;
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeModal() {
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        function confirmBooking() {
+            const hallId = 'HAL-' + Math.floor(Math.random() * 9000 + 1000);
+            window.location.href = `thanks.html?type=hall&id=${hallId}`;
+        }
+
+        function filterHalls(category) {
+            const halls = document.querySelectorAll('.hall-card');
+            const buttons = document.querySelectorAll('.filter-btn');
+
+            // Reset buttons
+            buttons.forEach(btn => {
+                if (btn.innerText.toLowerCase().includes(category === 'all' ? 'all' : category)) {
+                    btn.classList.add('bg-amber-700', 'text-white');
+                    btn.classList.remove('bg-white', 'text-black', 'border-gray-300');
+                } else {
+                    btn.classList.remove('bg-amber-700', 'text-white');
+                    btn.classList.add('bg-white', 'text-black', 'border-gray-300');
+                }
+            });
+
+            halls.forEach(hall => {
+                if (category === 'all' || hall.dataset.category === category) {
+                    hall.style.display = 'block';
+                } else {
+                    hall.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>

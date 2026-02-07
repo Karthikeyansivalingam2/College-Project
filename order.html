@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order</title>
+  <link href="./src/output.css" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="./assets/css/common.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./assets/css/order.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+
+<body class="bg-gray-50">
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="nav-container">
+      <div class="flex items-center gap-6">
+        <div class="logo">Foodie Zone</div>
+        <div class="hidden sm:flex items-center gap-2 cursor-pointer group" onclick="toggleLocationModal()">
+          <span class="text-xs uppercase font-bold text-gray-500 group-hover:text-amber-700">Serviceable in</span>
+          <span id="currentLoc"
+            class="text-sm font-bold border-b-2 border-gray-800 pb-0.5 group-hover:text-amber-700 group-hover:border-amber-700">Chennai</span>
+          <i class="fa-solid fa-chevron-down text-amber-700 text-xs mt-1"></i>
+        </div>
+      </div>
+
+      <nav class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="order.html" class="active">Order</a>
+        <a href="halls.html">Party Halls</a>
+        <a href="review.html">Reviews</a>
+        <a href="partner.html">Partner with Us</a>
+        <a href="careers.html">Job Careers</a>
+        <a href="login.html" class="nav-login">Login</a>
+        <a href="profile.html" id="navProfile"
+          class="hidden items-center justify-center w-10 h-10 rounded-full border border-white/30 bg-white/10 text-white hover:bg-white/20 hover:scale-105 transition-all shadow-lg backdrop-blur-sm group">
+          <span id="navUserInitial" class="font-bold text-base"></span>
+          <i id="navUserIcon" class="fa-solid fa-user text-sm group-hover:rotate-12 transition-transform"></i>
+        </a>
+      </nav>
+      <div class="menu-icon" onclick="toggleMenu()">☰</div>
+    </div>
+  </header>
+
+  <script>
+    const user = JSON.parse(localStorage.getItem('currentUser'));
+    if (user) {
+      const profileBtn = document.getElementById('navProfile');
+      profileBtn.classList.remove('hidden');
+      profileBtn.style.display = 'flex';
+      document.querySelector('.nav-login').style.display = 'none';
+
+      if (user.username) {
+        document.getElementById('navUserInitial').innerText = user.username.charAt(0).toUpperCase();
+        document.getElementById('navUserIcon').classList.add('hidden');
+      }
+    }
+  </script>
+
+  <!-- Hero / Category Filter -->
+  <div class="max-w-7xl mx-auto px-4 py-6">
+    <div class="flex flex-col md:flex-row justify-between items-center mb-6 gap-4">
+
+      <div class="flex gap-2">
+        <button id="retailBtn" onclick="switchMode('retail')"
+          class="px-6 py-2 bg-amber-700 text-white rounded-full font-bold shadow-md">Retail Order</button>
+        <button id="packageBtn" onclick="switchMode('monthly')"
+          class="px-6 py-2 bg-gray-200 text-gray-700 rounded-full font-medium hover:bg-gray-300">Subscriptions</button>
+      </div>
+
+      <div id="retailFilters" class="flex gap-2 w-full md:w-auto overflow-x-auto pb-2">
+        <button onclick="selectCategory(null)"
+          class="whitespace-nowrap px-4 py-1.5 rounded-full border border-gray-300 hover:bg-amber-50 text-sm">All</button>
+        <button onclick="selectCategory('Popular')"
+          class="whitespace-nowrap px-4 py-1.5 rounded-full border border-gray-300 hover:bg-amber-50 text-sm">Popular</button>
+        <button onclick="selectCategory('Healthy')"
+          class="whitespace-nowrap px-4 py-1.5 rounded-full border border-green-200 text-green-800 bg-green-50 text-sm">Diet/Healthy</button>
+        <button onclick="selectCategory('Snacks')"
+          class="whitespace-nowrap px-4 py-1.5 rounded-full border border-gray-300 hover:bg-amber-50 text-sm">Snacks</button>
+      </div>
+
+      <div id="retailSearch" class="relative w-full md:w-64">
+        <input type="text" id="searchTea" onkeyup="renderMenu()" placeholder="Search items..."
+          class="w-full pl-10 pr-4 py-2 border rounded-full focus:outline-none focus:ring-2 focus:ring-amber-500">
+        <i class="fa-solid fa-search absolute left-3 top-3 text-gray-400"></i>
+      </div>
+    </div>
+
+    <!-- RETAIL SECTION -->
+    <div id="retailSection">
+
+      <!-- Beverages -->
+      <div id="beverageSection">
+        <h3 class="text-xl font-bold text-gray-800 mb-4 border-l-4 border-amber-700 pl-3">Hot & Cold Beverages</h3>
+        <div id="beverageGrid" class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-4 mb-8"></div>
+      </div>
+
+      <!-- Breakfast -->
+      <div id="breakfastSection">
+        <h3 class="text-xl font-bold text-gray-800 mb-4 border-l-4 border-orange-500 pl-3">Breakfast Specials</h3>
+        <div id="breakfastGrid" class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-4 mb-8"></div>
+      </div>
+
+      <!-- Lunch -->
+      <div id="lunchSection">
+        <h3 class="text-xl font-bold text-gray-800 mb-4 border-l-4 border-red-600 pl-3">Lunch Meals & Biryani</h3>
+        <div id="lunchGrid" class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-4 mb-8"></div>
+      </div>
+
+      <!-- Dinner -->
+      <div id="dinnerSection">
+        <h3 class="text-xl font-bold text-gray-800 mb-4 border-l-4 border-indigo-600 pl-3">Dinner Delights</h3>
+        <div id="dinnerGrid" class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-4 mb-8"></div>
+      </div>
+
+      <!-- Fast Food / Snacks -->
+      <div id="fastFoodSection">
+        <h3 class="text-xl font-bold text-gray-800 mb-4 border-l-4 border-yellow-500 pl-3">Fast Food & Snacks</h3>
+        <div id="fastFoodGrid" class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-4 mb-8"></div>
+      </div>
+
+      <!-- Diet -->
+      <div id="dietSection">
+        <h3 class="text-xl font-bold text-gray-800 mb-4 border-l-4 border-green-600 pl-3">Healthy & Diet Food</h3>
+        <div id="dietGrid" class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-4 mb-8"></div>
+      </div>
+
+    </div>
+    <div id="cartItems"></div>
+  </div>
+
+
+  <!-- CART BAR (SWIGGY STYLE) -->
+  <div id="cartBar" style="position:fixed; bottom:0;"
+    class="left-0 right-0 hidden bg-green-600 shadow-2xl z-40 transition-all duration-300">
+
+    <div class="max-w-4xl mx-auto flex justify-between items-center px-4 py-3">
+      <div class="text-white">
+        <p class="font-bold text-sm">
+          <span id="cartCount">0</span> Items | ₹<span id="cartTotal">0</span>
+        </p>
+      </div>
+
+      <button onclick="openCart()"
+        class="text-white font-bold flex items-center gap-2 uppercase text-sm tracking-widest">
+        View Cart <i class="fa-solid fa-bag-shopping"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- CART DRAWER -->
+  <div id="cartDrawer" class="fixed inset-0 bg-black bg-opacity-40 hidden z-50" onclick="closeCart()">
+    <div onclick="event.stopPropagation()" class=" bg-white p-4 fixed bottom-0 left-0 right-0 md:top-0 md:bottom-0 md:right-0 md:left-auto md:w-96
+      rounded-t-2xl md:rounded-none max-h-[75%] md:max-h-full overflow-y-auto">
+      <!-- Drag Handle (Mobile only) -->
+      <div class="w-12 h-1 bg-gray-300 rounded-full mx-auto mb-3 md:hidden"></div>
+      <h3 class="text-lg font-bold mb-3">Your Cart</h3>
+      <ul id="cartItems" class="space-y-3"></ul>
+      <div class="flex justify-between font-semibold mt-4 border-t pt-3">
+        <span>Total Order</span>
+        <span>₹<span id="total">0</span></span>
+      </div>
+
+      <div id="addressSection" class="mt-6 p-4 border-2 border-dashed border-gray-200 rounded-xl bg-gray-50">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-10 h-10 bg-white rounded shadow-sm flex items-center justify-center text-gray-400">
+            <i class="fa-solid fa-location-dot"></i>
+          </div>
+          <div>
+            <h4 class="font-bold text-gray-800">Delivery Address</h4>
+            <p class="text-xs text-gray-500">Add a new delivery address</p>
+          </div>
+        </div>
+
+        <form class="space-y-4">
+          <input type="text" id="txtName"
+            class="w-full border border-gray-200 rounded-lg p-3 text-sm focus:ring-2 focus:ring-amber-500 outline-none"
+            placeholder="Receiver Name">
+          <input type="tel" id="txtMobile"
+            class="w-full border border-gray-200 rounded-lg p-3 text-sm focus:ring-2 focus:ring-amber-500 outline-none"
+            placeholder="Mobile Number">
+          <textarea id="txtAddress"
+            class="w-full border border-gray-200 rounded-lg p-3 h-20 text-sm focus:ring-2 focus:ring-amber-500 outline-none"
+            placeholder="Complete Address (Flat/House No, Landmark)"></textarea>
+        </form>
+      </div>
+
+      <button id="payBtn" onclick="processPayment()"
+        class="w-full mt-6 bg-green-600 text-white py-4 rounded-xl text-lg font-bold shadow-lg hover:bg-green-700 transition">
+        Proceed to Pay ₹<span id="btnTotal">0</span>
+      </button>
+
+
+
+      <button onclick="closeCart()" class="w-full mt-2 text-gray-500 text-sm">
+        Close
+      </button>
+    </div>
+  </div>
+
+  <div id="monthlySection" class="hidden">
+
+    <h2 class="text-2xl font-bold mb-4 text-center">Subscriptions & Catering Plans</h2>
+
+    <!-- Tabs -->
+    <div class="flex flex-wrap justify-center gap-2 mb-6 border-b pb-4">
+      <button onclick="filterPackages('Hostel')"
+        class="px-4 py-2 bg-amber-100 text-amber-900 rounded-full font-medium hover:bg-amber-200 transition">Hostel/Mess</button>
+      <button onclick="filterPackages('Senior')"
+        class="px-4 py-2 bg-green-100 text-green-900 rounded-full font-medium hover:bg-green-200 transition">Senior
+        Diet</button>
+      <button onclick="filterPackages('Corporate')"
+        class="px-4 py-2 bg-blue-100 text-blue-900 rounded-full font-medium hover:bg-blue-200 transition">Corporate</button>
+      <button onclick="filterPackages('Event')"
+        class="px-4 py-2 bg-purple-100 text-purple-900 rounded-full font-medium hover:bg-purple-200 transition">Event
+        Catering</button>
+    </div>
+
+    <div id="packageGrid" class="grid grid-cols-1 md:grid-cols-3 gap-6 p-2"></div>
+    <div>
+      <form id="enquiryForm" class="max-w-sm mx-auto space-y-4"
+        style="background: white; padding: 20px; border-radius: 10px; margin-top: 20px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);">
+        <h1 class="text-2xl font-bold text-center mb-4">Enquire Form</h1>
+
+        <!-- Selected Package Display -->
+        <div>
+          <label class="block mb-2.5 text-sm font-medium text-heading">Interested Package</label>
+          <input type="text" id="txtSelectedPackage" readonly
+            class="bg-gray-100 border border-gray-300 text-gray-500 text-sm rounded block w-full px-2.5 py-2 cursor-not-allowed"
+            value="General Enquiry" />
+        </div>
+        <div>
+          <label for="visitors" class="block mb-2.5 text-sm font-medium text-heading">Name </label>
+          <input type="text" id="txtEnqName"
+            class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-2.5 py-2 shadow-xs placeholder:text-body"
+            placeholder="Name" />
+          <span class="text-red-800" id="spnEnqErrorName"></span>
+        </div>
+        <div>
+          <label for="visitors" class="block mb-2.5 text-sm font-medium text-heading">Mobile Number </label>
+          <input type="text" id="txtEnqMobile"
+            class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-2.5 py-2 shadow-xs placeholder:text-body"
+            placeholder="Mobile Number" />
+          <span class="text-red-800" id="spnEnqErrorMobile"></span>
+        </div>
+        <div>
+          <label for="visitors" class="block mb-2.5 text-sm font-medium text-heading">Email </label>
+          <input type="text" id="txtEnqEmail"
+            class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-2.5 py-2 shadow-xs placeholder:text-body"
+            placeholder="Mobile Number" />
+          <span class="text-red-800" id="spnEnqErrorEmail"></span>
+        </div>
+        <div>
+          <label for="visitors" class="block mb-2.5 text-sm font-medium text-heading">Company Name </label>
+          <input type="text" id="txtEnqComapny"
+            class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-2.5 py-2 shadow-xs placeholder:text-body"
+            placeholder="Mobile Number" />
+          <span class="text-red-800" id="spnEnqErrorComapny"></span>
+        </div>
+        <button type="button" id="btnEnquire"
+          class=" text-white bg-amber-800  bg-brand box-border border border-transparent hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none mt-100 rounded ">Submit</button>
+
+      </form>
+    </div>
+  </div>
+
+  <!--Footer-->
+  <footer class="footer">
+    <div class="footer-container">
+
+      <div class="footer-box">
+        <h3>Foodie Zone</h3>
+
+        <p>Discover the best food near you with instant directions.</p>
+      </div>
+
+      <div class="footer-box">
+        <h4>Quick Links</h4>
+        <a href="index.html">Home</a><br>
+        <a href="about.html">About</a><br>
+        <a href="halls.html">Party Halls</a><br>
+        <a href="review.html">Reviews</a>
+      </div>
+
+      <div class="footer-box">
+        <h4>Contact</h4>
+        <p>Email: support@foodiezone.com</p>
+
+        <p>Location: Tamil Nadu</p>
+      </div>
+
+      <div class="footer-box">
+        <h4>Follow Us</h4>
+        <div class="social-icons">
+          <a href="https://wa.me/919876543210" target="_blank" class="social whatsapp">
+            <i class="fa-brands fa-whatsapp"></i>
+          </a>
+          <a href="https://instagram.com" target="_blank" class="social instagram">
+            <i class="fa-brands fa-instagram"></i>
+          </a>
+          <a href="https://facebook.com" target="_blank" class="social facebook">
+            <i class="fa-brands fa-facebook-f"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      © 2026 Foodie Zone. All rights reserved.
+
+    </div>
+  </footer>
+
+  <!-- LOCATION MODAL -->
+  <div id="locationModal" class="fixed inset-0 bg-black bg-opacity-60 hidden flex items-center justify-center z-[3000]">
+    <div class="bg-white w-[90%] max-w-md rounded-2xl overflow-hidden shadow-2xl">
+      <div class="p-6 border-b flex justify-between items-center bg-gray-50">
+        <h3 class="font-bold text-gray-800">Select Service Location</h3>
+        <button onclick="toggleLocationModal()" class="text-gray-400 hover:text-gray-600"><i
+            class="fa-solid fa-times"></i></button>
+      </div>
+      <div class="p-6 space-y-4">
+        <p class="text-sm text-gray-500 mb-2">We are currently delivering in:</p>
+        <button onclick="setLocation('Chennai')"
+          class="w-full text-left p-4 border rounded-xl hover:bg-amber-50 hover:border-amber-500 transition flex justify-between items-center group">
+          <span class="font-bold text-gray-700 group-hover:text-amber-700">Chennai</span>
+          <i class="fa-solid fa-chevron-right text-gray-300 group-hover:text-amber-700"></i>
+        </button>
+        <button onclick="setLocation('Madurai')"
+          class="w-full text-left p-4 border rounded-xl hover:bg-amber-50 hover:border-amber-500 transition flex justify-between items-center group">
+          <span class="font-bold text-gray-700 group-hover:text-amber-700">Madurai</span>
+          <i class="fa-solid fa-chevron-right text-gray-300 group-hover:text-amber-700"></i>
+        </button>
+        <button onclick="setLocation('Coimbatore')"
+          class="w-full text-left p-4 border rounded-xl hover:bg-amber-50 hover:border-amber-500 transition flex justify-between items-center group">
+          <span class="font-bold text-gray-700 group-hover:text-amber-700">Coimbatore</span>
+          <i class="fa-solid fa-chevron-right text-gray-300 group-hover:text-amber-700"></i>
+        </button>
+        <button onclick="setLocation('Salem')"
+          class="w-full text-left p-4 border rounded-xl hover:bg-amber-50 hover:border-amber-500 transition flex justify-between items-center group">
+          <span class="font-bold text-gray-700 group-hover:text-amber-700">Salem</span>
+          <i class="fa-solid fa-chevron-right text-gray-300 group-hover:text-amber-700"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="./assets/js/common.js"></script>
+  <script src="./assets/js/order.js"></script>
+
+
+
+  <!-- ACKNOWLEDGEMENT MODAL -->
+  <div id="ackModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-[2000]">
+    <div class="bg-white rounded-lg shadow-2xl w-full max-w-lg overflow-hidden transform transition-all scale-100">
+      <!-- Header -->
+      <div class="bg-amber-700 p-6 text-white text-center relative">
+        <h2 class="text-2xl font-bold mb-1">Foodie Zone</h2>
+
+        <p class="text-amber-100 text-sm">Enquiry Acknowledgement</p>
+        <button onclick="closeAckModal()" class="absolute top-4 right-4 text-white hover:text-gray-200">
+          <i class="fa-solid fa-times text-xl"></i>
+        </button>
+      </div>
+
+      <!-- Body -->
+      <div class="p-8">
+        <div class="text-center mb-6">
+          <div class="inline-flex items-center justify-center w-12 h-12 bg-green-100 rounded-full mb-3">
+            <i class="fa-solid fa-check text-green-600 text-xl"></i>
+          </div>
+          <h3 class="text-xl font-bold text-gray-800">Application Sent Successfully!</h3>
+          <p class="text-gray-500 text-sm mt-1">Reference ID: <span id="ackRefId"
+              class="font-mono font-bold text-gray-800">REQ-0000</span></p>
+          <p class="text-gray-400 text-xs" id="ackDate">Date: --/--/----</p>
+        </div>
+
+        <div class="bg-gray-50 rounded-lg p-4 border border-gray-100 text-sm space-y-3">
+          <h4 class="font-bold text-gray-700 border-b pb-2 mb-2">Submitted Details</h4>
+
+          <div class="grid grid-cols-3 gap-2">
+            <span class="text-gray-500 col-span-1">Name:</span>
+            <span class="font-medium text-gray-800 col-span-2 text-right" id="ackName">-</span>
+          </div>
+          <div class="grid grid-cols-3 gap-2">
+            <span class="text-gray-500 col-span-1">Mobile:</span>
+            <span class="font-medium text-gray-800 col-span-2 text-right" id="ackMobile">-</span>
+          </div>
+          <div class="grid grid-cols-3 gap-2">
+            <span class="text-gray-500 col-span-1">Email:</span>
+            <span class="font-medium text-gray-800 col-span-2 text-right break-all" id="ackEmail">-</span>
+          </div>
+          <div class="grid grid-cols-3 gap-2">
+            <span class="text-gray-500 col-span-1">Company:</span>
+            <span class="font-medium text-gray-800 col-span-2 text-right break-words" id="ackCompany">-</span>
+          </div>
+          <div class="grid grid-cols-3 gap-2 pt-2 border-t mt-2">
+            <span class="text-gray-500 col-span-1">Package:</span>
+            <span class="font-bold text-amber-700 col-span-2 text-right" id="ackPackage">-</span>
+          </div>
+        </div>
+
+        <p class="text-center text-xs text-gray-400 mt-6">
+          Thank you for your interest. Our team will contact you shortly.<br>
+          For support: support@foodiezone.com
+
+        </p>
+
+        <button onclick="closeAckModal()"
+          class="w-full mt-6 bg-amber-700 text-white py-3 rounded-lg font-bold hover:bg-amber-800 transition">
+          Close Receipt
+        </button>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+</html>

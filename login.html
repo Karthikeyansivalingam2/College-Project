@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - Foodie Zone</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Outfit', sans-serif;
+      background-color: #fca5a5;
+      background-image: linear-gradient(315deg, #fca5a5 0%, #fcd34d 74%);
+    }
+  </style>
+</head>
+
+<body class="flex items-center justify-center min-h-screen p-4">
+
+  <div class="bg-white rounded-2xl shadow-2xl flex overflow-hidden w-full max-w-4xl min-h-[500px]">
+
+    <!-- Left Side: Image & Branding -->
+    <div
+      class="hidden md:flex w-1/2 bg-amber-900 relative flex-col justify-center items-center text-white p-8 text-center">
+
+      <div class="absolute inset-0 z-0 opacity-40">
+        <img src="https://images.unsplash.com/photo-1543353071-873f17a7a088?q=80&w=800"
+          class="w-full h-full object-cover">
+      </div>
+
+      <div class="relative z-10">
+        <h1 class="text-4xl font-bold mb-2">Foodie Zone</h1>
+
+        <p class="text-amber-100">Experience the Joy of Authentic Food</p>
+      </div>
+    </div>
+
+    <!-- Right Side: Forms -->
+    <div class="w-full md:w-1/2 p-8 md:p-12 relative">
+
+      <!-- Navbar Back Link -->
+      <a href="index.html" class="absolute top-4 right-4 text-gray-400 hover:text-black text-sm">
+        <i class="fa-solid fa-arrow-left"></i> Back to Home
+      </a>
+
+      <!-- Tabs -->
+      <div class="flex gap-6 mb-8 border-b">
+        <button onclick="switchTab('login')" id="tabLogin"
+          class="pb-2 border-b-2 border-amber-700 font-bold text-amber-700">Login</button>
+        <button onclick="switchTab('signup')" id="tabSignup"
+          class="pb-2 border-b-2 border-transparent text-gray-500 hover:text-black">Sign Up</button>
+      </div>
+
+      <!-- Login Form -->
+      <form id="loginForm" class="space-y-4">
+        <h2 class="text-2xl font-bold mb-4">Welcome Back</h2>
+
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Phone or Email</label>
+          <input type="text" id="loginUser" class="w-full border rounded-lg p-3 bg-gray-50 focus:outline-amber-700"
+            placeholder="Enter your details">
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Password</label>
+          <input type="password" class="w-full border rounded-lg p-3 bg-gray-50 focus:outline-amber-700"
+            placeholder="••••••••">
+          <a href="#" class="text-xs text-amber-700 float-right mt-1">Forgot Password?</a>
+        </div>
+
+        <button type="button" onclick="handleLogin()"
+          class="w-full bg-amber-700 text-white font-bold py-3 rounded-lg hover:bg-amber-800 transition mt-6 disabled:opacity-50">
+          Login Securely
+        </button>
+      </form>
+
+      <!-- Signup Form (Hidden) -->
+      <form id="signupForm" class="space-y-4 hidden">
+        <h2 class="text-2xl font-bold mb-4">Create Account</h2>
+
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Full Name</label>
+          <input type="text" class="w-full border rounded-lg p-3 bg-gray-50 focus:outline-amber-700"
+            placeholder="John Doe">
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Mobile Number</label>
+          <input type="text" class="w-full border rounded-lg p-3 bg-gray-50 focus:outline-amber-700"
+            placeholder="9876543210">
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Create Password</label>
+          <input type="password" class="w-full border rounded-lg p-3 bg-gray-50 focus:outline-amber-700"
+            placeholder="Minimum 6 chars">
+        </div>
+
+        <button type="button" onclick="alert('Account Created!')"
+          class="w-full bg-black text-white font-bold py-3 rounded-lg hover:bg-amber-700 transition mt-6">
+          Sign Up
+        </button>
+      </form>
+
+    </div>
+  </div>
+
+  <script>
+    function switchTab(tab) {
+      const loginForm = document.getElementById('loginForm');
+      const signupForm = document.getElementById('signupForm');
+      const tabLogin = document.getElementById('tabLogin');
+      const tabSignup = document.getElementById('tabSignup');
+
+      if (tab === 'login') {
+        loginForm.classList.remove('hidden');
+        signupForm.classList.add('hidden');
+        tabLogin.classList.add('border-amber-700', 'text-amber-700');
+        tabLogin.classList.remove('border-transparent', 'text-gray-500');
+        tabSignup.classList.remove('border-amber-700', 'text-amber-700');
+        tabSignup.classList.add('border-transparent', 'text-gray-500');
+      } else {
+        loginForm.classList.add('hidden');
+        signupForm.classList.remove('hidden');
+        tabSignup.classList.add('border-amber-700', 'text-amber-700');
+        tabSignup.classList.remove('border-transparent', 'text-gray-500');
+        tabLogin.classList.remove('border-amber-700', 'text-amber-700');
+        tabLogin.classList.add('border-transparent', 'text-gray-500');
+      }
+    }
+
+    async function handleLogin() {
+      const user = document.getElementById('loginUser').value;
+      const passInput = document.querySelector('input[type="password"]');
+      const pass = passInput ? passInput.value : '';
+
+      if (!user) {
+        alert("Please enter username");
+        return;
+      }
+
+      // Try connecting to backend
+      try {
+        const res = await fetch('/api/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: user, password: pass })
+        });
+
+        if (res.ok) {
+          const data = await res.json();
+          if (data.success) {
+            localStorage.setItem('currentUser', JSON.stringify(data.user));
+            window.location.href = 'index.html';
+            return;
+          } else {
+            alert(data.message || "Invalid credentials");
+          }
+        } else {
+          // Server is there but returned error (e.g. 401)
+          const data = await res.json();
+          alert(data.message || "Login failed");
+        }
+      } catch (e) {
+        console.log("Offline login fallback", e);
+        // Fallback if server is not running or network error, 
+        // just so the user can test the UI without backend.
+        // Store valid JSON so profile doesn't crash.
+        const u = { username: user, email: user + '@example.com' };
+        localStorage.setItem('currentUser', JSON.stringify(u));
+        alert("Logged in (Offline Mode)");
+        window.location.href = 'index.html';
+      }
+    }
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,558 @@
+
+/* =====================================================
+   HERO SECTION (MAIN SEARCH AREA)
+   ===================================================== */
+.hero {
+  min-height: 70vh;
+  padding: 90px 20px 110px;
+   background: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)), url("../images/tea-estate.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #ffffff;
+}
+
+.hero-content{
+  max-width: 900px;
+  width: 100%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;   /* 🔥 key line */
+  text-align: center;
+}
+
+
+.hero h1 {
+  
+  font-size: 42px;
+  max-width: 720px;
+  line-height: 1.2;
+  margin-bottom: 14px;
+}
+
+.hero p {
+  color: var(--text-dark);
+  font-size: 17px;
+  max-width: 520px;
+  color: #f3e7db;
+  margin-bottom: 12px;
+}
+
+.hero .hero-meta {
+  margin-top: 22px;
+  font-size: 14px;
+  color: #ffffff;
+  opacity: 0.9;
+  letter-spacing: 0.4px;
+}
+
+
+
+.hero h1,
+.hero p,
+.search-box,
+.search-hints {
+  animation: heroRise 0.7s ease-out both;
+}
+
+.hero p { animation-delay: 0.1s; }
+.search-box { animation-delay: 0.2s; }
+.search-hints { animation-delay: 0.3s; }
+
+@keyframes heroRise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+.search-box{
+  margin-top: 30px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+
+.search-box input{
+  width: 420px;
+  max-width: 100%;
+  padding: 16px 18px;
+  font-size: 16px;
+  border-radius: 16px;
+  border: none;
+  outline: none;
+  box-shadow: 0 10px 28px rgba(0,0,0,0.25);
+}
+
+
+
+.search-box button{
+  padding: 16px 28px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 12px;
+  border: none;
+  background: var(--primary-color);
+  color: #fff;
+  cursor: pointer;
+  box-shadow: 0 8px 22px rgba(0,0,0,0.25);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+
+.search-box button:hover{
+  background: var(--primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.32);
+}
+
+.search-box button:active{
+  transform: translateY(0);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+}
+.search-box button:focus-visible{
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(201,122,61,0.45);
+}
+
+.search-dropdown {
+  width: 100%;
+  max-width: 420px;
+  padding: 14px 18px;
+  font-size: 16px;
+  border-radius: 30px;
+  border: none;
+  outline: none;
+  font-family: 'Poppins', sans-serif;
+}
+
+
+
+/* ===== Strong & clean search suggestions ===== */
+
+.search-hints {
+  margin-top: 18px;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 3;
+}
+
+/* "Try:" label */
+.hint-label {
+  margin-right: 8px;
+  color: #ffffff;
+  font-weight: 600;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.85);
+}
+
+/* Clickable hint */
+.hint {
+  cursor: pointer;
+  color: #ffffff;
+  font-weight: 600;
+
+  background: rgba(0,0,0,0.22); /* makes text BRIGHT */
+  padding: 6px 14px;
+  border-radius: 18px;
+
+  margin: 4px 0;
+
+  text-shadow: 0 1px 4px rgba(0,0,0,0.85);
+  transition: all 0.2s ease;
+}
+
+.hint:hover {
+  background: var(--primary-color);
+  color: #ffffff;
+}
+
+/* Separator dot */
+.dot {
+  margin: 0 10px;
+  color: #ffffff;
+  opacity: 0.9;
+}
+
+
+
+
+/* =====================================================
+   FEATURES SECTION
+   ===================================================== */
+.features {
+    padding: 50px 60px;
+    background: linear-gradient(180deg, #fdf8f2, #ffffff);
+    background-color: var(--bg-section);
+    text-align: center;
+    
+}
+
+/* Features heading */
+.features h2 {
+    color: var(--text-dark);
+    font-size: 30px;
+    margin-bottom: 40px;
+    margin-top: 0;
+}
+
+/* Features grid */
+.features-box {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+/* Feature card */
+.feature-card {
+    background-color: #ffffff;
+    background: var(--bg-card);
+    padding: 30px 20px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #333;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    text-align: center;
+}
+
+.feature-card i {
+    font-size: 34px;
+    color: var(--primary-color);
+    margin-bottom: 14px;
+    display: block;
+}
+
+.feature-card p {
+    color: var(--text-muted);
+    font-size: 16px;
+    font-weight: 500;
+   
+}
+
+
+.feature-card {
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 24px rgba(0,0,0,0.12);
+}
+
+
+.features-box {
+    max-width: 1100px;
+    margin: auto;
+}
+
+.feature-link{
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+.feature-link:hover{
+  text-decoration: underline;
+}
+
+
+
+
+/* =====================================================
+   POPULAR TEA SHOPS SECTION
+   ===================================================== */
+/* ================= POPULAR TEA SHOPS ================= */
+
+.popular-shops {
+  padding: 80px 60px;
+  background: #faf8f5;
+  background-color: var(--bg-main);
+  text-align: center;
+}
+.popular-shops {
+  border-top: 1px solid #eee;
+}
+
+.popular-shops h2 {
+  font-size: 32px;
+  margin-bottom: 45px;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+/* Cards grid */
+.shop-cards {
+  max-width: 1200px;
+  margin: auto;
+  background: var(--bg-card);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+/* Individual card */
+.shop-card {
+  background: #ffffff;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: left;
+}
+
+/* Hover effect */
+.shop-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.15);
+}
+
+/* Card image */
+.shop-card img {
+  width: 100%;
+  height: 190px;
+  object-fit: cover;
+  display: block;
+}
+
+/* Card content */
+.shop-info {
+  padding: 18px 20px 22px;
+}
+
+.shop-info h3 {
+  font-size: 18px;
+  margin-bottom: 6px;
+  color: var(--text-dark);
+}
+
+.shop-info p {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-bottom: 18px;
+}
+
+/* Buttons container */
+.shop-actions {
+  display: flex;
+  gap: 12px;
+}
+
+/* View on Map button */
+.map-btn {
+  flex: 1;
+  padding: 10px 0;
+  border: none;
+  border-radius: 8px;
+  background-color: var(--primary-color);
+  color: #ffffff;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.25s ease;
+}
+
+.map-btn:hover {
+  background-color: var(--primary-dark);
+}
+
+/* Book Now button */
+.book-btn {
+  flex: 1;
+  padding: 10px 0;
+  border-radius: 8px;
+  border: 1px solid var(--primary-color);
+  background: transparent;
+  color: var(--primary-color);
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.book-btn:hover {
+  background: var(--primary-color);
+  color: #ffffff;
+}
+
+
+
+
+/* =====================================================
+   WHY CHOOSE US SECTION
+   ===================================================== */
+/* ================= WHY CHOOSE US ================= */
+
+.why-choose-us {
+  padding: 80px 60px;
+  background: linear-gradient(180deg, #fffaf6, #ffffff);
+  background: linear-gradient(
+    180deg,
+    var(--bg-section),
+    var(--bg-main)
+  );
+  text-align: center;
+}
+
+.why-choose-us h2 {
+  font-size: 32px;
+  margin-bottom: 50px;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+/* Cards container */
+.reasons {
+  max-width: 1100px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+/* Individual card */
+.reason {
+  background: #ffffff;
+  background: var(--bg-card);
+  padding: 35px 28px;
+  border-radius: 14px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Hover effect */
+.reason:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 36px rgba(0,0,0,0.14);
+}
+
+/* Title */
+.reason h4 {
+  font-size: 18px;
+  margin-bottom: 12px;
+  color: var(--primary-color);
+}
+
+/* Description */
+.reason p {
+  font-size: 14px;
+  color: var(--text-muted);;
+  line-height: 1.6;
+}
+
+
+
+/* =====================================================
+   RESPONSIVE — TABLET & MOBILE
+   ===================================================== */
+  /* ===== HAMBURGER DEFAULT (DESKTOP) ===== */
+
+
+
+   @media (max-width: 768px) {
+
+  /* Hero */
+  .hero {
+    min-height: auto;
+    padding: 60px 16px;
+    align-items: center;
+    text-align: center;
+  }
+
+  .hero h1 {
+    font-size: 28px;
+  }
+
+  .hero p {
+    font-size: 15px;
+  }
+
+  /* Search box */
+  .search-box {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .search-box input {
+    width: 100%;
+  }
+
+  /* Sections spacing */
+  .features,
+  .popular-shops,
+  .why-choose-us {
+    padding: 50px 20px;
+  }
+
+  /* Grids → single column */
+  .features-box,
+  .shop-cards,
+  .reasons,
+  #results {
+    grid-template-columns: 1fr;
+  }
+
+  /* Search header */
+  .search-header {
+    padding: 60px 20px 30px;
+  }
+}
+
+
+/* =====================================================
+   RESPONSIVE — SMALL MOBILE
+   ===================================================== */
+@media (max-width: 480px) {
+
+  .hero h1 {
+    font-size: 24px;
+  }
+
+  .search-box button {
+    width: 100%;
+  }
+
+  .hint {
+    font-size: 13px;
+    padding: 5px 12px;
+  }
+
+  .shop-card img {
+    height: 170px;
+  }
+
+  .shop-actions {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 600px){
+
+  .search-box{
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .search-box input{
+    width: 100%;
+  }
+
+  .search-box button{
+    width: 100%;
+  }
+}
+

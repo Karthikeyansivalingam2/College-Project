@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Foodie Zone - Premium Food & Events</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./assets/css/common.css">
+  <style>
+    body {
+      font-family: 'Outfit', sans-serif;
+    }
+
+    .hero-bg {
+      background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=1600');
+      background-size: cover;
+      background-position: center;
+    }
+  </style>
+</head>
+
+<body class="bg-gray-50">
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="nav-container">
+      <div class="logo">Foodie Zone</div>
+
+      <nav class="nav-links" id="navLinks">
+        <a href="index.html" class="active">Home</a>
+        <a href="order.html">Order</a>
+        <a href="halls.html">Party Halls</a>
+        <a href="review.html">Reviews</a>
+        <a href="partner.html">Partner with Us</a>
+        <a href="careers.html">Job Careers</a>
+        <a href="login.html" class="nav-login">Login</a>
+        <a href="profile.html" id="navProfile"
+          class="hidden items-center justify-center w-10 h-10 rounded-full border border-white/30 bg-white/10 text-white hover:bg-white/20 hover:scale-105 transition-all shadow-lg backdrop-blur-sm group">
+          <span id="navUserInitial" class="font-bold text-base"></span>
+          <i id="navUserIcon" class="fa-solid fa-user text-sm group-hover:rotate-12 transition-transform"></i>
+        </a>
+      </nav>
+      <div class="menu-icon" onclick="toggleMenu()">☰</div>
+    </div>
+  </header>
+
+  <script>
+    const user = JSON.parse(localStorage.getItem('currentUser'));
+    if (user) {
+      const profileBtn = document.getElementById('navProfile');
+      profileBtn.classList.remove('hidden');
+      profileBtn.style.display = 'flex';
+      document.querySelector('.nav-login').style.display = 'none';
+
+      if (user.username) {
+        const initial = user.username.charAt(0).toUpperCase();
+        document.getElementById('navUserInitial').innerText = initial;
+        document.getElementById('navUserIcon').classList.add('hidden');
+
+        // Premium color mapping
+        const colors = ['bg-orange-500', 'bg-emerald-500', 'bg-blue-500', 'bg-rose-500', 'bg-amber-500', 'bg-indigo-500'];
+        const colorIndex = initial.charCodeAt(0) % colors.length;
+        profileBtn.classList.remove('bg-white/10');
+        profileBtn.classList.add(colors[colorIndex]);
+      }
+    }
+  </script>
+
+  <!-- Hero Section -->
+  <section class="relative h-[600px] flex items-center justify-center text-center text-white overflow-hidden">
+    <!-- Parallax Background -->
+    <div class="absolute inset-0 z-0">
+      <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=1920"
+        class="w-full h-full object-cover brightness-50" alt="Food Background">
+    </div>
+
+    <!-- Content -->
+    <div class="relative z-10 px-4 max-w-4xl mx-auto animate-fade-in-up">
+      <span
+        class="bg-amber-600/80 text-amber-50 px-4 py-1 rounded-full text-sm font-semibold tracking-wide mb-6 inline-block backdrop-blur-sm border border-amber-500/50">
+        #1 Food & Event Service in Tamil Nadu
+      </span>
+
+      <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight drop-shadow-xl">
+        Taste the <span class="text-amber-400">Tradition</span>
+      </h1>
+
+      <p class="text-lg md:text-2xl mb-10 text-gray-200 font-light max-w-2xl mx-auto">
+        From homely hostel mess plans to grand wedding feasts—we deliver happiness.
+      </p>
+
+      <!-- Glass Search Bar -->
+      <div
+        class="bg-white/20 backdrop-blur-md border border-white/30 p-2 rounded-full flex shadow-2xl mx-auto max-w-xl transition-transform hover:scale-[1.02]">
+        <button onclick="detectLocation()" class="pl-5 pr-3 text-amber-300 hover:text-amber-100 transition"
+          title="Detect Location">
+          <i class="fa-solid fa-location-crosshairs text-xl"></i>
+        </button>
+        <div class="h-8 w-px bg-white/30 my-auto"></div>
+        <select
+          class="flex-1 p-4 bg-transparent text-white placeholder-gray-200 outline-none border-none font-medium text-lg cursor-pointer"
+          id="searchLocation">
+          <option value="" class="text-gray-800">Select City</option>
+          <option value="Chennai" class="text-gray-800">Chennai</option>
+          <option value="Madurai" class="text-gray-800">Madurai</option>
+          <option value="Coimbatore" class="text-gray-800">Coimbatore</option>
+          <option value="Salem" class="text-gray-800">Salem</option>
+          <option value="Trichy" class="text-gray-800">Trichy</option>
+        </select>
+        <button onclick="findServices()"
+          class="bg-amber-600 hover:bg-amber-700 text-white px-8 py-3 rounded-full font-bold shadow-lg transition-all active:scale-95">
+          Explore
+        </button>
+      </div>
+
+      <!-- Quick Stats -->
+      <div class="mt-12 flex gap-8 justify-center">
+        <div class="text-center">
+          <p class="text-3xl font-bold text-amber-400">10k+</p>
+          <p class="text-xs text-gray-300 uppercase tracking-widest">Happy Eaters</p>
+        </div>
+        <div class="h-10 w-px bg-white/20"></div>
+        <div class="text-center">
+          <p class="text-3xl font-bold text-amber-400">50+</p>
+          <p class="text-xs text-gray-300 uppercase tracking-widest">Partner Halls</p>
+        </div>
+        <div class="h-10 w-px bg-white/20"></div>
+        <div class="text-center">
+          <p class="text-3xl font-bold text-amber-400">4.8</p>
+          <p class="text-xs text-gray-300 uppercase tracking-widest">User Rating</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features / Why Us -->
+  <section class="py-16 bg-white">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="text-center mb-16">
+        <h2 class="text-gray-400 font-semibold tracking-widest uppercase text-sm mb-2">Why Foodie Zone?</h2>
+
+        <h3 class="text-4xl font-bold text-gray-900">More than just food delivery</h3>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+        <!-- Feature 1 -->
+        <div class="flex flex-col items-center text-center p-6 transition hover:-translate-y-2 duration-300">
+          <div
+            class="w-16 h-16 bg-green-100 text-green-600 rounded-2xl flex items-center justify-center text-3xl mb-6 shadow-sm rotate-3">
+            <i class="fa-solid fa-leaf"></i>
+          </div>
+          <h4 class="text-xl font-bold text-gray-800 mb-3">Hygenic & Fresh</h4>
+          <p class="text-gray-500 leading-relaxed">Safety first. Our partners follow strict hygiene protocols to ensure
+            every bite is safe.</p>
+        </div>
+        <!-- Feature 2 -->
+        <div class="flex flex-col items-center text-center p-6 transition hover:-translate-y-2 duration-300">
+          <div
+            class="w-16 h-16 bg-orange-100 text-orange-600 rounded-2xl flex items-center justify-center text-3xl mb-6 shadow-sm -rotate-2">
+            <i class="fa-solid fa-clock"></i>
+          </div>
+          <h4 class="text-xl font-bold text-gray-800 mb-3">On-Time Delivery</h4>
+          <p class="text-gray-500 leading-relaxed">Whether it's your daily lunchbox or a wedding banquet, we value your
+            time.</p>
+        </div>
+        <!-- Feature 3 -->
+        <div class="flex flex-col items-center text-center p-6 transition hover:-translate-y-2 duration-300">
+          <div
+            class="w-16 h-16 bg-blue-100 text-blue-600 rounded-2xl flex items-center justify-center text-3xl mb-6 shadow-sm rotate-1">
+            <i class="fa-solid fa-wallet"></i>
+          </div>
+          <h4 class="text-xl font-bold text-gray-800 mb-3">Pocket Friendly</h4>
+          <p class="text-gray-500 leading-relaxed">Premium quality doesn't always have to be expensive. Plans starting @
+            ₹99.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section class="max-w-7xl mx-auto py-20 px-4 bg-gray-50 rounded-3xl my-10 relative overflow-hidden">
+    <!-- Decorative Blob -->
+    <div class="absolute -top-24 -left-24 w-96 h-96 bg-amber-200/30 rounded-full blur-3xl"></div>
+
+    <div class="relative z-10">
+      <h2 class="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-14">Explore Our Services</h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- Service Card 1 -->
+        <div class="bg-white rounded-2xl shadow-lg p-1 group hover:shadow-2xl transition duration-500">
+          <div class="relative h-56 overflow-hidden rounded-xl">
+            <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=800"
+              class="w-full h-full object-cover transition duration-700 group-hover:scale-110">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+            <div class="absolute bottom-4 left-4 text-white">
+              <span class="bg-amber-600 text-xs font-bold px-2 py-1 rounded mb-2 inline-block">MOST POPULAR</span>
+              <h3 class="text-2xl font-bold">Daily Mess</h3>
+            </div>
+          </div>
+          <div class="p-6">
+            <p class="text-gray-500 mb-6 text-sm line-clamp-2">Healthy, home-style meals delivered to your hostel or
+              room. Breakfast, Lunch & Dinner plans.</p>
+            <a href="order.html"
+              class="block w-full text-center border-2 border-amber-600 text-amber-700 font-bold py-3 rounded-lg hover:bg-amber-600 hover:text-white transition uppercase tracking-wide text-sm">
+              View Menu
+            </a>
+          </div>
+        </div>
+
+        <!-- Service Card 2 -->
+        <div class="bg-white rounded-2xl shadow-lg p-1 group hover:shadow-2xl transition duration-500">
+          <div class="relative h-56 overflow-hidden rounded-xl">
+            <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=800"
+              class="w-full h-full object-cover transition duration-700 group-hover:scale-110">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+            <div class="absolute bottom-4 left-4 text-white">
+              <h3 class="text-2xl font-bold">Corporate Catering</h3>
+            </div>
+          </div>
+          <div class="p-6">
+            <p class="text-gray-500 mb-6 text-sm line-clamp-2">Bulk food solutions for offices and events. Snacks, Tea,
+              and Executive Lunches.</p>
+            <a href="order.html"
+              class="block w-full text-center border-2 border-gray-200 text-gray-700 font-bold py-3 rounded-lg hover:border-amber-600 hover:text-amber-700 transition uppercase tracking-wide text-sm">
+              Get Quote
+            </a>
+          </div>
+        </div>
+
+        <!-- Service Card 3 -->
+        <div class="bg-white rounded-2xl shadow-lg p-1 group hover:shadow-2xl transition duration-500">
+          <div class="relative h-56 overflow-hidden rounded-xl">
+            <img src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?q=80&w=800"
+              class="w-full h-full object-cover transition duration-700 group-hover:scale-110">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+            <div class="absolute bottom-4 left-4 text-white">
+              <h3 class="text-2xl font-bold">Party Halls</h3>
+            </div>
+          </div>
+          <div class="p-6">
+            <p class="text-gray-500 mb-6 text-sm line-clamp-2">Book premium banquet halls for Weddings, Birthdays, and
+              Receptions.</p>
+            <a href="halls.html"
+              class="block w-full text-center border-2 border-gray-200 text-gray-700 font-bold py-3 rounded-lg hover:border-amber-600 hover:text-amber-700 transition uppercase tracking-wide text-sm">
+              Book Hall
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Locations Section -->
+  <section class="max-w-6xl mx-auto py-16 px-4">
+    <div class="flex justify-between items-end mb-10">
+      <div>
+        <h2 class="text-3xl font-bold text-gray-800">Popular Cities</h2>
+        <p class="text-gray-500 mt-2">Find us in your neighborhood</p>
+      </div>
+      <a href="#" class="text-amber-700 font-bold hover:underline hidden md:block">View all cities <i
+          class="fa-solid fa-arrow-right ml-1"></i></a>
+    </div>
+
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+      <!-- City Card -->
+      <a href="#"
+        onclick="document.getElementById('searchLocation').value='Chennai'; document.querySelector('.hero-bg').scrollIntoView({behavior:'smooth'})"
+        class="group relative h-64 rounded-2xl overflow-hidden cursor-pointer shadow-lg">
+        <img src="https://images.unsplash.com/photo-1582510003544-5243788c942e?q=80&w=800"
+          class="w-full h-full object-cover transition duration-700 group-hover:scale-110 group-hover:rotate-1">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+        <div class="absolute bottom-0 left-0 w-full p-6">
+          <h3 class="text-white text-xl font-bold group-hover:text-amber-300 transition">Chennai</h3>
+          <p class="text-gray-300 text-xs">50+ Locations</p>
+        </div>
+      </a>
+
+      <!-- City Card -->
+      <a href="#"
+        onclick="document.getElementById('searchLocation').value='Madurai'; document.querySelector('.hero-bg').scrollIntoView({behavior:'smooth'})"
+        class="group relative h-64 rounded-2xl overflow-hidden cursor-pointer shadow-lg mt-0 md:mt-8">
+        <img src="https://images.unsplash.com/photo-1578564969153-06ac3f2935bc?q=80&w=800"
+          class="w-full h-full object-cover transition duration-700 group-hover:scale-110 group-hover:rotate-1">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+        <div class="absolute bottom-0 left-0 w-full p-6">
+          <h3 class="text-white text-xl font-bold group-hover:text-amber-300 transition">Madurai</h3>
+          <p class="text-gray-300 text-xs">35+ Locations</p>
+        </div>
+      </a>
+
+      <!-- City Card -->
+      <a href="#"
+        onclick="document.getElementById('searchLocation').value='Coimbatore'; document.querySelector('.hero-bg').scrollIntoView({behavior:'smooth'})"
+        class="group relative h-64 rounded-2xl overflow-hidden cursor-pointer shadow-lg">
+        <img src="https://images.unsplash.com/photo-1621243912629-28f58b0907a2?q=80&w=800"
+          class="w-full h-full object-cover transition duration-700 group-hover:scale-110 group-hover:rotate-1">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+        <div class="absolute bottom-0 left-0 w-full p-6">
+          <h3 class="text-white text-xl font-bold group-hover:text-amber-300 transition">Coimbatore</h3>
+          <p class="text-gray-300 text-xs">20+ Locations</p>
+        </div>
+      </a>
+
+      <!-- City Card -->
+      <a href="#"
+        onclick="document.getElementById('searchLocation').value='Salem'; document.querySelector('.hero-bg').scrollIntoView({behavior:'smooth'})"
+        class="group relative h-64 rounded-2xl overflow-hidden cursor-pointer shadow-lg mt-0 md:mt-8">
+        <img src="https://images.unsplash.com/photo-1590449557762-b9d9c2273185?q=80&w=800"
+          class="w-full h-full object-cover transition duration-700 group-hover:scale-110 group-hover:rotate-1">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+        <div class="absolute bottom-0 left-0 w-full p-6">
+          <h3 class="text-white text-xl font-bold group-hover:text-amber-300 transition">Salem</h3>
+          <p class="text-gray-300 text-xs">15+ Locations</p>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-box">
+        <h3>Foodie Zone</h3>
+
+        <p>One stop for Food, Halls, and Catering.</p>
+      </div>
+      <div class="footer-box">
+        <h4>Quick Links</h4>
+        <a href="index.html">Home</a><br>
+        <a href="order.html">Order</a><br>
+        <a href="halls.html">Party Halls</a>
+      </div>
+      <div class="footer-box">
+        <h4>Contact</h4>
+        <p>Email: support@arusuvai.com</p>
+        <p>Location: Tamil Nadu</p>
+      </div>
+      <div class="footer-bottom">
+        © 2026 Foodie Zone. All rights reserved. | <a href="admin-login.html" class="hover:text-amber-500">Admin
+          Login</a>
+
+      </div>
+  </footer>
+
+  <script src="./assets/js/common.js"></script>
+  <script>
+    function findServices() {
+      const loc = document.getElementById('searchLocation').value;
+      if (loc) {
+        window.location.href = "search.html?q=" + encodeURIComponent(loc);
+      } else {
+        alert("Please select a location");
+      }
+    }
+
+    function detectLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            // In a real app, use reverse geocoding API here.
+            // For now, we simulate detecting 'Chennai' or closest supported city
+            const select = document.getElementById('searchLocation');
+            select.value = 'Chennai'; // Simulating result
+            select.classList.add('text-amber-700', 'font-bold');
+            alert("Location detected: Chennai");
+          },
+          (error) => {
+            alert("Unable to retrieve your location");
+          }
+        );
+      } else {
+        alert("Geolocation is not supported by your browser");
+      }
+    }
+  </script>
+</body>
+
+</html>

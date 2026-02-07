@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reviews - Foodie Zone</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./assets/css/common.css">
+  <style>
+    body {
+      font-family: 'Outfit', sans-serif;
+      background-color: #f9fafb;
+    }
+
+    .hero-pattern {
+      background-color: #1f2937;
+      background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%239C92AC' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    .star-rating i {
+      color: #d1d5db;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+
+    .star-rating i.active {
+      color: #f59e0b;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="nav-container">
+      <div class="logo">Foodie Zone</div>
+
+      <nav class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="order.html">Order</a>
+        <a href="review.html">Reviews</a>
+        <a href="partner.html">Partner with Us</a>
+        <a href="careers.html">Job Careers</a>
+        <a href="contact.html">Contact</a>
+        <a href="login.html" class="nav-login">Login</a>
+        <a href="profile.html" id="navProfile"
+          class="hidden items-center justify-center w-10 h-10 rounded-full border border-white/30 bg-white/10 text-white hover:bg-white/20 hover:scale-105 transition-all shadow-lg backdrop-blur-sm group">
+          <span id="navUserInitial" class="font-bold text-base"></span>
+          <i id="navUserIcon" class="fa-solid fa-user text-sm group-hover:rotate-12 transition-transform"></i>
+        </a>
+      </nav>
+      <div class="menu-icon" onclick="toggleMenu()">☰</div>
+    </div>
+  </header>
+
+  <!-- Script to check login in nav -->
+  <script>
+    const user = JSON.parse(localStorage.getItem('currentUser'));
+    if (user) {
+      const profileBtn = document.getElementById('navProfile');
+      profileBtn.classList.remove('hidden');
+      profileBtn.style.display = 'flex';
+      document.querySelector('.nav-login').style.display = 'none';
+
+      if (user.username) {
+        document.getElementById('navUserInitial').innerText = user.username.charAt(0).toUpperCase();
+        document.getElementById('navUserIcon').classList.add('hidden');
+      }
+    }
+  </script>
+
+  <!-- Hero Section -->
+  <section class="hero-pattern py-20 px-4 text-center text-white relative overflow-hidden">
+    <div class="relative z-10 max-w-3xl mx-auto">
+      <h1 class="text-4xl md:text-5xl font-bold mb-4">Customer Stories</h1>
+      <p class="text-gray-300 text-lg mb-8">See what tea lovers are saying about their favorite spots in town.</p>
+
+      <div
+        class="inline-flex items-center gap-6 bg-white/10 backdrop-blur-md rounded-full px-8 py-3 border border-white/20">
+        <div class="text-center">
+          <span class="block text-2xl font-bold text-amber-400">4.8</span>
+          <span class="text-xs text-gray-300">Average Rating</span>
+        </div>
+        <div class="w-px h-8 bg-gray-500"></div>
+        <div class="text-center">
+          <span class="block text-2xl font-bold text-white">2.5k+</span>
+          <span class="text-xs text-gray-300">Total Reviews</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Content -->
+  <main class="max-w-7xl mx-auto px-4 -mt-10 relative z-20 pb-20">
+
+    <!-- Action Bar -->
+    <div class="bg-white rounded-xl shadow-lg p-4 mb-8 flex flex-col md:flex-row justify-between items-center gap-4">
+      <div class="flex items-center gap-2">
+        <span class="text-gray-600 font-medium">Filter by:</span>
+        <select
+          class="border-none bg-gray-100 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-amber-500 outline-none">
+          <option>All Locations</option>
+          <option>Chennai</option>
+          <option>Salem</option>
+          <option>Erode</option>
+        </select>
+      </div>
+      <button onclick="openModal()"
+        class="bg-amber-700 hover:bg-amber-800 text-white px-6 py-2.5 rounded-lg font-medium shadow-md transition-all flex items-center gap-2">
+        <i class="fa-solid fa-pen-nib"></i> Write a Review
+      </button>
+    </div>
+
+    <!-- Reviews Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+      <!-- Review 1 -->
+      <div class="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition card-hover">
+        <div class="flex justify-between items-start mb-4">
+          <div class="flex items-center gap-3">
+            <img src="https://ui-avatars.com/api/?name=Suresh+Kumar&background=random" class="w-10 h-10 rounded-full">
+            <div>
+              <h4 class="font-bold text-gray-800 text-sm">Suresh Kumar</h4>
+              <p class="text-xs text-gray-500">Local Guide • 12 Reviews</p>
+            </div>
+          </div>
+          <span class="bg-green-100 text-green-700 text-xs px-2 py-1 rounded font-bold">5.0 ★</span>
+        </div>
+        <h5 class="font-semibold text-amber-800 text-sm mb-2"><i class="fa-solid fa-store mr-1"></i> Royal Tea, Erode
+        </h5>
+        <p class="text-gray-600 text-sm leading-relaxed mb-4">
+          "Absolutely love their Masala Chai! The place is very clean and the staff is super friendly. Best place to
+          hang out with friends in the evening."
+        </p>
+        <div class="flex justify-between items-center pt-4 border-t border-gray-100 text-xs text-gray-400">
+          <span>2 days ago</span>
+          <button class="flex items-center gap-1 hover:text-amber-700 transition"><i
+              class="fa-regular fa-thumbs-up"></i> Helpful (12)</button>
+        </div>
+      </div>
+
+      <!-- Review 2 -->
+      <div class="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition card-hover">
+        <div class="flex justify-between items-start mb-4">
+          <div class="flex items-center gap-3">
+            <img src="https://ui-avatars.com/api/?name=Anita+R&background=random" class="w-10 h-10 rounded-full">
+            <div>
+              <h4 class="font-bold text-gray-800 text-sm">Anita Raj</h4>
+              <p class="text-xs text-gray-500">Tea Lover • 5 Reviews</p>
+            </div>
+          </div>
+          <span class="bg-green-100 text-green-700 text-xs px-2 py-1 rounded font-bold">4.5 ★</span>
+        </div>
+        <h5 class="font-semibold text-amber-800 text-sm mb-2"><i class="fa-solid fa-store mr-1"></i> Chennai Chai, T
+          Nagar</h5>
+        <p class="text-gray-600 text-sm leading-relaxed mb-4">
+          "Great vibe and amazing filter coffee. The snacks were fresh too. Bit crowded during weekends but worth the
+          wait."
+        </p>
+        <div class="flex justify-between items-center pt-4 border-t border-gray-100 text-xs text-gray-400">
+          <span>1 week ago</span>
+          <button class="flex items-center gap-1 hover:text-amber-700 transition"><i
+              class="fa-regular fa-thumbs-up"></i> Helpful (8)</button>
+        </div>
+      </div>
+
+      <!-- Review 3 -->
+      <div class="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition card-hover">
+        <div class="flex justify-between items-start mb-4">
+          <div class="flex items-center gap-3">
+            <img src="https://ui-avatars.com/api/?name=Mike+T&background=random" class="w-10 h-10 rounded-full">
+            <div>
+              <h4 class="font-bold text-gray-800 text-sm">Mike Tyson</h4>
+              <p class="text-xs text-gray-500">Visitor • 1 Review</p>
+            </div>
+          </div>
+          <span class="bg-yellow-100 text-yellow-700 text-xs px-2 py-1 rounded font-bold">4.0 ★</span>
+        </div>
+        <h5 class="font-semibold text-amber-800 text-sm mb-2"><i class="fa-solid fa-store mr-1"></i> Bus Stand Tea,
+          Salem</h5>
+        <p class="text-gray-600 text-sm leading-relaxed mb-4">
+          "Quick service and decent pricing. Logic tea was good. Need more seating space though."
+        </p>
+        <div class="flex justify-between items-center pt-4 border-t border-gray-100 text-xs text-gray-400">
+          <span>3 weeks ago</span>
+          <button class="flex items-center gap-1 hover:text-amber-700 transition"><i
+              class="fa-regular fa-thumbs-up"></i> Helpful (2)</button>
+        </div>
+      </div>
+      <!-- Review 4 -->
+      <div class="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition card-hover">
+        <div class="flex justify-between items-start mb-4">
+          <div class="flex items-center gap-3">
+            <img src="https://ui-avatars.com/api/?name=Deepa+M&background=random" class="w-10 h-10 rounded-full">
+            <div>
+              <h4 class="font-bold text-gray-800 text-sm">Deepa M</h4>
+              <p class="text-xs text-gray-500">Foodie • 34 Reviews</p>
+            </div>
+          </div>
+          <span class="bg-green-100 text-green-700 text-xs px-2 py-1 rounded font-bold">5.0 ★</span>
+        </div>
+        <h5 class="font-semibold text-amber-800 text-sm mb-2"><i class="fa-solid fa-store mr-1"></i> Green Leaf,
+          Coimbatore</h5>
+        <p class="text-gray-600 text-sm leading-relaxed mb-4">
+          "Hands down the best Green tea I've had. Very refreshing. Highly recommended!"
+        </p>
+        <div class="flex justify-between items-center pt-4 border-t border-gray-100 text-xs text-gray-400">
+          <span>1 month ago</span>
+          <button class="flex items-center gap-1 hover:text-amber-700 transition"><i
+              class="fa-regular fa-thumbs-up"></i> Helpful (24)</button>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="text-center mt-10">
+      <button
+        class="text-gray-500 border border-gray-300 px-6 py-2 rounded-full hover:bg-gray-100 hover:text-black transition">Load
+        More Reviews</button>
+    </div>
+
+  </main>
+
+  <!-- Review Modal -->
+  <div id="reviewModal" class="fixed inset-0 bg-black/60 hidden items-center justify-center z-50 backdrop-blur-sm">
+    <div class="bg-white rounded-2xl w-full max-w-md p-6 m-4 shadow-2xl transform transition-all scale-100">
+      <div class="flex justify-between items-center mb-6">
+        <h3 class="text-xl font-bold text-gray-800">Write a Review</h3>
+        <button onclick="closeModal()" class="text-gray-400 hover:text-black"><i
+            class="fa-solid fa-xmark text-xl"></i></button>
+      </div>
+
+      <form id="reviewForm" onsubmit="submitReview(event)">
+        <div class="mb-4">
+          <label class="block text-sm font-medium text-gray-700 mb-1">Select Shop</label>
+          <select id="drpShop"
+            class="w-full bg-gray-50 border border-gray-300 rounded-lg p-2.5 focus:ring-2 focus:ring-amber-500 outline-none">
+            <option value="">-- Choose a Shop --</option>
+            <option>Royal Tea - Erode</option>
+            <option>Chai Kings - Anthiyur</option>
+            <option>Chennai Chai - Chennai</option>
+            <option>Salem Sips - Salem</option>
+          </select>
+        </div>
+
+        <div class="mb-4 text-center">
+          <label class="block text-sm font-medium text-gray-700 mb-2">Rate your experience</label>
+          <div class="star-rating text-2xl space-x-2" id="starContainer">
+            <i class="fa-solid fa-star" onclick="setRating(1)"></i>
+            <i class="fa-solid fa-star" onclick="setRating(2)"></i>
+            <i class="fa-solid fa-star" onclick="setRating(3)"></i>
+            <i class="fa-solid fa-star" onclick="setRating(4)"></i>
+            <i class="fa-solid fa-star" onclick="setRating(5)"></i>
+          </div>
+          <p class="text-xs text-red-500 mt-1 hidden" id="rateError">Please select a rating</p>
+        </div>
+
+        <div class="mb-6">
+          <label class="block text-sm font-medium text-gray-700 mb-1">Your Review</label>
+          <textarea id="txtReviewContent"
+            class="w-full bg-gray-50 border border-gray-300 rounded-lg p-3 h-28 focus:ring-2 focus:ring-amber-500 outline-none"
+            placeholder="What did you like? What can be improved?"></textarea>
+        </div>
+
+        <button type="submit"
+          class="w-full bg-amber-700 hover:bg-amber-800 text-white font-bold py-3 rounded-lg shadow-lg transition transform active:scale-95">Post
+          Review</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-box">
+        <h3>Foodie Zone</h3>
+
+        <p>Discover the best tea shops near you with instant directions.</p>
+      </div>
+      <div class="footer-box">
+        <h4>Quick Links</h4>
+        <a href="index.html">Home</a><br>
+        <a href="about.html">About</a><br>
+        <a href="reviews.html">Reviews</a><br>
+        <a href="admin.html" style="color: #fea040;">Admin Dashboard</a>
+      </div>
+      <div class="footer-box">
+        <h4>Contact</h4>
+        <p>Email: support@foodiezone.com</p>
+
+        <p>Location: Tamil Nadu</p>
+      </div>
+      <div class="footer-box">
+        <h4>Follow Us</h4>
+        <div class="social-icons">
+          <a href="#" class="social whatsapp"><i class="fa-brands fa-whatsapp"></i></a>
+          <a href="#" class="social instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" class="social facebook"><i class="fa-brands fa-facebook-f"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      © 2026 Foodie Zone. All rights reserved.
+
+    </div>
+  </footer>
+
+  <script src="./assets/js/common.js"></script>
+  <script>
+    // Modal Logic
+    const modal = document.getElementById('reviewModal');
+    let currentRating = 0;
+
+    function openModal() {
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeModal() {
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    // Star Rating Logic
+    function setRating(rating) {
+      currentRating = rating;
+      const stars = document.querySelectorAll('#starContainer i');
+      stars.forEach((star, index) => {
+        if (index < rating) {
+          star.classList.add('active', 'text-yellow-400');
+          star.classList.remove('text-gray-300');
+        } else {
+          star.classList.remove('active', 'text-yellow-400');
+          star.classList.add('text-gray-300');
+        }
+      });
+      document.getElementById('rateError').classList.add('hidden');
+    }
+
+    // Submit Logic
+    function submitReview(e) {
+      e.preventDefault();
+
+      const shop = document.getElementById('drpShop').value;
+      const content = document.getElementById('txtReviewContent').value;
+
+      if (!shop) {
+        alert("Please select a tea shop");
+        return;
+      }
+      if (currentRating === 0) {
+        document.getElementById('rateError').classList.remove('hidden');
+        return;
+      }
+      if (!content) {
+        alert("Please write something!");
+        return;
+      }
+
+      // Simulate API Call
+      const btn = e.target.querySelector('button');
+      const originalText = btn.innerText;
+      btn.innerText = "Posting...";
+      btn.disabled = true;
+
+      setTimeout(() => {
+        alert("Review submitted successfully! Thank you for your feedback.");
+        closeModal();
+        btn.innerText = originalText;
+        btn.disabled = false;
+
+        // Clear Form
+        document.getElementById('reviewForm').reset();
+        setRating(0);
+      }, 1000);
+    }
+
+    // Close modal on outside click
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeModal();
+    });
+
+  </script>
+</body>
+
+</html>

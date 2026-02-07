@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Careers - Foodie Zone</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./assets/css/common.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+
+<body class="bg-gray-50 flex flex-col min-h-screen">
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="nav-container">
+      <div class="logo">Foodie Zone</div>
+
+      <nav class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="order.html">Order</a>
+        <a href="halls.html">Party Halls</a>
+        <a href="review.html">Reviews</a>
+        <a href="partner.html">Partner with Us</a>
+        <a href="careers.html" class="active">Job Careers</a>
+        <a href="contact.html">Contact</a>
+        <a href="login.html" class="nav-login">Login</a>
+        <a href="profile.html" id="navProfile"
+          class="hidden items-center justify-center w-10 h-10 rounded-full border border-white/30 bg-white/10 text-white hover:bg-white/20 hover:scale-105 transition-all shadow-lg backdrop-blur-sm group">
+          <span id="navUserInitial" class="font-bold text-base"></span>
+          <i id="navUserIcon" class="fa-solid fa-user text-sm group-hover:rotate-12 transition-transform"></i>
+        </a>
+      </nav>
+      <div class="menu-icon" onclick="toggleMenu()">☰</div>
+    </div>
+  </header>
+
+  <script>
+    const user = JSON.parse(localStorage.getItem('currentUser'));
+    if (user) {
+      const profileBtn = document.getElementById('navProfile');
+      if (profileBtn) {
+        profileBtn.classList.remove('hidden');
+        profileBtn.style.display = 'flex';
+        document.querySelector('.nav-login').style.display = 'none';
+
+        if (user.username) {
+          document.getElementById('navUserInitial').innerText = user.username.charAt(0).toUpperCase();
+          document.getElementById('navUserIcon').classList.add('hidden');
+        }
+      }
+    }
+  </script>
+
+  <!-- Hero Section -->
+  <section class="relative h-64 md:h-80 bg-cover bg-center flex items-center justify-center"
+    style="background-image:url('https://images.unsplash.com/photo-1542744173-8e7e53415bb0');">
+    <div class="absolute inset-0 bg-black/60"></div>
+    <div class="relative z-10 text-center px-4">
+      <h1 class="text-3xl md:text-5xl font-bold text-white mb-2">Join Our Growing Team</h1>
+      <p class="text-gray-200 text-lg">Find exciting opportunities in Food, Catering & Hospitality</p>
+    </div>
+  </section>
+
+  <!-- Job Listings -->
+  <main class="flex-grow max-w-6xl mx-auto px-4 py-10 w-full">
+
+    <h2 class="text-2xl font-bold text-gray-800 mb-6 border-l-4 border-amber-700 pl-3">Open Positions</h2>
+
+    <div id="jobs" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+      <!-- Job 1 -->
+      <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition border border-gray-100">
+        <div class="flex justify-between items-start mb-4">
+          <div>
+            <h3 class="text-xl font-bold text-gray-800">Master Chef</h3>
+            <p class="text-sm text-gray-500"><i class="fa-solid fa-location-dot"></i> Chennai</p>
+          </div>
+          <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded font-bold">Full Time</span>
+        </div>
+        <div class="mb-4">
+          <p class="text-gray-600 text-sm">Expert in South Indian cuisine. Minimum 3 years exp required.</p>
+        </div>
+        <div class="flex justify-between items-center">
+          <p class="font-bold text-amber-700">₹25k - ₹35k</p>
+          <button onclick="scrollToApply('Master Chef')"
+            class="bg-black text-white px-4 py-2 rounded text-sm hover:bg-amber-700 transition">Apply Now</button>
+        </div>
+      </div>
+
+      <!-- Job 2 -->
+      <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition border border-gray-100">
+        <div class="flex justify-between items-start mb-4">
+          <div>
+            <h3 class="text-xl font-bold text-gray-800">Service Staff</h3>
+            <p class="text-sm text-gray-500"><i class="fa-solid fa-location-dot"></i> Salem</p>
+          </div>
+          <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded font-bold">Urgent</span>
+        </div>
+        <div class="mb-4">
+          <p class="text-gray-600 text-sm">Waiters for our new dine-in restaurant. Keep customers happy.</p>
+        </div>
+        <div class="flex justify-between items-center">
+          <p class="font-bold text-amber-700">₹12k - ₹15k</p>
+          <button onclick="scrollToApply('Service Staff')"
+            class="bg-black text-white px-4 py-2 rounded text-sm hover:bg-amber-700 transition">Apply Now</button>
+        </div>
+      </div>
+
+      <!-- Job 3 -->
+      <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition border border-gray-100">
+        <div class="flex justify-between items-start mb-4">
+          <div>
+            <h3 class="text-xl font-bold text-gray-800">Delivery Partner</h3>
+            <p class="text-sm text-gray-500"><i class="fa-solid fa-location-dot"></i> Erode</p>
+          </div>
+          <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded font-bold">Part Time</span>
+        </div>
+        <div class="mb-4">
+          <p class="text-gray-600 text-sm">Deliver food parcels. Own bike & license mandatory.</p>
+        </div>
+        <div class="flex justify-between items-center">
+          <p class="font-bold text-amber-700">₹15k + Fuel</p>
+          <button onclick="scrollToApply('Delivery Partner')"
+            class="bg-black text-white px-4 py-2 rounded text-sm hover:bg-amber-700 transition">Apply Now</button>
+        </div>
+      </div>
+
+      <!-- Job 4 -->
+      <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition border border-gray-100">
+        <div class="flex justify-between items-start mb-4">
+          <div>
+            <h3 class="text-xl font-bold text-gray-800">Event Manager</h3>
+            <p class="text-sm text-gray-500"><i class="fa-solid fa-location-dot"></i> Chennai</p>
+          </div>
+          <span class="bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded font-bold">Contract</span>
+        </div>
+        <div class="mb-4">
+          <p class="text-gray-600 text-sm">Coordinate marriage & birthday catering events.</p>
+        </div>
+        <div class="flex justify-between items-center">
+          <p class="font-bold text-amber-700">₹40k / Event</p>
+          <button onclick="scrollToApply('Event Manager')"
+            class="bg-black text-white px-4 py-2 rounded text-sm hover:bg-amber-700 transition">Apply Now</button>
+        </div>
+      </div>
+
+      <!-- Job 5 -->
+      <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition border border-gray-100">
+        <div class="flex justify-between items-start mb-4">
+          <div>
+            <h3 class="text-xl font-bold text-gray-800">Restaurant Manager</h3>
+            <p class="text-sm text-gray-500"><i class="fa-solid fa-location-dot"></i> Salem</p>
+          </div>
+          <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded font-bold">Full Time</span>
+        </div>
+        <div class="mb-4">
+          <p class="text-gray-600 text-sm">Manage daily operations, staff, and inventory.</p>
+        </div>
+        <div class="flex justify-between items-center">
+          <p class="font-bold text-amber-700">₹25k - ₹40k</p>
+          <button onclick="scrollToApply('Restaurant Manager')"
+            class="bg-black text-white px-4 py-2 rounded text-sm hover:bg-amber-700 transition">Apply Now</button>
+        </div>
+      </div>
+
+      <!-- Job 6 -->
+      <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition border border-gray-100">
+        <div class="flex justify-between items-start mb-4">
+          <div>
+            <h3 class="text-xl font-bold text-gray-800">Digital Marketer</h3>
+            <p class="text-sm text-gray-500"><i class="fa-solid fa-location-dot"></i> Chennai</p>
+          </div>
+          <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded font-bold">Remote</span>
+        </div>
+        <div class="mb-4">
+          <p class="text-gray-600 text-sm">Handle social media, ads, and brand growth.</p>
+        </div>
+        <div class="flex justify-between items-center">
+          <p class="font-bold text-amber-700">₹20k - ₹30k</p>
+          <button onclick="scrollToApply('Digital Marketer')"
+            class="bg-black text-white px-4 py-2 rounded text-sm hover:bg-amber-700 transition">Apply Now</button>
+        </div>
+      </div>
+
+      <!-- Job 7 -->
+      <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition border border-gray-100">
+        <div class="flex justify-between items-start mb-4">
+          <div>
+            <h3 class="text-xl font-bold text-gray-800">Housekeeping</h3>
+            <p class="text-sm text-gray-500"><i class="fa-solid fa-location-dot"></i> All Locations</p>
+          </div>
+          <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded font-bold">Full Time</span>
+        </div>
+        <div class="mb-4">
+          <p class="text-gray-600 text-sm">Maintain cleanliness and hygiene in branches.</p>
+        </div>
+        <div class="flex justify-between items-center">
+          <p class="font-bold text-amber-700">₹10k - ₹15k</p>
+          <button onclick="scrollToApply('Housekeeping Staff')"
+            class="bg-black text-white px-4 py-2 rounded text-sm hover:bg-amber-700 transition">Apply Now</button>
+        </div>
+      </div>
+
+      <!-- Job 8 -->
+      <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition border border-gray-100">
+        <div class="flex justify-between items-start mb-4">
+          <div>
+            <h3 class="text-xl font-bold text-gray-800">Accounts Assistant</h3>
+            <p class="text-sm text-gray-500"><i class="fa-solid fa-location-dot"></i> Erode</p>
+          </div>
+          <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded font-bold">Full Time</span>
+        </div>
+        <div class="mb-4">
+          <p class="text-gray-600 text-sm">Manage billing, petty cash, and daily reports.</p>
+        </div>
+        <div class="flex justify-between items-center">
+          <p class="font-bold text-amber-700">₹15k - ₹20k</p>
+          <button onclick="scrollToApply('Accounts Assistant')"
+            class="bg-black text-white px-4 py-2 rounded text-sm hover:bg-amber-700 transition">Apply Now</button>
+        </div>
+      </div>
+
+      <!-- Job 9 -->
+      <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition border border-gray-100">
+        <div class="flex justify-between items-start mb-4">
+          <div>
+            <h3 class="text-xl font-bold text-gray-800">Pastry Chef</h3>
+            <p class="text-sm text-gray-500"><i class="fa-solid fa-location-dot"></i> Madurai</p>
+          </div>
+          <span class="bg-pink-100 text-pink-800 text-xs px-2 py-1 rounded font-bold">Expert</span>
+        </div>
+        <div class="mb-4">
+          <p class="text-gray-600 text-sm">Specialist in cakes, desserts, and bakery items.</p>
+        </div>
+        <div class="flex justify-between items-center">
+          <p class="font-bold text-amber-700">₹20k - ₹35k</p>
+          <button onclick="scrollToApply('Pastry Chef')"
+            class="bg-black text-white px-4 py-2 rounded text-sm hover:bg-amber-700 transition">Apply Now</button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Application Form -->
+    <div id="applySection" class="mt-16 bg-white p-8 rounded-2xl shadow-lg border border-gray-100 max-w-2xl mx-auto">
+      <h2 class="text-2xl font-bold text-gray-800 text-center mb-2">Apply for a Position</h2>
+      <p class="text-center text-gray-500 mb-6">Fill out the form below and we will contact you.</p>
+
+      <form id="careerForm" class="space-y-4">
+        <input type="text" id="jobRole" readonly name="role"
+          class="w-full bg-gray-100 border border-gray-300 rounded p-3 text-gray-500 font-bold"
+          value="General Application">
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <input type="text" id="appName" placeholder="Full Name" required
+            class="w-full border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-amber-500">
+          <input type="text" id="appMobile" placeholder="Mobile Number" required
+            class="w-full border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-amber-500">
+        </div>
+
+        <input type="email" id="appEmail" placeholder="Email Address" required
+          class="w-full border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-amber-500">
+
+        <textarea id="appExp" placeholder="Briefly describe your experience..." rows="3" required
+          class="w-full border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-amber-500"></textarea>
+
+        <button type="submit"
+          class="w-full bg-amber-700 text-white font-bold py-3 rounded-lg hover:bg-amber-800 transition shadow-md">Submit
+          Application</button>
+      </form>
+
+      <script>
+        document.getElementById('careerForm').addEventListener('submit', async (e) => {
+          e.preventDefault();
+
+          const data = {
+            role: document.getElementById('jobRole').value,
+            name: document.getElementById('appName').value,
+            mobile: document.getElementById('appMobile').value,
+            email: document.getElementById('appEmail').value,
+            experience: document.getElementById('appExp').value
+          };
+
+          try {
+            const res = await fetch('/api/apply/job', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(data)
+            });
+
+            const result = await res.json();
+
+            if (result.success) {
+              window.location.href = `thanks.html?type=job&id=${result.appId}`;
+            } else {
+              alert('Failed to send application.');
+            }
+          } catch (err) {
+            console.error(err);
+            alert("Error connecting to server.");
+          }
+        });
+      </script>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer mt-auto">
+    <div class="footer-container">
+      <div class="footer-box">
+        <h3>Semma Taste</h3>
+        <p>One stop for Food, Halls, and Catering.</p>
+      </div>
+      <div class="footer-box">
+        <h4>Quick Links</h4>
+        <a href="index.html">Home</a><br>
+        <a href="order.html">Order</a><br>
+        <a href="halls.html">Party Halls</a>
+      </div>
+      <div class="footer-box">
+        <h4>Contact</h4>
+        <p>Email: careers@foodiezone.com</p>
+
+      </div>
+    </div>
+  </footer>
+
+  <script src="./assets/js/common.js"></script>
+  <script>
+    function scrollToApply(role) {
+      document.getElementById('jobRole').value = role;
+      document.getElementById('applySection').scrollIntoView({ behavior: 'smooth' });
+    }
+  </script>
+</body>
+
+</html>

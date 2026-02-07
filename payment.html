@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Payment - Foodie Zone Gateway</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <style>
+        .gpay-btn {
+            background: #202124;
+            color: white;
+        }
+
+        .phonepe-btn {
+            background: #5f259f;
+            color: white;
+        }
+
+        .spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border-left-color: #000;
+            animation: spin 1s ease infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100 min-h-screen flex items-center justify-center p-4">
+
+    <div class="bg-white w-full max-w-md rounded-2xl shadow-xl overflow-hidden" id="paymentCard">
+        <!-- Header -->
+        <div class="bg-gray-50 border-b p-4 flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <i class="fa-solid fa-lock text-green-600"></i>
+                <span class="font-semibold text-gray-700">Secure Payment</span>
+            </div>
+            <div class="text-sm text-gray-500">ORD-REF-PG1029</div>
+        </div>
+
+        <div class="p-6">
+            <!-- Amount -->
+            <div class="text-center mb-8">
+                <p class="text-gray-500 text-sm mb-1">Total Payable</p>
+                <h1 class="text-4xl font-bold text-gray-800">₹<span id="payAmount">0</span></h1>
+            </div>
+
+            <!-- Payment Methods Selection -->
+            <div id="methodSelection">
+                <h3 class="text-sm font-semibold text-gray-500 uppercase mb-3">Select Payment Method</h3>
+                <div class="space-y-3">
+                    <button onclick="showDetails('UPI')"
+                        class="w-full flex items-center justify-between p-4 border rounded-xl hover:border-black transition group">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center">
+                                <i class="fa-brands fa-google-pay text-xl text-gray-700"></i>
+                            </div>
+                            <span class="font-medium">UPI (GPay / PhonePe)</span>
+                        </div>
+                        <i class="fa-solid fa-chevron-right text-gray-300 group-hover:text-black"></i>
+                    </button>
+
+                    <button onclick="showDetails('CARD')"
+                        class="w-full flex items-center justify-between p-4 border rounded-xl hover:border-black transition group">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center">
+                                <i class="fa-regular fa-credit-card text-xl text-gray-700"></i>
+                            </div>
+                            <span class="font-medium">Credit / Debit Card</span>
+                        </div>
+                        <i class="fa-solid fa-chevron-right text-gray-300 group-hover:text-black"></i>
+                    </button>
+
+                    <button onclick="confirmCOD()"
+                        class="w-full flex items-center justify-between p-4 border rounded-xl hover:border-black transition group">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center">
+                                <i class="fa-solid fa-money-bill-wave text-xl text-gray-700"></i>
+                            </div>
+                            <span class="font-medium">Cash on Delivery</span>
+                        </div>
+                        <i class="fa-solid fa-chevron-right text-gray-300 group-hover:text-black"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- UPI Details Form -->
+            <div id="upiForm" class="hidden animate-fade-in">
+                <button onclick="backToMethods()" class="text-amber-700 text-sm mb-4 font-bold flex items-center gap-2">
+                    <i class="fa-solid fa-arrow-left"></i> Change Method
+                </button>
+                <h3 class="font-bold text-gray-800 mb-4">Enter UPI ID</h3>
+                <input type="text" id="upiId" placeholder="example@okhdfc"
+                    class="w-full p-4 border-2 rounded-xl border-gray-100 focus:border-amber-700 outline-none mb-4 font-mono">
+                <button onclick="finalPay('UPI')"
+                    class="w-full bg-black text-white py-4 rounded-xl font-bold shadow-lg active:scale-95 transition">Pay
+                    Now</button>
+            </div>
+
+            <!-- Card Details Form -->
+            <div id="cardForm" class="hidden animate-fade-in">
+                <button onclick="backToMethods()" class="text-amber-700 text-sm mb-4 font-bold flex items-center gap-2">
+                    <i class="fa-solid fa-arrow-left"></i> Change Method
+                </button>
+                <h3 class="font-bold text-gray-800 mb-4">Enter Card Details</h3>
+                <div class="space-y-4">
+                    <input type="text" id="cardNumber" placeholder="0000 0000 0000 0000" maxlength="19"
+                        class="w-full p-4 border-2 rounded-xl border-gray-100 focus:border-amber-700 outline-none font-mono">
+                    <div class="grid grid-cols-2 gap-4">
+                        <input type="text" id="cardExpiry" placeholder="MM/YY" maxlength="5"
+                            class="w-full p-4 border-2 rounded-xl border-gray-100 focus:border-amber-700 outline-none font-mono">
+                        <input type="password" id="cardCvv" placeholder="CVV" maxlength="3"
+                            class="w-full p-4 border-2 rounded-xl border-gray-100 focus:border-amber-700 outline-none font-mono">
+                    </div>
+                </div>
+                <button onclick="finalPay('Card')"
+                    class="w-full bg-black text-white py-4 rounded-xl font-bold shadow-lg active:scale-95 transition mt-6">Pay
+                    Securely</button>
+            </div>
+
+            <button id="cancelBtn" onclick="cancelPayment()"
+                class="w-full mt-6 text-gray-400 hover:text-red-500 text-sm font-medium transition">Cancel
+                Transaction</button>
+        </div>
+    </div>
+
+    <!-- Processing State -->
+    <div id="processingState" class="hidden text-center">
+        <div class="spinner mx-auto mb-4"></div>
+        <h2 class="text-xl font-bold mb-2">Processing Your Order...</h2>
+        <p class="text-gray-500">Completing security checks...</p>
+    </div>
+
+    <script>
+        const pendingOrder = JSON.parse(localStorage.getItem('pendingOrder'));
+
+        if (!pendingOrder) {
+            alert("No pending order found.");
+            window.location.href = 'index.html';
+        } else {
+            document.getElementById('payAmount').innerText = pendingOrder.total;
+        }
+
+        function showDetails(method) {
+            document.getElementById('methodSelection').classList.add('hidden');
+            document.getElementById('cancelBtn').classList.add('hidden');
+            if (method === 'UPI') document.getElementById('upiForm').classList.remove('hidden');
+            if (method === 'CARD') document.getElementById('cardForm').classList.remove('hidden');
+        }
+
+        function backToMethods() {
+            document.getElementById('methodSelection').classList.remove('hidden');
+            document.getElementById('cancelBtn').classList.remove('hidden');
+            document.getElementById('upiForm').classList.add('hidden');
+            document.getElementById('cardForm').classList.add('hidden');
+        }
+
+        function confirmCOD() {
+            if (confirm("Confirm order with Cash on Delivery?")) {
+                finalPay('Cash on Delivery');
+            }
+        }
+
+        function cancelPayment() {
+            if (confirm("Are you sure you want to cancel?")) {
+                window.location.href = "order.html";
+            }
+        }
+
+        function finalPay(method) {
+            // Validation
+            if (method === 'UPI') {
+                const id = document.getElementById('upiId').value;
+                if (!id.includes('@')) return alert("Enter valid UPI ID");
+            }
+            if (method === 'Card') {
+                const num = document.getElementById('cardNumber').value.replace(/\s/g, '');
+                const exp = document.getElementById('cardExpiry').value;
+                const cvv = document.getElementById('cardCvv').value;
+                if (num.length < 16 || exp.length < 5 || cvv.length < 3) return alert("Enter valid Card details");
+            }
+
+            // UI Switch
+            document.getElementById('paymentCard').classList.add('hidden');
+            document.getElementById('processingState').classList.remove('hidden');
+
+            // Set Data
+            pendingOrder.paymentMethod = method;
+            pendingOrder.paymentStatus = (method === 'Cash on Delivery') ? 'Pending' : 'Success';
+
+            setTimeout(() => {
+                fetch('/api/order', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(pendingOrder)
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.success) {
+                            localStorage.removeItem('pendingOrder');
+                            window.location.href = "./thanksorder.html?orderId=" + data.orderId;
+                        } else {
+                            alert("Order failed!");
+                            window.location.reload();
+                        }
+                    })
+                    .catch(err => {
+                        console.error(err);
+                        alert("Network Error");
+                        window.location.reload();
+                    });
+            }, 2000);
+        }
+
+        // Live formatting for card
+        document.getElementById('cardNumber')?.addEventListener('input', (e) => {
+            e.target.value = e.target.value.replace(/[^\d]/g, '').replace(/(.{4})/g, '$1 ').trim();
+        });
+        document.getElementById('cardExpiry')?.addEventListener('input', (e) => {
+            e.target.value = e.target.value.replace(/[^\d]/g, '').replace(/(.{2})/g, '$1/').replace(/\/$/, '').slice(0, 5);
+        });
+    </script>
+</body>
+
+</html>

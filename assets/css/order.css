@@ -1,0 +1,12 @@
+ html,
+    body {
+      height: 100%;
+      overflow-x: hidden;
+    }
+    #cartBar, #cartDrawer {
+  position: fixed !important;
+  transform: none !important;
+}
+body {
+  transform: none !important;
+}

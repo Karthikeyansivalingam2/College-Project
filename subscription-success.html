@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enquiry Received - Foodie Zone Corporate</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: #f3f4f6;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .check-animation {
+            animation: scaleUp 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        @keyframes scaleUp {
+            from {
+                transform: scale(0);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+
+<body class="min-h-screen flex flex-col items-center justify-center p-4 relative overflow-hidden">
+
+    <!-- decorative background elements -->
+    <div class="absolute top-0 left-0 w-full h-64 bg-amber-800 skew-y-3 transform -translate-y-20 z-0"></div>
+    <div
+        class="absolute bottom-0 right-0 w-64 h-64 bg-amber-100 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob">
+    </div>
+
+    <div class="glass-card relative z-10 w-full max-w-lg rounded-2xl shadow-2xl overflow-hidden text-center p-10">
+
+        <div class="flex justify-center mb-6">
+            <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center check-animation">
+                <i class="fa-solid fa-check text-4xl text-green-600"></i>
+            </div>
+        </div>
+
+        <h1 class="text-3xl font-bold text-gray-800 mb-2">Request Received!</h1>
+        <p class="text-gray-500 mb-6">Thank you for your interest in our Corporate Packages.</p>
+
+        <div class="bg-gray-50 rounded-xl p-6 mb-8 border border-gray-100">
+            <p class="text-xs uppercase tracking-widest text-gray-400 font-semibold mb-1">Reference ID</p>
+            <p class="text-2xl font-mono font-bold text-amber-800 tracking-wider" id="refId">#REQ-8392</p>
+
+            <div class="mt-4 pt-4 border-t border-gray-200">
+                <div class="flex items-center justify-center text-sm text-gray-600 gap-2">
+                    <i class="fa-regular fa-clock"></i>
+                    <span>We will contact you within <strong>24 Hours</strong></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="space-y-3">
+            <a href="index.html"
+                class="block w-full bg-amber-800 text-white font-semibold py-3 px-6 rounded-lg hover:bg-amber-900 transition-colors shadow-lg">
+                Back to Home
+            </a>
+            <button onclick="window.print()"
+                class="block w-full bg-white text-gray-600 font-medium py-3 px-6 rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors">
+                Download Acknowledgement
+            </button>
+        </div>
+
+        <p class="mt-8 text-xs text-gray-400">
+            Need immediate assistance? Call us at <a href="tel:+919876543210"
+                class="text-amber-700 font-semibold hover:underline">+91 98765-43210</a>
+        </p>
+    </div>
+
+    <!-- Script to set ID -->
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const refId = urlParams.get('refId') || 'REQ-' + Math.floor(Math.random() * 10000);
+        document.getElementById('refId').innerText = refId;
+    </script>
+
+</body>
+
+</html>
