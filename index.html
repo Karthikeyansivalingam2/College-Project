@@ -95,43 +95,43 @@
 
       <!-- Glass Search Bar -->
       <div
-        class="bg-white/20 backdrop-blur-md border border-white/30 p-2 rounded-full flex shadow-2xl mx-auto max-w-xl transition-transform hover:scale-[1.02]">
-        <button onclick="detectLocation()" class="pl-5 pr-3 text-amber-300 hover:text-amber-100 transition"
-          title="Detect Location">
-          <i class="fa-solid fa-location-crosshairs text-xl"></i>
-        </button>
-        <div class="h-8 w-px bg-white/30 my-auto"></div>
-        <select
-          class="flex-1 p-4 bg-transparent text-white placeholder-gray-200 outline-none border-none font-medium text-lg cursor-pointer"
-          id="searchLocation">
-          <option value="" class="text-gray-800">Select City</option>
-          <option value="Chennai" class="text-gray-800">Chennai</option>
-          <option value="Madurai" class="text-gray-800">Madurai</option>
-          <option value="Coimbatore" class="text-gray-800">Coimbatore</option>
-          <option value="Salem" class="text-gray-800">Salem</option>
-          <option value="Trichy" class="text-gray-800">Trichy</option>
-        </select>
+        class="bg-white/20 backdrop-blur-md border border-white/30 p-2 rounded-2xl md:rounded-full flex flex-col md:flex-row shadow-2xl mx-auto max-w-xl transition-transform hover:scale-[1.02] gap-2 md:gap-0">
+        <div class="flex flex-1 items-center">
+          <button onclick="detectLocation()" class="pl-5 pr-3 text-amber-300 hover:text-amber-100 transition"
+            title="Detect Location">
+            <i class="fa-solid fa-location-crosshairs text-xl"></i>
+          </button>
+          <div class="h-8 w-px bg-white/30 my-auto hidden md:block"></div>
+          <select
+            class="flex-1 p-4 bg-transparent text-white placeholder-gray-200 outline-none border-none font-medium text-lg cursor-pointer md:w-auto w-full"
+            id="searchLocation">
+            <option value="" class="text-gray-800">Select City</option>
+            <option value="Chennai" class="text-gray-800">Chennai</option>
+            <option value="Madurai" class="text-gray-800">Madurai</option>
+            <option value="Coimbatore" class="text-gray-800">Coimbatore</option>
+            <option value="Salem" class="text-gray-800">Salem</option>
+            <option value="Trichy" class="text-gray-800">Trichy</option>
+          </select>
+        </div>
         <button onclick="findServices()"
-          class="bg-amber-600 hover:bg-amber-700 text-white px-8 py-3 rounded-full font-bold shadow-lg transition-all active:scale-95">
+          class="bg-amber-600 hover:bg-amber-700 text-white px-8 py-3 rounded-xl md:rounded-full font-bold shadow-lg transition-all active:scale-95 w-full md:w-auto">
           Explore
         </button>
       </div>
 
       <!-- Quick Stats -->
-      <div class="mt-12 flex gap-8 justify-center">
+      <div class="mt-12 grid grid-cols-3 gap-4 md:gap-8 max-w-2xl mx-auto">
         <div class="text-center">
-          <p class="text-3xl font-bold text-amber-400">10k+</p>
-          <p class="text-xs text-gray-300 uppercase tracking-widest">Happy Eaters</p>
+          <p class="text-2xl md:text-3xl font-bold text-amber-400">10k+</p>
+          <p class="text-[10px] md:text-xs text-gray-300 uppercase tracking-widest">Happy Eaters</p>
         </div>
-        <div class="h-10 w-px bg-white/20"></div>
-        <div class="text-center">
-          <p class="text-3xl font-bold text-amber-400">50+</p>
-          <p class="text-xs text-gray-300 uppercase tracking-widest">Partner Halls</p>
+        <div class="text-center border-x border-white/20">
+          <p class="text-2xl md:text-3xl font-bold text-amber-400">50+</p>
+          <p class="text-[10px] md:text-xs text-gray-300 uppercase tracking-widest">Partner Halls</p>
         </div>
-        <div class="h-10 w-px bg-white/20"></div>
         <div class="text-center">
-          <p class="text-3xl font-bold text-amber-400">4.8</p>
-          <p class="text-xs text-gray-300 uppercase tracking-widest">User Rating</p>
+          <p class="text-2xl md:text-3xl font-bold text-amber-400">4.8</p>
+          <p class="text-[10px] md:text-xs text-gray-300 uppercase tracking-widest">User Rating</p>
         </div>
       </div>
     </div>

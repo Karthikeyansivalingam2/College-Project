@@ -19,9 +19,12 @@
 
     <div class="flex h-screen">
         <!-- Sidebar -->
-        <aside class="w-64 bg-amber-900 text-white flex flex-col hidden md:flex">
-            <div class="p-6 text-2xl font-bold border-b border-amber-800">
+        <aside id="sidebar"
+            class="fixed inset-y-0 left-0 z-50 w-64 bg-amber-900 text-white flex flex-col transform -translate-x-full md:translate-x-0 md:static transition-transform duration-300">
+            <div class="p-6 text-2xl font-bold border-b border-amber-800 flex justify-between items-center">
                 Foodie Admin
+                <button onclick="toggleSidebar()" class="md:hidden text-amber-200"><i
+                        class="fa-solid fa-times"></i></button>
             </div>
             <nav class="flex-1 p-4 space-y-2">
                 <button onclick="showSection('orders')"
@@ -47,12 +50,17 @@
             </nav>
         </aside>
 
+        <!-- Overlay for mobile -->
+        <div id="sidebarOverlay" class="fixed inset-0 bg-black/50 z-40 hidden md:hidden" onclick="toggleSidebar()">
+        </div>
+
         <!-- Main Content -->
         <main class="flex-1 overflow-y-auto">
             <!-- Mobile Header -->
-            <header class="bg-white shadow p-4 md:hidden flex justify-between items-center">
+            <header class="bg-white shadow p-4 md:hidden flex justify-between items-center sticky top-0 z-30">
                 <h1 class="text-xl font-bold text-amber-900">Foodie Admin</h1>
-                <button class="text-gray-600"><i class="fa-solid fa-bars"></i></button>
+                <button onclick="toggleSidebar()" class="text-gray-600 p-2"><i
+                        class="fa-solid fa-bars text-xl"></i></button>
             </header>
 
             <div class="p-8">
@@ -76,8 +84,8 @@
                 <!-- Orders Section -->
                 <div id="ordersSection">
                     <h2 class="text-2xl font-bold mb-4 text-gray-800">Live Orders</h2>
-                    <div class="bg-white rounded-xl shadow-sm overflow-hidden">
-                        <table class="w-full text-left border-collapse">
+                    <div class="bg-white rounded-xl shadow-sm overflow-x-auto">
+                        <table class="w-full text-left border-collapse min-w-[700px]">
                             <thead class="bg-gray-50 text-gray-500 uppercase text-xs">
                                 <tr>
                                     <th class="p-4">Order ID</th>
@@ -109,8 +117,8 @@
                 <!-- Partners Section -->
                 <div id="partnersSection" class="hidden">
                     <h2 class="text-2xl font-bold mb-4 text-gray-800">Partner Applications</h2>
-                    <div class="bg-white rounded-xl shadow-sm overflow-hidden">
-                        <table class="w-full text-left border-collapse">
+                    <div class="bg-white rounded-xl shadow-sm overflow-x-auto">
+                        <table class="w-full text-left border-collapse min-w-[800px]">
                             <thead class="bg-gray-50 text-gray-500 uppercase text-xs">
                                 <tr>
                                     <th class="p-4">Partner ID</th>
@@ -132,8 +140,8 @@
                 <!-- Careers Section -->
                 <div id="careersSection" class="hidden">
                     <h2 class="text-2xl font-bold mb-4 text-gray-800">Job Applications</h2>
-                    <div class="bg-white rounded-xl shadow-sm overflow-hidden">
-                        <table class="w-full text-left border-collapse">
+                    <div class="bg-white rounded-xl shadow-sm overflow-x-auto">
+                        <table class="w-full text-left border-collapse min-w-[700px]">
                             <thead class="bg-gray-50 text-gray-500 uppercase text-xs">
                                 <tr>
                                     <th class="p-4">App ID</th>
@@ -156,8 +164,22 @@
     </div>
 
     <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('sidebarOverlay');
+            sidebar.classList.toggle('-translate-x-full');
+            overlay.classList.toggle('hidden');
+        }
+
         // Simple View Switcher
         function showSection(id) {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('sidebarOverlay');
+            if (window.innerWidth < 768) {
+                sidebar.classList.add('-translate-x-full');
+                overlay.classList.add('hidden');
+            }
+
             document.getElementById('ordersSection').classList.add('hidden');
             document.getElementById('enquiriesSection').classList.add('hidden');
             document.getElementById('enquiriesSection').classList.add('hidden');
@@ -183,7 +205,7 @@
         // Fetch Data
         async function loadDashboard() {
             try {
-                const res = await fetch('http://localhost:3000/api/admin/data');
+                const res = await fetch('/api/admin/data');
                 const data = await res.json();
 
                 // Stats
@@ -341,7 +363,7 @@
             if (!confirm(`Are you sure you want to mark this order as ${status}?`)) return;
 
             try {
-                const res = await fetch('http://localhost:3000/api/order/status', {
+                const res = await fetch('/api/order/status', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ orderId, status })
@@ -364,7 +386,7 @@
             if (!confirm(`Mark partner ${partnerId} as ${status}?`)) return;
 
             try {
-                const res = await fetch('http://localhost:3000/api/partner/status', {
+                const res = await fetch('/api/partner/status', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ partnerId, status })
