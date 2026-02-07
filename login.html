@@ -77,29 +77,29 @@
         </button>
       </form>
 
-      <!-- Signup Form (Hidden) -->
+      <!-- Signup Form -->
       <form id="signupForm" class="space-y-4 hidden">
         <h2 class="text-2xl font-bold mb-4">Create Account</h2>
 
         <div>
-          <label class="block text-sm font-medium text-gray-700">Full Name</label>
-          <input type="text" class="w-full border rounded-lg p-3 bg-gray-50 focus:outline-amber-700"
-            placeholder="John Doe">
+          <label class="block text-sm font-medium text-gray-700">Username</label>
+          <input type="text" id="signupUser" class="w-full border rounded-lg p-3 bg-gray-50 focus:outline-amber-700"
+            placeholder="karthikeyan">
         </div>
 
         <div>
-          <label class="block text-sm font-medium text-gray-700">Mobile Number</label>
-          <input type="text" class="w-full border rounded-lg p-3 bg-gray-50 focus:outline-amber-700"
-            placeholder="9876543210">
+          <label class="block text-sm font-medium text-gray-700">Email Address</label>
+          <input type="email" id="signupEmail" class="w-full border rounded-lg p-3 bg-gray-50 focus:outline-amber-700"
+            placeholder="name@example.com">
         </div>
 
         <div>
           <label class="block text-sm font-medium text-gray-700">Create Password</label>
-          <input type="password" class="w-full border rounded-lg p-3 bg-gray-50 focus:outline-amber-700"
+          <input type="password" id="signupPass" class="w-full border rounded-lg p-3 bg-gray-50 focus:outline-amber-700"
             placeholder="Minimum 6 chars">
         </div>
 
-        <button type="button" onclick="alert('Account Created!')"
+        <button type="button" onclick="handleSignup()"
           class="w-full bg-black text-white font-bold py-3 rounded-lg hover:bg-amber-700 transition mt-6">
           Sign Up
         </button>
@@ -129,6 +129,36 @@
         tabSignup.classList.remove('border-transparent', 'text-gray-500');
         tabLogin.classList.remove('border-amber-700', 'text-amber-700');
         tabLogin.classList.add('border-transparent', 'text-gray-500');
+      }
+    }
+
+    async function handleSignup() {
+      const username = document.getElementById('signupUser').value;
+      const email = document.getElementById('signupEmail').value;
+      const password = document.getElementById('signupPass').value;
+
+      if (!username || !email || !password) {
+        alert("Please fill all fields");
+        return;
+      }
+
+      try {
+        const res = await fetch('/api/signup', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username, email, password })
+        });
+
+        const data = await res.json();
+        if (data.success) {
+          alert("Account created successfully! Please login.");
+          switchTab('login');
+        } else {
+          alert(data.message || "Signup failed");
+        }
+      } catch (e) {
+        console.error("Signup error", e);
+        alert("Connection error. Is the server running?");
       }
     }
 
