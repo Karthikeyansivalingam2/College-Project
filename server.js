@@ -241,21 +241,9 @@ app.get('/api/partner/dashboard/:id', async (req, res) => {
         const partner = await Partner.findOne({ partnerId: req.params.id });
         if (!partner) return res.status(404).json({ message: "Not found" });
 
-        // Match by city (case-insensitive) OR show orders with no city
-        const partnerCity = (partner.city || 'Chennai').trim();
-        let query = {
-            $or: [
-                { city: { $regex: new RegExp(`^${partnerCity}$`, 'i') } },
-                { city: { $exists: false } },
-                { city: "" },
-                { city: null }
-            ]
-        };
-
-        // If partner has no specific city in DB, show all
-        if (!partner.city) query = {};
-
-        const partnerOrders = await Order.find(query);
+        // DEBUG: SHOW ALL ORDERS TEMPORARILY
+        // To fix visibility issues
+        const partnerOrders = await Order.find({});
         const totalEarnings = partnerOrders.filter(o => o.status === 'Completed').reduce((sum, o) => sum + parseFloat(o.total || 0), 0);
         const pendingCount = partnerOrders.filter(o => o.status === 'Pending').length;
 
