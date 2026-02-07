@@ -241,10 +241,18 @@ app.get('/api/partner/dashboard/:id', async (req, res) => {
         const partner = await Partner.findOne({ partnerId: req.params.id });
         if (!partner) return res.status(404).json({ message: "Not found" });
 
-        // Match by city (case-insensitive)
-        let query = { city: { $regex: new RegExp(`^${partner.city || 'Chennai'}$`, 'i') } };
+        // Match by city (case-insensitive) OR show orders with no city
+        const partnerCity = (partner.city || 'Chennai').trim();
+        let query = {
+            $or: [
+                { city: { $regex: new RegExp(`^${partnerCity}$`, 'i') } },
+                { city: { $exists: false } },
+                { city: "" },
+                { city: null }
+            ]
+        };
 
-        // If no city is associated with partner, show all orders as fallback
+        // If partner has no specific city in DB, show all
         if (!partner.city) query = {};
 
         const partnerOrders = await Order.find(query);
