@@ -8,28 +8,30 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   <style>
     body {
-      font-family: 'Poppins', sans-serif;
-      background-color: #f9fafb;
+      font-family: 'Outfit', sans-serif;
+      background-color: #030712;
+      color: #f3f4f6;
     }
 
     .step-active .icon-box {
-      background-color: #b45309;
+      background-color: #059669;
       color: white;
-      border-color: #b45309;
+      border-color: #059669;
     }
 
     .step-completed .icon-box {
-      background-color: #b45309;
+      background-color: #059669;
       color: white;
-      border-color: #b45309;
+      border-color: #059669;
     }
 
     .step-completed .line {
-      background-color: #b45309;
+      background-color: #059669;
     }
 
     .animate-pulse-slow {
@@ -47,39 +49,39 @@
   </script>
 
   <!-- Navbar -->
-  <nav class="bg-white shadow-sm p-4 sticky top-0 z-50">
+  <nav class="bg-gray-900 shadow-sm p-4 sticky top-0 z-50 border-b border-gray-700">
     <div class="max-w-6xl mx-auto flex justify-between items-center">
-      <div class="text-2xl font-bold text-amber-800">Foodie Zone</div>
-      <a href="index.html" class="text-gray-600 hover:text-amber-800 font-medium">Home</a>
+      <div class="text-2xl font-bold text-emerald-500">Foodie Zone</div>
+      <a href="index.html" class="text-gray-400 hover:text-emerald-500 font-medium">Home</a>
     </div>
   </nav>
 
   <div class="max-w-3xl mx-auto mt-10 p-6">
 
     <!-- Order Header -->
-    <div class="bg-white rounded-2xl shadow-lg p-8 mb-8 text-center relative overflow-hidden">
-      <div class="absolute top-0 left-0 w-full h-2 bg-amber-700"></div>
+    <div class="bg-gray-800 rounded-2xl shadow-lg p-8 mb-8 text-center relative overflow-hidden border border-gray-700">
+      <div class="absolute top-0 left-0 w-full h-2 bg-emerald-700"></div>
 
-      <div class="inline-block p-4 rounded-full bg-green-100 text-green-600 mb-4 animate-bounce">
+      <div class="inline-block p-4 rounded-full bg-green-900/30 text-green-400 mb-4 animate-bounce">
         <i class="fa-solid fa-check text-3xl"></i>
       </div>
 
-      <h1 class="text-3xl font-bold text-gray-800 mb-2">Order Confirmed!</h1>
-      <p class="text-gray-500 mb-6">Order ID: <span class="font-mono font-bold text-black"
+      <h1 class="text-3xl font-bold text-gray-100 mb-2">Order Confirmed!</h1>
+      <p class="text-gray-400 mb-6">Order ID: <span class="font-mono font-bold text-emerald-400"
           id="dispOrderId">#LOADING</span></p>
 
-      <div class="bg-gray-50 rounded-lg p-4 inline-block text-left w-full md:w-2/3">
+      <div class="bg-gray-700 rounded-lg p-4 inline-block text-left w-full md:w-2/3 border border-gray-600">
         <h3 class="text-sm uppercase tracking-wide text-gray-400 font-semibold mb-2">Estimated Delivery</h3>
         <div class="flex items-center justify-between">
-          <span class="text-2xl font-bold text-gray-800" id="timeRemaining">15-20 mins</span>
-          <span class="text-amber-600 font-medium"><i class="fa-solid fa-motorcycle"></i> On Time</span>
+          <span class="text-2xl font-bold text-gray-100" id="timeRemaining">15-20 mins</span>
+          <span class="text-emerald-400 font-medium"><i class="fa-solid fa-motorcycle"></i> On Time</span>
         </div>
       </div>
     </div>
 
     <!-- Tracking Timeline -->
-    <div class="bg-white rounded-2xl shadow-lg p-8">
-      <h2 class="text-xl font-bold mb-6 border-b pb-4">Live Tracking</h2>
+    <div class="bg-gray-800 rounded-2xl shadow-lg p-8 border border-gray-700">
+      <h2 class="text-xl font-bold mb-6 border-b border-gray-700 pb-4 text-gray-100">Live Tracking</h2>
 
       <!-- Vertical Timeline for Mobile / Horizontal for Desktop -->
       <div class="relative">
@@ -88,15 +90,15 @@
         <div class="flex gap-6 pb-8 h-full step-completed" id="step1">
           <div class="flex flex-col items-center">
             <div
-              class="icon-box w-12 h-12 rounded-full border-4 border-gray-200 flex items-center justify-center bg-white text-gray-400 z-10 transition-all duration-500">
+              class="icon-box w-12 h-12 rounded-full border-4 border-gray-700 flex items-center justify-center bg-gray-600 text-gray-400 z-10 transition-all duration-500">
               <i class="fa-solid fa-clipboard-check"></i>
             </div>
-            <div class="line w-1 h-full bg-gray-200 -mt-2 -mb-2 z-0 transition-all duration-500"></div>
+            <div class="line w-1 h-full bg-gray-700 -mt-2 -mb-2 z-0 transition-all duration-500"></div>
           </div>
           <div>
-            <h3 class="text-lg font-bold">Order Placed</h3>
-            <p class="text-gray-500 text-sm">We have received your order.</p>
-            <p class="text-xs text-gray-400 mt-1" id="time1"></p>
+            <h3 class="text-lg font-bold text-gray-200">Order Placed</h3>
+            <p class="text-gray-400 text-sm">We have received your order.</p>
+            <p class="text-xs text-gray-500 mt-1" id="time1"></p>
           </div>
         </div>
 
@@ -104,15 +106,15 @@
         <div class="flex gap-6 pb-8 h-full" id="step2">
           <div class="flex flex-col items-center">
             <div
-              class="icon-box w-12 h-12 rounded-full border-4 border-gray-200 flex items-center justify-center bg-white text-gray-400 z-10 transition-all duration-500">
+              class="icon-box w-12 h-12 rounded-full border-4 border-gray-700 flex items-center justify-center bg-gray-600 text-gray-400 z-10 transition-all duration-500">
               <i class="fa-solid fa-mug-hot"></i>
             </div>
-            <div class="line w-1 h-full bg-gray-200 -mt-2 -mb-2 z-0 transition-all duration-500"></div>
+            <div class="line w-1 h-full bg-gray-700 -mt-2 -mb-2 z-0 transition-all duration-500"></div>
           </div>
           <div>
-            <h3 class="text-lg font-bold">Preparing</h3>
-            <p class="text-gray-500 text-sm">Your tea is being brewed with love.</p>
-            <p class="text-xs text-gray-400 mt-1" id="time2"></p>
+            <h3 class="text-lg font-bold text-gray-200">Preparing</h3>
+            <p class="text-gray-400 text-sm">Your tea is being brewed with love.</p>
+            <p class="text-xs text-gray-500 mt-1" id="time2"></p>
           </div>
         </div>
 
@@ -120,15 +122,15 @@
         <div class="flex gap-6 pb-8 h-full" id="step3">
           <div class="flex flex-col items-center">
             <div
-              class="icon-box w-12 h-12 rounded-full border-4 border-gray-200 flex items-center justify-center bg-white text-gray-400 z-10 transition-all duration-500">
+              class="icon-box w-12 h-12 rounded-full border-4 border-gray-700 flex items-center justify-center bg-gray-600 text-gray-400 z-10 transition-all duration-500">
               <i class="fa-solid fa-person-biking"></i>
             </div>
-            <div class="line w-1 h-full bg-gray-200 -mt-2 -mb-2 z-0 transition-all duration-500"></div>
+            <div class="line w-1 h-full bg-gray-700 -mt-2 -mb-2 z-0 transition-all duration-500"></div>
           </div>
           <div>
-            <h3 class="text-lg font-bold">Out for Delivery</h3>
-            <p class="text-gray-500 text-sm">Our partner is on the way.</p>
-            <p class="text-xs text-gray-400 mt-1" id="time3"></p>
+            <h3 class="text-lg font-bold text-gray-200">Out for Delivery</h3>
+            <p class="text-gray-400 text-sm">Our partner is on the way.</p>
+            <p class="text-xs text-gray-500 mt-1" id="time3"></p>
           </div>
         </div>
 
@@ -136,14 +138,14 @@
         <div class="flex gap-6 h-full" id="step4">
           <div class="flex flex-col items-center">
             <div
-              class="icon-box w-12 h-12 rounded-full border-4 border-gray-200 flex items-center justify-center bg-white text-gray-400 z-10 transition-all duration-500">
+              class="icon-box w-12 h-12 rounded-full border-4 border-gray-700 flex items-center justify-center bg-gray-600 text-gray-400 z-10 transition-all duration-500">
               <i class="fa-solid fa-house-chimney"></i>
             </div>
           </div>
           <div>
-            <h3 class="text-lg font-bold">Delivered</h3>
-            <p class="text-gray-500 text-sm">Enjoy your tea!</p>
-            <p class="text-xs text-gray-400 mt-1" id="time4"></p>
+            <h3 class="text-lg font-bold text-gray-200">Delivered</h3>
+            <p class="text-gray-400 text-sm">Enjoy your tea!</p>
+            <p class="text-xs text-gray-500 mt-1" id="time4"></p>
           </div>
         </div>
 
@@ -152,11 +154,11 @@
       <!-- Action Buttons -->
       <div class="mt-8 flex flex-col md:flex-row gap-4">
         <a href="tel:919876543210"
-          class="flex-1 bg-white border border-gray-300 text-gray-700 py-3 rounded-lg text-center font-semibold hover:bg-gray-50">
+          class="flex-1 bg-gray-700 border border-gray-600 text-gray-300 py-3 rounded-lg text-center font-semibold hover:bg-gray-600 transition">
           <i class="fa-solid fa-phone mr-2"></i> Call Support
         </a>
         <a href="index.html"
-          class="flex-1 bg-amber-700 text-white py-3 rounded-lg text-center font-semibold hover:bg-amber-800 shadow-md">
+          class="flex-1 bg-emerald-600 text-white py-3 rounded-lg text-center font-semibold hover:bg-emerald-700 shadow-md transition">
           Order More
         </a>
       </div>

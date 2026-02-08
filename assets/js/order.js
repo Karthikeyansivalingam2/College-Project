@@ -18,6 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const savedLoc = localStorage.getItem('userLocation');
   if (savedLoc) document.getElementById('currentLoc').innerText = savedLoc;
   renderMenu();
+  loadSavedAddress();
 });
 function switchMode(mode) {
 
@@ -211,35 +212,37 @@ function renderMenu() {
     if (targetSection) targetSection.classList.remove('hidden');
 
     const card = `
-      <div class="bg-white p-4 flex justify-between items-center border-b border-gray-100 hover:bg-gray-50 transition group">
-        <div class="flex-1 pr-4">
+      <div class="glass-card p-4 flex justify-between items-center group mb-4 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-r from-emerald-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+        
+        <div class="flex-1 pr-4 relative z-10">
           <div class="flex items-center gap-2 mb-1">
-             <i class="fa-regular fa-square-caret-up text-[10px] ${t.category === 'Diet' ? 'text-green-500' : 'text-red-500'}"></i>
-             ${t.bestseller ? `<span class="text-[10px] font-bold text-orange-500 uppercase tracking-tighter"><i class="fa-solid fa-star text-[10px]"></i> Bestseller</span>` : ""}
+             <i class="fa-regular fa-square-caret-up text-[12px] ${t.category === 'Diet' ? 'text-green-500' : 'text-red-500'}"></i>
+             ${t.bestseller ? `<span class="bg-amber-500/20 text-amber-500 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider shadow-[0_0_10px_rgba(245,158,11,0.2)]"><i class="fa-solid fa-star text-[9px]"></i> Bestseller</span>` : ""}
           </div>
-          <h3 class="font-bold text-gray-800 text-base md:text-lg mb-0.5">${t.name}</h3>
-          <p class="font-bold text-gray-700 text-sm mb-2">₹${t.price}</p>
-          <div class="flex items-center gap-2 text-[10px] text-gray-400 font-medium">
-             <span class="flex items-center gap-1 text-green-600"><i class="fa-solid fa-star"></i> 4.2</span>
-             <span>•</span>
+          <h3 class="font-bold text-gray-100 text-lg mb-1 group-hover:text-emerald-400 transition-colors">${t.name}</h3>
+          <p class="font-bold text-white text-base mb-2">₹${t.price}</p>
+          <div class="flex items-center gap-3 text-xs text-gray-400 font-medium bg-white/5 inline-flex px-2 py-1 rounded-lg border border-white/5">
+             <span class="flex items-center gap-1 text-emerald-400"><i class="fa-solid fa-star text-[10px]"></i> 4.2</span>
+             <span class="w-1 h-1 bg-gray-600 rounded-full"></span>
              <span>${t.category}</span>
           </div>
         </div>
 
-        <div class="relative w-28 h-24 md:w-32 md:h-28">
-          <img src="${t.image}" class="w-full h-full object-cover rounded-xl shadow-sm group-hover:shadow-md transition">
+        <div class="relative w-32 h-28 shrink-0">
+          <img src="${t.image}" class="w-full h-full object-cover rounded-xl shadow-lg border border-white/10 group-hover:scale-105 transition duration-500">
           
-          <div class="absolute -bottom-3 left-1/2 -translate-x-1/2 w-[80%]">
+          <div class="absolute -bottom-3 left-1/2 -translate-x-1/2 w-[90%] z-20">
             ${cartItem.qty > 0 ? `
-              <div class="bg-white border text-green-600 font-bold px-2 py-1.5 rounded-lg shadow-lg flex justify-between items-center text-sm border-gray-200">
-                <button onclick="updateQty('${t.name}',${t.price},-1)" class="px-2 hover:bg-gray-100 rounded">−</button>
-                <span>${cartItem.qty}</span>
-                <button onclick="updateQty('${t.name}',${t.price},1)" class="px-2 hover:bg-gray-100 rounded">+</button>
+              <div class="bg-gray-900/95 backdrop-blur border border-emerald-500/50 text-emerald-400 font-bold px-1 py-1.5 rounded-xl shadow-xl flex justify-between items-center text-sm w-full">
+                <button onclick="updateQty('${t.name}',${t.price},-1)" class="w-8 h-full flex items-center justify-center hover:bg-emerald-500/20 rounded-lg transition text-lg">−</button>
+                <span class="text-white text-base">${cartItem.qty}</span>
+                <button onclick="updateQty('${t.name}',${t.price},1)" class="w-8 h-full flex items-center justify-center hover:bg-emerald-500/20 rounded-lg transition text-lg">+</button>
               </div>
             ` : `
               <button onclick="updateQty('${t.name}',${t.price},1)" 
-                class="w-full bg-white border border-gray-200 text-green-600 font-bold py-1.5 rounded-lg shadow-lg hover:bg-gray-50 transition uppercase text-xs tracking-wider">
-                Add
+                class="w-full bg-slate-900 text-emerald-400 border border-emerald-500/50 font-bold py-2 rounded-xl shadow-lg hover:bg-emerald-600 hover:text-white hover:border-emerald-500 hover:shadow-emerald-500/40 transition-all uppercase text-xs tracking-wider transform active:scale-95 backdrop-blur-md">
+                ADD
               </button>
             `}
           </div>
@@ -408,6 +411,9 @@ function processPayment() {
     return;
   }
 
+  // Save Address for future
+  localStorage.setItem("userAddress", JSON.stringify({ name, mobile, address }));
+
   const orderDetails = {
     username: localStorage.getItem('currentUser') ? JSON.parse(localStorage.getItem('currentUser')).username : 'Guest',
     name, mobile, address,
@@ -539,5 +545,74 @@ function showAckModal(id, details) {
 function closeAckModal() {
   document.getElementById('ackModal').classList.add('hidden');
   // window.location.reload(); // Optional: reload after closing if needed
+}
+
+/* ADDRESS MANAGEMENT LOGIC */
+function loadSavedAddress() {
+  const saved = localStorage.getItem("userAddress");
+  const formView = document.getElementById("addressFormView");
+  const savedView = document.getElementById("savedAddressView");
+  const changeBtn = document.getElementById("changeAddressBtn");
+
+  if (saved) {
+    const addr = JSON.parse(saved);
+
+    // Populate Views
+    document.getElementById("savedName").innerText = addr.name;
+    document.getElementById("savedMobile").innerText = addr.mobile;
+    document.getElementById("savedAddressText").innerText = addr.address;
+
+    // Populate Hidden Inputs (for payment processing)
+    document.getElementById('txtName').value = addr.name;
+    document.getElementById('txtMobile').value = addr.mobile;
+    document.getElementById('txtAddress').value = addr.address;
+
+    // Switch UI
+    savedView.classList.remove("hidden");
+    formView.classList.add("hidden");
+    changeBtn.classList.remove("hidden");
+  } else {
+    toggleAddressEdit();
+  }
+}
+
+function toggleAddressEdit() {
+  document.getElementById("savedAddressView").classList.add("hidden");
+  document.getElementById("addressFormView").classList.remove("hidden");
+  document.getElementById("changeAddressBtn").classList.add("hidden");
+}
+
+function detectLocation() {
+  if (navigator.geolocation) {
+    const btn = event.currentTarget;
+    const originalContent = btn.innerHTML;
+    btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Detecting...';
+
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const { latitude, longitude } = position.coords;
+        // In a real app, use Reverse Geocoding API here.
+        // For now, we simulate a detected address based on current city
+        const city = localStorage.getItem('userLocation') || "Chennai";
+        const detectedAddress = `[GPS: ${latitude.toFixed(4)}, ${longitude.toFixed(4)}] \nNear ${city} Center, Main Road, ${city}`;
+
+        document.getElementById('txtAddress').value = detectedAddress;
+
+        btn.innerHTML = '<i class="fa-solid fa-check"></i> Found!'; // Success state
+        btn.classList.add('bg-emerald-900/50', 'text-emerald-300');
+
+        setTimeout(() => {
+          btn.innerHTML = originalContent;
+          btn.classList.remove('bg-emerald-900/50', 'text-emerald-300');
+        }, 2000);
+      },
+      (error) => {
+        alert("Location access denied. Please enter address manually.");
+        btn.innerHTML = originalContent;
+      }
+    );
+  } else {
+    alert("Geolocation is not supported by your browser.");
+  }
 }
 

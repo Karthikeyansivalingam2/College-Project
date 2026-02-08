@@ -11,13 +11,14 @@
     <style>
         body {
             font-family: 'Outfit', sans-serif;
-            background-color: #f3f4f6;
+            background-color: #030712;
+            color: #f3f4f6;
         }
 
         .glass-card {
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(17, 24, 39, 0.95);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(75, 85, 99, 0.4);
         }
 
         .check-animation {
@@ -41,28 +42,29 @@
 <body class="min-h-screen flex flex-col items-center justify-center p-4 relative overflow-hidden">
 
     <!-- decorative background elements -->
-    <div class="absolute top-0 left-0 w-full h-64 bg-amber-800 skew-y-3 transform -translate-y-20 z-0"></div>
+    <div class="absolute top-0 left-0 w-full h-64 bg-emerald-900 skew-y-3 transform -translate-y-20 z-0 opacity-50">
+    </div>
     <div
-        class="absolute bottom-0 right-0 w-64 h-64 bg-amber-100 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob">
+        class="absolute bottom-0 right-0 w-64 h-64 bg-emerald-900/30 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob">
     </div>
 
     <div class="glass-card relative z-10 w-full max-w-lg rounded-2xl shadow-2xl overflow-hidden text-center p-10">
 
         <div class="flex justify-center mb-6">
-            <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center check-animation">
-                <i class="fa-solid fa-check text-4xl text-green-600"></i>
+            <div class="w-20 h-20 bg-green-900/30 rounded-full flex items-center justify-center check-animation">
+                <i class="fa-solid fa-check text-4xl text-green-400"></i>
             </div>
         </div>
 
-        <h1 class="text-3xl font-bold text-gray-800 mb-2">Request Received!</h1>
-        <p class="text-gray-500 mb-6">Thank you for your interest in our Corporate Packages.</p>
+        <h1 class="text-3xl font-bold text-gray-100 mb-2">Request Received!</h1>
+        <p class="text-gray-400 mb-6">Thank you for your interest in our Corporate Packages.</p>
 
-        <div class="bg-gray-50 rounded-xl p-6 mb-8 border border-gray-100">
-            <p class="text-xs uppercase tracking-widest text-gray-400 font-semibold mb-1">Reference ID</p>
-            <p class="text-2xl font-mono font-bold text-amber-800 tracking-wider" id="refId">#REQ-8392</p>
+        <div class="bg-gray-800 rounded-xl p-6 mb-8 border border-gray-700">
+            <p class="text-xs uppercase tracking-widest text-gray-500 font-semibold mb-1">Reference ID</p>
+            <p class="text-2xl font-mono font-bold text-emerald-400 tracking-wider" id="refId">#REQ-8392</p>
 
-            <div class="mt-4 pt-4 border-t border-gray-200">
-                <div class="flex items-center justify-center text-sm text-gray-600 gap-2">
+            <div class="mt-4 pt-4 border-t border-gray-700">
+                <div class="flex items-center justify-center text-sm text-gray-400 gap-2">
                     <i class="fa-regular fa-clock"></i>
                     <span>We will contact you within <strong>24 Hours</strong></span>
                 </div>
@@ -71,18 +73,18 @@
 
         <div class="space-y-3">
             <a href="index.html"
-                class="block w-full bg-amber-800 text-white font-semibold py-3 px-6 rounded-lg hover:bg-amber-900 transition-colors shadow-lg">
+                class="block w-full bg-emerald-600 text-white font-semibold py-3 px-6 rounded-lg hover:bg-emerald-700 transition-colors shadow-lg">
                 Back to Home
             </a>
             <button onclick="window.print()"
-                class="block w-full bg-white text-gray-600 font-medium py-3 px-6 rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors">
+                class="block w-full bg-gray-800 text-gray-400 font-medium py-3 px-6 rounded-lg border border-gray-600 hover:bg-gray-700 transition-colors">
                 Download Acknowledgement
             </button>
         </div>
 
-        <p class="mt-8 text-xs text-gray-400">
+        <p class="mt-8 text-xs text-gray-500">
             Need immediate assistance? Call us at <a href="tel:+919876543210"
-                class="text-amber-700 font-semibold hover:underline">+91 98765-43210</a>
+                class="text-emerald-400 font-semibold hover:underline">+91 98765-43210</a>
         </p>
     </div>
 

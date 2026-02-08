@@ -17,169 +17,209 @@
 
 <body>
   <!-- ================= NAVBAR ================= -->
-  <header class="navbar">
-    <div class="nav-container">
-      <div class="logo">Foodie Zone</div>
+
+  <body class="bg-gray-900 text-gray-100">
+    <header class="navbar">
+      <div class="nav-container">
+        <div class="logo">Foodie Zone</div>
 
 
-      <nav class="nav-links" id="navLinks">
-        <a href="index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="order.html">Order</a>
-        <a href="review.html">Reviews</a>
-        <a href="careers.html">Job Careers</a>
-        <a href="contact.html">Contact</a>
-        <a href="login.html" class="nav-login">Login</a>
-        <a href="profile.html" id="navProfile"
-          class="hidden items-center justify-center w-10 h-10 rounded-full border border-white/30 bg-white/10 text-white hover:bg-white/20 hover:scale-105 transition-all shadow-lg backdrop-blur-sm group">
-          <span id="navUserInitial" class="font-bold text-base"></span>
-          <i id="navUserIcon" class="fa-solid fa-user text-sm group-hover:rotate-12 transition-transform"></i>
-        </a>
-      </nav>
+        <nav class="nav-links" id="navLinks">
+          <a href="index.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="order.html">Order</a>
+          <a href="review.html">Reviews</a>
+          <a href="careers.html">Job Careers</a>
+          <a href="contact.html">Contact</a>
+          <a href="login.html" class="nav-login">Login</a>
+          <a href="profile.html" id="navProfile"
+            class="hidden items-center justify-center w-10 h-10 rounded-full border border-white/30 bg-emerald-700 text-white hover:bg-emerald-800 hover:scale-105 transition-all shadow-lg backdrop-blur-sm group">
+            <span id="navUserInitial" class="font-bold text-base"></span>
+            <i id="navUserIcon" class="fa-solid fa-user text-sm group-hover:rotate-12 transition-transform"></i>
+          </a>
+        </nav>
 
-      <div class="menu-icon" onclick="toggleMenu()">☰</div>
-    </div>
-  </header>
+        <div class="menu-icon" onclick="toggleMenu()">☰</div>
+      </div>
+    </header>
 
-  <script>
-    const user = JSON.parse(localStorage.getItem('currentUser'));
-    if (user) {
-      const profileBtn = document.getElementById('navProfile');
-      if (profileBtn) {
-        profileBtn.classList.remove('hidden');
-        profileBtn.style.display = 'flex';
-        document.querySelector('.nav-login').style.display = 'none';
+    <script>
+      const user = JSON.parse(localStorage.getItem('currentUser'));
+      if (user) {
+        const profileBtn = document.getElementById('navProfile');
+        if (profileBtn) {
+          profileBtn.classList.remove('hidden');
+          profileBtn.style.display = 'flex';
+          document.querySelector('.nav-login').style.display = 'none';
 
-        if (user.username) {
-          document.getElementById('navUserInitial').innerText = user.username.charAt(0).toUpperCase();
-          document.getElementById('navUserIcon').classList.add('hidden');
+          if (user.username) {
+            document.getElementById('navUserInitial').innerText = user.username.charAt(0).toUpperCase();
+            document.getElementById('navUserIcon').classList.add('hidden');
+          }
         }
       }
-    }
-  </script>
+    </script>
 
 
 
 
-  <!-- ================= HERO ================= -->
-  <section class="bg-[#3b2a21] text-white py-20 text-center">
-    <h1 class="text-4xl md:text-5xl font-bold mb-4">
-      About Foodie Zone
+    <!-- ================= HERO ================= -->
+    <section class="relative bg-emerald-900 text-white py-24 text-center overflow-hidden">
+      <!-- Background Pattern -->
+      <div class="absolute inset-0 opacity-10"
+        style="background-image: url('https://www.transparenttextures.com/patterns/food.png');"></div>
 
-    </h1>
-    <p class="text-lg text-gray-300 max-w-2xl mx-auto">
-      Connecting tea lovers with the best tea shops across Tamil Nadu.
-    </p>
-  </section>
-
-
-  <!-- ================= ABOUT CONTENT ================= -->
-  <section class="py-20 px-6 max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
-
-    <!-- Image -->
-    <div>
-      <img src="assets/images/tea-order-photo_5.jpg" class="rounded-2xl shadow-lg w-full object-cover">
-    </div>
-
-    <!-- Text -->
-    <div>
-      <h2 class="text-3xl font-bold text-[#96582D] mb-6">
-        Who We Are
-      </h2>
-
-      <p class="text-gray-600 mb-4 leading-relaxed">
-        Foodie Zone is a platform created for food lovers. We help people discover
-        hidden outlets, explore job opportunities, and connect with authentic dining experiences.
-      </p>
-
-      <p class="text-gray-600 leading-relaxed">
-        Our mission is simple — make it easy to find the perfect tea near you.
-        From small roadside stalls to premium tea cafés, we bring everything together.
-      </p>
-    </div>
-
-  </section>
-
-
-  <!-- ================= FEATURES ================= -->
-  <section class="py-16 bg-white">
-
-    <div class="max-w-6xl mx-auto grid md:grid-cols-3 gap-10 text-center">
-
-      <div class="p-6 shadow rounded-xl">
-        <i class="fa-solid fa-magnifying-glass text-3xl text-[#96582D] mb-4"></i>
-        <h3 class="font-semibold text-lg">Easy Search</h3>
-        <p class="text-gray-500 mt-2">Find tea shops near your location quickly.</p>
+      <div class="relative z-10 px-4">
+        <h1 class="text-4xl md:text-6xl font-bold mb-6 tracking-tight">
+          Redefining Culinary Experiences
+        </h1>
+        <p class="text-xl text-emerald-100 max-w-3xl mx-auto font-light leading-relaxed">
+          From homely daily meals to grand wedding feasts, Foodie Zone bridges the gap between hunger and happiness
+          across Tamil Nadu.
+        </p>
       </div>
-
-      <div class="p-6 shadow rounded-xl">
-        <i class="fa-solid fa-star text-3xl text-[#96582D] mb-4"></i>
-        <h3 class="font-semibold text-lg">Verified Shops</h3>
-        <p class="text-gray-500 mt-2">Only trusted and quality tea spots listed.</p>
-      </div>
-
-      <div class="p-6 shadow rounded-xl">
-        <i class="fa-solid fa-map-location-dot text-3xl text-[#96582D] mb-4"></i>
-        <h3 class="font-semibold text-lg">Easy Navigation</h3>
-        <p class="text-gray-500 mt-2">Instant directions using Google Maps.</p>
-      </div>
-
-    </div>
-
-  </section>
+    </section>
 
 
-  <!--Footer-->
-  <footer class="footer">
-    <div class="footer-container">
+    <!-- ================= ABOUT CONTENT ================= -->
+    <section class="py-20 px-6 max-w-7xl mx-auto">
 
-      <div class="footer-box">
-        <h3>Foodie Zone</h3>
+      <div class="grid md:grid-cols-2 gap-16 items-center mb-24">
+        <!-- Image -->
+        <div class="relative group">
+          <div
+            class="absolute -inset-1 bg-gradient-to-r from-emerald-600 to-teal-600 rounded-2xl blur opacity-25 group-hover:opacity-75 transition duration-1000 group-hover:duration-200">
+          </div>
+          <img src="https://images.unsplash.com/photo-1555244162-803834f70033?q=80&w=1000"
+            class="relative rounded-2xl shadow-2xl w-full object-cover h-[400px]" alt="Diverse Food Spread">
+        </div>
 
-        <p>Discover the best Foodie Zone outlets near you with instant directions.</p>
-      </div>
+        <!-- Text -->
+        <div>
+          <h4 class="text-emerald-500 font-bold uppercase tracking-widest text-sm mb-2">Our Story</h4>
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-100 mb-6 leading-tight">
+            More Than Just a Delivery App
+          </h2>
 
-      <div class="footer-box">
-        <h4>Quick Links</h4>
-        <a href="index.html">Home</a><br>
-        <a href="about.html">About</a><br>
-        <a href="packages.html">Packages</a><br>
-        <a href="reviews.html">Reviews</a>
-      </div>
+          <p class="text-gray-300 mb-6 leading-relaxed text-lg">
+            Foodie Zone started with a simple idea: good food should be accessible to everyone, everywhere. What began
+            as a small initiative to connect local tea shops has now evolved into Tamil Nadu's most comprehensive food
+            service ecosystem.
+          </p>
 
-      <div class="footer-box">
-        <h4>Contact</h4>
-        <p>Email: support@foodiezone.com</p>
-
-        <p>Location: Tamil Nadu</p>
-      </div>
-
-      <div class="footer-box">
-        <h4>Follow Us</h4>
-        <div class="social-icons">
-          <a href="https://wa.me/919876543210" target="_blank" class="social whatsapp">
-            <i class="fa-brands fa-whatsapp"></i>
-          </a>
-          <a href="https://instagram.com" target="_blank" class="social instagram">
-            <i class="fa-brands fa-instagram"></i>
-          </a>
-          <a href="https://facebook.com" target="_blank" class="social facebook">
-            <i class="fa-brands fa-facebook-f"></i>
-          </a>
+          <p class="text-gray-400 leading-relaxed">
+            We understand that food is personal. Whether you are a student missing home-cooked meals, a corporate team
+            needing a productivity boost, or a family celebrating a milestone, we bring the best culinary partners to
+            your doorstep.
+          </p>
         </div>
       </div>
-    </div>
 
-    <div class="footer-bottom">
-      © 2026 Foodie Zone. All rights reserved.
+      <!-- Mission & Vision -->
+      <div class="grid md:grid-cols-2 gap-8">
+        <div
+          class="bg-gray-800 p-8 rounded-2xl border border-gray-700 hover:border-emerald-600 transition duration-300">
+          <div class="w-12 h-12 bg-emerald-900/50 rounded-lg flex items-center justify-center mb-4">
+            <i class="fa-solid fa-bullseye text-2xl text-emerald-500"></i>
+          </div>
+          <h3 class="text-xl font-bold text-white mb-3">Our Mission</h3>
+          <p class="text-gray-400">To revolutionize the food industry by empowering local eateries, ensuring hygiene
+            standards, and delivering joy through every meal served.</p>
+        </div>
 
-    </div>
-  </footer>
+        <div
+          class="bg-gray-800 p-8 rounded-2xl border border-gray-700 hover:border-emerald-600 transition duration-300">
+          <div class="w-12 h-12 bg-emerald-900/50 rounded-lg flex items-center justify-center mb-4">
+            <i class="fa-solid fa-earth-asia text-2xl text-emerald-500"></i>
+          </div>
+          <h3 class="text-xl font-bold text-white mb-3">Our Vision</h3>
+          <p class="text-gray-400">To become the most trusted food partner in South India, known for quality,
+            reliability, and our commitment to customer satisfaction.</p>
+        </div>
+      </div>
+
+    </section>
+
+
+    <!-- ================= FEATURES ================= -->
+    <section class="py-16 bg-gray-900">
+
+      <div class="max-w-6xl mx-auto grid md:grid-cols-3 gap-10 text-center">
+
+        <div class="p-6 shadow rounded-xl bg-gray-800 border border-gray-700">
+          <i class="fa-solid fa-utensils text-3xl text-emerald-500 mb-4"></i>
+          <h3 class="font-semibold text-lg text-gray-100">Diverse Menu</h3>
+          <p class="text-gray-400 mt-2">From Beverages to Biryani, we serve it all.</p>
+        </div>
+
+        <div class="p-6 shadow rounded-xl bg-gray-800 border border-gray-700">
+          <i class="fa-solid fa-calendar-check text-3xl text-emerald-500 mb-4"></i>
+          <h3 class="font-semibold text-lg text-gray-100">Catering & Events</h3>
+          <p class="text-gray-400 mt-2">Professional catering for corporate & personal events.</p>
+        </div>
+
+        <div class="p-6 shadow rounded-xl bg-gray-800 border border-gray-700">
+          <i class="fa-solid fa-truck-fast text-3xl text-emerald-500 mb-4"></i>
+          <h3 class="font-semibold text-lg text-gray-100">Fast Delivery</h3>
+          <p class="text-gray-400 mt-2">Hot and fresh food delivered to your doorstep.</p>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!--Footer-->
+    <footer class="footer">
+      <div class="footer-container">
+
+        <div class="footer-box">
+          <h3>Foodie Zone</h3>
+
+          <p>Discover the best Foodie Zone outlets near you with instant directions.</p>
+        </div>
+
+        <div class="footer-box">
+          <h4>Quick Links</h4>
+          <a href="index.html">Home</a><br>
+          <a href="about.html">About</a><br>
+          <a href="packages.html">Packages</a><br>
+          <a href="reviews.html">Reviews</a>
+        </div>
+
+        <div class="footer-box">
+          <h4>Contact</h4>
+          <p>Email: support@foodiezone.com</p>
+
+          <p>Location: Tamil Nadu</p>
+        </div>
+
+        <div class="footer-box">
+          <h4>Follow Us</h4>
+          <div class="social-icons">
+            <a href="https://wa.me/919876543210" target="_blank" class="social whatsapp">
+              <i class="fa-brands fa-whatsapp"></i>
+            </a>
+            <a href="https://instagram.com" target="_blank" class="social instagram">
+              <i class="fa-brands fa-instagram"></i>
+            </a>
+            <a href="https://facebook.com" target="_blank" class="social facebook">
+              <i class="fa-brands fa-facebook-f"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        © 2026 Foodie Zone. All rights reserved.
+
+      </div>
+    </footer>
 
 
 
-  <script src="./assets/js/common.js"></script>
+    <script src="./assets/js/common.js"></script>
 
-</body>
+  </body>
 
 </html>

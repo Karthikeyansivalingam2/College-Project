@@ -16,7 +16,7 @@
     }
 
     .hero-bg {
-      background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=1600');
+      background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.8)), url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=1600');
       background-size: cover;
       background-position: center;
     }
@@ -55,7 +55,7 @@
   </style>
 </head>
 
-<body class="bg-gray-50">
+<body class="bg-gray-900 text-gray-100">
 
   <!-- Navbar -->
   <header class="navbar">
@@ -64,6 +64,7 @@
 
       <nav class="nav-links" id="navLinks">
         <a href="index.html" class="active">Home</a>
+        <a href="about.html">About</a>
         <a href="order.html">Order</a>
         <a href="halls.html">Party Halls</a>
         <a href="review.html">Reviews</a>
@@ -74,7 +75,7 @@
         <!-- Toggle Theme -->
         <button onclick="toggleTheme()"
           class="ml-4 p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition" title="Toggle Theme">
-          <i class="fa-solid fa-moon text-amber-700" id="themeIcon"></i>
+          <i class="fa-solid fa-moon text-emerald-500" id="themeIcon"></i>
         </button>
 
         <a href="profile.html" id="navProfile"
@@ -120,12 +121,12 @@
     <!-- Content -->
     <div class="relative z-10 px-4 max-w-4xl mx-auto animate-fade-in-up">
       <span
-        class="bg-amber-600/80 text-amber-50 px-4 py-1 rounded-full text-sm font-semibold tracking-wide mb-6 inline-block backdrop-blur-sm border border-amber-500/50">
+        class="bg-emerald-600/80 text-emerald-50 px-4 py-1 rounded-full text-sm font-semibold tracking-wide mb-6 inline-block backdrop-blur-sm border border-emerald-500/50">
         #1 Food & Event Service in Tamil Nadu
       </span>
 
       <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight drop-shadow-xl">
-        Taste the <span class="text-amber-400">Tradition</span>
+        Taste the <span class="text-emerald-400">Tradition</span>
       </h1>
 
       <p class="text-lg md:text-2xl mb-10 text-gray-200 font-light max-w-2xl mx-auto">
@@ -133,43 +134,74 @@
       </p>
 
       <!-- Glass Search Bar -->
-      <div
-        class="bg-white/20 backdrop-blur-md border border-white/30 p-2 rounded-2xl md:rounded-full flex flex-col md:flex-row shadow-2xl mx-auto max-w-xl transition-transform hover:scale-[1.02] gap-2 md:gap-0">
-        <div class="flex flex-1 items-center">
-          <button onclick="detectLocation()" class="pl-5 pr-3 text-amber-300 hover:text-amber-100 transition"
-            title="Detect Location">
-            <i class="fa-solid fa-location-crosshairs text-xl"></i>
+      <!-- Swiggy-Inspired Search System -->
+      <div class="w-full max-w-4xl mx-auto z-50 relative text-left">
+
+        <div
+          class="flex flex-col md:flex-row bg-white rounded-2xl shadow-2xl overflow-visible transition-all duration-300 hover:shadow-green-500/20 ring-1 ring-black/5">
+
+          <!-- Location Input -->
+          <div class="relative flex-1 group border-b md:border-b-0 md:border-r border-gray-200">
+            <div id="locationBox"
+              class="flex items-center p-4 cursor-pointer hover:bg-gray-50 transition-colors rounded-t-2xl md:rounded-l-2xl">
+              <i
+                class="fa-solid fa-location-dot text-emerald-500 text-xl mx-2 transform group-hover:scale-110 transition-transform"></i>
+              <div class="flex-1 ml-3">
+                <input type="text" id="locationInput"
+                  class="w-full font-bold text-gray-700 outline-none bg-transparent placeholder-gray-500 text-lg cursor-pointer truncate"
+                  placeholder="Enter your delivery location" value="" autocomplete="off" readonly>
+              </div>
+              <i id="locationArrow"
+                class="fa-solid fa-chevron-down text-emerald-500 text-sm mx-2 transition-transform duration-300"></i>
+            </div>
+
+            <!-- Dropdown Menu -->
+            <div id="locationDropdown"
+              class="absolute top-[110%] left-0 w-full bg-white rounded-xl shadow-xl p-1 hidden animate-fade-in z-50 border border-gray-100 ring-1 ring-black/5 origin-top">
+              <!-- Locate Me -->
+              <div onclick="detectLocation()"
+                class="flex items-start gap-4 p-4 hover:bg-gray-50 rounded-lg cursor-pointer transition-all group/item mb-1">
+                <i class="fa-solid fa-location-crosshairs text-emerald-500 text-xl mt-1"></i>
+                <div>
+                  <h4 class="font-bold text-gray-700 group-hover/item:text-emerald-500 transition-colors">Use my current
+                    location</h4>
+                  <p class="text-xs text-gray-500 mt-0.5 font-medium">Using GPS</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Search Area -->
+          <div class="flex-[1.5] flex items-center p-2 relative">
+            <div class="flex-1 flex items-center px-4">
+              <i class="fa-solid fa-magnifying-glass text-gray-400 text-lg mr-3"></i>
+              <input type="text" class="w-full font-medium text-gray-700 outline-none placeholder-gray-400 text-lg"
+                placeholder="Search for restaurant, item or more">
+            </div>
+            <button id="searchBtnDesktop" onclick="findServices()"
+              class="hidden md:block bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-green-600 hover:to-green-700 text-white px-8 py-3 rounded-xl font-bold text-base shadow-lg hover:shadow-emerald-500/30 transition-all transform active:scale-95">
+              Search
+            </button>
+          </div>
+          <button id="searchBtnMobile" onclick="findServices()"
+            class="md:hidden bg-emerald-600 text-white py-4 font-bold text-lg uppercase shadow-inner">
+            Search Food
           </button>
-          <div class="h-8 w-px bg-white/30 my-auto hidden md:block"></div>
-          <select
-            class="flex-1 p-4 bg-transparent text-white placeholder-gray-200 outline-none border-none font-medium text-lg cursor-pointer md:w-auto w-full"
-            id="searchLocation">
-            <option value="" class="text-gray-800">Select City</option>
-            <option value="Chennai" class="text-gray-800">Chennai</option>
-            <option value="Madurai" class="text-gray-800">Madurai</option>
-            <option value="Coimbatore" class="text-gray-800">Coimbatore</option>
-            <option value="Salem" class="text-gray-800">Salem</option>
-            <option value="Trichy" class="text-gray-800">Trichy</option>
-          </select>
         </div>
-        <button onclick="findServices()"
-          class="bg-amber-600 hover:bg-amber-700 text-white px-8 py-3 rounded-xl md:rounded-full font-bold shadow-lg transition-all active:scale-95 w-full md:w-auto">
-          Explore
-        </button>
       </div>
 
       <!-- Quick Stats -->
       <div class="mt-12 grid grid-cols-3 gap-4 md:gap-8 max-w-2xl mx-auto">
         <div class="text-center">
-          <p class="text-2xl md:text-3xl font-bold text-amber-400">10k+</p>
+          <p class="text-2xl md:text-3xl font-bold text-emerald-400">10k+</p>
           <p class="text-[10px] md:text-xs text-gray-300 uppercase tracking-widest">Happy Eaters</p>
         </div>
         <div class="text-center border-x border-white/20">
-          <p class="text-2xl md:text-3xl font-bold text-amber-400">50+</p>
+          <p class="text-2xl md:text-3xl font-bold text-emerald-400">50+</p>
           <p class="text-[10px] md:text-xs text-gray-300 uppercase tracking-widest">Partner Halls</p>
         </div>
         <div class="text-center">
-          <p class="text-2xl md:text-3xl font-bold text-amber-400">4.8</p>
+          <p class="text-2xl md:text-3xl font-bold text-emerald-400">4.8</p>
           <p class="text-[10px] md:text-xs text-gray-300 uppercase tracking-widest">User Rating</p>
         </div>
       </div>
@@ -199,7 +231,7 @@
         <!-- Feature 2 -->
         <div class="flex flex-col items-center text-center p-6 transition hover:-translate-y-2 duration-300">
           <div
-            class="w-16 h-16 bg-orange-100 text-orange-600 rounded-2xl flex items-center justify-center text-3xl mb-6 shadow-sm -rotate-2">
+            class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-2xl flex items-center justify-center text-3xl mb-6 shadow-sm -rotate-2">
             <i class="fa-solid fa-clock"></i>
           </div>
           <h4 class="text-xl font-bold text-gray-800 mb-3">On-Time Delivery</h4>
@@ -223,7 +255,7 @@
   <!-- Services Section -->
   <section class="max-w-7xl mx-auto py-20 px-4 bg-gray-50 rounded-3xl my-10 relative overflow-hidden">
     <!-- Decorative Blob -->
-    <div class="absolute -top-24 -left-24 w-96 h-96 bg-amber-200/30 rounded-full blur-3xl"></div>
+    <div class="absolute -top-24 -left-24 w-96 h-96 bg-emerald-200/30 rounded-full blur-3xl"></div>
 
     <div class="relative z-10">
       <h2 class="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-14">Explore Our Services</h2>
@@ -236,7 +268,7 @@
               class="w-full h-full object-cover transition duration-700 group-hover:scale-110">
             <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
             <div class="absolute bottom-4 left-4 text-white">
-              <span class="bg-amber-600 text-xs font-bold px-2 py-1 rounded mb-2 inline-block">MOST POPULAR</span>
+              <span class="bg-emerald-600 text-xs font-bold px-2 py-1 rounded mb-2 inline-block">MOST POPULAR</span>
               <h3 class="text-2xl font-bold">Daily Mess</h3>
             </div>
           </div>
@@ -244,7 +276,7 @@
             <p class="text-gray-500 mb-6 text-sm line-clamp-2">Healthy, home-style meals delivered to your hostel or
               room. Breakfast, Lunch & Dinner plans.</p>
             <a href="order.html"
-              class="block w-full text-center border-2 border-amber-600 text-amber-700 font-bold py-3 rounded-lg hover:bg-amber-600 hover:text-white transition uppercase tracking-wide text-sm">
+              class="block w-full text-center border-2 border-emerald-600 text-emerald-700 font-bold py-3 rounded-lg hover:bg-emerald-600 hover:text-white transition uppercase tracking-wide text-sm">
               View Menu
             </a>
           </div>
@@ -264,7 +296,7 @@
             <p class="text-gray-500 mb-6 text-sm line-clamp-2">Bulk food solutions for offices and events. Snacks, Tea,
               and Executive Lunches.</p>
             <a href="order.html"
-              class="block w-full text-center border-2 border-gray-200 text-gray-700 font-bold py-3 rounded-lg hover:border-amber-600 hover:text-amber-700 transition uppercase tracking-wide text-sm">
+              class="block w-full text-center border-2 border-gray-200 text-gray-700 font-bold py-3 rounded-lg hover:border-emerald-600 hover:text-emerald-700 transition uppercase tracking-wide text-sm">
               Get Quote
             </a>
           </div>
@@ -284,7 +316,7 @@
             <p class="text-gray-500 mb-6 text-sm line-clamp-2">Book premium banquet halls for Weddings, Birthdays, and
               Receptions.</p>
             <a href="halls.html"
-              class="block w-full text-center border-2 border-gray-200 text-gray-700 font-bold py-3 rounded-lg hover:border-amber-600 hover:text-amber-700 transition uppercase tracking-wide text-sm">
+              class="block w-full text-center border-2 border-gray-200 text-gray-700 font-bold py-3 rounded-lg hover:border-emerald-600 hover:text-emerald-700 transition uppercase tracking-wide text-sm">
               Book Hall
             </a>
           </div>
@@ -306,8 +338,9 @@
 
     <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
       <!-- City Card -->
+      <!-- City Card -->
       <a href="#"
-        onclick="document.getElementById('searchLocation').value='Chennai'; document.querySelector('.hero-bg').scrollIntoView({behavior:'smooth'})"
+        onclick="selectCity('Chennai'); document.querySelector('.hero-bg').scrollIntoView({behavior:'smooth'})"
         class="group relative h-64 rounded-2xl overflow-hidden cursor-pointer shadow-lg">
         <img src="https://images.unsplash.com/photo-1582510003544-5243788c942e?q=80&w=800"
           class="w-full h-full object-cover transition duration-700 group-hover:scale-110 group-hover:rotate-1">
@@ -320,7 +353,7 @@
 
       <!-- City Card -->
       <a href="#"
-        onclick="document.getElementById('searchLocation').value='Madurai'; document.querySelector('.hero-bg').scrollIntoView({behavior:'smooth'})"
+        onclick="selectCity('Madurai'); document.querySelector('.hero-bg').scrollIntoView({behavior:'smooth'})"
         class="group relative h-64 rounded-2xl overflow-hidden cursor-pointer shadow-lg mt-0 md:mt-8">
         <img src="https://images.unsplash.com/photo-1578564969153-06ac3f2935bc?q=80&w=800"
           class="w-full h-full object-cover transition duration-700 group-hover:scale-110 group-hover:rotate-1">
@@ -333,7 +366,7 @@
 
       <!-- City Card -->
       <a href="#"
-        onclick="document.getElementById('searchLocation').value='Coimbatore'; document.querySelector('.hero-bg').scrollIntoView({behavior:'smooth'})"
+        onclick="selectCity('Coimbatore'); document.querySelector('.hero-bg').scrollIntoView({behavior:'smooth'})"
         class="group relative h-64 rounded-2xl overflow-hidden cursor-pointer shadow-lg">
         <img src="https://images.unsplash.com/photo-1621243912629-28f58b0907a2?q=80&w=800"
           class="w-full h-full object-cover transition duration-700 group-hover:scale-110 group-hover:rotate-1">
@@ -345,8 +378,7 @@
       </a>
 
       <!-- City Card -->
-      <a href="#"
-        onclick="document.getElementById('searchLocation').value='Salem'; document.querySelector('.hero-bg').scrollIntoView({behavior:'smooth'})"
+      <a href="#" onclick="selectCity('Salem'); document.querySelector('.hero-bg').scrollIntoView({behavior:'smooth'})"
         class="group relative h-64 rounded-2xl overflow-hidden cursor-pointer shadow-lg mt-0 md:mt-8">
         <img src="https://images.unsplash.com/photo-1590449557762-b9d9c2273185?q=80&w=800"
           class="w-full h-full object-cover transition duration-700 group-hover:scale-110 group-hover:rotate-1">
@@ -380,7 +412,7 @@
         <p>Location: Tamil Nadu</p>
       </div>
       <div class="footer-bottom">
-        © 2026 Foodie Zone. All rights reserved. | <a href="admin-login.html" class="hover:text-amber-500">Admin
+        © 2026 Foodie Zone. All rights reserved. | <a href="admin-login.html" class="hover:text-emerald-500">Admin
           Login</a>
 
       </div>
@@ -388,27 +420,141 @@
 
   <script src="./assets/js/common.js"></script>
   <script>
+    // -- SEARCH & LOCATION LOGIC --
+    const locationInput = document.getElementById('locationInput');
+    const locationDropdown = document.getElementById('locationDropdown');
+    const locationArrow = document.getElementById('locationArrow');
+    const locationBox = document.getElementById('locationBox');
+
+    // Handle Location Box Click
+    if (locationBox) {
+      locationBox.addEventListener('click', (e) => {
+        e.stopPropagation(); // Stop bubbling
+        // If user clicks the input, keep it open (focus handles opening, this prevents toggling off)
+        if (e.target === locationInput) {
+          toggleLocationDropdown(true);
+        } else {
+          // Toggle for icon or container clicks
+          toggleLocationDropdown();
+        }
+      });
+    }
+
+    // Add explicit listener for input to handle focus/click robustly
+    if (locationInput) {
+      locationInput.addEventListener('click', (e) => {
+        e.stopPropagation();
+        locationInput.removeAttribute('readonly');
+        toggleLocationDropdown(true);
+      });
+      locationInput.addEventListener('focus', () => {
+        locationInput.removeAttribute('readonly');
+        toggleLocationDropdown(true);
+      });
+    }
+
+    // Toggle Dropdown
+    function toggleLocationDropdown(forceShow = null) {
+      if (locationDropdown) {
+        if (forceShow === true) {
+          locationDropdown.classList.remove('hidden');
+          if (locationArrow) locationArrow.classList.add('rotate-180');
+        } else if (forceShow === false) {
+          locationDropdown.classList.add('hidden');
+          if (locationArrow) locationArrow.classList.remove('rotate-180');
+        } else {
+          locationDropdown.classList.toggle('hidden');
+          if (locationArrow) locationArrow.classList.toggle('rotate-180');
+        }
+      }
+    }
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', function (e) {
+      const container = document.querySelector('.group'); // The location container
+      if (container && !container.contains(e.target) && locationDropdown && !locationDropdown.classList.contains('hidden')) {
+        toggleLocationDropdown(false);
+      }
+    });
+
+    function selectCity(city) {
+      if (locationInput) locationInput.value = city;
+      toggleLocationDropdown(false);
+    }
+
     function findServices() {
-      const loc = document.getElementById('searchLocation').value;
-      if (loc) {
-        window.location.href = "search.html?q=" + encodeURIComponent(loc);
+      const loc = document.getElementById('locationInput').value;
+      if (loc && loc.trim() !== "") {
+        // Show loading state
+        const btnDesktop = document.getElementById('searchBtnDesktop');
+        const btnMobile = document.getElementById('searchBtnMobile');
+
+        // Update Desktop Button
+        if (btnDesktop) {
+          btnDesktop.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin mr-2"></i>Searching...';
+          btnDesktop.classList.add('opacity-75', 'cursor-not-allowed');
+          btnDesktop.disabled = true;
+        }
+
+        // Update Mobile Button
+        if (btnMobile) {
+          btnMobile.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin mr-2"></i>Searching...';
+          btnMobile.classList.add('opacity-75', 'cursor-not-allowed');
+          btnMobile.disabled = true;
+        }
+
+        // Simulate network delay (1.5 seconds)
+        setTimeout(() => {
+          window.location.href = "search.html?q=" + encodeURIComponent(loc);
+        }, 1500);
       } else {
-        alert("Please select a location");
+        showToast("Please select your delivery location", 'info');
+        toggleLocationDropdown(true);
+        if (locationInput) locationInput.focus();
       }
     }
 
     function detectLocation() {
       if (navigator.geolocation) {
+        if (locationInput) {
+          locationInput.value = "Detecting location...";
+          locationInput.classList.add('animate-pulse');
+        }
+
         navigator.geolocation.getCurrentPosition(
           (position) => {
-            // In a real app, use reverse geocoding API here.
-            // For now, we simulate detecting 'Chennai' or closest supported city
-            const select = document.getElementById('searchLocation');
-            select.value = 'Chennai'; // Simulating result
-            select.classList.add('text-amber-700', 'font-bold');
-            showToast("Location detected: Chennai", 'success');
+            // Using a free reverse geocoding API (OpenStreetMap Nominatim) for realism
+            const { latitude, longitude } = position.coords;
+            const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`;
+
+            fetch(url)
+              .then(response => response.json())
+              .then(data => {
+                if (locationInput) locationInput.classList.remove('animate-pulse');
+                const city = data.address.city || data.address.town || data.address.village || 'Chennai';
+                const area = data.address.suburb || data.address.neighbourhood || '';
+
+                // Format: Area, City
+                const formatted = area ? `${area}, ${city}` : city;
+                if (locationInput) locationInput.value = formatted;
+                showToast(`Location detected: ${formatted}`, 'success');
+                toggleLocationDropdown(false);
+              })
+              .catch(err => {
+                console.error(err);
+                if (locationInput) {
+                  locationInput.classList.remove('animate-pulse');
+                  locationInput.value = 'Chennai'; // Fallback
+                }
+                showToast("Location detected: Chennai (Simulated)", 'success');
+                toggleLocationDropdown(false);
+              });
           },
           (error) => {
+            if (locationInput) {
+              locationInput.classList.remove('animate-pulse');
+              locationInput.value = '';
+            }
             showToast("Unable to retrieve your location", 'error');
           }
         );
@@ -431,11 +577,11 @@
     function updateThemeIcon(isDark) {
       const icon = document.getElementById('themeIcon');
       if (isDark) {
-        icon.classList.remove('fa-moon', 'text-amber-700');
+        icon.classList.remove('fa-moon', 'text-emerald-500');
         icon.classList.add('fa-sun', 'text-yellow-400');
       } else {
         icon.classList.remove('fa-sun', 'text-yellow-400');
-        icon.classList.add('fa-moon', 'text-amber-700');
+        icon.classList.add('fa-moon', 'text-emerald-500');
       }
     }
 

@@ -13,22 +13,23 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 
-<body class="bg-gray-50">
+<body class="bg-gray-900 text-gray-100">
   <!-- Navbar -->
   <header class="navbar">
     <div class="nav-container">
       <div class="flex items-center gap-6">
         <div class="logo">Foodie Zone</div>
         <div class="hidden sm:flex items-center gap-2 cursor-pointer group" onclick="toggleLocationModal()">
-          <span class="text-xs uppercase font-bold text-gray-500 group-hover:text-amber-700">Serviceable in</span>
+          <span class="text-xs uppercase font-bold text-gray-400 group-hover:text-emerald-500">Serviceable in</span>
           <span id="currentLoc"
-            class="text-sm font-bold border-b-2 border-gray-800 pb-0.5 group-hover:text-amber-700 group-hover:border-amber-700">Chennai</span>
-          <i class="fa-solid fa-chevron-down text-amber-700 text-xs mt-1"></i>
+            class="text-sm font-bold border-b-2 border-gray-600 pb-0.5 group-hover:text-emerald-500 group-hover:border-emerald-500">Chennai</span>
+          <i class="fa-solid fa-chevron-down text-emerald-500 text-xs mt-1"></i>
         </div>
       </div>
 
       <nav class="nav-links" id="navLinks">
         <a href="index.html">Home</a>
+        <a href="about.html">About</a>
         <a href="order.html" class="active">Order</a>
         <a href="halls.html">Party Halls</a>
         <a href="review.html">Reviews</a>
@@ -66,26 +67,27 @@
 
       <div class="flex gap-2">
         <button id="retailBtn" onclick="switchMode('retail')"
-          class="px-6 py-2 bg-amber-700 text-white rounded-full font-bold shadow-md">Retail Order</button>
+          class="px-6 py-2 bg-emerald-700 text-white rounded-full font-bold shadow-md hover:bg-emerald-600 transition">Retail
+          Order</button>
         <button id="packageBtn" onclick="switchMode('monthly')"
-          class="px-6 py-2 bg-gray-200 text-gray-700 rounded-full font-medium hover:bg-gray-300">Subscriptions</button>
+          class="px-6 py-2 bg-gray-800 text-gray-300 rounded-full font-medium hover:bg-gray-700 transition">Subscriptions</button>
       </div>
 
       <div id="retailFilters" class="flex gap-2 w-full md:w-auto overflow-x-auto pb-2">
         <button onclick="selectCategory(null)"
-          class="whitespace-nowrap px-4 py-1.5 rounded-full border border-gray-300 hover:bg-amber-50 text-sm">All</button>
+          class="whitespace-nowrap px-4 py-1.5 rounded-full border border-gray-700 hover:bg-gray-800 text-sm text-gray-300">All</button>
         <button onclick="selectCategory('Popular')"
-          class="whitespace-nowrap px-4 py-1.5 rounded-full border border-gray-300 hover:bg-amber-50 text-sm">Popular</button>
+          class="whitespace-nowrap px-4 py-1.5 rounded-full border border-gray-700 hover:bg-gray-800 text-sm text-gray-300">Popular</button>
         <button onclick="selectCategory('Healthy')"
-          class="whitespace-nowrap px-4 py-1.5 rounded-full border border-green-200 text-green-800 bg-green-50 text-sm">Diet/Healthy</button>
+          class="whitespace-nowrap px-4 py-1.5 rounded-full border border-emerald-900 text-emerald-400 bg-emerald-900/20 text-sm">Diet/Healthy</button>
         <button onclick="selectCategory('Snacks')"
-          class="whitespace-nowrap px-4 py-1.5 rounded-full border border-gray-300 hover:bg-amber-50 text-sm">Snacks</button>
+          class="whitespace-nowrap px-4 py-1.5 rounded-full border border-gray-700 hover:bg-gray-800 text-sm text-gray-300">Snacks</button>
       </div>
 
       <div id="retailSearch" class="relative w-full md:w-64">
         <input type="text" id="searchTea" onkeyup="renderMenu()" placeholder="Search items..."
-          class="w-full pl-10 pr-4 py-2 border rounded-full focus:outline-none focus:ring-2 focus:ring-amber-500">
-        <i class="fa-solid fa-search absolute left-3 top-3 text-gray-400"></i>
+          class="w-full pl-10 pr-4 py-2 border border-gray-700 bg-gray-800 text-gray-200 rounded-full focus:outline-none focus:ring-2 focus:ring-emerald-500 placeholder-gray-500">
+        <i class="fa-solid fa-search absolute left-3 top-3 text-gray-500"></i>
       </div>
     </div>
 
@@ -94,37 +96,37 @@
 
       <!-- Beverages -->
       <div id="beverageSection">
-        <h3 class="text-xl font-bold text-gray-800 mb-4 border-l-4 border-amber-700 pl-3">Hot & Cold Beverages</h3>
+        <h3 class="text-xl font-bold text-gray-100 mb-4 border-l-4 border-emerald-600 pl-3">Hot & Cold Beverages</h3>
         <div id="beverageGrid" class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-4 mb-8"></div>
       </div>
 
       <!-- Breakfast -->
       <div id="breakfastSection">
-        <h3 class="text-xl font-bold text-gray-800 mb-4 border-l-4 border-orange-500 pl-3">Breakfast Specials</h3>
+        <h3 class="text-xl font-bold text-gray-100 mb-4 border-l-4 border-emerald-500 pl-3">Breakfast Specials</h3>
         <div id="breakfastGrid" class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-4 mb-8"></div>
       </div>
 
       <!-- Lunch -->
       <div id="lunchSection">
-        <h3 class="text-xl font-bold text-gray-800 mb-4 border-l-4 border-red-600 pl-3">Lunch Meals & Biryani</h3>
+        <h3 class="text-xl font-bold text-gray-100 mb-4 border-l-4 border-emerald-600 pl-3">Lunch Meals & Biryani</h3>
         <div id="lunchGrid" class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-4 mb-8"></div>
       </div>
 
       <!-- Dinner -->
       <div id="dinnerSection">
-        <h3 class="text-xl font-bold text-gray-800 mb-4 border-l-4 border-indigo-600 pl-3">Dinner Delights</h3>
+        <h3 class="text-xl font-bold text-gray-100 mb-4 border-l-4 border-emerald-600 pl-3">Dinner Delights</h3>
         <div id="dinnerGrid" class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-4 mb-8"></div>
       </div>
 
       <!-- Fast Food / Snacks -->
       <div id="fastFoodSection">
-        <h3 class="text-xl font-bold text-gray-800 mb-4 border-l-4 border-yellow-500 pl-3">Fast Food & Snacks</h3>
+        <h3 class="text-xl font-bold text-gray-100 mb-4 border-l-4 border-emerald-500 pl-3">Fast Food & Snacks</h3>
         <div id="fastFoodGrid" class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-4 mb-8"></div>
       </div>
 
       <!-- Diet -->
       <div id="dietSection">
-        <h3 class="text-xl font-bold text-gray-800 mb-4 border-l-4 border-green-600 pl-3">Healthy & Diet Food</h3>
+        <h3 class="text-xl font-bold text-gray-100 mb-4 border-l-4 border-emerald-600 pl-3">Healthy & Diet Food</h3>
         <div id="dietGrid" class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-4 mb-8"></div>
       </div>
 
@@ -135,7 +137,7 @@
 
   <!-- CART BAR (SWIGGY STYLE) -->
   <div id="cartBar" style="position:fixed; bottom:0;"
-    class="left-0 right-0 hidden bg-green-600 shadow-2xl z-40 transition-all duration-300">
+    class="left-0 right-0 hidden bg-emerald-700 shadow-2xl z-40 transition-all duration-300">
 
     <div class="max-w-4xl mx-auto flex justify-between items-center px-4 py-3">
       <div class="text-white">
@@ -153,7 +155,7 @@
 
   <!-- CART DRAWER -->
   <div id="cartDrawer" class="fixed inset-0 bg-black bg-opacity-40 hidden z-50" onclick="closeCart()">
-    <div onclick="event.stopPropagation()" class=" bg-white p-4 fixed bottom-0 left-0 right-0 md:top-0 md:bottom-0 md:right-0 md:left-auto md:w-96
+    <div onclick="event.stopPropagation()" class=" bg-gray-800 text-gray-200 p-4 fixed bottom-0 left-0 right-0 md:top-0 md:bottom-0 md:right-0 md:left-auto md:w-96
       rounded-t-2xl md:rounded-none max-h-[75%] md:max-h-full overflow-y-auto">
       <!-- Drag Handle (Mobile only) -->
       <div class="w-12 h-1 bg-gray-300 rounded-full mx-auto mb-3 md:hidden"></div>
@@ -164,28 +166,82 @@
         <span>₹<span id="total">0</span></span>
       </div>
 
-      <div id="addressSection" class="mt-6 p-4 border-2 border-dashed border-gray-200 rounded-xl bg-gray-50">
-        <div class="flex items-center gap-3 mb-4">
-          <div class="w-10 h-10 bg-white rounded shadow-sm flex items-center justify-center text-gray-400">
-            <i class="fa-solid fa-location-dot"></i>
+      <div id="addressSection" class="mt-6">
+        <!-- Header -->
+        <div class="flex justify-between items-center mb-4">
+          <h4 class="font-bold text-gray-200 text-lg">Delivery Address</h4>
+          <button onclick="toggleAddressEdit()"
+            class="text-emerald-400 text-xs font-bold uppercase tracking-wider hidden hover:text-emerald-300"
+            id="changeAddressBtn">CHANGE</button>
+        </div>
+
+        <!-- Saved Address View -->
+        <div id="savedAddressView"
+          class="hidden glass-card p-5 border border-emerald-500/30 relative overflow-hidden group cursor-pointer hover:border-emerald-500/60 transition-all bg-gray-800/50">
+          <div
+            class="absolute -right-4 -top-4 w-24 h-24 bg-emerald-500/10 rounded-full group-hover:scale-110 transition-transform">
           </div>
-          <div>
-            <h4 class="font-bold text-gray-800">Delivery Address</h4>
-            <p class="text-xs text-gray-500">Add a new delivery address</p>
+
+          <div class="relative z-10">
+            <div class="flex items-center justify-between mb-3">
+              <div class="flex items-center gap-2 bg-emerald-500/10 px-2 py-1 rounded-md border border-emerald-500/20">
+                <i class="fa-solid fa-house text-emerald-400 text-xs"></i>
+                <span class="font-bold text-emerald-400 uppercase tracking-wider text-[10px]">Home</span>
+              </div>
+              <i class="fa-solid fa-circle-check text-emerald-500 text-lg shadow-emerald-500/50 drop-shadow-lg"></i>
+            </div>
+
+            <h5 class="font-bold text-white text-base mb-1 flex items-center gap-2">
+              <span id="savedName">User Name</span>
+              <span class="text-gray-500 font-normal text-xs bg-gray-700 px-1.5 py-0.5 rounded">Receiver</span>
+            </h5>
+            <p class="text-sm text-gray-300 mb-2 leading-relaxed" id="savedAddressText">123 Street Name...</p>
+            <p class="text-xs text-gray-400 font-mono flex items-center gap-2">
+              <i class="fa-solid fa-phone text-[10px]"></i> <span id="savedMobile">+91 9876543210</span>
+            </p>
           </div>
         </div>
 
-        <form class="space-y-4">
-          <input type="text" id="txtName"
-            class="w-full border border-gray-200 rounded-lg p-3 text-sm focus:ring-2 focus:ring-amber-500 outline-none"
-            placeholder="Receiver Name">
-          <input type="tel" id="txtMobile"
-            class="w-full border border-gray-200 rounded-lg p-3 text-sm focus:ring-2 focus:ring-amber-500 outline-none"
-            placeholder="Mobile Number">
-          <textarea id="txtAddress"
-            class="w-full border border-gray-200 rounded-lg p-3 h-20 text-sm focus:ring-2 focus:ring-amber-500 outline-none"
-            placeholder="Complete Address (Flat/House No, Landmark)"></textarea>
-        </form>
+        <!-- Edit/Add Form View -->
+        <div id="addressFormView" class="space-y-4">
+          <button onclick="detectLocation()"
+            class="w-full py-3 bg-emerald-900/20 border border-emerald-500/30 text-emerald-400 rounded-xl font-bold text-sm flex items-center justify-center gap-2 hover:bg-emerald-900/40 hover:border-emerald-500/50 transition shadow-lg shadow-emerald-900/10 group">
+            <i class="fa-solid fa-location-crosshairs group-hover:animate-pulse"></i> Use Current Location
+            <span class="text-gray-500 font-normal text-xs ml-1">(GPS)</span>
+          </button>
+
+          <div class="relative flex items-center gap-4 my-3">
+            <div class="h-px bg-gray-700/50 flex-1"></div>
+            <span class="text-[10px] text-gray-500 uppercase font-bold tracking-widest">Or enter manually</span>
+            <div class="h-px bg-gray-700/50 flex-1"></div>
+          </div>
+
+          <form class="space-y-3">
+            <div class="relative group">
+              <i
+                class="fa-solid fa-user absolute left-3 top-3.5 text-gray-500 text-sm group-focus-within:text-emerald-500 transition-colors"></i>
+              <input type="text" id="txtName"
+                class="w-full border border-gray-700 bg-gray-800/50 text-gray-200 rounded-xl p-3 pl-10 text-sm focus:ring-1 focus:ring-emerald-500 focus:border-emerald-500 outline-none placeholder-gray-500 transition-all font-medium"
+                placeholder="Receiver Name">
+            </div>
+
+            <div class="relative group">
+              <i
+                class="fa-solid fa-phone absolute left-3 top-3.5 text-gray-500 text-sm group-focus-within:text-emerald-500 transition-colors"></i>
+              <input type="tel" id="txtMobile"
+                class="w-full border border-gray-700 bg-gray-800/50 text-gray-200 rounded-xl p-3 pl-10 text-sm focus:ring-1 focus:ring-emerald-500 focus:border-emerald-500 outline-none placeholder-gray-500 transition-all font-mono"
+                placeholder="Mobile Number">
+            </div>
+
+            <div class="relative group">
+              <i
+                class="fa-solid fa-map-pin absolute left-3 top-3.5 text-gray-500 text-sm group-focus-within:text-emerald-500 transition-colors"></i>
+              <textarea id="txtAddress"
+                class="w-full border border-gray-700 bg-gray-800/50 text-gray-200 rounded-xl p-3 pl-10 h-24 text-sm focus:ring-1 focus:ring-emerald-500 focus:border-emerald-500 outline-none placeholder-gray-500 transition-all resize-none leading-relaxed"
+                placeholder="Complete Address (House No, Street, Landmark)"></textarea>
+            </div>
+          </form>
+        </div>
       </div>
 
       <button id="payBtn" onclick="processPayment()"
@@ -208,60 +264,60 @@
     <!-- Tabs -->
     <div class="flex flex-wrap justify-center gap-2 mb-6 border-b pb-4">
       <button onclick="filterPackages('Hostel')"
-        class="px-4 py-2 bg-amber-100 text-amber-900 rounded-full font-medium hover:bg-amber-200 transition">Hostel/Mess</button>
+        class="px-4 py-2 bg-emerald-900/30 text-emerald-300 border border-emerald-700/50 rounded-full font-medium hover:bg-emerald-900/50 transition">Hostel/Mess</button>
       <button onclick="filterPackages('Senior')"
-        class="px-4 py-2 bg-green-100 text-green-900 rounded-full font-medium hover:bg-green-200 transition">Senior
+        class="px-4 py-2 bg-gray-800 text-gray-400 border border-gray-700 rounded-full font-medium hover:bg-gray-700 transition">Senior
         Diet</button>
       <button onclick="filterPackages('Corporate')"
-        class="px-4 py-2 bg-blue-100 text-blue-900 rounded-full font-medium hover:bg-blue-200 transition">Corporate</button>
+        class="px-4 py-2 bg-gray-800 text-gray-400 border border-gray-700 rounded-full font-medium hover:bg-gray-700 transition">Corporate</button>
       <button onclick="filterPackages('Event')"
-        class="px-4 py-2 bg-purple-100 text-purple-900 rounded-full font-medium hover:bg-purple-200 transition">Event
+        class="px-4 py-2 bg-gray-800 text-gray-400 border border-gray-700 rounded-full font-medium hover:bg-gray-700 transition">Event
         Catering</button>
     </div>
 
     <div id="packageGrid" class="grid grid-cols-1 md:grid-cols-3 gap-6 p-2"></div>
     <div>
       <form id="enquiryForm" class="max-w-sm mx-auto space-y-4"
-        style="background: white; padding: 20px; border-radius: 10px; margin-top: 20px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);">
-        <h1 class="text-2xl font-bold text-center mb-4">Enquire Form</h1>
+        style="background: #1f2937; padding: 20px; border-radius: 10px; margin-top: 20px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5); color: #f3f4f6;">
+        <h1 class="text-2xl font-bold text-center mb-4 text-white">Enquire Form</h1>
 
         <!-- Selected Package Display -->
         <div>
-          <label class="block mb-2.5 text-sm font-medium text-heading">Interested Package</label>
+          <label class="block mb-2.5 text-sm font-medium text-gray-300">Interested Package</label>
           <input type="text" id="txtSelectedPackage" readonly
-            class="bg-gray-100 border border-gray-300 text-gray-500 text-sm rounded block w-full px-2.5 py-2 cursor-not-allowed"
+            class="bg-gray-700 border border-gray-600 text-gray-300 text-sm rounded block w-full px-2.5 py-2 cursor-not-allowed"
             value="General Enquiry" />
         </div>
         <div>
-          <label for="visitors" class="block mb-2.5 text-sm font-medium text-heading">Name </label>
+          <label for="visitors" class="block mb-2.5 text-sm font-medium text-gray-300">Name </label>
           <input type="text" id="txtEnqName"
-            class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-2.5 py-2 shadow-xs placeholder:text-body"
+            class="bg-gray-700 border border-gray-600 text-gray-200 text-sm rounded block w-full px-2.5 py-2 shadow-xs placeholder:text-gray-500"
             placeholder="Name" />
-          <span class="text-red-800" id="spnEnqErrorName"></span>
+          <span class="text-red-400" id="spnEnqErrorName"></span>
         </div>
         <div>
-          <label for="visitors" class="block mb-2.5 text-sm font-medium text-heading">Mobile Number </label>
+          <label for="visitors" class="block mb-2.5 text-sm font-medium text-gray-300">Mobile Number </label>
           <input type="text" id="txtEnqMobile"
-            class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-2.5 py-2 shadow-xs placeholder:text-body"
+            class="bg-gray-700 border border-gray-600 text-gray-200 text-sm rounded block w-full px-2.5 py-2 shadow-xs placeholder:text-gray-500"
             placeholder="Mobile Number" />
-          <span class="text-red-800" id="spnEnqErrorMobile"></span>
+          <span class="text-red-400" id="spnEnqErrorMobile"></span>
         </div>
         <div>
-          <label for="visitors" class="block mb-2.5 text-sm font-medium text-heading">Email </label>
+          <label for="visitors" class="block mb-2.5 text-sm font-medium text-gray-300">Email </label>
           <input type="text" id="txtEnqEmail"
-            class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-2.5 py-2 shadow-xs placeholder:text-body"
+            class="bg-gray-700 border border-gray-600 text-gray-200 text-sm rounded block w-full px-2.5 py-2 shadow-xs placeholder:text-gray-500"
             placeholder="Mobile Number" />
-          <span class="text-red-800" id="spnEnqErrorEmail"></span>
+          <span class="text-red-400" id="spnEnqErrorEmail"></span>
         </div>
         <div>
-          <label for="visitors" class="block mb-2.5 text-sm font-medium text-heading">Company Name </label>
+          <label for="visitors" class="block mb-2.5 text-sm font-medium text-gray-300">Company Name </label>
           <input type="text" id="txtEnqComapny"
-            class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-2.5 py-2 shadow-xs placeholder:text-body"
+            class="bg-gray-700 border border-gray-600 text-gray-200 text-sm rounded block w-full px-2.5 py-2 shadow-xs placeholder:text-gray-500"
             placeholder="Mobile Number" />
-          <span class="text-red-800" id="spnEnqErrorComapny"></span>
+          <span class="text-red-400" id="spnEnqErrorComapny"></span>
         </div>
         <button type="button" id="btnEnquire"
-          class=" text-white bg-amber-800  bg-brand box-border border border-transparent hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none mt-100 rounded ">Submit</button>
+          class=" text-white bg-emerald-700 box-border border border-transparent hover:bg-emerald-800 focus:ring-4 focus:ring-emerald-500 shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none mt-100 rounded ">Submit</button>
 
       </form>
     </div>
@@ -316,33 +372,33 @@
 
   <!-- LOCATION MODAL -->
   <div id="locationModal" class="fixed inset-0 bg-black bg-opacity-60 hidden flex items-center justify-center z-[3000]">
-    <div class="bg-white w-[90%] max-w-md rounded-2xl overflow-hidden shadow-2xl">
-      <div class="p-6 border-b flex justify-between items-center bg-gray-50">
-        <h3 class="font-bold text-gray-800">Select Service Location</h3>
-        <button onclick="toggleLocationModal()" class="text-gray-400 hover:text-gray-600"><i
+    <div class="bg-gray-800 w-[90%] max-w-md rounded-2xl overflow-hidden shadow-2xl">
+      <div class="p-6 border-b border-gray-700 flex justify-between items-center bg-gray-900">
+        <h3 class="font-bold text-gray-200">Select Service Location</h3>
+        <button onclick="toggleLocationModal()" class="text-gray-400 hover:text-gray-200"><i
             class="fa-solid fa-times"></i></button>
       </div>
       <div class="p-6 space-y-4">
-        <p class="text-sm text-gray-500 mb-2">We are currently delivering in:</p>
+        <p class="text-sm text-gray-400 mb-2">We are currently delivering in:</p>
         <button onclick="setLocation('Chennai')"
-          class="w-full text-left p-4 border rounded-xl hover:bg-amber-50 hover:border-amber-500 transition flex justify-between items-center group">
-          <span class="font-bold text-gray-700 group-hover:text-amber-700">Chennai</span>
-          <i class="fa-solid fa-chevron-right text-gray-300 group-hover:text-amber-700"></i>
+          class="w-full text-left p-4 border border-gray-600 rounded-xl hover:bg-emerald-900/40 hover:border-emerald-500 transition flex justify-between items-center group">
+          <span class="font-bold text-gray-300 group-hover:text-emerald-400">Chennai</span>
+          <i class="fa-solid fa-chevron-right text-gray-500 group-hover:text-emerald-500"></i>
         </button>
         <button onclick="setLocation('Madurai')"
-          class="w-full text-left p-4 border rounded-xl hover:bg-amber-50 hover:border-amber-500 transition flex justify-between items-center group">
-          <span class="font-bold text-gray-700 group-hover:text-amber-700">Madurai</span>
-          <i class="fa-solid fa-chevron-right text-gray-300 group-hover:text-amber-700"></i>
+          class="w-full text-left p-4 border border-gray-600 rounded-xl hover:bg-emerald-900/40 hover:border-emerald-500 transition flex justify-between items-center group">
+          <span class="font-bold text-gray-300 group-hover:text-emerald-400">Madurai</span>
+          <i class="fa-solid fa-chevron-right text-gray-500 group-hover:text-emerald-500"></i>
         </button>
         <button onclick="setLocation('Coimbatore')"
-          class="w-full text-left p-4 border rounded-xl hover:bg-amber-50 hover:border-amber-500 transition flex justify-between items-center group">
-          <span class="font-bold text-gray-700 group-hover:text-amber-700">Coimbatore</span>
-          <i class="fa-solid fa-chevron-right text-gray-300 group-hover:text-amber-700"></i>
+          class="w-full text-left p-4 border border-gray-600 rounded-xl hover:bg-emerald-900/40 hover:border-emerald-500 transition flex justify-between items-center group">
+          <span class="font-bold text-gray-300 group-hover:text-emerald-400">Coimbatore</span>
+          <i class="fa-solid fa-chevron-right text-gray-500 group-hover:text-emerald-500"></i>
         </button>
         <button onclick="setLocation('Salem')"
-          class="w-full text-left p-4 border rounded-xl hover:bg-amber-50 hover:border-amber-500 transition flex justify-between items-center group">
-          <span class="font-bold text-gray-700 group-hover:text-amber-700">Salem</span>
-          <i class="fa-solid fa-chevron-right text-gray-300 group-hover:text-amber-700"></i>
+          class="w-full text-left p-4 border border-gray-600 rounded-xl hover:bg-emerald-900/40 hover:border-emerald-500 transition flex justify-between items-center group">
+          <span class="font-bold text-gray-300 group-hover:text-emerald-400">Salem</span>
+          <i class="fa-solid fa-chevron-right text-gray-500 group-hover:text-emerald-500"></i>
         </button>
       </div>
     </div>
@@ -357,10 +413,10 @@
   <div id="ackModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-[2000]">
     <div class="bg-white rounded-lg shadow-2xl w-full max-w-lg overflow-hidden transform transition-all scale-100">
       <!-- Header -->
-      <div class="bg-amber-700 p-6 text-white text-center relative">
+      <div class="bg-emerald-700 p-6 text-white text-center relative">
         <h2 class="text-2xl font-bold mb-1">Foodie Zone</h2>
 
-        <p class="text-amber-100 text-sm">Enquiry Acknowledgement</p>
+        <p class="text-emerald-100 text-sm">Enquiry Acknowledgement</p>
         <button onclick="closeAckModal()" class="absolute top-4 right-4 text-white hover:text-gray-200">
           <i class="fa-solid fa-times text-xl"></i>
         </button>
@@ -369,12 +425,12 @@
       <!-- Body -->
       <div class="p-8">
         <div class="text-center mb-6">
-          <div class="inline-flex items-center justify-center w-12 h-12 bg-green-100 rounded-full mb-3">
-            <i class="fa-solid fa-check text-green-600 text-xl"></i>
+          <div class="inline-flex items-center justify-center w-12 h-12 bg-emerald-900 rounded-full mb-3">
+            <i class="fa-solid fa-check text-emerald-500 text-xl"></i>
           </div>
           <h3 class="text-xl font-bold text-gray-800">Application Sent Successfully!</h3>
-          <p class="text-gray-500 text-sm mt-1">Reference ID: <span id="ackRefId"
-              class="font-mono font-bold text-gray-800">REQ-0000</span></p>
+          <p class="text-gray-600 text-sm mt-1">Reference ID: <span id="ackRefId"
+              class="font-mono font-bold text-gray-900">REQ-0000</span></p>
           <p class="text-gray-400 text-xs" id="ackDate">Date: --/--/----</p>
         </div>
 
@@ -399,7 +455,7 @@
           </div>
           <div class="grid grid-cols-3 gap-2 pt-2 border-t mt-2">
             <span class="text-gray-500 col-span-1">Package:</span>
-            <span class="font-bold text-amber-700 col-span-2 text-right" id="ackPackage">-</span>
+            <span class="font-bold text-emerald-700 col-span-2 text-right" id="ackPackage">-</span>
           </div>
         </div>
 
@@ -410,7 +466,7 @@
         </p>
 
         <button onclick="closeAckModal()"
-          class="w-full mt-6 bg-amber-700 text-white py-3 rounded-lg font-bold hover:bg-amber-800 transition">
+          class="w-full mt-6 bg-emerald-700 text-white py-3 rounded-lg font-bold hover:bg-emerald-800 transition">
           Close Receipt
         </button>
       </div>

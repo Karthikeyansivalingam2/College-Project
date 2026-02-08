@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 
-<body class="bg-gray-50 flex flex-col min-h-screen">
+<body class="bg-gray-900 text-gray-100 flex flex-col min-h-screen">
 
     <!-- Navbar -->
     <header class="navbar">
@@ -29,7 +29,7 @@
                 <a href="contact.html">Contact</a>
                 <a href="login.html" class="nav-login">Login</a>
                 <a href="profile.html" id="navProfile"
-                    class="hidden items-center justify-center w-10 h-10 bg-amber-700 text-white rounded-full hover:bg-amber-800 transition shadow-md">
+                    class="hidden items-center justify-center w-10 h-10 bg-emerald-700 text-white rounded-full hover:bg-emerald-800 transition shadow-md">
                     <i class="fa-solid fa-user"></i>
                 </a>
             </nav>
@@ -39,37 +39,39 @@
 
     <!-- Main Content -->
     <main class="flex-grow flex items-center justify-center py-10 px-4">
-        <div class="bg-white p-8 rounded-xl shadow-lg w-full max-w-md border border-gray-100">
-            <h1 class="text-2xl font-bold text-center text-amber-800 mb-6">Admin Login</h1>
+        <div class="bg-gray-800 p-8 rounded-xl shadow-lg w-full max-w-md border border-gray-700">
+            <h1 class="text-2xl font-bold text-center text-emerald-500 mb-6">Admin Login</h1>
 
             <form id="adminLoginForm" class="space-y-4">
                 <div>
-                    <label class="block text-sm font-medium text-gray-700">Username</label>
-                    <input type="text" id="adminUser" class="w-full border rounded p-3 focus:outline-amber-700"
+                    <label class="block text-sm font-medium text-gray-300">Username</label>
+                    <input type="text" id="adminUser"
+                        class="w-full border border-gray-600 bg-gray-700 text-white rounded p-3 focus:outline-emerald-500"
                         placeholder="Enter username">
                 </div>
 
                 <div>
-                    <label class="block text-sm font-medium text-gray-700">Password</label>
+                    <label class="block text-sm font-medium text-gray-300">Password</label>
                     <div class="relative">
                         <input type="password" id="adminPass"
-                            class="w-full border rounded p-3 focus:outline-amber-700 pr-10" placeholder="••••••••">
+                            class="w-full border border-gray-600 bg-gray-700 text-white rounded p-3 focus:outline-emerald-500 pr-10"
+                            placeholder="••••••••">
                         <i class="fa-solid fa-eye absolute right-4 top-4 text-gray-400 cursor-pointer"
                             id="toggleAdminPass"></i>
                     </div>
-                    <label class="flex items-center gap-2 text-sm text-gray-600 mt-2 cursor-pointer">
+                    <label class="flex items-center gap-2 text-sm text-gray-400 mt-2 cursor-pointer">
                         <input type="checkbox" id="adminRememberMe"
-                            class="w-4 h-4 rounded border-gray-300 text-amber-600">
+                            class="w-4 h-4 rounded border-gray-600 bg-gray-700 text-emerald-600">
                         Remember me
                     </label>
                 </div>
 
                 <button type="submit"
-                    class="w-full bg-amber-800 text-white font-bold py-3 rounded hover:bg-amber-900 transition">Login</button>
+                    class="w-full bg-emerald-600 text-white font-bold py-3 rounded hover:bg-emerald-700 transition">Login</button>
             </form>
 
             <p class="text-center mt-4 text-sm">
-                <a href="index.html" class="text-gray-500 hover:text-gray-800">Back to Website</a>
+                <a href="index.html" class="text-gray-400 hover:text-white">Back to Website</a>
             </p>
         </div>
     </main>

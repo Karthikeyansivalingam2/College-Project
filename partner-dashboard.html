@@ -5,36 +5,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Partner Dashboard - Foodie Zone</title>
+    <link href="assets/css/common.css" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: 'Outfit', sans-serif;
-            background-color: #f8fafc;
-        }
-
         .sidebar-link.active {
-            background-color: #78350f;
-            color: white;
+            background: linear-gradient(90deg, rgba(16, 185, 129, 0.2), transparent);
+            border-left: 3px solid #10b981;
+            color: #10b981;
         }
 
-        /* Skeleton Animation */
-        @keyframes shimmer {
-            0% {
-                background-position: -200% 0;
-            }
-
-            100% {
-                background-position: 200% 0;
-            }
+        /* Custom scrollbar for tables */
+        .overflow-x-auto::-webkit-scrollbar {
+            height: 6px;
         }
 
-        .skeleton {
-            background: linear-gradient(90deg, #f3f4f6 25%, #e5e7eb 50%, #f3f4f6 75%);
-            background-size: 200% 100%;
-            animation: shimmer 1.5s infinite;
-            border-radius: 0.5rem;
+        .overflow-x-auto::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .overflow-x-auto::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
         }
     </style>
 </head>
@@ -43,133 +36,157 @@
 
     <!-- Sidebar -->
     <aside id="partnerSidebar"
-        class="fixed inset-y-0 left-0 z-50 w-64 bg-amber-900 text-amber-100 flex flex-col transform -translate-x-full lg:translate-x-0 lg:static transition-transform duration-300 h-screen">
-        <div class="p-6 border-b border-amber-800 flex justify-between items-center">
+        class="fixed inset-y-0 left-0 z-50 w-64 glass border-r border-white/5 flex flex-col transform -translate-x-full lg:translate-x-0 lg:static transition-transform duration-300 h-screen shrink-0">
+
+        <div class="p-6 border-b border-white/5 flex justify-between items-center">
             <h1 class="text-xl font-bold text-white flex items-center gap-2">
-                <i class="fa-solid fa-utensils"></i> Partner Center
+                <i class="fa-solid fa-utensils text-emerald-500"></i> Partner Center
             </h1>
-            <button onclick="togglePartnerSidebar()" class="lg:hidden text-amber-200"><i
-                    class="fa-solid fa-times"></i></button>
+            <button onclick="togglePartnerSidebar()" class="lg:hidden text-gray-400 hover:text-white">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
         </div>
 
-        <nav class="flex-grow p-4 space-y-2">
+        <nav class="flex-grow p-4 space-y-2 overflow-y-auto">
             <button onclick="showSection('dashboard')"
-                class="sidebar-link active flex items-center gap-3 w-full p-3 rounded-xl transition text-left">
+                class="sidebar-link active flex items-center gap-3 w-full p-3 rounded-xl hover:bg-white/5 transition text-left text-gray-300 font-medium">
                 <i class="fa-solid fa-chart-line w-5"></i> Dashboard
             </button>
             <button onclick="showSection('live-orders')"
-                class="sidebar-link flex items-center gap-3 w-full p-3 rounded-xl hover:bg-amber-800 transition text-left">
+                class="sidebar-link flex items-center gap-3 w-full p-3 rounded-xl hover:bg-white/5 transition text-left text-gray-300 font-medium">
                 <i class="fa-solid fa-list-check w-5"></i> Live Orders
             </button>
             <button onclick="showSection('menu')"
-                class="sidebar-link flex items-center gap-3 w-full p-3 rounded-xl hover:bg-amber-800 transition text-left">
+                class="sidebar-link flex items-center gap-3 w-full p-3 rounded-xl hover:bg-white/5 transition text-left text-gray-300 font-medium">
                 <i class="fa-solid fa-book-open w-5"></i> Menu Manager
             </button>
             <button onclick="showSection('earnings')"
-                class="sidebar-link flex items-center gap-3 w-full p-3 rounded-xl hover:bg-amber-800 transition text-left">
+                class="sidebar-link flex items-center gap-3 w-full p-3 rounded-xl hover:bg-white/5 transition text-left text-gray-300 font-medium">
                 <i class="fa-solid fa-wallet w-5"></i> Earnings
             </button>
             <button onclick="showSection('reviews')"
-                class="sidebar-link flex items-center gap-3 w-full p-3 rounded-xl hover:bg-amber-800 transition text-left">
+                class="sidebar-link flex items-center gap-3 w-full p-3 rounded-xl hover:bg-white/5 transition text-left text-gray-300 font-medium">
                 <i class="fa-solid fa-comments w-5"></i> Reviews
             </button>
         </nav>
 
-        <div class="p-4 border-t border-amber-800">
+        <div class="p-4 border-t border-white/5">
             <button onclick="logout()"
-                class="flex items-center gap-3 w-full p-3 rounded-xl hover:bg-red-800/50 text-red-100 transition">
+                class="flex items-center gap-3 w-full p-3 rounded-xl hover:bg-red-500/10 text-red-400 hover:text-red-300 transition font-medium">
                 <i class="fa-solid fa-right-from-bracket"></i> Logout
             </button>
         </div>
     </aside>
 
     <!-- Overlay -->
-    <div id="partnerOverlay" class="fixed inset-0 bg-black/50 z-40 hidden lg:hidden" onclick="togglePartnerSidebar()">
+    <div id="partnerOverlay" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-40 hidden lg:hidden"
+        onclick="togglePartnerSidebar()">
     </div>
 
     <!-- Main Content -->
-    <main class="flex-grow">
+    <main class="flex-grow flex flex-col h-screen overflow-hidden">
         <!-- Header -->
-        <header class="bg-white border-b sticky top-0 z-30 px-6 py-4 flex justify-between items-center">
+        <header
+            class="glass border-b border-white/5 sticky top-0 z-30 px-6 py-4 flex justify-between items-center shrink-0">
             <div class="flex items-center gap-4">
-                <button onclick="togglePartnerSidebar()" class="lg:hidden text-gray-600 p-2"><i
+                <button onclick="togglePartnerSidebar()"
+                    class="lg:hidden text-gray-300 p-2 hover:bg-white/5 rounded-lg transition"><i
                         class="fa-solid fa-bars text-xl"></i></button>
                 <div>
-                    <h2 class="text-xl md:text-2xl font-bold text-gray-800" id="businessName">Loading...</h2>
-                    <p class="text-xs md:text-sm text-gray-500">Partner ID: <span id="partnerIdDisplay"
-                            class="font-mono">...</span></p>
+                    <h2 class="text-xl md:text-2xl font-bold text-white tracking-tight" id="businessName">Loading...
+                    </h2>
+                    <p class="text-xs md:text-sm text-gray-400">Partner ID: <span id="partnerIdDisplay"
+                            class="font-mono text-emerald-400">...</span></p>
                 </div>
             </div>
 
-            <div class="flex items-center gap-4">
+            <div class="flex items-center gap-6">
                 <div class="text-right hidden sm:block">
-                    <p class="text-xs text-gray-400">Store Status</p>
-                    <p class="text-sm font-bold text-green-600 flex items-center gap-1">
-                        <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span> Open
+                    <p class="text-xs text-gray-400 uppercase tracking-widest font-semibold mb-0.5">Store Status</p>
+                    <p class="text-sm font-bold text-green-400 flex items-center justify-end gap-2">
+                        <span class="relative flex h-2.5 w-2.5">
+                            <span
+                                class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span>
+                        </span>
+                        Open
                     </p>
                 </div>
                 <img id="partnerAvatar" src="https://ui-avatars.com/api/?name=Partner"
-                    class="w-10 h-10 rounded-full border-2 border-amber-100">
+                    class="w-10 h-10 rounded-full border-2 border-emerald-500/50 shadow-lg shadow-emerald-500/20">
             </div>
         </header>
 
         <!-- Dynamic Content -->
-        <div class="p-6">
+        <div class="flex-grow overflow-y-auto p-4 md:p-8">
 
             <!-- DASHBOARD SECTION -->
-            <div id="section-dashboard">
+            <div id="section-dashboard" class="max-w-7xl mx-auto animate-fade-in-up">
                 <!-- Quick Stats -->
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
-                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
-                        <p class="text-gray-400 text-sm mb-1 uppercase tracking-wider font-semibold">Today's Orders</p>
-                        <div class="flex items-baseline gap-2">
-                            <span class="text-3xl font-bold text-gray-800" id="statOrders">0</span>
-                            <span class="text-green-500 text-xs font-bold font-mono">+12%</span>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                    <div class="glass-card p-6 relative overflow-hidden group">
+                        <div
+                            class="absolute -right-6 -top-6 w-24 h-24 bg-emerald-500/10 rounded-full group-hover:bg-emerald-500/20 transition-all">
+                        </div>
+                        <p class="text-gray-400 text-xs mb-2 uppercase tracking-wider font-bold">Today's Orders</p>
+                        <div class="flex items-end gap-3">
+                            <span class="text-4xl font-bold text-white tracking-tight" id="statOrders">0</span>
+                            <span
+                                class="text-emerald-400 text-xs font-bold font-mono bg-emerald-500/10 px-2 py-1 rounded-full">+12%</span>
                         </div>
                     </div>
-                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
-                        <p class="text-gray-400 text-sm mb-1 uppercase tracking-wider font-semibold">Today's Earnings
-                        </p>
+                    <div class="glass-card p-6 relative overflow-hidden group">
+                        <div
+                            class="absolute -right-6 -top-6 w-24 h-24 bg-blue-500/10 rounded-full group-hover:bg-blue-500/20 transition-all">
+                        </div>
+                        <p class="text-gray-400 text-xs mb-2 uppercase tracking-wider font-bold">Today's Earnings</p>
                         <div class="flex items-baseline gap-2">
-                            <span class="text-3xl font-bold text-gray-800">₹<span id="statEarnings">0</span></span>
+                            <span class="text-4xl font-bold text-white tracking-tight">₹<span
+                                    id="statEarnings">0</span></span>
                         </div>
                     </div>
-                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
-                        <p class="text-gray-400 text-sm mb-1 uppercase tracking-wider font-semibold">Pending Requests
-                        </p>
+                    <div class="glass-card p-6 relative overflow-hidden group">
+                        <div
+                            class="absolute -right-6 -top-6 w-24 h-24 bg-orange-500/10 rounded-full group-hover:bg-orange-500/20 transition-all">
+                        </div>
+                        <p class="text-gray-400 text-xs mb-2 uppercase tracking-wider font-bold">Pending Requests</p>
                         <div class="flex items-baseline gap-2">
-                            <span class="text-3xl font-bold text-amber-600" id="statPending">0</span>
+                            <span class="text-4xl font-bold text-orange-400 tracking-tight" id="statPending">0</span>
                         </div>
                     </div>
-                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
-                        <p class="text-gray-400 text-sm mb-1 uppercase tracking-wider font-semibold">Average Rating</p>
+                    <div class="glass-card p-6 relative overflow-hidden group">
+                        <div
+                            class="absolute -right-6 -top-6 w-24 h-24 bg-purple-500/10 rounded-full group-hover:bg-purple-500/20 transition-all">
+                        </div>
+                        <p class="text-gray-400 text-xs mb-2 uppercase tracking-wider font-bold">Average Rating</p>
                         <div class="flex items-baseline gap-2">
-                            <span class="text-3xl font-bold text-amber-800" id="statRating">0.0</span>
-                            <i class="fa-solid fa-star text-amber-400 text-xs"></i>
+                            <span class="text-4xl font-bold text-white tracking-tight" id="statRating">0.0</span>
+                            <i class="fa-solid fa-star text-yellow-400 text-lg"></i>
                         </div>
                     </div>
                 </div>
 
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
                     <!-- Recent Orders -->
-                    <div class="lg:col-span-2 bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
-                        <div class="p-6 border-b flex justify-between items-center">
-                            <h3 class="font-bold text-gray-800">Recent Live Orders</h3>
+                    <div class="lg:col-span-2 glass-card overflow-hidden flex flex-col">
+                        <div class="p-6 border-b border-white/5 flex justify-between items-center bg-white/5">
+                            <h3 class="font-bold text-white text-lg">Recent Live Orders</h3>
                             <button onclick="showSection('live-orders')"
-                                class="text-sm text-amber-700 hover:underline">View All</button>
+                                class="text-xs font-bold text-emerald-400 hover:text-emerald-300 uppercase tracking-wider">View
+                                All</button>
                         </div>
                         <div class="overflow-x-auto">
                             <table class="w-full text-left">
-                                <thead class="bg-gray-50 text-xs text-gray-400 uppercase">
+                                <thead class="bg-black/20 text-xs text-gray-400 uppercase tracking-wider">
                                     <tr>
-                                        <th class="px-6 py-4 font-semibold min-w-[120px]">Order ID</th>
-                                        <th class="px-6 py-4 font-semibold min-w-[150px]">Customer</th>
-                                        <th class="px-6 py-4 font-semibold">Total</th>
-                                        <th class="px-6 py-4 font-semibold">Status</th>
-                                        <th class="px-6 py-4 font-semibold">Time</th>
+                                        <th class="px-6 py-4 font-semibold whitespace-nowrap">Order ID</th>
+                                        <th class="px-6 py-4 font-semibold whitespace-nowrap">Customer</th>
+                                        <th class="px-6 py-4 font-semibold whitespace-nowrap">Total</th>
+                                        <th class="px-6 py-4 font-semibold whitespace-nowrap">Status</th>
+                                        <th class="px-6 py-4 font-semibold whitespace-nowrap">Time</th>
                                     </tr>
                                 </thead>
-                                <tbody id="ordersTableBody" class="divide-y divide-gray-50">
+                                <tbody id="ordersTableBody" class="divide-y divide-white/5">
                                     <!-- Loaded via JS -->
                                 </tbody>
                             </table>
@@ -177,30 +194,39 @@
                     </div>
 
                     <!-- Profile Info -->
-                    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
-                        <h3 class="font-bold text-gray-800 mb-6 flex items-center gap-2">
-                            <i class="fa-solid fa-circle-info text-amber-700"></i> Business Profile
+                    <div class="glass-card p-6">
+                        <h3 class="font-bold text-white mb-6 flex items-center gap-3 text-lg">
+                            <div class="w-8 h-8 rounded-lg bg-emerald-500/20 flex items-center justify-center">
+                                <i class="fa-solid fa-circle-info text-emerald-500"></i>
+                            </div>
+                            Business Profile
                         </h3>
 
-                        <div class="space-y-4">
+                        <div class="space-y-6">
                             <div>
-                                <p class="text-xs text-gray-400">Account Status</p>
+                                <p class="text-xs text-gray-500 uppercase tracking-widest font-bold mb-2">Account Status
+                                </p>
                                 <span
-                                    class="inline-block px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs font-bold mt-1"
+                                    class="inline-block px-3 py-1 bg-green-500/20 text-green-400 rounded-full text-xs font-bold border border-green-500/20 shadow-[0_0_10px_rgba(34,197,94,0.1)]"
                                     id="partnerStatus">Active</span>
                             </div>
                             <div>
-                                <p class="text-xs text-gray-400">Commission Rate</p>
-                                <p class="text-sm font-bold text-gray-800">10% per order</p>
+                                <p class="text-xs text-gray-500 uppercase tracking-widest font-bold mb-1">Commission
+                                    Rate</p>
+                                <p class="text-base font-bold text-white">10% <span
+                                        class="text-gray-500 font-normal text-sm">per order</span></p>
                             </div>
                             <div>
-                                <p class="text-xs text-gray-400">Settlement Cycle</p>
-                                <p class="text-sm font-bold text-gray-800">Weekly (Every Monday)</p>
+                                <p class="text-xs text-gray-500 uppercase tracking-widest font-bold mb-1">Settlement
+                                    Cycle</p>
+                                <p class="text-base font-bold text-white">Weekly <span
+                                        class="text-gray-500 font-normal text-sm">(Every Monday)</span></p>
                             </div>
-                            <div class="pt-4 mt-6 border-t border-dashed">
+                            <div class="pt-6 mt-2 border-t border-white/5">
                                 <button
-                                    class="w-full bg-gray-50 text-gray-600 font-bold py-3 rounded-xl hover:bg-gray-100 transition border">Edit
-                                    Profile</button>
+                                    class="w-full bg-white/5 text-gray-300 font-bold py-3 rounded-xl hover:bg-white/10 transition border border-white/5 hover:border-emerald-500/50 hover:text-white">
+                                    Edit Profile
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -208,24 +234,24 @@
             </div>
 
             <!-- LIVE ORDERS SECTION -->
-            <div id="section-live-orders" class="hidden">
-                <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
-                    <div class="p-6 border-b">
-                        <h3 class="font-bold text-gray-800 text-xl">All Live Orders</h3>
+            <div id="section-live-orders" class="hidden max-w-7xl mx-auto animate-fade-in-up">
+                <div class="glass-card overflow-hidden border border-white/10">
+                    <div class="p-6 border-b border-white/10 bg-white/5">
+                        <h3 class="font-bold text-white text-xl">All Live Orders</h3>
                     </div>
                     <div class="overflow-x-auto">
                         <table class="w-full text-left">
-                            <thead class="bg-gray-50 text-xs text-gray-400 uppercase">
+                            <thead class="bg-black/20 text-xs text-gray-400 uppercase tracking-wider">
                                 <tr>
-                                    <th class="px-6 py-4 font-semibold min-w-[120px]">Order ID</th>
-                                    <th class="px-6 py-4 font-semibold min-w-[150px]">Customer</th>
-                                    <th class="px-6 py-4 font-semibold min-w-[200px]">Items</th>
-                                    <th class="px-6 py-4 font-semibold">Total</th>
-                                    <th class="px-6 py-4 font-semibold">Status</th>
-                                    <th class="px-6 py-4 font-semibold">Action</th>
+                                    <th class="px-6 py-5 font-semibold whitespace-nowrap">Order ID</th>
+                                    <th class="px-6 py-5 font-semibold whitespace-nowrap">Customer</th>
+                                    <th class="px-6 py-5 font-semibold whitespace-nowrap">Items</th>
+                                    <th class="px-6 py-5 font-semibold whitespace-nowrap">Total</th>
+                                    <th class="px-6 py-5 font-semibold whitespace-nowrap">Status</th>
+                                    <th class="px-6 py-5 font-semibold whitespace-nowrap">Action</th>
                                 </tr>
                             </thead>
-                            <tbody id="fullOrdersTableBody" class="divide-y divide-gray-50 text-sm">
+                            <tbody id="fullOrdersTableBody" class="divide-y divide-white/5 text-sm">
                                 <!-- Loaded via JS -->
                             </tbody>
                         </table>
@@ -234,11 +260,13 @@
             </div>
 
             <!-- MENU MANAGER SECTION -->
-            <div id="section-menu" class="hidden">
-                <div class="flex justify-between items-center mb-6">
-                    <h3 class="font-bold text-gray-800 text-xl">Menu Manager</h3>
+            <div id="section-menu" class="hidden max-w-7xl mx-auto animate-fade-in-up">
+                <div class="flex justify-between items-center mb-8">
+                    <h3 class="font-bold text-white text-2xl">Menu Manager</h3>
                     <button onclick="addNewItem()"
-                        class="bg-amber-700 text-white px-4 py-2 rounded-lg font-bold text-sm">+ Add Item</button>
+                        class="btn-primary flex items-center gap-2 shadow-lg shadow-emerald-500/20">
+                        <i class="fa-solid fa-plus"></i> Add New Item
+                    </button>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="menuGrid">
                     <!-- Loaded via JS -->
@@ -246,24 +274,29 @@
             </div>
 
             <!-- EARNINGS SECTION -->
-            <div id="section-earnings" class="hidden">
-                <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
-                    <h3 class="font-bold text-gray-800 text-xl mb-6">Earnings Overview</h3>
-                    <div class="h-64 bg-gray-50 rounded-xl flex items-center justify-center text-gray-400 font-medium">
-                        [ Earnings Chart Placeholder ]
+            <div id="section-earnings" class="hidden max-w-7xl mx-auto animate-fade-in-up">
+                <div class="glass-card p-8 border border-white/10">
+                    <h3 class="font-bold text-white text-2xl mb-8">Earnings Overview</h3>
+                    <div
+                        class="h-72 bg-black/40 rounded-2xl flex items-center justify-center text-gray-500 font-medium border border-white/5">
+                        <div class="text-center">
+                            <i class="fa-solid fa-chart-column text-4xl mb-3 opacity-50"></i>
+                            <p>[ Interactive Earnings Chart ]</p>
+                        </div>
                     </div>
-                    <div class="mt-8 grid grid-cols-3 gap-4">
-                        <div class="p-4 bg-amber-50 rounded-xl">
-                            <p class="text-xs text-amber-600 font-bold uppercase">This Month</p>
-                            <p class="text-2xl font-bold">₹42,940</p>
+                    <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="p-6 bg-emerald-500/10 rounded-2xl border border-emerald-500/20">
+                            <p class="text-xs text-emerald-400 font-bold uppercase tracking-widest mb-1">This Month</p>
+                            <p class="text-3xl font-bold text-white shadow-emerald-500/10">₹42,940</p>
                         </div>
-                        <div class="p-4 bg-green-50 rounded-xl">
-                            <p class="text-xs text-green-600 font-bold uppercase">Total Payout</p>
-                            <p class="text-2xl font-bold">₹1,28,400</p>
+                        <div class="p-6 bg-blue-500/10 rounded-2xl border border-blue-500/20">
+                            <p class="text-xs text-blue-400 font-bold uppercase tracking-widest mb-1">Total Payout</p>
+                            <p class="text-3xl font-bold text-white">₹1,28,400</p>
                         </div>
-                        <div class="p-4 bg-blue-50 rounded-xl">
-                            <p class="text-xs text-blue-600 font-bold uppercase">Commission</p>
-                            <p class="text-2xl font-bold">₹12,840</p>
+                        <div class="p-6 bg-purple-500/10 rounded-2xl border border-purple-500/20">
+                            <p class="text-xs text-purple-400 font-bold uppercase tracking-widest mb-1">Commission Paid
+                            </p>
+                            <p class="text-3xl font-bold text-white">₹12,840</p>
                         </div>
                     </div>
                 </div>
@@ -304,7 +337,8 @@
 
             // Update Sidebar UI
             document.querySelectorAll('.sidebar-link').forEach(link => {
-                link.classList.remove('active', 'bg-amber-800');
+                link.classList.remove('active');
+                // Check if the onclick attribute contains the id
                 if (link.getAttribute('onclick').includes(id)) link.classList.add('active');
             });
 
@@ -323,11 +357,11 @@
             const tbody = document.getElementById('ordersTableBody');
             tbody.innerHTML = Array(5).fill(0).map(() => `
                 <tr>
-                    <td class="px-6 py-4"><div class="skeleton h-4 w-16"></div></td>
-                    <td class="px-6 py-4"><div class="skeleton h-4 w-32"></div></td>
-                    <td class="px-6 py-4"><div class="skeleton h-4 w-12"></div></td>
-                    <td class="px-6 py-4"><div class="skeleton h-6 w-20 rounded-full"></div></td>
-                    <td class="px-6 py-4"><div class="skeleton h-3 w-16"></div></td>
+                    <td class="px-6 py-4"><div class="h-4 w-16 bg-white/10 rounded animate-pulse"></div></td>
+                    <td class="px-6 py-4"><div class="h-4 w-32 bg-white/10 rounded animate-pulse"></div></td>
+                    <td class="px-6 py-4"><div class="h-4 w-12 bg-white/10 rounded animate-pulse"></div></td>
+                    <td class="px-6 py-4"><div class="h-6 w-20 bg-white/10 rounded-full animate-pulse"></div></td>
+                    <td class="px-6 py-4"><div class="h-3 w-16 bg-white/10 rounded animate-pulse"></div></td>
                 </tr>
             `).join('');
         }
@@ -336,17 +370,17 @@
             if (!dashboardData) return;
             const tbody = document.getElementById('ordersTableBody');
             tbody.innerHTML = dashboardData.recentOrders.slice(0, 5).map(order => `
-                <tr class="hover:bg-gray-50 transition">
-                    <td class="px-6 py-4 font-mono text-sm text-gray-900">${order.id}</td>
-                    <td class="px-6 py-4 text-sm font-medium text-gray-800">${order.customer}</td>
-                    <td class="px-6 py-4 text-sm font-bold text-amber-800">₹${order.total}</td>
+                <tr class="hover:bg-white/5 transition border-t border-white/5 cursor-pointer">
+                    <td class="px-6 py-4 font-mono text-sm text-emerald-400 font-bold">${order.id}</td>
+                    <td class="px-6 py-4 text-sm font-medium text-gray-200">${order.customer}</td>
+                    <td class="px-6 py-4 text-sm font-bold text-white">₹${order.total}</td>
                     <td class="px-6 py-4">
                         <span
-                            class="px-2 py-1 ${order.status === 'Completed' ? 'bg-green-100 text-green-700' : (order.status === 'Pending' ? 'bg-yellow-100 text-yellow-700' : 'bg-blue-100 text-blue-700')} rounded-lg text-xs font-bold">
+                            class="px-2.5 py-1 ${order.status === 'Completed' ? 'bg-green-500/20 text-green-400 border-green-500/20' : (order.status === 'Pending' ? 'bg-orange-500/20 text-orange-400 border-orange-500/20' : 'bg-blue-500/20 text-blue-400 border-blue-500/20')} border rounded-md text-xs font-bold uppercase tracking-wide">
                             ${order.status}
                         </span>
                     </td>
-                    <td class="px-6 py-4 text-xs text-gray-400">${order.time}</td>
+                    <td class="px-6 py-4 text-xs text-gray-500">${order.time}</td>
                 </tr>
             `).join('');
         }
@@ -365,7 +399,7 @@
                 document.getElementById('businessName').innerText = dashboardData.businessName;
                 document.getElementById('partnerIdDisplay').innerText = dashboardData.partnerId;
                 document.getElementById('partnerAvatar').src =
-                    `https://ui-avatars.com/api/?name=${encodeURIComponent(dashboardData.businessName)}&background=random`;
+                    `https://ui-avatars.com/api/?name=${encodeURIComponent(dashboardData.businessName)}&background=10b981&color=fff`;
 
                 // Update Stats
                 document.getElementById('statOrders').innerText = dashboardData.stats.todayOrders;
@@ -397,24 +431,30 @@
             if (!dashboardData) return;
 
             tbody.innerHTML = dashboardData.recentOrders.map(order => `
-    <tr class="hover:bg-gray-50 transition">
-        <td class="px-6 py-4 font-mono font-bold text-amber-700">${order.id}</td>
-        <td class="px-6 py-4 font-bold text-gray-800">${order.customer}</td>
-        <td class="px-6 py-4 text-gray-500">${order.itemsSummary || 'Varies'}</td>
-        <td class="px-6 py-4 font-bold">₹${order.total}</td>
+    <tr class="hover:bg-white/5 transition border-t border-white/5">
+        <td class="px-6 py-4 font-mono font-bold text-emerald-400 border-l-2 border-transparent hover:border-emerald-500">${order.id}</td>
+        <td class="px-6 py-4 font-bold text-gray-200">${order.customer}</td>
+        <td class="px-6 py-4 text-gray-400 text-sm">${order.itemsSummary || 'Varies'}</td>
+        <td class="px-6 py-4 font-bold text-white">₹${order.total}</td>
+        <td class="px-6 py-4">
+             <span
+                class="px-2 py-1 ${order.status === 'Completed' ? 'bg-green-500/10 text-green-400' : (order.status === 'Pending' ? 'bg-orange-500/10 text-orange-400' : 'bg-blue-500/10 text-blue-400')} rounded text-xs font-bold">
+                ${order.status}
+            </span>
+        </td>
         <td class="px-6 py-4">
             ${order.status === 'Pending' ? `
             <button onclick="updateOrderStatus('${order.id}', 'Preparing')"
-                class="bg-green-600 text-white px-3 py-1 rounded-lg text-xs font-bold hover:bg-green-700">Accept</button>
+                class="bg-green-600/20 border border-green-600/50 text-green-400 px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-green-600 hover:text-white transition">ACCEPT</button>
             ` : (order.status === 'Preparing' ? `
             <button onclick="updateOrderStatus('${order.id}', 'Out for Delivery')"
-                class="bg-blue-600 text-white px-3 py-1 rounded-lg text-xs font-bold hover:bg-blue-700">Shipped</button>
+                class="bg-blue-600/20 border border-blue-600/50 text-blue-400 px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-blue-600 hover:text-white transition">SHIP ORDER</button>
             ` : (order.status === 'Out for Delivery' ? `
             <button onclick="updateOrderStatus('${order.id}', 'Completed')"
-                class="bg-amber-700 text-white px-3 py-1 rounded-lg text-xs font-bold hover:bg-amber-800">Delivered</button>
+                class="bg-emerald-600/20 border border-emerald-600/50 text-emerald-400 px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-emerald-600 hover:text-white transition">COMPLETE</button>
             ` : (order.status === 'Completed' || order.status === 'Delivered' ? `
-            <span class="text-green-600 font-bold text-xs"><i class="fa-solid fa-check-double"></i> Finished</span>
-            ` : '<span class="text-gray-400">Processed</span>')))}
+            <span class="text-gray-500 font-bold text-xs flex items-center gap-1"><i class="fa-solid fa-check-double"></i> Done</span>
+            ` : '<span class="text-gray-500">Processed</span>')))}
         </td>
     </tr>
     `).join('');
@@ -453,27 +493,35 @@
         function renderMenuManager() {
             const grid = document.getElementById('menuGrid');
             grid.innerHTML = menuItems.map(item => `
-                <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 transition-all ${item.active ? '' : 'opacity-60 grayscale'}">
-                    <div class="relative">
-                        <img src="${item.image}" class="w-full h-36 object-cover rounded-xl mb-4">
-                        <span class="absolute top-2 right-2 px-2 py-1 bg-white/90 rounded-lg text-[10px] font-bold uppercase tracking-wider text-gray-600 shadow-sm">${item.category}</span>
-                    </div>
-                    <div class="flex justify-between items-start mb-1">
-                        <h4 class="font-bold text-gray-800">${item.name}</h4>
-                        <span class="text-xs font-bold ${item.active ? 'text-green-500' : 'text-red-500'}">
-                            ${item.active ? 'Available' : 'Disabled'}
-                        </span>
-                    </div>
-                    <p class="text-amber-700 font-bold mb-4">₹${item.price}</p>
-                    <div class="flex gap-2">
-                        <button onclick="editItem(${item.id})" class="flex-1 bg-gray-50 text-gray-600 py-2 rounded-lg text-xs font-bold border hover:bg-gray-100 transition">Edit</button>
-                        <button onclick="toggleItemStatus(${item.id}, ${item.active})" 
-                            class="flex-1 py-2 rounded-lg text-xs font-bold border transition ${item.active ? 'bg-red-50 text-red-600 border-red-100 hover:bg-red-100' : 'bg-green-50 text-green-600 border-green-100 hover:bg-green-100'}">
-                            ${item.active ? 'Disable' : 'Enable'}
-                        </button>
-                    </div>
+        <div class="glass-card p-4 group relative overflow-hidden transition-all hover:-translate-y-1 hover:shadow-emerald-500/10 ${item.active ? '' : 'opacity-60 grayscale'}">
+            <div class="absolute inset-x-0 bottom-0 h-1 bg-gradient-to-r from-emerald-500 to-teal-500 scale-x-0 group-hover:scale-x-100 transition-transform"></div>
+            
+            <div class="relative mb-4">
+                <img src="${item.image}" class="w-full h-40 object-cover rounded-xl shadow-md">
+                <span class="absolute top-2 right-2 px-2.5 py-1 bg-black/80 backdrop-blur rounded-lg text-[10px] font-bold uppercase tracking-wider text-white border border-white/10">${item.category}</span>
+            </div>
+            
+            <div class="flex justify-between items-start mb-2">
+                <h4 class="font-bold text-white text-lg leading-tight">${item.name}</h4>
+                <div class="flex flex-col items-end">
+                    <span class="text-xs font-bold ${item.active ? 'text-green-400' : 'text-red-400'} flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full ${item.active ? 'bg-green-400' : 'bg-red-400'}"></span>
+                        ${item.active ? 'Active' : 'Hidden'}
+                    </span>
                 </div>
-            `).join('');
+            </div>
+            
+            <p class="text-emerald-400 font-bold text-xl mb-4">₹${item.price}</p>
+            
+            <div class="flex gap-3">
+                <button onclick="editItem(${item.id})" class="flex-1 bg-white/5 text-gray-300 py-2 rounded-lg text-xs font-bold border border-white/10 hover:bg-white/10 hover:text-white transition">EDIT</button>
+                <button onclick="toggleItemStatus(${item.id}, ${item.active})" 
+                    class="flex-1 py-2 rounded-lg text-xs font-bold border transition ${item.active ? 'bg-red-500/10 text-red-400 border-red-500/20 hover:bg-red-500/20' : 'bg-green-500/10 text-green-400 border-green-500/20 hover:bg-green-500/20'}">
+                    ${item.active ? 'DISABLE' : 'ENABLE'}
+                </button>
+            </div>
+        </div>
+    `).join('');
         }
 
         async function toggleItemStatus(id, currentStatus) {

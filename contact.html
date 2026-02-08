@@ -17,201 +17,203 @@
 
 <body>
   <!-- ================= NAVBAR ================= -->
-  <header class="navbar">
-    <div class="nav-container">
-      <div class="logo">Foodie Zone</div>
+
+  <body class="bg-gray-900 text-gray-100">
+    <header class="navbar">
+      <div class="nav-container">
+        <div class="logo">Foodie Zone</div>
 
 
-      <nav class="nav-links" id="navLinks">
-        <a href="index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="order.html">Order</a>
-        <a href="review.html">Reviews</a>
-        <a href="partner.html">Partner with Us</a>
-        <a href="careers.html">Job Careers</a>
-        <a href="contact.html">Contact</a>
-        <a href="login.html" class="nav-login">Login</a>
-        <a href="profile.html" id="navProfile"
-          class="hidden items-center justify-center w-10 h-10 rounded-full border border-white/30 bg-white/10 text-white hover:bg-white/20 hover:scale-105 transition-all shadow-lg backdrop-blur-sm group">
-          <span id="navUserInitial" class="font-bold text-base"></span>
-          <i id="navUserIcon" class="fa-solid fa-user text-sm group-hover:rotate-12 transition-transform"></i>
-        </a>
-      </nav>
+        <nav class="nav-links" id="navLinks">
+          <a href="index.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="order.html">Order</a>
+          <a href="review.html">Reviews</a>
+          <a href="partner.html">Partner with Us</a>
+          <a href="careers.html">Job Careers</a>
+          <a href="contact.html">Contact</a>
+          <a href="login.html" class="nav-login">Login</a>
+          <a href="profile.html" id="navProfile"
+            class="hidden items-center justify-center w-10 h-10 rounded-full border border-white/30 bg-emerald-700 text-white hover:bg-emerald-800 hover:scale-105 transition-all shadow-lg backdrop-blur-sm group">
+            <span id="navUserInitial" class="font-bold text-base"></span>
+            <i id="navUserIcon" class="fa-solid fa-user text-sm group-hover:rotate-12 transition-transform"></i>
+          </a>
+        </nav>
 
-      <div class="menu-icon" onclick="toggleMenu()">☰</div>
-    </div>
-  </header>
+        <div class="menu-icon" onclick="toggleMenu()">☰</div>
+      </div>
+    </header>
 
-  <script>
-    const user = JSON.parse(localStorage.getItem('currentUser'));
-    if (user) {
-      const profileBtn = document.getElementById('navProfile');
-      if (profileBtn) {
-        profileBtn.classList.remove('hidden');
-        profileBtn.style.display = 'flex';
-        document.querySelector('.nav-login').style.display = 'none';
+    <script>
+      const user = JSON.parse(localStorage.getItem('currentUser'));
+      if (user) {
+        const profileBtn = document.getElementById('navProfile');
+        if (profileBtn) {
+          profileBtn.classList.remove('hidden');
+          profileBtn.style.display = 'flex';
+          document.querySelector('.nav-login').style.display = 'none';
 
-        if (user.username) {
-          document.getElementById('navUserInitial').innerText = user.username.charAt(0).toUpperCase();
-          document.getElementById('navUserIcon').classList.add('hidden');
+          if (user.username) {
+            document.getElementById('navUserInitial').innerText = user.username.charAt(0).toUpperCase();
+            document.getElementById('navUserIcon').classList.add('hidden');
+          }
         }
       }
-    }
-  </script>
+    </script>
 
 
-  <!-- Contact Section -->
-  <section id="contact" class="bg-[#faf7f2] py-20">
+    <!-- Contact Section -->
+    <section id="contact" class="bg-gray-900 py-20">
 
-    <div class="max-w-7xl mx-auto px-6">
+      <div class="max-w-7xl mx-auto px-6">
 
-      <!-- Heading -->
-      <div class="text-center mb-16">
-        <h1 class="text-[#96582D] font-bold tracking-wide uppercase text-sm mb-2">
-          Contact Us
-        </h1>
+        <!-- Heading -->
+        <div class="text-center mb-16">
+          <h1 class="text-emerald-500 font-bold tracking-wide uppercase text-sm mb-2">
+            Contact Us
+          </h1>
 
-        <h3 class="text-3xl md:text-4xl font-bold text-gray-900">
-          We'd Love to Hear From You
-        </h3>
+          <h3 class="text-3xl md:text-4xl font-bold text-gray-100">
+            We'd Love to Hear From You
+          </h3>
 
-        <p class="mt-4 text-gray-600 max-w-2xl mx-auto">
-          Have a question about a tea shop or want to partner with us?
-          Fill out the form below and our team will get back to you shortly.
-        </p>
-      </div>
-
-
-      <!-- Container -->
-      <div
-        class="grid grid-cols-1 lg:grid-cols-2 gap-12 bg-white rounded-3xl shadow-lg border border-gray-200 overflow-hidden">
-
-
-        <!-- LEFT : Info -->
-        <div class="p-10 bg-[#fffdf9]">
-
-          <h4 class="text-2xl font-bold text-[#96582D] mb-6">
-            Contact Information
-          </h4>
-
-          <p class="text-black mb-8">
-            Reach out to us anytime. We’re always happy to help you.
+          <p class="mt-4 text-gray-400 max-w-2xl mx-auto">
+            Have a question about a tea shop or want to partner with us?
+            Fill out the form below and our team will get back to you shortly.
           </p>
+        </div>
 
-          <div class="space-y-6 text-black">
 
-            <div>
-              <h5 class="font-semibold">📍 Location</h5>
-              <p>Tamil Nadu, India</p>
+        <!-- Container -->
+        <div
+          class="grid grid-cols-1 lg:grid-cols-2 gap-12 bg-gray-800 rounded-3xl shadow-lg border border-gray-700 overflow-hidden">
+
+
+          <!-- LEFT : Info -->
+          <div class="p-10 bg-gray-800">
+
+            <h4 class="text-2xl font-bold text-emerald-500 mb-6">
+              Contact Information
+            </h4>
+
+            <p class="text-gray-300 mb-8">
+              Reach out to us anytime. We’re always happy to help you.
+            </p>
+
+            <div class="space-y-6 text-gray-300">
+
+              <div>
+                <h5 class="font-semibold text-gray-200">📍 Location</h5>
+                <p>Tamil Nadu, India</p>
+              </div>
+
+              <div>
+                <h5 class="font-semibold text-gray-200">✉️ Email</h5>
+                <p>support@foodiezone.com</p>
+
+              </div>
+
+              <div>
+                <h5 class="font-semibold text-gray-200">📞 Phone</h5>
+                <p>+91 98765 43210</p>
+              </div>
+
             </div>
+          </div>
 
-            <div>
-              <h5 class="font-semibold">✉️ Email</h5>
-              <p>support@foodiezone.com</p>
 
-            </div>
+          <!-- RIGHT : Form -->
+          <div class="p-10">
 
-            <div>
-              <h5 class="font-semibold">📞 Phone</h5>
-              <p>+91 98765 43210</p>
-            </div>
+            <form id="contactForm" class="space-y-6">
+
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <input type="text" id="firstName" placeholder="First Name"
+                  class="w-full px-4 py-3 rounded-lg bg-gray-700 border border-gray-600 text-white focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 outline-none placeholder-gray-400">
+
+                <input type="text" id="lastName" placeholder="Last Name"
+                  class="w-full px-4 py-3 rounded-lg bg-gray-700 border border-gray-600 text-white focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 outline-none placeholder-gray-400">
+              </div>
+
+              <input type="email" id="email" placeholder="Email Address"
+                class="w-full px-4 py-3 rounded-lg bg-gray-700 border border-gray-600 text-white focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 outline-none placeholder-gray-400">
+
+              <select
+                class="w-full px-4 py-3 rounded-lg bg-gray-700 border border-gray-600 text-white focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 outline-none">
+                <option>General Inquiry</option>
+                <option>Feedback</option>
+                <option>Partnership</option>
+              </select>
+
+              <textarea rows="4" id="message" placeholder="Your Message"
+                class="w-full px-4 py-3 rounded-lg bg-gray-700 border border-gray-600 text-white focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 outline-none placeholder-gray-400"></textarea>
+
+              <button type="submit"
+                class="w-full bg-emerald-600 text-white font-semibold py-3 rounded-lg hover:bg-emerald-700 transition">
+                Send Message
+              </button>
+
+            </form>
 
           </div>
-        </div>
-
-
-        <!-- RIGHT : Form -->
-        <div class="p-10">
-
-          <form id="contactForm" class="space-y-6">
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <input type="text" id="firstName" placeholder="First Name"
-                class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-[#96582D] focus:ring-1 focus:ring-[#96582D] outline-none">
-
-              <input type="text" id="lastName" placeholder="Last Name"
-                class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-[#96582D] focus:ring-1 focus:ring-[#96582D] outline-none">
-            </div>
-
-            <input type="email" id="email" placeholder="Email Address"
-              class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-[#96582D] focus:ring-1 focus:ring-[#96582D] outline-none">
-
-            <select
-              class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-[#96582D] focus:ring-1 focus:ring-[#96582D] outline-none">
-              <option>General Inquiry</option>
-              <option>Feedback</option>
-              <option>Partnership</option>
-            </select>
-
-            <textarea rows="4" id="message" placeholder="Your Message"
-              class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-[#96582D] focus:ring-1 focus:ring-[#96582D] outline-none"></textarea>
-
-            <button type="submit"
-              class="w-full bg-[#96582D] text-white font-semibold py-3 rounded-lg hover:bg-[#7a4623] transition">
-              Send Message
-            </button>
-
-          </form>
 
         </div>
 
       </div>
-
-    </div>
-  </section>
+    </section>
 
 
-  <!--Footer-->
-  <footer class="footer">
-    <div class="footer-container">
+    <!--Footer-->
+    <footer class="footer">
+      <div class="footer-container">
 
-      <div class="footer-box">
-        <h3>Foodie Zone</h3>
+        <div class="footer-box">
+          <h3>Foodie Zone</h3>
 
-        <p>Discover the best tea shops near you with instant directions.</p>
-      </div>
+          <p>Discover the best tea shops near you with instant directions.</p>
+        </div>
 
-      <div class="footer-box">
-        <h4>Quick Links</h4>
-        <a href="index.html">Home</a><br>
-        <a href="about.html">About</a><br>
-        <a href="packages.html">Packages</a><br>
-        <a href="reviews.html">Reviews</a>
-      </div>
+        <div class="footer-box">
+          <h4>Quick Links</h4>
+          <a href="index.html">Home</a><br>
+          <a href="about.html">About</a><br>
+          <a href="packages.html">Packages</a><br>
+          <a href="reviews.html">Reviews</a>
+        </div>
 
-      <div class="footer-box">
-        <h4>Contact</h4>
-        <p>Email: support@foodiezone.com</p>
+        <div class="footer-box">
+          <h4>Contact</h4>
+          <p>Email: support@foodiezone.com</p>
 
-        <p>Location: Tamil Nadu</p>
-      </div>
+          <p>Location: Tamil Nadu</p>
+        </div>
 
-      <div class="footer-box">
-        <h4>Follow Us</h4>
-        <div class="social-icons">
-          <a href="https://wa.me/919876543210" target="_blank" class="social whatsapp">
-            <i class="fa-brands fa-whatsapp"></i>
-          </a>
-          <a href="https://instagram.com" target="_blank" class="social instagram">
-            <i class="fa-brands fa-instagram"></i>
-          </a>
-          <a href="https://facebook.com" target="_blank" class="social facebook">
-            <i class="fa-brands fa-facebook-f"></i>
-          </a>
+        <div class="footer-box">
+          <h4>Follow Us</h4>
+          <div class="social-icons">
+            <a href="https://wa.me/919876543210" target="_blank" class="social whatsapp">
+              <i class="fa-brands fa-whatsapp"></i>
+            </a>
+            <a href="https://instagram.com" target="_blank" class="social instagram">
+              <i class="fa-brands fa-instagram"></i>
+            </a>
+            <a href="https://facebook.com" target="_blank" class="social facebook">
+              <i class="fa-brands fa-facebook-f"></i>
+            </a>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="footer-bottom">
-      © 2026 Foodie Zone. All rights reserved.
+      <div class="footer-bottom">
+        © 2026 Foodie Zone. All rights reserved.
 
-    </div>
-  </footer>
+      </div>
+    </footer>
 
 
-  <script src="./contact.js"></script>
-  <script src="./assets/js/common.js"></script>
+    <script src="./contact.js"></script>
+    <script src="./assets/js/common.js"></script>
 
-</body>
+  </body>
 
 </html>

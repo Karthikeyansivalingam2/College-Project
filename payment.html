@@ -39,95 +39,98 @@
     </style>
 </head>
 
-<body class="bg-gray-100 min-h-screen flex items-center justify-center p-4">
+<body class="bg-gray-950 min-h-screen flex items-center justify-center p-4">
 
-    <div class="bg-white w-full max-w-md rounded-2xl shadow-xl overflow-hidden" id="paymentCard">
+    <div class="bg-gray-900 w-full max-w-md rounded-2xl shadow-xl overflow-hidden border border-gray-800"
+        id="paymentCard">
         <!-- Header -->
-        <div class="bg-gray-50 border-b p-4 flex justify-between items-center">
+        <div class="bg-gray-800 border-b border-gray-700 p-4 flex justify-between items-center">
             <div class="flex items-center gap-2">
-                <i class="fa-solid fa-lock text-green-600"></i>
-                <span class="font-semibold text-gray-700">Secure Payment</span>
+                <i class="fa-solid fa-lock text-emerald-500"></i>
+                <span class="font-semibold text-gray-200">Secure Payment</span>
             </div>
-            <div class="text-sm text-gray-500">ORD-REF-PG1029</div>
+            <div class="text-sm text-gray-400">ORD-REF-PG1029</div>
         </div>
 
         <div class="p-6">
             <!-- Amount -->
             <div class="text-center mb-8">
-                <p class="text-gray-500 text-sm mb-1">Total Payable</p>
-                <h1 class="text-4xl font-bold text-gray-800">₹<span id="payAmount">0</span></h1>
+                <p class="text-gray-400 text-sm mb-1">Total Payable</p>
+                <h1 class="text-4xl font-bold text-gray-100">₹<span id="payAmount">0</span></h1>
             </div>
 
             <!-- Payment Methods Selection -->
             <div id="methodSelection">
-                <h3 class="text-sm font-semibold text-gray-500 uppercase mb-3">Select Payment Method</h3>
+                <h3 class="text-sm font-semibold text-gray-400 uppercase mb-3">Select Payment Method</h3>
                 <div class="space-y-3">
                     <button onclick="showDetails('UPI')"
-                        class="w-full flex items-center justify-between p-4 border rounded-xl hover:border-black transition group">
+                        class="w-full flex items-center justify-between p-4 border border-gray-700 rounded-xl hover:border-emerald-500 transition group bg-gray-800 text-gray-200">
                         <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center">
-                                <i class="fa-brands fa-google-pay text-xl text-gray-700"></i>
+                            <div class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center">
+                                <i class="fa-brands fa-google-pay text-xl text-gray-300"></i>
                             </div>
                             <span class="font-medium">UPI (GPay / PhonePe)</span>
                         </div>
-                        <i class="fa-solid fa-chevron-right text-gray-300 group-hover:text-black"></i>
+                        <i class="fa-solid fa-chevron-right text-gray-500 group-hover:text-emerald-500"></i>
                     </button>
 
                     <button onclick="showDetails('CARD')"
-                        class="w-full flex items-center justify-between p-4 border rounded-xl hover:border-black transition group">
+                        class="w-full flex items-center justify-between p-4 border border-gray-700 rounded-xl hover:border-emerald-500 transition group bg-gray-800 text-gray-200">
                         <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center">
-                                <i class="fa-regular fa-credit-card text-xl text-gray-700"></i>
+                            <div class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center">
+                                <i class="fa-regular fa-credit-card text-xl text-gray-300"></i>
                             </div>
                             <span class="font-medium">Credit / Debit Card</span>
                         </div>
-                        <i class="fa-solid fa-chevron-right text-gray-300 group-hover:text-black"></i>
+                        <i class="fa-solid fa-chevron-right text-gray-500 group-hover:text-emerald-500"></i>
                     </button>
 
                     <button onclick="confirmCOD()"
-                        class="w-full flex items-center justify-between p-4 border rounded-xl hover:border-black transition group">
+                        class="w-full flex items-center justify-between p-4 border border-gray-700 rounded-xl hover:border-emerald-500 transition group bg-gray-800 text-gray-200">
                         <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center">
-                                <i class="fa-solid fa-money-bill-wave text-xl text-gray-700"></i>
+                            <div class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center">
+                                <i class="fa-solid fa-money-bill-wave text-xl text-gray-300"></i>
                             </div>
                             <span class="font-medium">Cash on Delivery</span>
                         </div>
-                        <i class="fa-solid fa-chevron-right text-gray-300 group-hover:text-black"></i>
+                        <i class="fa-solid fa-chevron-right text-gray-500 group-hover:text-emerald-500"></i>
                     </button>
                 </div>
             </div>
 
             <!-- UPI Details Form -->
             <div id="upiForm" class="hidden animate-fade-in">
-                <button onclick="backToMethods()" class="text-amber-700 text-sm mb-4 font-bold flex items-center gap-2">
+                <button onclick="backToMethods()"
+                    class="text-emerald-400 text-sm mb-4 font-bold flex items-center gap-2 hover:text-emerald-300 transition">
                     <i class="fa-solid fa-arrow-left"></i> Change Method
                 </button>
-                <h3 class="font-bold text-gray-800 mb-4">Enter UPI ID</h3>
+                <h3 class="font-bold text-gray-200 mb-4">Enter UPI ID</h3>
                 <input type="text" id="upiId" placeholder="example@okhdfc"
-                    class="w-full p-4 border-2 rounded-xl border-gray-100 focus:border-amber-700 outline-none mb-4 font-mono">
+                    class="w-full p-4 border rounded-xl bg-gray-800 border-gray-700 text-white focus:border-emerald-500 outline-none mb-4 font-mono placeholder-gray-500">
                 <button onclick="finalPay('UPI')"
-                    class="w-full bg-black text-white py-4 rounded-xl font-bold shadow-lg active:scale-95 transition">Pay
+                    class="w-full bg-emerald-600 text-white py-4 rounded-xl font-bold shadow-lg hover:bg-emerald-700 active:scale-95 transition">Pay
                     Now</button>
             </div>
 
             <!-- Card Details Form -->
             <div id="cardForm" class="hidden animate-fade-in">
-                <button onclick="backToMethods()" class="text-amber-700 text-sm mb-4 font-bold flex items-center gap-2">
+                <button onclick="backToMethods()"
+                    class="text-emerald-400 text-sm mb-4 font-bold flex items-center gap-2 hover:text-emerald-300 transition">
                     <i class="fa-solid fa-arrow-left"></i> Change Method
                 </button>
-                <h3 class="font-bold text-gray-800 mb-4">Enter Card Details</h3>
+                <h3 class="font-bold text-gray-200 mb-4">Enter Card Details</h3>
                 <div class="space-y-4">
                     <input type="text" id="cardNumber" placeholder="0000 0000 0000 0000" maxlength="19"
-                        class="w-full p-4 border-2 rounded-xl border-gray-100 focus:border-amber-700 outline-none font-mono">
+                        class="w-full p-4 border rounded-xl bg-gray-800 border-gray-700 text-white focus:border-emerald-500 outline-none font-mono placeholder-gray-500">
                     <div class="grid grid-cols-2 gap-4">
                         <input type="text" id="cardExpiry" placeholder="MM/YY" maxlength="5"
-                            class="w-full p-4 border-2 rounded-xl border-gray-100 focus:border-amber-700 outline-none font-mono">
+                            class="w-full p-4 border rounded-xl bg-gray-800 border-gray-700 text-white focus:border-emerald-500 outline-none font-mono placeholder-gray-500">
                         <input type="password" id="cardCvv" placeholder="CVV" maxlength="3"
-                            class="w-full p-4 border-2 rounded-xl border-gray-100 focus:border-amber-700 outline-none font-mono">
+                            class="w-full p-4 border rounded-xl bg-gray-800 border-gray-700 text-white focus:border-emerald-500 outline-none font-mono placeholder-gray-500">
                     </div>
                 </div>
                 <button onclick="finalPay('Card')"
-                    class="w-full bg-black text-white py-4 rounded-xl font-bold shadow-lg active:scale-95 transition mt-6">Pay
+                    class="w-full bg-emerald-600 text-white py-4 rounded-xl font-bold shadow-lg hover:bg-emerald-700 active:scale-95 transition mt-6">Pay
                     Securely</button>
             </div>
 
@@ -138,10 +141,10 @@
     </div>
 
     <!-- Processing State -->
-    <div id="processingState" class="hidden text-center">
-        <div class="spinner mx-auto mb-4"></div>
+    <div id="processingState" class="hidden text-center text-white">
+        <div class="spinner mx-auto mb-4 border-gray-600 border-l-emerald-500"></div>
         <h2 class="text-xl font-bold mb-2">Processing Your Order...</h2>
-        <p class="text-gray-500">Completing security checks...</p>
+        <p class="text-gray-400">Completing security checks...</p>
     </div>
 
     <script>

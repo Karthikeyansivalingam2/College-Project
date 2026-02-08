@@ -13,7 +13,8 @@
   <style>
     body {
       font-family: 'Outfit', sans-serif;
-      background-color: #f9fafb;
+      background-color: #111827;
+      color: #f3f4f6;
     }
 
     .hero-pattern {
@@ -28,7 +29,7 @@
     }
 
     .star-rating i.active {
-      color: #f59e0b;
+      color: #eab308;
     }
   </style>
 </head>
@@ -50,7 +51,7 @@
         <a href="contact.html">Contact</a>
         <a href="login.html" class="nav-login">Login</a>
         <a href="profile.html" id="navProfile"
-          class="hidden items-center justify-center w-10 h-10 rounded-full border border-white/30 bg-white/10 text-white hover:bg-white/20 hover:scale-105 transition-all shadow-lg backdrop-blur-sm group">
+          class="hidden items-center justify-center w-10 h-10 rounded-full border border-white/30 bg-emerald-700 text-white hover:bg-emerald-800 hover:scale-105 transition-all shadow-lg backdrop-blur-sm group">
           <span id="navUserInitial" class="font-bold text-base"></span>
           <i id="navUserIcon" class="fa-solid fa-user text-sm group-hover:rotate-12 transition-transform"></i>
         </a>
@@ -84,7 +85,7 @@
       <div
         class="inline-flex items-center gap-6 bg-white/10 backdrop-blur-md rounded-full px-8 py-3 border border-white/20">
         <div class="text-center">
-          <span class="block text-2xl font-bold text-amber-400">4.8</span>
+          <span class="block text-2xl font-bold text-emerald-400">4.8</span>
           <span class="text-xs text-gray-300">Average Rating</span>
         </div>
         <div class="w-px h-8 bg-gray-500"></div>
@@ -100,11 +101,11 @@
   <main class="max-w-7xl mx-auto px-4 -mt-10 relative z-20 pb-20">
 
     <!-- Action Bar -->
-    <div class="bg-white rounded-xl shadow-lg p-4 mb-8 flex flex-col md:flex-row justify-between items-center gap-4">
+    <div class="bg-gray-800 rounded-xl shadow-lg p-4 mb-8 flex flex-col md:flex-row justify-between items-center gap-4">
       <div class="flex items-center gap-2">
-        <span class="text-gray-600 font-medium">Filter by:</span>
+        <span class="text-gray-300 font-medium">Filter by:</span>
         <select
-          class="border-none bg-gray-100 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-amber-500 outline-none">
+          class="border-none bg-gray-700 text-gray-200 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-emerald-500 outline-none">
           <option>All Locations</option>
           <option>Chennai</option>
           <option>Salem</option>
@@ -112,7 +113,7 @@
         </select>
       </div>
       <button onclick="openModal()"
-        class="bg-amber-700 hover:bg-amber-800 text-white px-6 py-2.5 rounded-lg font-medium shadow-md transition-all flex items-center gap-2">
+        class="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-2.5 rounded-lg font-medium shadow-md transition-all flex items-center gap-2">
         <i class="fa-solid fa-pen-nib"></i> Write a Review
       </button>
     </div>
@@ -121,98 +122,98 @@
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 
       <!-- Review 1 -->
-      <div class="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition card-hover">
+      <div class="bg-gray-800 rounded-xl p-6 shadow-sm hover:shadow-md transition card-hover">
         <div class="flex justify-between items-start mb-4">
           <div class="flex items-center gap-3">
             <img src="https://ui-avatars.com/api/?name=Suresh+Kumar&background=random" class="w-10 h-10 rounded-full">
             <div>
-              <h4 class="font-bold text-gray-800 text-sm">Suresh Kumar</h4>
-              <p class="text-xs text-gray-500">Local Guide • 12 Reviews</p>
+              <h4 class="font-bold text-gray-200 text-sm">Suresh Kumar</h4>
+              <p class="text-xs text-gray-400">Local Guide • 12 Reviews</p>
             </div>
           </div>
-          <span class="bg-green-100 text-green-700 text-xs px-2 py-1 rounded font-bold">5.0 ★</span>
+          <span class="bg-emerald-900/40 text-emerald-400 text-xs px-2 py-1 rounded font-bold">5.0 ★</span>
         </div>
-        <h5 class="font-semibold text-amber-800 text-sm mb-2"><i class="fa-solid fa-store mr-1"></i> Royal Tea, Erode
+        <h5 class="font-semibold text-emerald-400 text-sm mb-2"><i class="fa-solid fa-store mr-1"></i> Royal Tea, Erode
         </h5>
-        <p class="text-gray-600 text-sm leading-relaxed mb-4">
+        <p class="text-gray-300 text-sm leading-relaxed mb-4">
           "Absolutely love their Masala Chai! The place is very clean and the staff is super friendly. Best place to
           hang out with friends in the evening."
         </p>
-        <div class="flex justify-between items-center pt-4 border-t border-gray-100 text-xs text-gray-400">
+        <div class="flex justify-between items-center pt-4 border-t border-gray-700 text-xs text-gray-400">
           <span>2 days ago</span>
-          <button class="flex items-center gap-1 hover:text-amber-700 transition"><i
+          <button class="flex items-center gap-1 hover:text-emerald-400 transition"><i
               class="fa-regular fa-thumbs-up"></i> Helpful (12)</button>
         </div>
       </div>
 
       <!-- Review 2 -->
-      <div class="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition card-hover">
+      <div class="bg-gray-800 rounded-xl p-6 shadow-sm hover:shadow-md transition card-hover">
         <div class="flex justify-between items-start mb-4">
           <div class="flex items-center gap-3">
             <img src="https://ui-avatars.com/api/?name=Anita+R&background=random" class="w-10 h-10 rounded-full">
             <div>
-              <h4 class="font-bold text-gray-800 text-sm">Anita Raj</h4>
-              <p class="text-xs text-gray-500">Tea Lover • 5 Reviews</p>
+              <h4 class="font-bold text-gray-200 text-sm">Anita Raj</h4>
+              <p class="text-xs text-gray-400">Tea Lover • 5 Reviews</p>
             </div>
           </div>
-          <span class="bg-green-100 text-green-700 text-xs px-2 py-1 rounded font-bold">4.5 ★</span>
+          <span class="bg-emerald-900/40 text-emerald-400 text-xs px-2 py-1 rounded font-bold">4.5 ★</span>
         </div>
-        <h5 class="font-semibold text-amber-800 text-sm mb-2"><i class="fa-solid fa-store mr-1"></i> Chennai Chai, T
+        <h5 class="font-semibold text-emerald-400 text-sm mb-2"><i class="fa-solid fa-store mr-1"></i> Chennai Chai, T
           Nagar</h5>
-        <p class="text-gray-600 text-sm leading-relaxed mb-4">
+        <p class="text-gray-300 text-sm leading-relaxed mb-4">
           "Great vibe and amazing filter coffee. The snacks were fresh too. Bit crowded during weekends but worth the
           wait."
         </p>
-        <div class="flex justify-between items-center pt-4 border-t border-gray-100 text-xs text-gray-400">
+        <div class="flex justify-between items-center pt-4 border-t border-gray-700 text-xs text-gray-400">
           <span>1 week ago</span>
-          <button class="flex items-center gap-1 hover:text-amber-700 transition"><i
+          <button class="flex items-center gap-1 hover:text-emerald-400 transition"><i
               class="fa-regular fa-thumbs-up"></i> Helpful (8)</button>
         </div>
       </div>
 
       <!-- Review 3 -->
-      <div class="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition card-hover">
+      <div class="bg-gray-800 rounded-xl p-6 shadow-sm hover:shadow-md transition card-hover">
         <div class="flex justify-between items-start mb-4">
           <div class="flex items-center gap-3">
             <img src="https://ui-avatars.com/api/?name=Mike+T&background=random" class="w-10 h-10 rounded-full">
             <div>
-              <h4 class="font-bold text-gray-800 text-sm">Mike Tyson</h4>
-              <p class="text-xs text-gray-500">Visitor • 1 Review</p>
+              <h4 class="font-bold text-gray-200 text-sm">Mike Tyson</h4>
+              <p class="text-xs text-gray-400">Visitor • 1 Review</p>
             </div>
           </div>
-          <span class="bg-yellow-100 text-yellow-700 text-xs px-2 py-1 rounded font-bold">4.0 ★</span>
+          <span class="bg-yellow-900/40 text-yellow-400 text-xs px-2 py-1 rounded font-bold">4.0 ★</span>
         </div>
-        <h5 class="font-semibold text-amber-800 text-sm mb-2"><i class="fa-solid fa-store mr-1"></i> Bus Stand Tea,
+        <h5 class="font-semibold text-emerald-400 text-sm mb-2"><i class="fa-solid fa-store mr-1"></i> Bus Stand Tea,
           Salem</h5>
-        <p class="text-gray-600 text-sm leading-relaxed mb-4">
+        <p class="text-gray-300 text-sm leading-relaxed mb-4">
           "Quick service and decent pricing. Logic tea was good. Need more seating space though."
         </p>
-        <div class="flex justify-between items-center pt-4 border-t border-gray-100 text-xs text-gray-400">
+        <div class="flex justify-between items-center pt-4 border-t border-gray-700 text-xs text-gray-400">
           <span>3 weeks ago</span>
-          <button class="flex items-center gap-1 hover:text-amber-700 transition"><i
+          <button class="flex items-center gap-1 hover:text-emerald-400 transition"><i
               class="fa-regular fa-thumbs-up"></i> Helpful (2)</button>
         </div>
       </div>
       <!-- Review 4 -->
-      <div class="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition card-hover">
+      <div class="bg-gray-800 rounded-xl p-6 shadow-sm hover:shadow-md transition card-hover">
         <div class="flex justify-between items-start mb-4">
           <div class="flex items-center gap-3">
             <img src="https://ui-avatars.com/api/?name=Deepa+M&background=random" class="w-10 h-10 rounded-full">
             <div>
-              <h4 class="font-bold text-gray-800 text-sm">Deepa M</h4>
-              <p class="text-xs text-gray-500">Foodie • 34 Reviews</p>
+              <h4 class="font-bold text-gray-200 text-sm">Deepa M</h4>
+              <p class="text-xs text-gray-400">Foodie • 34 Reviews</p>
             </div>
           </div>
-          <span class="bg-green-100 text-green-700 text-xs px-2 py-1 rounded font-bold">5.0 ★</span>
+          <span class="bg-emerald-900/40 text-emerald-400 text-xs px-2 py-1 rounded font-bold">5.0 ★</span>
         </div>
-        <h5 class="font-semibold text-amber-800 text-sm mb-2"><i class="fa-solid fa-store mr-1"></i> Green Leaf,
+        <h5 class="font-semibold text-emerald-400 text-sm mb-2"><i class="fa-solid fa-store mr-1"></i> Green Leaf,
           Coimbatore</h5>
-        <p class="text-gray-600 text-sm leading-relaxed mb-4">
+        <p class="text-gray-300 text-sm leading-relaxed mb-4">
           "Hands down the best Green tea I've had. Very refreshing. Highly recommended!"
         </p>
-        <div class="flex justify-between items-center pt-4 border-t border-gray-100 text-xs text-gray-400">
+        <div class="flex justify-between items-center pt-4 border-t border-gray-700 text-xs text-gray-400">
           <span>1 month ago</span>
-          <button class="flex items-center gap-1 hover:text-amber-700 transition"><i
+          <button class="flex items-center gap-1 hover:text-emerald-400 transition"><i
               class="fa-regular fa-thumbs-up"></i> Helpful (24)</button>
         </div>
       </div>
@@ -221,26 +222,27 @@
 
     <div class="text-center mt-10">
       <button
-        class="text-gray-500 border border-gray-300 px-6 py-2 rounded-full hover:bg-gray-100 hover:text-black transition">Load
+        class="text-gray-400 border border-gray-600 px-6 py-2 rounded-full hover:bg-gray-800 hover:text-white transition">Load
         More Reviews</button>
     </div>
 
   </main>
 
   <!-- Review Modal -->
-  <div id="reviewModal" class="fixed inset-0 bg-black/60 hidden items-center justify-center z-50 backdrop-blur-sm">
-    <div class="bg-white rounded-2xl w-full max-w-md p-6 m-4 shadow-2xl transform transition-all scale-100">
+  <div id="reviewModal" class="fixed inset-0 bg-black/70 hidden items-center justify-center z-50 backdrop-blur-sm">
+    <div
+      class="bg-gray-900 rounded-2xl w-full max-w-md p-6 m-4 shadow-2xl transform transition-all scale-100 border border-gray-700">
       <div class="flex justify-between items-center mb-6">
-        <h3 class="text-xl font-bold text-gray-800">Write a Review</h3>
-        <button onclick="closeModal()" class="text-gray-400 hover:text-black"><i
+        <h3 class="text-xl font-bold text-gray-200">Write a Review</h3>
+        <button onclick="closeModal()" class="text-gray-400 hover:text-white"><i
             class="fa-solid fa-xmark text-xl"></i></button>
       </div>
 
       <form id="reviewForm" onsubmit="submitReview(event)">
         <div class="mb-4">
-          <label class="block text-sm font-medium text-gray-700 mb-1">Select Shop</label>
+          <label class="block text-sm font-medium text-gray-300 mb-1">Select Shop</label>
           <select id="drpShop"
-            class="w-full bg-gray-50 border border-gray-300 rounded-lg p-2.5 focus:ring-2 focus:ring-amber-500 outline-none">
+            class="w-full bg-gray-800 border border-gray-600 text-gray-200 rounded-lg p-2.5 focus:ring-2 focus:ring-emerald-500 outline-none">
             <option value="">-- Choose a Shop --</option>
             <option>Royal Tea - Erode</option>
             <option>Chai Kings - Anthiyur</option>
@@ -250,7 +252,7 @@
         </div>
 
         <div class="mb-4 text-center">
-          <label class="block text-sm font-medium text-gray-700 mb-2">Rate your experience</label>
+          <label class="block text-sm font-medium text-gray-300 mb-2">Rate your experience</label>
           <div class="star-rating text-2xl space-x-2" id="starContainer">
             <i class="fa-solid fa-star" onclick="setRating(1)"></i>
             <i class="fa-solid fa-star" onclick="setRating(2)"></i>
@@ -262,14 +264,14 @@
         </div>
 
         <div class="mb-6">
-          <label class="block text-sm font-medium text-gray-700 mb-1">Your Review</label>
+          <label class="block text-sm font-medium text-gray-300 mb-1">Your Review</label>
           <textarea id="txtReviewContent"
-            class="w-full bg-gray-50 border border-gray-300 rounded-lg p-3 h-28 focus:ring-2 focus:ring-amber-500 outline-none"
+            class="w-full bg-gray-800 border border-gray-600 text-gray-200 rounded-lg p-3 h-28 focus:ring-2 focus:ring-emerald-500 outline-none"
             placeholder="What did you like? What can be improved?"></textarea>
         </div>
 
         <button type="submit"
-          class="w-full bg-amber-700 hover:bg-amber-800 text-white font-bold py-3 rounded-lg shadow-lg transition transform active:scale-95">Post
+          class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-lg shadow-lg transition transform active:scale-95">Post
           Review</button>
       </form>
     </div>
@@ -288,7 +290,7 @@
         <a href="index.html">Home</a><br>
         <a href="about.html">About</a><br>
         <a href="reviews.html">Reviews</a><br>
-        <a href="admin.html" style="color: #fea040;">Admin Dashboard</a>
+        <a href="admin-login.html" style="color: #6ee7b7;">Admin Dashboard</a>
       </div>
       <div class="footer-box">
         <h4>Contact</h4>
@@ -337,7 +339,7 @@
           star.classList.remove('text-gray-300');
         } else {
           star.classList.remove('active', 'text-yellow-400');
-          star.classList.add('text-gray-300');
+          star.classList.add('text-gray-600');
         }
       });
       document.getElementById('rateError').classList.add('hidden');

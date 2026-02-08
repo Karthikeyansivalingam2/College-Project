@@ -16,16 +16,16 @@
     </style>
 </head>
 
-<body class="bg-gray-50 min-h-screen">
+<body class="bg-gray-900 text-gray-100 min-h-screen">
 
     <!-- Navbar -->
-    <nav class="bg-white shadow-sm p-4 sticky top-0 z-50">
+    <nav class="bg-gray-800 shadow-sm p-4 sticky top-0 z-50 border-b border-gray-700">
         <div class="max-w-6xl mx-auto flex justify-between items-center">
-            <a href="index.html" class="text-2xl font-bold text-amber-800">Foodie Zone</a>
+            <a href="index.html" class="text-2xl font-bold text-emerald-500">Foodie Zone</a>
 
             <div class="flex gap-4">
-                <a href="index.html" class="text-gray-600 hover:text-amber-800 font-medium">Home</a>
-                <button onclick="logout()" class="text-red-500 hover:text-red-700 font-medium">Logout</button>
+                <a href="index.html" class="text-gray-300 hover:text-emerald-500 font-medium">Home</a>
+                <button onclick="logout()" class="text-red-400 hover:text-red-300 font-medium">Logout</button>
             </div>
         </div>
     </nav>
@@ -34,47 +34,50 @@
 
         <!-- Profile Header -->
         <div
-            class="bg-white rounded-2xl shadow-sm p-8 mb-6 flex flex-col md:flex-row items-center md:items-start gap-6">
-            <div class="w-24 h-24 bg-amber-100 rounded-full flex items-center justify-center text-4xl text-amber-700 font-bold uppercase"
+            class="bg-gray-800 rounded-2xl shadow-sm p-8 mb-6 flex flex-col md:flex-row items-center md:items-start gap-6 border border-gray-700">
+            <div class="w-24 h-24 bg-emerald-900/50 rounded-full flex items-center justify-center text-4xl text-emerald-500 font-bold uppercase"
                 id="avatar">
                 U
             </div>
             <div class="text-center md:text-left">
-                <h1 class="text-3xl font-bold text-gray-800" id="profileName">Loading...</h1>
-                <p class="text-gray-500" id="profileEmail">...</p>
+                <h1 class="text-3xl font-bold text-gray-100" id="profileName">Loading...</h1>
+                <p class="text-gray-400" id="profileEmail">...</p>
                 <div class="mt-4 flex flex-wrap gap-2 justify-center md:justify-start">
-                    <span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm font-medium">Active
+                    <span class="px-3 py-1 bg-green-900/30 text-green-400 rounded-full text-sm font-medium">Active
                         Member</span>
                     <button onclick="openEditModal()"
-                        class="px-3 py-1 bg-gray-100 text-gray-700 hover:bg-gray-200 rounded-full text-sm font-medium transition">
+                        class="px-3 py-1 bg-gray-700 text-gray-300 hover:bg-gray-600 rounded-full text-sm font-medium transition">
                         <i class="fa-solid fa-pen-to-square mr-1"></i> Edit Profile
                     </button>
                     <!-- Display Extra Info -->
-                    <div id="extraInfo" class="w-full text-sm text-gray-500 mt-2"></div>
+                    <div id="extraInfo" class="w-full text-sm text-gray-400 mt-2"></div>
                 </div>
             </div>
         </div>
 
         <!-- Edit Profile Modal -->
-        <div id="editModal" class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50">
-            <div class="bg-white p-6 rounded-xl w-full max-w-md shadow-2xl transform transition-all scale-95"
+        <div id="editModal" class="fixed inset-0 bg-black/80 hidden items-center justify-center z-50">
+            <div class="bg-gray-800 p-6 rounded-xl w-full max-w-md shadow-2xl transform transition-all scale-95 border border-gray-700"
                 id="modalContent">
-                <h2 class="text-xl font-bold mb-4">Edit Profile</h2>
+                <h2 class="text-xl font-bold mb-4 text-gray-100">Edit Profile</h2>
                 <form id="editForm" class="space-y-4">
                     <div>
-                        <label class="block text-sm font-medium text-gray-700">Phone</label>
-                        <input type="tel" id="editPhone" class="w-full border p-2 rounded focus:outline-amber-700"
+                        <label class="block text-sm font-medium text-gray-300">Phone</label>
+                        <input type="tel" id="editPhone"
+                            class="w-full bg-gray-700 border border-gray-600 text-white p-2 rounded focus:outline-none focus:ring-2 focus:ring-emerald-500"
                             placeholder="+91 98765 43210">
                     </div>
                     <div>
-                        <label class="block text-sm font-medium text-gray-700">Address</label>
-                        <textarea id="editAddress" class="w-full border p-2 rounded focus:outline-amber-700" rows="3"
-                            placeholder="123, Street Name, City"></textarea>
+                        <label class="block text-sm font-medium text-gray-300">Address</label>
+                        <textarea id="editAddress"
+                            class="w-full bg-gray-700 border border-gray-600 text-white p-2 rounded focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                            rows="3" placeholder="123, Street Name, City"></textarea>
                     </div>
                     <div class="flex justify-end gap-3 mt-6">
                         <button type="button" onclick="closeEditModal()"
-                            class="px-4 py-2 text-gray-600 hover:bg-gray-100 rounded">Cancel</button>
-                        <button type="submit" class="px-4 py-2 bg-amber-700 text-white rounded hover:bg-amber-800">Save
+                            class="px-4 py-2 text-gray-400 hover:bg-gray-700 rounded">Cancel</button>
+                        <button type="submit"
+                            class="px-4 py-2 bg-emerald-600 text-white rounded hover:bg-emerald-700">Save
                             Changes</button>
                     </div>
                 </form>
@@ -82,9 +85,9 @@
         </div>
 
         <!-- Order History -->
-        <h2 class="text-2xl font-bold text-gray-800 mb-4">Order History</h2>
+        <h2 class="text-2xl font-bold text-gray-100 mb-4">Order History</h2>
 
-        <div class="bg-white rounded-2xl shadow-sm overflow-hidden" id="ordersContainer">
+        <div class="bg-gray-800 rounded-2xl shadow-sm overflow-hidden border border-gray-700" id="ordersContainer">
             <!-- Loading State -->
             <div class="p-8 text-center text-gray-400">
                 <i class="fa-solid fa-circle-notch fa-spin text-2xl mb-2"></i>
@@ -188,9 +191,9 @@
                 if (orders.length === 0) {
                     container.innerHTML = `
                         <div class="p-10 text-center">
-                            <i class="fa-solid fa-utensils text-4xl text-gray-200 mb-4"></i>
-                            <h3 class="text-lg font-semibold text-gray-500">No orders yet</h3>
-                            <a href="order.html" class="text-amber-700 hover:underline mt-2 inline-block">Order some food now</a>
+                            <i class="fa-solid fa-utensils text-4xl text-gray-600 mb-4"></i>
+                            <h3 class="text-lg font-semibold text-gray-400">No orders yet</h3>
+                            <a href="order.html" class="text-emerald-500 hover:underline mt-2 inline-block">Order some food now</a>
                         </div>
                     `;
                     return;
@@ -198,24 +201,24 @@
 
                 orders.reverse().forEach(order => {
                     const date = order.date ? new Date(order.date).toLocaleDateString() : 'Date N/A';
-                    const statusColor = order.status === 'Pending' ? 'text-yellow-600 bg-yellow-100' : 'text-green-600 bg-green-100';
+                    const statusColor = order.status === 'Pending' ? 'text-yellow-500 bg-yellow-900/30' : 'text-green-400 bg-green-900/30';
 
                     let itemsHtml = '';
                     if (order.items && typeof order.items === 'object') {
                         itemsHtml = Object.keys(order.items).map(k =>
-                            `<span class="text-gray-600 text-sm bg-gray-100 px-2 py-1 rounded mr-2 mb-2 inline-block">${k} x${order.items[k].qty}</span>`
+                            `<span class="text-gray-300 text-sm bg-gray-700 px-2 py-1 rounded mr-2 mb-2 inline-block">${k} x${order.items[k].qty}</span>`
                         ).join('');
                     }
 
                     const html = `
-                        <div class="p-6 border-b last:border-0 hover:bg-gray-50 transition">
+                        <div class="p-6 border-b border-gray-700 last:border-0 hover:bg-gray-750 transition">
                             <div class="flex justify-between items-start mb-3">
                                 <div>
-                                    <h3 class="font-bold text-lg text-amber-900">${order.orderId || 'ORD-###'}</h3>
-                                    <p class="text-xs text-gray-400">${date}</p>
+                                    <h3 class="font-bold text-lg text-emerald-400">${order.orderId || 'ORD-###'}</h3>
+                                    <p class="text-xs text-gray-500">${date}</p>
                                 </div>
                                 <div class="text-right">
-                                    <div class="font-bold text-lg">₹${order.total || 0}</div>
+                                    <div class="font-bold text-lg text-white">₹${order.total || 0}</div>
                                     <span class="text-xs px-2 py-1 rounded font-medium ${statusColor}">${order.status || 'Received'}</span>
                                 </div>
                             </div>
@@ -224,9 +227,9 @@
                                 ${itemsHtml}
                             </div>
                             
-                            <div class="flex justify-between items-center text-sm text-gray-500 mt-4">
+                            <div class="flex justify-between items-center text-sm text-gray-400 mt-4">
                                 <span><i class="fa-solid fa-credit-card mr-1"></i> ${order.paymentMethod || 'Online'}</span>
-                                <a href="#" class="text-amber-600 hover:underline">Track Order</a>
+                                <a href="#" class="text-emerald-500 hover:underline">Track Order</a>
                             </div>
                         </div>
                     `;
@@ -238,8 +241,8 @@
                 container.innerHTML = `
                     <div class="p-8 text-center text-red-400">
                         <p>No orders found or server unavailable.</p>
-                        <p class="text-xs text-gray-400 mt-2">Make sure 'npm run start' is running.</p>
-                        <button onclick="location.reload()" class="mt-2 text-sm text-gray-800 underline">Retry</button>
+                        <p class="text-xs text-gray-500 mt-2">Make sure 'npm run start' is running.</p>
+                        <button onclick="location.reload()" class="mt-2 text-sm text-gray-300 underline">Retry</button>
                     </div>`;
             }
         }

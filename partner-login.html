@@ -11,37 +11,38 @@
     <style>
         body {
             font-family: 'Outfit', sans-serif;
-            background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+            background: linear-gradient(135deg, #111827 0%, #064e3b 100%);
         }
     </style>
 </head>
 
 <body class="min-h-screen flex items-center justify-center p-4">
 
-    <div class="bg-white rounded-3xl shadow-2xl flex overflow-hidden w-full max-w-4xl min-h-[500px]">
+    <div
+        class="bg-gray-800 rounded-3xl shadow-2xl flex overflow-hidden w-full max-w-4xl min-h-[500px] border border-gray-700">
         <!-- Left Side: Promo -->
         <div
-            class="hidden md:flex w-1/2 bg-amber-800 relative flex-col justify-center items-center text-white p-12 text-center">
+            class="hidden md:flex w-1/2 bg-emerald-900 relative flex-col justify-center items-center text-white p-12 text-center">
             <div class="absolute inset-0 z-0 opacity-30">
                 <img src="https://images.unsplash.com/photo-1552566626-52f8b828add9?q=80&w=800"
                     class="w-full h-full object-cover">
             </div>
             <div class="relative z-10">
                 <h2 class="text-3xl font-bold mb-4">Partner Portal</h2>
-                <p class="text-amber-100 text-lg leading-relaxed">Manager your restaurant, orders, and earnings in one
+                <p class="text-emerald-100 text-lg leading-relaxed">Manager your restaurant, orders, and earnings in one
                     place.</p>
 
                 <div class="mt-8 flex flex-col items-center gap-4">
                     <div class="flex items-center gap-3 text-sm">
-                        <i class="fa-solid fa-circle-check text-green-400"></i>
+                        <i class="fa-solid fa-circle-check text-emerald-400"></i>
                         <span>Real-time Order Tracking</span>
                     </div>
                     <div class="flex items-center gap-3 text-sm">
-                        <i class="fa-solid fa-circle-check text-green-400"></i>
+                        <i class="fa-solid fa-circle-check text-emerald-400"></i>
                         <span>Easy Earnings Withdrawal</span>
                     </div>
                     <div class="flex items-center gap-3 text-sm">
-                        <i class="fa-solid fa-circle-check text-green-400"></i>
+                        <i class="fa-solid fa-circle-check text-emerald-400"></i>
                         <span>Menu Management</span>
                     </div>
                 </div>
@@ -49,56 +50,56 @@
         </div>
 
         <!-- Right Side: Login Form -->
-        <div class="w-full md:w-1/2 p-10 md:p-16 relative bg-white">
-            <a href="partner.html" class="absolute top-6 right-8 text-gray-400 hover:text-amber-800 transition">
+        <div class="w-full md:w-1/2 p-10 md:p-16 relative bg-gray-800">
+            <a href="partner.html" class="absolute top-6 right-8 text-gray-400 hover:text-emerald-400 transition">
                 <i class="fa-solid fa-arrow-left"></i> Back
             </a>
 
             <div class="mb-10">
-                <h1 class="text-3xl font-bold text-gray-800 mb-2">Partner Login</h1>
-                <p class="text-gray-500">Welcome back! Please enter your details.</p>
+                <h1 class="text-3xl font-bold text-gray-100 mb-2">Partner Login</h1>
+                <p class="text-gray-400">Welcome back! Please enter your details.</p>
             </div>
 
             <form id="partnerLoginForm" class="space-y-6">
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Partner ID</label>
+                    <label class="block text-sm font-medium text-gray-300 mb-1">Partner ID</label>
                     <div class="relative">
                         <i class="fa-solid fa-id-card absolute left-4 top-4 text-gray-400"></i>
                         <input type="text" id="partnerId" required
-                            class="w-full pl-12 pr-4 py-3.5 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-500 transition"
+                            class="w-full pl-12 pr-4 py-3.5 bg-gray-700 border border-gray-600 text-white rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 transition placeholder-gray-400"
                             placeholder="PTR-####">
                     </div>
                 </div>
 
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Password</label>
+                    <label class="block text-sm font-medium text-gray-300 mb-1">Password</label>
                     <div class="relative">
                         <i class="fa-solid fa-lock absolute left-4 top-4 text-gray-400"></i>
                         <input type="password" id="password" required
-                            class="w-full pl-12 pr-12 py-3.5 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-500 transition"
+                            class="w-full pl-12 pr-12 py-3.5 bg-gray-700 border border-gray-600 text-white rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 transition placeholder-gray-400"
                             placeholder="••••••••">
                         <i class="fa-solid fa-eye absolute right-4 top-4 text-gray-400 cursor-pointer"
                             id="togglePassword"></i>
                     </div>
                     <div class="flex justify-between items-center mt-3">
-                        <label class="flex items-center gap-2 text-sm text-gray-600 cursor-pointer">
+                        <label class="flex items-center gap-2 text-sm text-gray-400 cursor-pointer">
                             <input type="checkbox" id="rememberMe"
-                                class="w-4 h-4 rounded border-gray-300 text-amber-600 focus:ring-amber-500">
+                                class="w-4 h-4 rounded border-gray-500 text-emerald-600 focus:ring-emerald-500 bg-gray-700">
                             Remember me
                         </label>
-                        <a href="#" class="text-sm text-amber-800 hover:underline">Forgot password?</a>
+                        <a href="#" class="text-sm text-emerald-400 hover:underline">Forgot password?</a>
                     </div>
                 </div>
 
                 <div class="pt-4">
                     <button type="submit"
-                        class="w-full bg-amber-800 text-white font-bold py-4 rounded-xl hover:bg-amber-900 transition shadow-lg hover:shadow-xl active:scale-[0.98]">
+                        class="w-full bg-emerald-600 text-white font-bold py-4 rounded-xl hover:bg-emerald-700 transition shadow-lg hover:shadow-xl active:scale-[0.98]">
                         Login to Dashboard
                     </button>
                 </div>
 
-                <p class="text-center text-sm text-gray-500">
-                    Not a partner yet? <a href="partner.html" class="text-amber-800 font-bold hover:underline">Apply
+                <p class="text-center text-sm text-gray-400">
+                    Not a partner yet? <a href="partner.html" class="text-emerald-400 font-bold hover:underline">Apply
                         Now</a>
                 </p>
             </form>

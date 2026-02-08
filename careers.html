@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 
-<body class="bg-gray-50 flex flex-col min-h-screen">
+<body class="bg-gray-900 text-gray-100 flex flex-col min-h-screen">
 
   <!-- Navbar -->
   <header class="navbar">
@@ -29,7 +29,7 @@
         <a href="contact.html">Contact</a>
         <a href="login.html" class="nav-login">Login</a>
         <a href="profile.html" id="navProfile"
-          class="hidden items-center justify-center w-10 h-10 rounded-full border border-white/30 bg-white/10 text-white hover:bg-white/20 hover:scale-105 transition-all shadow-lg backdrop-blur-sm group">
+          class="hidden items-center justify-center w-10 h-10 rounded-full border border-white/30 bg-emerald-700 text-white hover:bg-emerald-800 hover:scale-105 transition-all shadow-lg backdrop-blur-sm group">
           <span id="navUserInitial" class="font-bold text-base"></span>
           <i id="navUserIcon" class="fa-solid fa-user text-sm group-hover:rotate-12 transition-transform"></i>
         </a>
@@ -68,208 +68,217 @@
   <!-- Job Listings -->
   <main class="flex-grow max-w-6xl mx-auto px-4 py-10 w-full">
 
-    <h2 class="text-2xl font-bold text-gray-800 mb-6 border-l-4 border-amber-700 pl-3">Open Positions</h2>
+    <h2 class="text-2xl font-bold text-gray-100 mb-6 border-l-4 border-emerald-600 pl-3">Open Positions</h2>
 
     <div id="jobs" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 
       <!-- Job 1 -->
-      <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition border border-gray-100">
+      <div class="bg-gray-800 p-6 rounded-xl shadow hover:shadow-lg transition border border-gray-700">
         <div class="flex justify-between items-start mb-4">
           <div>
-            <h3 class="text-xl font-bold text-gray-800">Master Chef</h3>
-            <p class="text-sm text-gray-500"><i class="fa-solid fa-location-dot"></i> Chennai</p>
+            <h3 class="text-xl font-bold text-gray-100">Master Chef</h3>
+            <p class="text-sm text-gray-400"><i class="fa-solid fa-location-dot"></i> Chennai</p>
           </div>
           <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded font-bold">Full Time</span>
         </div>
         <div class="mb-4">
-          <p class="text-gray-600 text-sm">Expert in South Indian cuisine. Minimum 3 years exp required.</p>
+          <p class="text-gray-300 text-sm">Expert in South Indian cuisine. Minimum 3 years exp required.</p>
         </div>
         <div class="flex justify-between items-center">
-          <p class="font-bold text-amber-700">₹25k - ₹35k</p>
+          <p class="font-bold text-emerald-400">₹25k - ₹35k</p>
           <button onclick="scrollToApply('Master Chef')"
-            class="bg-black text-white px-4 py-2 rounded text-sm hover:bg-amber-700 transition">Apply Now</button>
+            class="bg-emerald-600 text-white px-4 py-2 rounded text-sm hover:bg-emerald-700 transition">Apply
+            Now</button>
         </div>
       </div>
 
       <!-- Job 2 -->
-      <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition border border-gray-100">
+      <div class="bg-gray-800 p-6 rounded-xl shadow hover:shadow-lg transition border border-gray-700">
         <div class="flex justify-between items-start mb-4">
           <div>
-            <h3 class="text-xl font-bold text-gray-800">Service Staff</h3>
-            <p class="text-sm text-gray-500"><i class="fa-solid fa-location-dot"></i> Salem</p>
+            <h3 class="text-xl font-bold text-gray-100">Service Staff</h3>
+            <p class="text-sm text-gray-400"><i class="fa-solid fa-location-dot"></i> Salem</p>
           </div>
           <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded font-bold">Urgent</span>
         </div>
         <div class="mb-4">
-          <p class="text-gray-600 text-sm">Waiters for our new dine-in restaurant. Keep customers happy.</p>
+          <p class="text-gray-300 text-sm">Waiters for our new dine-in restaurant. Keep customers happy.</p>
         </div>
         <div class="flex justify-between items-center">
-          <p class="font-bold text-amber-700">₹12k - ₹15k</p>
+          <p class="font-bold text-emerald-400">₹12k - ₹15k</p>
           <button onclick="scrollToApply('Service Staff')"
-            class="bg-black text-white px-4 py-2 rounded text-sm hover:bg-amber-700 transition">Apply Now</button>
+            class="bg-emerald-600 text-white px-4 py-2 rounded text-sm hover:bg-emerald-700 transition">Apply
+            Now</button>
         </div>
       </div>
 
       <!-- Job 3 -->
-      <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition border border-gray-100">
+      <div class="bg-gray-800 p-6 rounded-xl shadow hover:shadow-lg transition border border-gray-700">
         <div class="flex justify-between items-start mb-4">
           <div>
-            <h3 class="text-xl font-bold text-gray-800">Delivery Partner</h3>
-            <p class="text-sm text-gray-500"><i class="fa-solid fa-location-dot"></i> Erode</p>
+            <h3 class="text-xl font-bold text-gray-100">Delivery Partner</h3>
+            <p class="text-sm text-gray-400"><i class="fa-solid fa-location-dot"></i> Erode</p>
           </div>
           <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded font-bold">Part Time</span>
         </div>
         <div class="mb-4">
-          <p class="text-gray-600 text-sm">Deliver food parcels. Own bike & license mandatory.</p>
+          <p class="text-gray-300 text-sm">Deliver food parcels. Own bike & license mandatory.</p>
         </div>
         <div class="flex justify-between items-center">
-          <p class="font-bold text-amber-700">₹15k + Fuel</p>
+          <p class="font-bold text-emerald-400">₹15k + Fuel</p>
           <button onclick="scrollToApply('Delivery Partner')"
-            class="bg-black text-white px-4 py-2 rounded text-sm hover:bg-amber-700 transition">Apply Now</button>
+            class="bg-emerald-600 text-white px-4 py-2 rounded text-sm hover:bg-emerald-700 transition">Apply
+            Now</button>
         </div>
       </div>
 
       <!-- Job 4 -->
-      <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition border border-gray-100">
+      <div class="bg-gray-800 p-6 rounded-xl shadow hover:shadow-lg transition border border-gray-700">
         <div class="flex justify-between items-start mb-4">
           <div>
-            <h3 class="text-xl font-bold text-gray-800">Event Manager</h3>
-            <p class="text-sm text-gray-500"><i class="fa-solid fa-location-dot"></i> Chennai</p>
+            <h3 class="text-xl font-bold text-gray-100">Event Manager</h3>
+            <p class="text-sm text-gray-400"><i class="fa-solid fa-location-dot"></i> Chennai</p>
           </div>
           <span class="bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded font-bold">Contract</span>
         </div>
         <div class="mb-4">
-          <p class="text-gray-600 text-sm">Coordinate marriage & birthday catering events.</p>
+          <p class="text-gray-300 text-sm">Coordinate marriage & birthday catering events.</p>
         </div>
         <div class="flex justify-between items-center">
-          <p class="font-bold text-amber-700">₹40k / Event</p>
+          <p class="font-bold text-emerald-400">₹40k / Event</p>
           <button onclick="scrollToApply('Event Manager')"
-            class="bg-black text-white px-4 py-2 rounded text-sm hover:bg-amber-700 transition">Apply Now</button>
+            class="bg-emerald-600 text-white px-4 py-2 rounded text-sm hover:bg-emerald-700 transition">Apply
+            Now</button>
         </div>
       </div>
 
       <!-- Job 5 -->
-      <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition border border-gray-100">
+      <div class="bg-gray-800 p-6 rounded-xl shadow hover:shadow-lg transition border border-gray-700">
         <div class="flex justify-between items-start mb-4">
           <div>
-            <h3 class="text-xl font-bold text-gray-800">Restaurant Manager</h3>
-            <p class="text-sm text-gray-500"><i class="fa-solid fa-location-dot"></i> Salem</p>
+            <h3 class="text-xl font-bold text-gray-100">Restaurant Manager</h3>
+            <p class="text-sm text-gray-400"><i class="fa-solid fa-location-dot"></i> Salem</p>
           </div>
           <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded font-bold">Full Time</span>
         </div>
         <div class="mb-4">
-          <p class="text-gray-600 text-sm">Manage daily operations, staff, and inventory.</p>
+          <p class="text-gray-300 text-sm">Manage daily operations, staff, and inventory.</p>
         </div>
         <div class="flex justify-between items-center">
-          <p class="font-bold text-amber-700">₹25k - ₹40k</p>
+          <p class="font-bold text-emerald-400">₹25k - ₹40k</p>
           <button onclick="scrollToApply('Restaurant Manager')"
-            class="bg-black text-white px-4 py-2 rounded text-sm hover:bg-amber-700 transition">Apply Now</button>
+            class="bg-emerald-600 text-white px-4 py-2 rounded text-sm hover:bg-emerald-700 transition">Apply
+            Now</button>
         </div>
       </div>
 
       <!-- Job 6 -->
-      <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition border border-gray-100">
+      <div class="bg-gray-800 p-6 rounded-xl shadow hover:shadow-lg transition border border-gray-700">
         <div class="flex justify-between items-start mb-4">
           <div>
-            <h3 class="text-xl font-bold text-gray-800">Digital Marketer</h3>
-            <p class="text-sm text-gray-500"><i class="fa-solid fa-location-dot"></i> Chennai</p>
+            <h3 class="text-xl font-bold text-gray-100">Digital Marketer</h3>
+            <p class="text-sm text-gray-400"><i class="fa-solid fa-location-dot"></i> Chennai</p>
           </div>
           <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded font-bold">Remote</span>
         </div>
         <div class="mb-4">
-          <p class="text-gray-600 text-sm">Handle social media, ads, and brand growth.</p>
+          <p class="text-gray-300 text-sm">Handle social media, ads, and brand growth.</p>
         </div>
         <div class="flex justify-between items-center">
-          <p class="font-bold text-amber-700">₹20k - ₹30k</p>
+          <p class="font-bold text-emerald-400">₹20k - ₹30k</p>
           <button onclick="scrollToApply('Digital Marketer')"
-            class="bg-black text-white px-4 py-2 rounded text-sm hover:bg-amber-700 transition">Apply Now</button>
+            class="bg-emerald-600 text-white px-4 py-2 rounded text-sm hover:bg-emerald-700 transition">Apply
+            Now</button>
         </div>
       </div>
 
       <!-- Job 7 -->
-      <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition border border-gray-100">
+      <div class="bg-gray-800 p-6 rounded-xl shadow hover:shadow-lg transition border border-gray-700">
         <div class="flex justify-between items-start mb-4">
           <div>
-            <h3 class="text-xl font-bold text-gray-800">Housekeeping</h3>
-            <p class="text-sm text-gray-500"><i class="fa-solid fa-location-dot"></i> All Locations</p>
+            <h3 class="text-xl font-bold text-gray-100">Housekeeping</h3>
+            <p class="text-sm text-gray-400"><i class="fa-solid fa-location-dot"></i> All Locations</p>
           </div>
           <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded font-bold">Full Time</span>
         </div>
         <div class="mb-4">
-          <p class="text-gray-600 text-sm">Maintain cleanliness and hygiene in branches.</p>
+          <p class="text-gray-300 text-sm">Maintain cleanliness and hygiene in branches.</p>
         </div>
         <div class="flex justify-between items-center">
-          <p class="font-bold text-amber-700">₹10k - ₹15k</p>
+          <p class="font-bold text-emerald-400">₹10k - ₹15k</p>
           <button onclick="scrollToApply('Housekeeping Staff')"
-            class="bg-black text-white px-4 py-2 rounded text-sm hover:bg-amber-700 transition">Apply Now</button>
+            class="bg-emerald-600 text-white px-4 py-2 rounded text-sm hover:bg-emerald-700 transition">Apply
+            Now</button>
         </div>
       </div>
 
       <!-- Job 8 -->
-      <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition border border-gray-100">
+      <div class="bg-gray-800 p-6 rounded-xl shadow hover:shadow-lg transition border border-gray-700">
         <div class="flex justify-between items-start mb-4">
           <div>
-            <h3 class="text-xl font-bold text-gray-800">Accounts Assistant</h3>
-            <p class="text-sm text-gray-500"><i class="fa-solid fa-location-dot"></i> Erode</p>
+            <h3 class="text-xl font-bold text-gray-100">Accounts Assistant</h3>
+            <p class="text-sm text-gray-400"><i class="fa-solid fa-location-dot"></i> Erode</p>
           </div>
           <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded font-bold">Full Time</span>
         </div>
         <div class="mb-4">
-          <p class="text-gray-600 text-sm">Manage billing, petty cash, and daily reports.</p>
+          <p class="text-gray-300 text-sm">Manage billing, petty cash, and daily reports.</p>
         </div>
         <div class="flex justify-between items-center">
-          <p class="font-bold text-amber-700">₹15k - ₹20k</p>
+          <p class="font-bold text-emerald-400">₹15k - ₹20k</p>
           <button onclick="scrollToApply('Accounts Assistant')"
-            class="bg-black text-white px-4 py-2 rounded text-sm hover:bg-amber-700 transition">Apply Now</button>
+            class="bg-emerald-600 text-white px-4 py-2 rounded text-sm hover:bg-emerald-700 transition">Apply
+            Now</button>
         </div>
       </div>
 
       <!-- Job 9 -->
-      <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition border border-gray-100">
+      <div class="bg-gray-800 p-6 rounded-xl shadow hover:shadow-lg transition border border-gray-700">
         <div class="flex justify-between items-start mb-4">
           <div>
-            <h3 class="text-xl font-bold text-gray-800">Pastry Chef</h3>
-            <p class="text-sm text-gray-500"><i class="fa-solid fa-location-dot"></i> Madurai</p>
+            <h3 class="text-xl font-bold text-gray-100">Pastry Chef</h3>
+            <p class="text-sm text-gray-400"><i class="fa-solid fa-location-dot"></i> Madurai</p>
           </div>
           <span class="bg-pink-100 text-pink-800 text-xs px-2 py-1 rounded font-bold">Expert</span>
         </div>
         <div class="mb-4">
-          <p class="text-gray-600 text-sm">Specialist in cakes, desserts, and bakery items.</p>
+          <p class="text-gray-300 text-sm">Specialist in cakes, desserts, and bakery items.</p>
         </div>
         <div class="flex justify-between items-center">
-          <p class="font-bold text-amber-700">₹20k - ₹35k</p>
+          <p class="font-bold text-emerald-400">₹20k - ₹35k</p>
           <button onclick="scrollToApply('Pastry Chef')"
-            class="bg-black text-white px-4 py-2 rounded text-sm hover:bg-amber-700 transition">Apply Now</button>
+            class="bg-emerald-600 text-white px-4 py-2 rounded text-sm hover:bg-emerald-700 transition">Apply
+            Now</button>
         </div>
       </div>
 
     </div>
 
     <!-- Application Form -->
-    <div id="applySection" class="mt-16 bg-white p-8 rounded-2xl shadow-lg border border-gray-100 max-w-2xl mx-auto">
-      <h2 class="text-2xl font-bold text-gray-800 text-center mb-2">Apply for a Position</h2>
-      <p class="text-center text-gray-500 mb-6">Fill out the form below and we will contact you.</p>
+    <div id="applySection" class="mt-16 bg-gray-800 p-8 rounded-2xl shadow-lg border border-gray-700 max-w-2xl mx-auto">
+      <h2 class="text-2xl font-bold text-gray-100 text-center mb-2">Apply for a Position</h2>
+      <p class="text-center text-gray-400 mb-6">Fill out the form below and we will contact you.</p>
 
       <form id="careerForm" class="space-y-4">
         <input type="text" id="jobRole" readonly name="role"
-          class="w-full bg-gray-100 border border-gray-300 rounded p-3 text-gray-500 font-bold"
+          class="w-full bg-gray-700 border border-gray-600 rounded p-3 text-gray-300 font-bold"
           value="General Application">
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <input type="text" id="appName" placeholder="Full Name" required
-            class="w-full border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-amber-500">
+            class="w-full bg-gray-700 border border-gray-600 text-white rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-emerald-500">
           <input type="text" id="appMobile" placeholder="Mobile Number" required
-            class="w-full border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-amber-500">
+            class="w-full bg-gray-700 border border-gray-600 text-white rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-emerald-500">
         </div>
 
         <input type="email" id="appEmail" placeholder="Email Address" required
-          class="w-full border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-amber-500">
+          class="w-full bg-gray-700 border border-gray-600 text-white rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-emerald-500">
 
         <textarea id="appExp" placeholder="Briefly describe your experience..." rows="3" required
-          class="w-full border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-amber-500"></textarea>
+          class="w-full bg-gray-700 border border-gray-600 text-white rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-emerald-500"></textarea>
 
         <button type="submit"
-          class="w-full bg-amber-700 text-white font-bold py-3 rounded-lg hover:bg-amber-800 transition shadow-md">Submit
+          class="w-full bg-emerald-600 text-white font-bold py-3 rounded-lg hover:bg-emerald-700 transition shadow-md">Submit
           Application</button>
       </form>
 
