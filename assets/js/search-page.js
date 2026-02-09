@@ -15,120 +15,123 @@ function updateResultTitle(text) {
 /* ===============================
    TEA SHOPS / HOTELS DATA
    =============================== */
-var teaShops = [
+/* ===============================
+   RESTAURANTS DATA
+   =============================== */
+var restaurants = [
 
   /* ================= ANTHIYUR ================= */
   {
-    name: "Anand Tea & Coffee Stall",
+    name: "Anthiyur Delights",
     location: "Anthiyur",
-    teas: ["Strong Tea", "Masala Tea", "Ginger Tea"],
-    coffees: ["Filter Coffee", "Milk Coffee"],
-    snacks: ["Vada", "Biscuit", "Bun"],
-    map: "Anand Tea & Coffee Stall Anthiyur"
+    cuisines: ["South Indian", "Chinese"],
+    popular: ["Chicken Biryani", "Parotta"],
+    specials: ["Grill Chicken", "Falooda"],
+    map: "Anthiyur Delights Anthiyur"
   },
   {
-    name: "Sri Murugan Tea Kadai",
+    name: "Sri Murugan Mess",
     location: "Anthiyur",
-    teas: ["Strong Tea", "Milk Tea"],
-    coffees: ["Filter Coffee"],
-    snacks: ["Samosa", "Vada", "Bajji"],
-    map: "Sri Murugan Tea Kadai Anthiyur"
+    cuisines: ["South Indian"],
+    popular: ["Meals", "Fish Curry"],
+    specials: ["Mutton Chukka", "Kothu Parotta"],
+    map: "Sri Murugan Mess Anthiyur"
   },
 
   /* ================= ERODE ================= */
   {
-    name: "Raja Tea Stall",
+    name: "Spice Garden",
     location: "Erode",
-    teas: ["Strong Tea", "Masala Tea", "Ginger Tea"],
-    coffees: ["Filter Coffee", "Strong Coffee"],
-    snacks: ["Samosa", "Vada", "Bajji"],
-    map: "Raja Tea Stall Erode"
+    cuisines: ["North Indian", "Tandoori"],
+    popular: ["Butter Chicken", "Naan"],
+    specials: ["Paneer Tikka", "Lassi"],
+    map: "Spice Garden Erode"
   },
   {
-    name: "Kongu Tea & Coffee",
+    name: "Kongu Kitchen",
     location: "Erode",
-    teas: ["Masala Tea", "Ginger Tea"],
-    coffees: ["Milk Coffee", "Strong Coffee"],
-    snacks: ["Vada", "Bajji", "Murukku"],
-    map: "Kongu Tea & Coffee Erode"
+    cuisines: ["Chettinad", "Chinese"],
+    popular: ["Chicken 65", "Fried Rice"],
+    specials: ["Pichi Potta Kozhi", "Elaneer Payasam"],
+    map: "Kongu Kitchen Erode"
   },
 
   /* ================= SALEM ================= */
   {
-    name: "Salem Famous Tea Kadai",
+    name: "Salem Grand",
     location: "Salem",
-    teas: ["Strong Tea", "Masala Tea", "Ginger Tea"],
-    coffees: ["Filter Coffee", "Milk Coffee"],
-    snacks: ["Samosa", "Vada", "Bajji"],
-    map: "Salem Famous Tea Kadai"
+    cuisines: ["Mutli-Cuisine", "Arabian"],
+    popular: ["Shawarma", "Biryani"],
+    specials: ["BBQ Chicken", "Mojito"],
+    map: "Salem Grand Hotel"
   },
   {
-    name: "New Bus Stand Tea Shop",
+    name: "New Bus Stand Restaurant",
     location: "Salem",
-    teas: ["Milk Tea", "Lemon Tea"],
-    coffees: ["Strong Coffee"],
-    snacks: ["Bun", "Biscuit", "Cutlet"],
-    map: "New Bus Stand Tea Shop Salem"
+    cuisines: ["South Indian", "Fast Food"],
+    popular: ["Idli/Dosa", "Noodles"],
+    specials: ["Filter Coffee", "Rose Milk"],
+    map: "New Bus Stand Restaurant Salem"
   },
 
   /* ================= CHENNAI ================= */
   {
-    name: "Chennai Chai & Coffeewala",
+    name: "Taste of Chennai",
     location: "Chennai",
-    teas: ["Masala Tea", "Kashmiri Kahwa", "Milk Tea"],
-    coffees: ["Filter Coffee", "Black Coffee", "Latte"],
-    snacks: ["Samosa", "Bread Omelette", "Sandwich"],
-    map: "Chennai Chai & Coffeewala"
+    cuisines: ["South Indian", "Chettinad"],
+    popular: ["Meals", "Biryani"],
+    specials: ["Vanjaram Fry", "Crab Masala"],
+    map: "Taste of Chennai"
   },
   {
-    name: "Marina Beach Tea Stall",
+    name: "Marina Sea Food",
     location: "Chennai",
-    teas: ["Strong Tea", "Lemon Tea"],
-    coffees: ["Cold Coffee", "Milk Coffee"],
-    snacks: ["Sundal", "Bajji", "Murukku"],
-    map: "Marina Beach Tea Stall Chennai"
+    cuisines: ["Sea Food"],
+    popular: ["Fish Fry", "Prawn Gravy"],
+    specials: ["Nethili Fry", "Squid Roast"],
+    map: "Marina Sea Food Chennai"
   },
   {
-    name: "T Nagar Chai Point",
+    name: "T Nagar Bistro",
     location: "Chennai",
-    teas: ["Masala Tea", "Elaichi Tea"],
-    coffees: ["Milk Coffee"],
-    snacks: ["Cutlet", "Bun"],
-    map: "T Nagar Chai Stall Chennai"
+    cuisines: ["Continental", "Italian"],
+    popular: ["Pasta", "Pizza"],
+    specials: ["Burgers", "Cold Coffee"],
+    map: "T Nagar Bistro Chennai"
   },
 
   /* ================= MADURAI ================= */
   {
-    name: "Madurai Famous Jigarthanda",
+    name: "Madurai Jigarthanda Shop",
     location: "Madurai",
-    teas: ["Strong Tea", "Lemon Tea"],
-    coffees: ["Filter Coffee"],
-    snacks: ["Jigarthanda", "Vada", "Bun"],
+    cuisines: ["Desserts", "Beverages"],
+    popular: ["Jigarthanda", "Basundi"],
+    specials: ["Ice Cream", "Falooda"],
     map: "Madurai Famous Jigarthanda"
   },
   {
-    name: "Meenakshi Tea Stall",
+    name: "Meenakshi Bhawan",
     location: "Madurai",
-    teas: ["Masala Tea", "Ginger Tea"],
-    coffees: ["Succu Coffee", "Filter Coffee"],
-    snacks: ["Murukku", "Seedai"],
-    map: "Meenakshi Tea Stall Madurai"
+    cuisines: ["South Indian", "Vegetarian"],
+    popular: ["Idli", "Pongal"],
+    specials: ["Filter Coffee", "Vada"],
+    map: "Meenakshi Bhawan Madurai"
   },
   {
-    name: "Temple City Chai",
+    name: "Temple City Restaurant",
     location: "Madurai",
-    teas: ["Cardamom Tea", "Milk Tea"],
-    coffees: ["Strong Coffee"],
-    snacks: ["Halwa", "Samosa"],
-    map: "Temple City Chai Madurai"
+    cuisines: ["Chettinad", "Chinese"],
+    popular: ["Mutton Biryani", "Chicken Gravy"],
+    specials: ["Pepper Chicken", "Parotta"],
+    map: "Temple City Restaurant Madurai"
   },
   {
-    name: "Koodal Nagar Tea Point",
+    name: "Koodal Nagar Food Court",
     location: "Madurai",
-    teas: ["Herbal Tea", "Green Tea"],
-    coffees: ["Black Coffee"],
-    snacks: ["Puff", "Biscuit"],
-    map: "Koodal Nagar Tea Point Madurai"
+    cuisines: ["Multi-Cuisine"],
+    popular: ["Fried Rice", "Noodles"],
+    specials: ["Grill Chicken", "Juices"],
+    map: "Koodal Nagar Food Court Madurai"
   }
 ];
 
@@ -184,8 +187,8 @@ function showShopList(query) {
 
   query = query.trim().toLowerCase();
 
-  for (var i = 0; i < teaShops.length; i++) {
-    var shop = teaShops[i];
+  for (var i = 0; i < restaurants.length; i++) {
+    var shop = restaurants[i];
 
     if (shop.location.trim().toLowerCase() === query) {
       found = true;
@@ -198,9 +201,9 @@ function showShopList(query) {
         '</div>' +
         '<p class="card-location">📍 ' + shop.location + '</p>' +
         '<div class="card-tags">' +
-        '<span>🍵 Tea</span>' +
-        '<span>☕ Coffee</span>' +
-        '<span>🥐 Snacks</span>' +
+        '<span>🍽️ Dine-in</span>' +
+        '<span>🥡 Takeaway</span>' +
+        '<span>🚴 Delivery</span>' +
         '</div>' +
         '<button class="details-btn" onclick="showShopDetails(\'' + shop.name + '\')">' +
         'View Details' +
@@ -236,8 +239,8 @@ function showShopDetails(name) {
 
   box.innerHTML = "";
 
-  for (var i = 0; i < teaShops.length; i++) {
-    var shop = teaShops[i];
+  for (var i = 0; i < restaurants.length; i++) {
+    var shop = restaurants[i];
 
     if (shop.name === name) {
       box.innerHTML =
@@ -247,9 +250,9 @@ function showShopDetails(name) {
         '<div class="shop-card detail-card">' +
         '<h2>' + shop.name + '</h2>' +
         '<p><b>Location:</b> ' + shop.location + '</p>' +
-        '<div class="detail-group"><b>Teas:</b> ' + shop.teas.join(", ") + '</div>' +
-        '<div class="detail-group"><b>Coffees:</b> ' + shop.coffees.join(", ") + '</div>' +
-        '<div class="detail-group"><b>Snacks:</b> ' + shop.snacks.join(", ") + '</div>' +
+        '<div class="detail-group"><b>Cuisines:</b> ' + shop.cuisines.join(", ") + '</div>' +
+        '<div class="detail-group"><b>Popular:</b> ' + shop.popular.join(", ") + '</div>' +
+        '<div class="detail-group"><b>Specials:</b> ' + shop.specials.join(", ") + '</div>' +
         '<button class="direction-btn" onclick="openMap(\'' + shop.map + '\')">' +
         'Get Directions' +
         '</button>' +

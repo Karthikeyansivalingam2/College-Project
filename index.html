@@ -73,10 +73,7 @@
         <a href="login.html" class="nav-login">Login</a>
 
         <!-- Toggle Theme -->
-        <button onclick="toggleTheme()"
-          class="ml-4 p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition" title="Toggle Theme">
-          <i class="fa-solid fa-moon text-emerald-500" id="themeIcon"></i>
-        </button>
+
 
         <a href="profile.html" id="navProfile"
           class="hidden items-center justify-center w-10 h-10 rounded-full border border-white/30 bg-white/10 text-white hover:bg-white/20 hover:scale-105 transition-all shadow-lg backdrop-blur-sm group">
@@ -138,7 +135,7 @@
       <div class="w-full max-w-4xl mx-auto z-50 relative text-left">
 
         <div
-          class="flex flex-col md:flex-row bg-white rounded-2xl shadow-2xl overflow-visible transition-all duration-300 hover:shadow-green-500/20 ring-1 ring-black/5">
+          class="flex flex-col md:flex-row bg-white !bg-white !text-gray-800 rounded-2xl shadow-2xl overflow-visible transition-all duration-300 hover:shadow-green-500/20 ring-1 ring-black/5">
 
           <!-- Location Input -->
           <div class="relative flex-1 group border-b md:border-b-0 md:border-r border-gray-200">
@@ -148,7 +145,7 @@
                 class="fa-solid fa-location-dot text-emerald-500 text-xl mx-2 transform group-hover:scale-110 transition-transform"></i>
               <div class="flex-1 ml-3">
                 <input type="text" id="locationInput"
-                  class="w-full font-bold text-gray-700 outline-none bg-transparent placeholder-gray-500 text-lg cursor-pointer truncate"
+                  class="w-full font-bold text-gray-700 !text-gray-700 outline-none bg-transparent placeholder-gray-500 !placeholder-gray-500 text-lg cursor-pointer truncate"
                   placeholder="Enter your delivery location" value="" autocomplete="off" readonly>
               </div>
               <i id="locationArrow"
@@ -175,7 +172,8 @@
           <div class="flex-[1.5] flex items-center p-2 relative">
             <div class="flex-1 flex items-center px-4">
               <i class="fa-solid fa-magnifying-glass text-gray-400 text-lg mr-3"></i>
-              <input type="text" class="w-full font-medium text-gray-700 outline-none placeholder-gray-400 text-lg"
+              <input type="text"
+                class="w-full font-medium text-gray-700 !text-gray-700 outline-none placeholder-gray-400 !placeholder-gray-400 text-lg"
                 placeholder="Search for restaurant, item or more">
             </div>
             <button id="searchBtnDesktop" onclick="findServices()"
@@ -576,6 +574,7 @@
 
     function updateThemeIcon(isDark) {
       const icon = document.getElementById('themeIcon');
+      if (!icon) return;
       if (isDark) {
         icon.classList.remove('fa-moon', 'text-emerald-500');
         icon.classList.add('fa-sun', 'text-yellow-400');

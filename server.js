@@ -125,27 +125,27 @@ seedMenu();
 
 // --- API Routes ---
 
-// 1. Get all tea shops (Hardcoded for Demo)
+// 1. Get all restaurants (Hardcoded for Demo)
 app.get('/api/shops', (req, res) => {
     const shops = [
-        { id: 1, name: "Royal Tea", location: "Erode", image: "assets/images/tea-1.jpg", rating: 4.5 },
-        { id: 2, name: "Chai Kings", location: "Anthiyur", image: "assets/images/tea-2.jpg", rating: 4.2 },
-        { id: 3, name: "Green Leaf Tea", location: "Coimbatore", image: "assets/images/tea-3.jpg", rating: 4.8 },
-        { id: 4, name: "Chennai Chai", location: "Chennai", image: "assets/images/tea-1.jpg", rating: 4.0 },
-        { id: 5, name: "Salem Sips", location: "Salem", image: "assets/images/tea-2.jpg", rating: 4.3 }
+        { id: 1, name: "Spice Garden", location: "Erode", image: "assets/images/tea-1.jpg", rating: 4.5 },
+        { id: 2, name: "Anjappar", location: "Chennai", image: "assets/images/tea-2.jpg", rating: 4.2 },
+        { id: 3, name: "Green Leaf", location: "Coimbatore", image: "assets/images/tea-3.jpg", rating: 4.8 },
+        { id: 4, name: "Taste of Chennai", location: "Chennai", image: "assets/images/tea-1.jpg", rating: 4.0 },
+        { id: 5, name: "Salem Grand", location: "Salem", image: "assets/images/tea-2.jpg", rating: 4.3 }
     ];
     res.json(shops);
 });
 
-// 2. Search Tea Shops
+// 2. Search Restaurants
 app.get('/api/search', (req, res) => {
     const query = req.query.q ? req.query.q.toLowerCase() : '';
     const shops = [
-        { id: 1, name: "Royal Tea", location: "Erode", image: "assets/images/tea-1.jpg", rating: 4.5 },
-        { id: 2, name: "Chai Kings", location: "Anthiyur", image: "assets/images/tea-2.jpg", rating: 4.2 },
-        { id: 3, name: "Green Leaf Tea", location: "Coimbatore", image: "assets/images/tea-3.jpg", rating: 4.8 },
-        { id: 4, name: "Chennai Chai", location: "Chennai", image: "assets/images/tea-1.jpg", rating: 4.0 },
-        { id: 5, name: "Salem Sips", location: "Salem", image: "assets/images/tea-2.jpg", rating: 4.3 }
+        { id: 1, name: "Spice Garden", location: "Erode", image: "assets/images/tea-1.jpg", rating: 4.5 },
+        { id: 2, name: "Anjappar", location: "Chennai", image: "assets/images/tea-2.jpg", rating: 4.2 },
+        { id: 3, name: "Green Leaf", location: "Coimbatore", image: "assets/images/tea-3.jpg", rating: 4.8 },
+        { id: 4, name: "Taste of Chennai", location: "Chennai", image: "assets/images/tea-1.jpg", rating: 4.0 },
+        { id: 5, name: "Salem Grand", location: "Salem", image: "assets/images/tea-2.jpg", rating: 4.3 }
     ];
     const results = shops.filter(shop =>
         shop.location.toLowerCase().includes(query) || shop.name.toLowerCase().includes(query)

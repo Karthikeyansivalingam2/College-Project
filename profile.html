@@ -9,6 +9,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="assets/js/toast.js"></script>
     <style>
         body {
             font-family: 'Outfit', sans-serif;
@@ -229,7 +230,7 @@
                             
                             <div class="flex justify-between items-center text-sm text-gray-400 mt-4">
                                 <span><i class="fa-solid fa-credit-card mr-1"></i> ${order.paymentMethod || 'Online'}</span>
-                                <a href="#" class="text-emerald-500 hover:underline">Track Order</a>
+                                <a href="thanksorder.html?orderId=${order.orderId}" class="text-emerald-500 hover:underline font-bold"><i class="fa-solid fa-location-arrow mr-1"></i> Track Order</a>
                             </div>
                         </div>
                     `;

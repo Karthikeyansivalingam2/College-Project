@@ -80,7 +80,7 @@
   <section class="hero-pattern py-20 px-4 text-center text-white relative overflow-hidden">
     <div class="relative z-10 max-w-3xl mx-auto">
       <h1 class="text-4xl md:text-5xl font-bold mb-4">Customer Stories</h1>
-      <p class="text-gray-300 text-lg mb-8">See what tea lovers are saying about their favorite spots in town.</p>
+      <p class="text-gray-300 text-lg mb-8">See what food lovers are saying about their favorite spots in town.</p>
 
       <div
         class="inline-flex items-center gap-6 bg-white/10 backdrop-blur-md rounded-full px-8 py-3 border border-white/20">
@@ -133,10 +133,11 @@
           </div>
           <span class="bg-emerald-900/40 text-emerald-400 text-xs px-2 py-1 rounded font-bold">5.0 ★</span>
         </div>
-        <h5 class="font-semibold text-emerald-400 text-sm mb-2"><i class="fa-solid fa-store mr-1"></i> Royal Tea, Erode
+        <h5 class="font-semibold text-emerald-400 text-sm mb-2"><i class="fa-solid fa-store mr-1"></i> Spice Garden,
+          Erode
         </h5>
         <p class="text-gray-300 text-sm leading-relaxed mb-4">
-          "Absolutely love their Masala Chai! The place is very clean and the staff is super friendly. Best place to
+          "Absolutely love their Chicken Biryani! The place is very clean and the staff is super friendly. Best place to
           hang out with friends in the evening."
         </p>
         <div class="flex justify-between items-center pt-4 border-t border-gray-700 text-xs text-gray-400">
@@ -153,15 +154,17 @@
             <img src="https://ui-avatars.com/api/?name=Anita+R&background=random" class="w-10 h-10 rounded-full">
             <div>
               <h4 class="font-bold text-gray-200 text-sm">Anita Raj</h4>
-              <p class="text-xs text-gray-400">Tea Lover • 5 Reviews</p>
+              <p class="text-xs text-gray-400">Food Lover • 5 Reviews</p>
             </div>
           </div>
           <span class="bg-emerald-900/40 text-emerald-400 text-xs px-2 py-1 rounded font-bold">4.5 ★</span>
         </div>
-        <h5 class="font-semibold text-emerald-400 text-sm mb-2"><i class="fa-solid fa-store mr-1"></i> Chennai Chai, T
+        <h5 class="font-semibold text-emerald-400 text-sm mb-2"><i class="fa-solid fa-store mr-1"></i> Taste of Chennai,
+          T
           Nagar</h5>
         <p class="text-gray-300 text-sm leading-relaxed mb-4">
-          "Great vibe and amazing filter coffee. The snacks were fresh too. Bit crowded during weekends but worth the
+          "Great vibe and amazing South Indian meals. The sweets were fresh too. Bit crowded during weekends but worth
+          the
           wait."
         </p>
         <div class="flex justify-between items-center pt-4 border-t border-gray-700 text-xs text-gray-400">
@@ -183,10 +186,10 @@
           </div>
           <span class="bg-yellow-900/40 text-yellow-400 text-xs px-2 py-1 rounded font-bold">4.0 ★</span>
         </div>
-        <h5 class="font-semibold text-emerald-400 text-sm mb-2"><i class="fa-solid fa-store mr-1"></i> Bus Stand Tea,
+        <h5 class="font-semibold text-emerald-400 text-sm mb-2"><i class="fa-solid fa-store mr-1"></i> Salem Grand,
           Salem</h5>
         <p class="text-gray-300 text-sm leading-relaxed mb-4">
-          "Quick service and decent pricing. Logic tea was good. Need more seating space though."
+          "Quick service and decent pricing. Mutton Chukka was good. Need more seating space though."
         </p>
         <div class="flex justify-between items-center pt-4 border-t border-gray-700 text-xs text-gray-400">
           <span>3 weeks ago</span>
@@ -209,7 +212,7 @@
         <h5 class="font-semibold text-emerald-400 text-sm mb-2"><i class="fa-solid fa-store mr-1"></i> Green Leaf,
           Coimbatore</h5>
         <p class="text-gray-300 text-sm leading-relaxed mb-4">
-          "Hands down the best Green tea I've had. Very refreshing. Highly recommended!"
+          "Hands down the best Veg Meals I've had. Very refreshing. Highly recommended!"
         </p>
         <div class="flex justify-between items-center pt-4 border-t border-gray-700 text-xs text-gray-400">
           <span>1 month ago</span>
@@ -244,10 +247,10 @@
           <select id="drpShop"
             class="w-full bg-gray-800 border border-gray-600 text-gray-200 rounded-lg p-2.5 focus:ring-2 focus:ring-emerald-500 outline-none">
             <option value="">-- Choose a Shop --</option>
-            <option>Royal Tea - Erode</option>
-            <option>Chai Kings - Anthiyur</option>
-            <option>Chennai Chai - Chennai</option>
-            <option>Salem Sips - Salem</option>
+            <option>Spice Garden - Erode</option>
+            <option>Anjappar - Chennai</option>
+            <option>Salem Grand - Salem</option>
+            <option>Green Leaf - Coimbatore</option>
           </select>
         </div>
 
@@ -283,7 +286,7 @@
       <div class="footer-box">
         <h3>Foodie Zone</h3>
 
-        <p>Discover the best tea shops near you with instant directions.</p>
+        <p>Discover the best restaurants near you with instant directions.</p>
       </div>
       <div class="footer-box">
         <h4>Quick Links</h4>
@@ -353,7 +356,7 @@
       const content = document.getElementById('txtReviewContent').value;
 
       if (!shop) {
-        alert("Please select a tea shop");
+        alert("Please select a restaurant");
         return;
       }
       if (currentRating === 0) {

@@ -4,251 +4,564 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Track Order - Foodie Zone</title>
+  <title>Live Tracking - Foodie Zone</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Leaflet Map CSS & JS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   <style>
     body {
       font-family: 'Outfit', sans-serif;
-      background-color: #030712;
-      color: #f3f4f6;
+      background-color: #0f172a;
+      overflow: hidden;
     }
 
-    .step-active .icon-box {
-      background-color: #059669;
-      color: white;
-      border-color: #059669;
+    #map {
+      height: 50vh;
+      width: 100%;
+      z-index: 0;
     }
 
-    .step-completed .icon-box {
-      background-color: #059669;
-      color: white;
-      border-color: #059669;
+    .tracking-sheet {
+      background: #1f2937;
+      border-top-left-radius: 24px;
+      border-top-right-radius: 24px;
+      margin-top: -24px;
+      position: relative;
+      z-index: 10;
+      padding: 24px;
+      height: 55vh;
+      overflow-y: auto;
+      box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.5);
     }
 
-    .step-completed .line {
-      background-color: #059669;
+    /* Custom Scrollbar */
+    .tracking-sheet::-webkit-scrollbar {
+      width: 6px;
     }
 
-    .animate-pulse-slow {
-      animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    .tracking-sheet::-webkit-scrollbar-thumb {
+      background-color: #374151;
+      border-radius: 3px;
+    }
+
+    /* Leaflet Customization */
+    .leaflet-control-attribution {
+      display: none;
     }
   </style>
 </head>
 
-<body>
+<body class="text-gray-100">
 
-  <!-- JAVA SCRIPT TO GET URL PARAMS -->
-  <script>
-    const urlParams = new URLSearchParams(window.location.search);
-    const orderId = urlParams.get('orderId') || 'ORD-' + Math.floor(Math.random() * 10000);
-  </script>
-
-  <!-- Navbar -->
-  <nav class="bg-gray-900 shadow-sm p-4 sticky top-0 z-50 border-b border-gray-700">
-    <div class="max-w-6xl mx-auto flex justify-between items-center">
-      <div class="text-2xl font-bold text-emerald-500">Foodie Zone</div>
-      <a href="index.html" class="text-gray-400 hover:text-emerald-500 font-medium">Home</a>
+  <!-- Header Overlay -->
+  <div class="absolute top-4 left-4 right-4 z-20 flex justify-between items-center pointer-events-none">
+    <a href="index.html"
+      class="bg-gray-900/80 backdrop-blur p-3 rounded-full text-white shadow-lg pointer-events-auto hover:bg-black transition">
+      <i class="fa-solid fa-arrow-left"></i>
+    </a>
+    <div class="bg-gray-900/80 backdrop-blur px-4 py-2 rounded-full shadow-lg flex items-center gap-2">
+      <span class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span>
+      <span class="text-xs font-bold text-white uppercase tracking-wider">Live Order</span>
     </div>
-  </nav>
+  </div>
 
-  <div class="max-w-3xl mx-auto mt-10 p-6">
+  <!-- Map Container -->
+  <div id="map"></div>
 
-    <!-- Order Header -->
-    <div class="bg-gray-800 rounded-2xl shadow-lg p-8 mb-8 text-center relative overflow-hidden border border-gray-700">
-      <div class="absolute top-0 left-0 w-full h-2 bg-emerald-700"></div>
+  <!-- Bottom Sheet -->
+  <div class="tracking-sheet">
+    <!-- Drag Handle -->
+    <div class="w-12 h-1.5 bg-gray-600 rounded-full mx-auto mb-6 opacity-50"></div>
 
-      <div class="inline-block p-4 rounded-full bg-green-900/30 text-green-400 mb-4 animate-bounce">
-        <i class="fa-solid fa-check text-3xl"></i>
+    <!-- Status Header -->
+    <div class="flex justify-between items-start mb-6">
+      <div>
+        <h1 class="text-2xl font-bold text-white animate-pulse" id="statusTitle">Finding Delivery Partner...</h1>
+        <p class="text-gray-400 text-sm mt-1" id="etaSubtitle">Estimated arrival: <span
+            class="text-emerald-400 font-bold">--</span></p>
       </div>
-
-      <h1 class="text-3xl font-bold text-gray-100 mb-2">Order Confirmed!</h1>
-      <p class="text-gray-400 mb-6">Order ID: <span class="font-mono font-bold text-emerald-400"
-          id="dispOrderId">#LOADING</span></p>
-
-      <div class="bg-gray-700 rounded-lg p-4 inline-block text-left w-full md:w-2/3 border border-gray-600">
-        <h3 class="text-sm uppercase tracking-wide text-gray-400 font-semibold mb-2">Estimated Delivery</h3>
-        <div class="flex items-center justify-between">
-          <span class="text-2xl font-bold text-gray-100" id="timeRemaining">15-20 mins</span>
-          <span class="text-emerald-400 font-medium"><i class="fa-solid fa-motorcycle"></i> On Time</span>
-        </div>
+      <div class="bg-gray-800 p-2 rounded-lg text-center border border-gray-700">
+        <span class="block text-[10px] text-gray-500 uppercase font-bold">Order ID</span>
+        <span class="block text-sm font-mono font-bold text-emerald-400" id="dispOrderId">...</span>
       </div>
     </div>
 
-    <!-- Tracking Timeline -->
-    <div class="bg-gray-800 rounded-2xl shadow-lg p-8 border border-gray-700">
-      <h2 class="text-xl font-bold mb-6 border-b border-gray-700 pb-4 text-gray-100">Live Tracking</h2>
+    <!-- Progress Steps -->
+    <div class="relative mb-8 px-2">
+      <div class="absolute top-1/2 left-0 w-full h-1 bg-gray-700 -translate-y-1/2 rounded-full"></div>
+      <div class="absolute top-1/2 left-0 h-1 bg-emerald-500 -translate-y-1/2 rounded-full transition-all duration-1000"
+        style="width: 5%" id="progressBar"></div>
 
-      <!-- Vertical Timeline for Mobile / Horizontal for Desktop -->
-      <div class="relative">
-
-        <!-- Step 1 -->
-        <div class="flex gap-6 pb-8 h-full step-completed" id="step1">
-          <div class="flex flex-col items-center">
-            <div
-              class="icon-box w-12 h-12 rounded-full border-4 border-gray-700 flex items-center justify-center bg-gray-600 text-gray-400 z-10 transition-all duration-500">
-              <i class="fa-solid fa-clipboard-check"></i>
-            </div>
-            <div class="line w-1 h-full bg-gray-700 -mt-2 -mb-2 z-0 transition-all duration-500"></div>
+      <div class="relative flex justify-between uppercase text-[10px] font-bold tracking-wider text-gray-500">
+        <div class="flex flex-col items-center gap-2">
+          <div
+            class="w-3 h-3 bg-emerald-500 rounded-full shadow ring-4 ring-gray-800 z-10 transition-transform scale-125"
+            id="dot1"></div>
+          <span>Placed</span>
+        </div>
+        <div class="flex flex-col items-center gap-2">
+          <div class="w-3 h-3 bg-gray-600 rounded-full shadow ring-4 ring-gray-800 z-10 transition-colors" id="dot2">
           </div>
+          <span>Cooking</span>
+        </div>
+        <div class="flex flex-col items-center gap-2">
+          <div class="w-3 h-3 bg-gray-600 rounded-full shadow ring-4 ring-gray-800 z-10 transition-colors" id="dot3">
+          </div>
+          <span>On Way</span>
+        </div>
+        <div class="flex flex-col items-center gap-2">
+          <div class="w-3 h-3 bg-gray-600 rounded-full shadow ring-4 ring-gray-800 z-10 transition-colors" id="dot4">
+          </div>
+          <span>Delivered</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Delivery Partner Info -->
+    <div
+      class="bg-gray-800/50 border border-gray-700 rounded-xl p-4 flex items-center justify-between mb-6 hidden animate-fade-in-up"
+      id="partnerCard">
+      <div class="flex items-center gap-4">
+        <div class="relative">
+          <img src="https://ui-avatars.com/api/?name=Ramesh+K&background=059669&color=fff"
+            class="w-12 h-12 rounded-full border-2 border-emerald-500/30">
+          <div
+            class="absolute -bottom-1 -right-1 bg-white text-emerald-700 text-[9px] font-bold px-1.5 py-0.5 rounded border border-gray-200 shadow">
+            4.9 ★</div>
+        </div>
+        <div>
+          <h3 class="font-bold text-white text-sm">Ramesh Kumar</h3>
+          <p class="text-xs text-gray-400">Vaccinated • English, Tamil</p>
+        </div>
+      </div>
+      <div class="flex gap-3">
+        <button onclick="window.location.href='tel:+919876543210'"
+          class="w-10 h-10 rounded-full bg-emerald-500/10 text-emerald-400 flex items-center justify-center hover:bg-emerald-500 hover:text-white transition border border-emerald-500/20">
+          <i class="fa-solid fa-phone"></i>
+        </button>
+        <button onclick="openChat()"
+          class="w-10 h-10 rounded-full bg-blue-500/10 text-blue-400 flex items-center justify-center hover:bg-blue-500 hover:text-white transition border border-blue-500/20">
+          <i class="fa-solid fa-message"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Order Items Toggle -->
+    <div class="bg-gray-800/30 rounded-lg p-4 cursor-pointer hover:bg-gray-800/50 transition" onclick="toggleItems()">
+      <div class="flex justify-between items-center text-sm">
+        <span class="text-gray-300 font-medium flex items-center gap-2"><i class="fa-solid fa-receipt"></i> View Order
+          Details</span>
+        <i class="fa-solid fa-chevron-down text-gray-500 transition-transform" id="itemIcon"></i>
+      </div>
+      <div id="itemList" class="hidden mt-4 pt-4 border-t border-gray-700/50 space-y-2 text-sm text-gray-400">
+        <p class="text-center italic">Loading items...</p>
+      </div>
+    </div>
+
+    <!-- Support Btn -->
+    <button onclick="openChat()"
+      class="w-full mt-6 text-gray-500 text-xs font-semibold uppercase tracking-wider hover:text-white transition py-4">
+      Need Help with this order?
+    </button>
+  </div>
+
+  <!-- Chat Modal -->
+  <div id="chatModal"
+    class="fixed inset-0 bg-black/80 z-50 hidden flex flex-col justify-end sm:justify-center sm:items-center">
+    <div
+      class="bg-gray-900 w-full sm:w-96 sm:rounded-2xl h-[80vh] sm:h-[600px] flex flex-col shadow-2xl overflow-hidden animate-slide-up">
+      <!-- Chat Header -->
+      <div class="bg-gray-800 p-4 flex justify-between items-center border-b border-gray-700">
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 rounded-full bg-emerald-600 flex items-center justify-center text-white"><i
+              class="fa-solid fa-headset"></i></div>
           <div>
-            <h3 class="text-lg font-bold text-gray-200">Order Placed</h3>
-            <p class="text-gray-400 text-sm">We have received your order.</p>
-            <p class="text-xs text-gray-500 mt-1" id="time1"></p>
+            <h3 class="font-bold text-white text-sm">Foodie Support</h3>
+            <p class="text-[10px] text-emerald-400">● Online</p>
           </div>
         </div>
-
-        <!-- Step 2 -->
-        <div class="flex gap-6 pb-8 h-full" id="step2">
-          <div class="flex flex-col items-center">
-            <div
-              class="icon-box w-12 h-12 rounded-full border-4 border-gray-700 flex items-center justify-center bg-gray-600 text-gray-400 z-10 transition-all duration-500">
-              <i class="fa-solid fa-mug-hot"></i>
-            </div>
-            <div class="line w-1 h-full bg-gray-700 -mt-2 -mb-2 z-0 transition-all duration-500"></div>
-          </div>
-          <div>
-            <h3 class="text-lg font-bold text-gray-200">Preparing</h3>
-            <p class="text-gray-400 text-sm">Your tea is being brewed with love.</p>
-            <p class="text-xs text-gray-500 mt-1" id="time2"></p>
-          </div>
-        </div>
-
-        <!-- Step 3 -->
-        <div class="flex gap-6 pb-8 h-full" id="step3">
-          <div class="flex flex-col items-center">
-            <div
-              class="icon-box w-12 h-12 rounded-full border-4 border-gray-700 flex items-center justify-center bg-gray-600 text-gray-400 z-10 transition-all duration-500">
-              <i class="fa-solid fa-person-biking"></i>
-            </div>
-            <div class="line w-1 h-full bg-gray-700 -mt-2 -mb-2 z-0 transition-all duration-500"></div>
-          </div>
-          <div>
-            <h3 class="text-lg font-bold text-gray-200">Out for Delivery</h3>
-            <p class="text-gray-400 text-sm">Our partner is on the way.</p>
-            <p class="text-xs text-gray-500 mt-1" id="time3"></p>
-          </div>
-        </div>
-
-        <!-- Step 4 -->
-        <div class="flex gap-6 h-full" id="step4">
-          <div class="flex flex-col items-center">
-            <div
-              class="icon-box w-12 h-12 rounded-full border-4 border-gray-700 flex items-center justify-center bg-gray-600 text-gray-400 z-10 transition-all duration-500">
-              <i class="fa-solid fa-house-chimney"></i>
-            </div>
-          </div>
-          <div>
-            <h3 class="text-lg font-bold text-gray-200">Delivered</h3>
-            <p class="text-gray-400 text-sm">Enjoy your tea!</p>
-            <p class="text-xs text-gray-500 mt-1" id="time4"></p>
-          </div>
-        </div>
-
+        <button onclick="closeChat()" class="text-gray-400 hover:text-white"><i
+            class="fa-solid fa-xmark text-lg"></i></button>
       </div>
 
-      <!-- Action Buttons -->
-      <div class="mt-8 flex flex-col md:flex-row gap-4">
-        <a href="tel:919876543210"
-          class="flex-1 bg-gray-700 border border-gray-600 text-gray-300 py-3 rounded-lg text-center font-semibold hover:bg-gray-600 transition">
-          <i class="fa-solid fa-phone mr-2"></i> Call Support
-        </a>
-        <a href="index.html"
-          class="flex-1 bg-emerald-600 text-white py-3 rounded-lg text-center font-semibold hover:bg-emerald-700 shadow-md transition">
-          Order More
-        </a>
+      <!-- Chat Body -->
+      <div class="flex-1 p-4 overflow-y-auto space-y-4" id="chatBody">
+        <div class="flex gap-3">
+          <div
+            class="w-6 h-6 rounded-full bg-gray-700 flex-shrink-0 flex items-center justify-center text-[10px] text-gray-400">
+            AI</div>
+          <div class="bg-gray-800 text-gray-300 text-sm p-3 rounded-2xl rounded-tl-none max-w-[80%]">
+            Hi! How can I help you with your order?
+          </div>
+        </div>
       </div>
 
+      <!-- Chat Input -->
+      <div class="p-3 bg-gray-800 border-t border-gray-700 flex gap-2">
+        <input type="text" id="chatInput" placeholder="Type a message..."
+          class="flex-1 bg-gray-900 border border-gray-600 rounded-full px-4 py-2 text-sm text-white focus:outline-none focus:border-emerald-500">
+        <button onclick="sendMessage()"
+          class="bg-emerald-600 w-10 h-10 rounded-full text-white flex items-center justify-center hover:bg-emerald-700"><i
+            class="fa-solid fa-paper-plane text-xs"></i></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Delivery Partner Review Modal -->
+  <div id="reviewModal"
+    class="fixed inset-0 bg-black/90 z-[60] hidden flex items-end sm:items-center justify-center animate-fade-in">
+    <div
+      class="bg-gray-900 w-full sm:w-96 rounded-t-3xl sm:rounded-2xl p-6 border-t sm:border border-gray-800 shadow-2xl transform transition-transform duration-300 translate-y-full sm:translate-y-0"
+      id="reviewCard">
+
+      <div class="flex justify-between items-center mb-6">
+        <h3 class="text-xl font-bold text-white">Rate Delivery</h3>
+        <button onclick="closeReview()" class="text-gray-500 hover:text-white"><i
+            class="fa-solid fa-xmark text-xl"></i></button>
+      </div>
+
+      <!-- Driver Info -->
+      <div class="flex flex-col items-center mb-6">
+        <div class="w-20 h-20 rounded-full p-1 border-2 border-dashed border-emerald-500 mb-3">
+          <img src="https://ui-avatars.com/api/?name=Ramesh+K&background=059669&color=fff"
+            class="w-full h-full rounded-full object-cover">
+        </div>
+        <h4 class="text-lg font-bold text-white">Ramesh Kumar</h4>
+        <p class="text-sm text-gray-400">Delivery Partner</p>
+      </div>
+
+      <!-- Stars -->
+      <div class="flex justify-center gap-3 mb-6">
+        <i class="fa-regular fa-star text-3xl text-gray-600 cursor-pointer hover:text-yellow-400 transition"
+          onclick="rate(1)" id="star1"></i>
+        <i class="fa-regular fa-star text-3xl text-gray-600 cursor-pointer hover:text-yellow-400 transition"
+          onclick="rate(2)" id="star2"></i>
+        <i class="fa-regular fa-star text-3xl text-gray-600 cursor-pointer hover:text-yellow-400 transition"
+          onclick="rate(3)" id="star3"></i>
+        <i class="fa-regular fa-star text-3xl text-gray-600 cursor-pointer hover:text-yellow-400 transition"
+          onclick="rate(4)" id="star4"></i>
+        <i class="fa-regular fa-star text-3xl text-gray-600 cursor-pointer hover:text-yellow-400 transition"
+          onclick="rate(5)" id="star5"></i>
+      </div>
+
+      <!-- Tags -->
+      <div class="flex flex-wrap justify-center gap-2 mb-6" id="reviewTags">
+        <button onclick="toggleTag(this)"
+          class="px-3 py-1.5 rounded-full bg-gray-800 text-gray-400 text-xs font-medium border border-gray-700 hover:border-emerald-500 hover:text-emerald-400 transition">Fast
+          Delivery ⚡</button>
+        <button onclick="toggleTag(this)"
+          class="px-3 py-1.5 rounded-full bg-gray-800 text-gray-400 text-xs font-medium border border-gray-700 hover:border-emerald-500 hover:text-emerald-400 transition">Polite
+          Behavior 😊</button>
+        <button onclick="toggleTag(this)"
+          class="px-3 py-1.5 rounded-full bg-gray-800 text-gray-400 text-xs font-medium border border-gray-700 hover:border-emerald-500 hover:text-emerald-400 transition">Safe
+          Packaging 📦</button>
+        <button onclick="toggleTag(this)"
+          class="px-3 py-1.5 rounded-full bg-gray-800 text-gray-400 text-xs font-medium border border-gray-700 hover:border-emerald-500 hover:text-emerald-400 transition">Good
+          Service 👍</button>
+      </div>
+
+      <textarea placeholder="Write a comment..."
+        class="w-full bg-gray-800 border border-gray-700 rounded-xl p-3 text-sm text-white focus:outline-none focus:border-emerald-500 mb-4 h-20 resize-none"></textarea>
+
+      <button onclick="submitReview()"
+        class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3.5 rounded-xl shadow-lg transition active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
+        id="submitReviewBtn" disabled>
+        Submit Review
+      </button>
     </div>
   </div>
 
   <script>
-    document.getElementById("dispOrderId").innerText = orderId;
+    // --- MAP SETUP ---
+    // Coordinates for Chennai (Example)
+    const RESTAURANT_LOC = [13.0827, 80.2707]; // Chennai Central
+    const USER_LOC = [13.0404, 80.2496];       // T. Nagar (Adjusted for better visuals)
 
-    // Simulate Time Setting
-    document.getElementById("time1").innerText = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    const map = L.map('map', { zoomControl: false }).setView(RESTAURANT_LOC, 13);
 
-    // Simulation Logic
-    const stages = ['step1', 'step2', 'step3', 'step4'];
-    let currentStage = 0;
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+      attribution: '© OpenStreetMap',
+      subdomains: 'abcd',
+      maxZoom: 20
+    }).addTo(map);
 
-    function updateStatus(stageIndex) {
-      if (stageIndex >= stages.length) return;
+    // Custom Icons
+    const restaurantIcon = L.divIcon({
+      html: '<div class="w-8 h-8 bg-orange-500 rounded-full border-2 border-white shadow-lg flex items-center justify-center text-white"><i class="fa-solid fa-utensils text-xs"></i></div>',
+      className: 'bg-transparent',
+      iconSize: [32, 32],
+      iconAnchor: [16, 32]
+    });
 
-      // Mark all previous stages as completed
-      for (let i = 0; i < stageIndex; i++) {
-        const prevId = stages[i];
-        const prevEl = document.getElementById(prevId);
-        prevEl.classList.add('step-completed');
-        prevEl.classList.remove('step-active');
-      }
+    const homeIcon = L.divIcon({
+      html: '<div class="w-8 h-8 bg-emerald-500 rounded-full border-2 border-white shadow-lg flex items-center justify-center text-white"><i class="fa-solid fa-house text-xs"></i></div>',
+      className: 'bg-transparent',
+      iconSize: [32, 32],
+      iconAnchor: [16, 32]
+    });
 
-      // Mark current stage as active
-      const currentId = stages[stageIndex];
-      const currentEl = document.getElementById(currentId);
-      currentEl.classList.add('step-active');
+    const bikeIcon = L.divIcon({
+      html: '<div class="w-10 h-10 bg-white rounded-full border-2 border-emerald-500 shadow-xl flex items-center justify-center text-emerald-600 text-lg transform -rotate-45"><i class="fa-solid fa-motorcycle"></i></div>',
+      className: 'bg-transparent',
+      iconSize: [40, 40],
+      iconAnchor: [20, 20]
+    });
 
-      // Update estimated times
-      if (stageIndex === 1) document.getElementById("time2").innerText = "Started Recently";
-      if (stageIndex === 2) document.getElementById("time3").innerText = "Estimated: 10 mins";
-      if (stageIndex === 3) document.getElementById("time4").innerText = "Pending";
+    // Add Markers
+    L.marker(RESTAURANT_LOC, { icon: restaurantIcon }).addTo(map);
+    L.marker(USER_LOC, { icon: homeIcon }).addTo(map);
+
+    // Bike Marker
+    const bikeMarker = L.marker(RESTAURANT_LOC, { icon: bikeIcon }).addTo(map);
+
+    // Fit Bounds
+    const bounds = L.latLngBounds([RESTAURANT_LOC, USER_LOC]);
+    map.fitBounds(bounds, { padding: [50, 50] });
+
+
+    // --- LOGIC ---
+    const urlParams = new URLSearchParams(window.location.search);
+    const orderId = urlParams.get('orderId') || 'ORD-' + Math.floor(Math.random() * 90000);
+    document.getElementById('dispOrderId').innerText = orderId;
+
+    // Animation State
+    let animState = {
+      running: false,
+      progress: 0.1,
+      timer: null
+    };
+
+    // Animate Bike along a line
+    function animateBike(progress) {
+      const lat = RESTAURANT_LOC[0] + (USER_LOC[0] - RESTAURANT_LOC[0]) * progress;
+      const lng = RESTAURANT_LOC[1] + (USER_LOC[1] - RESTAURANT_LOC[1]) * progress;
+      bikeMarker.setLatLng([lat, lng]);
     }
 
-    // Live Polling Logic
-    async function checkStatus() {
+    // Status Updates
+    function updateStatus(status) {
+      const title = document.getElementById('statusTitle');
+      const sub = document.getElementById('etaSubtitle');
+      const bar = document.getElementById('progressBar');
+      const partner = document.getElementById('partnerCard');
+
+      // Reset dots
+      ['dot1', 'dot2', 'dot3', 'dot4'].forEach(d => document.getElementById(d).className = "w-3 h-3 bg-gray-600 rounded-full shadow ring-4 ring-gray-800 z-10 transition-colors");
+      document.getElementById('dot1').className = "w-3 h-3 bg-emerald-500 rounded-full shadow ring-4 ring-gray-800 z-10 transition-colors"; // Always placed
+
+      if (status === 'Pending') {
+        title.innerText = "Order Placed";
+        sub.innerHTML = "Restaurant is confirming...";
+        bar.style.width = "10%";
+        partner.classList.add('hidden');
+
+        stopAnimation();
+        animateBike(0);
+      }
+      else if (status === 'Preparing') {
+        title.innerText = "Cooking Your Food";
+        sub.innerHTML = "Estimated time: <span class='text-emerald-400 font-bold'>25 mins</span>";
+        bar.style.width = "35%";
+        document.getElementById('dot2').className = "w-3 h-3 bg-emerald-500 rounded-full shadow ring-4 ring-gray-800 z-10 transition-colors";
+        partner.classList.add('hidden');
+
+        stopAnimation();
+        animateBike(0.1);
+      }
+      else if (status === 'Out for Delivery') {
+        title.innerText = "Order on the way";
+        sub.innerHTML = "Arriving in <span class='text-emerald-400 font-bold'>12 mins</span>";
+        bar.style.width = "70%";
+        document.getElementById('dot2').className = "w-3 h-3 bg-emerald-500 rounded-full shadow ring-4 ring-gray-800 z-10 transition-colors";
+        document.getElementById('dot3').className = "w-3 h-3 bg-emerald-500 rounded-full shadow ring-4 ring-gray-800 z-10 transition-colors";
+        partner.classList.remove('hidden');
+
+        // Start Animation ONLY if not running
+        if (!animState.running) {
+          startAnimation();
+        }
+      }
+      else if (status === 'Completed' || status === 'Delivered') {
+        title.innerText = "Order Delivered";
+        sub.innerHTML = "Enjoy your meal! <i class='fa-solid fa-heart text-red-500'></i>";
+        bar.style.width = "100%";
+        ['dot1', 'dot2', 'dot3', 'dot4'].forEach(d => document.getElementById(d).className = "w-3 h-3 bg-emerald-500 rounded-full shadow ring-4 ring-gray-800 z-10 transition-colors");
+
+        stopAnimation();
+        animateBike(1.0);
+
+        partner.classList.remove('hidden');
+
+        // Confetti
+        if (!window.confettiFired) {
+          confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
+          window.confettiFired = true;
+
+          // Show Review Modal after 2 seconds
+          setTimeout(() => {
+            const hasReviewed = localStorage.getItem('review_done_' + orderId);
+            if (!hasReviewed) {
+              openReview();
+            }
+          }, 2000);
+        }
+      }
+    }
+
+    function startAnimation() {
+      animState.running = true;
+      // Use requestAnimationFrame for smoother motion if possible, or faster interval
+      // Here using 50ms interval for simplicity but smoother than 100ms
+      if (animState.timer) clearInterval(animState.timer);
+
+      animState.timer = setInterval(() => {
+        animState.progress += 0.002; // Slower increment = smoother
+        if (animState.progress > 0.95) {
+          animState.progress = 0.95; // Cap it
+        }
+        animateBike(animState.progress);
+      }, 50);
+    }
+
+    function stopAnimation() {
+      animState.running = false;
+      if (animState.timer) {
+        clearInterval(animState.timer);
+        animState.timer = null;
+      }
+    }
+
+    // Poll API
+    async function fetchOrder() {
       try {
         const res = await fetch(`/api/order/${orderId}`);
-        const order = await res.json();
+        if (res.ok) {
+          const data = await res.json();
+          updateStatus(data.status);
 
-        if (order.status === 'Pending') {
-          updateStatus(0);
-        } else if (order.status === 'Preparing') {
-          updateStatus(1);
-        } else if (order.status === 'Out for Delivery') {
-          updateStatus(2);
-        } else if (order.status === 'Completed' || order.status === 'Delivered') {
-          updateStatus(3);
-          document.getElementById("time4").innerText = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-          document.querySelector("h1").innerText = "Order Delivered!";
-          document.querySelector(".text-green-600").classList.remove("animate-bounce");
-          clearInterval(statusInterval);
-          confettiEffect();
+          // Render Items
+          const itemList = document.getElementById('itemList');
+          if (data.items && itemList.innerHTML.includes('Loading')) {
+            itemList.innerHTML = Object.keys(data.items).map(k => `
+                            <div class="flex justify-between">
+                                <span>${k} <span class="text-xs bg-gray-700 px-1 rounded">x${data.items[k].qty}</span></span>
+                                <span>₹${data.items[k].price * data.items[k].qty}</span>
+                            </div>
+                        `).join('') + `
+                            <div class="flex justify-between border-t border-gray-700 pt-2 mt-2 font-bold text-white">
+                                <span>Total Paid</span>
+                                <span>₹${data.total}</span>
+                            </div>
+                        `;
+          }
         }
-      } catch (e) {
-        console.error("Status check failed", e);
-      }
+      } catch (e) { console.error(e); }
     }
 
-    const statusInterval = setInterval(checkStatus, 3000);
-    checkStatus();
+    setInterval(fetchOrder, 3000);
+    fetchOrder();
 
-    function confettiEffect() {
-      var duration = 3 * 1000;
-      var animationEnd = Date.now() + duration;
-      var defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
-
-      function randomInRange(min, max) {
-        return Math.random() * (max - min) + min;
-      }
-
-      var interval = setInterval(function () {
-        var timeLeft = animationEnd - Date.now();
-
-        if (timeLeft <= 0) {
-          return clearInterval(interval);
-        }
-
-        var particleCount = 50 * (timeLeft / duration);
-        // since particles fall down, start a bit higher than random
-        confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 } }));
-        confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } }));
-      }, 250);
+    // UI Interactions
+    function toggleItems() {
+      document.getElementById('itemList').classList.toggle('hidden');
+      document.getElementById('itemIcon').classList.toggle('rotate-180');
     }
 
+    function openChat() {
+      document.getElementById('chatModal').classList.remove('hidden');
+    }
+
+    function closeChat() {
+      document.getElementById('chatModal').classList.add('hidden');
+    }
+
+    function sendMessage() {
+      const input = document.getElementById('chatInput');
+      const msg = input.value.trim();
+      if (!msg) return;
+
+      const chatBody = document.getElementById('chatBody');
+
+      // User Msg
+      chatBody.innerHTML += `
+                <div class="flex gap-3 justify-end items-end">
+                    <div class="bg-emerald-600 text-white text-sm p-3 rounded-2xl rounded-tr-none max-w-[80%]">${msg}</div>
+                </div>
+            `;
+      input.value = "";
+      chatBody.scrollTop = chatBody.scrollHeight;
+
+      // Bot Reply Simulation
+      setTimeout(() => {
+        const reply = "I've forwarded your query to our support team. They will call you shortly.";
+        chatBody.innerHTML += `
+                    <div class="flex gap-3 mt-4">
+                        <div class="w-6 h-6 rounded-full bg-gray-700 flex-shrink-0 flex items-center justify-center text-[10px] text-gray-400">AI</div>
+                        <div class="bg-gray-800 text-gray-300 text-sm p-3 rounded-2xl rounded-tl-none max-w-[80%]">${reply}</div>
+                    </div>
+                `;
+        chatBody.scrollTop = chatBody.scrollHeight;
+      }, 1000);
+    }
+
+    // Review Logic
+    let currentRating = 0;
+
+    function openReview() {
+      document.getElementById('reviewModal').classList.remove('hidden');
+      setTimeout(() => {
+        document.getElementById('reviewCard').classList.remove('translate-y-full');
+      }, 10);
+    }
+
+    function closeReview() {
+      document.getElementById('reviewCard').classList.add('translate-y-full');
+      setTimeout(() => {
+        document.getElementById('reviewModal').classList.add('hidden');
+      }, 300);
+    }
+
+    function rate(star) {
+      currentRating = star;
+      for (let i = 1; i <= 5; i++) {
+        const el = document.getElementById('star' + i);
+        if (i <= star) {
+          el.classList.remove('fa-regular', 'text-gray-600');
+          el.classList.add('fa-solid', 'text-yellow-400');
+        } else {
+          el.classList.add('fa-regular', 'text-gray-600');
+          el.classList.remove('fa-solid', 'text-yellow-400');
+        }
+      }
+      document.getElementById('submitReviewBtn').disabled = false;
+    }
+
+    function toggleTag(btn) {
+      btn.classList.toggle('bg-emerald-900');
+      btn.classList.toggle('bg-gray-800');
+      btn.classList.toggle('border-emerald-500');
+      btn.classList.toggle('border-gray-700');
+      btn.classList.toggle('text-emerald-400');
+      btn.classList.toggle('text-gray-400');
+    }
+
+    function submitReview() {
+      // Fake API Call
+      const btn = document.getElementById('submitReviewBtn');
+      btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Submitting...';
+
+      setTimeout(() => {
+        localStorage.setItem('review_done_' + orderId, 'true');
+        closeReview();
+        alert("Thanks for your feedback!"); // Can be replaced with toast if available
+      }, 1000);
+    }
   </script>
 </body>
 
