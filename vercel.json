@@ -32,6 +32,10 @@
         {
             "src": "image/**",
             "use": "@vercel/static"
+        },
+        {
+            "src": "components/**",
+            "use": "@vercel/static"
         }
     ],
     "routes": [

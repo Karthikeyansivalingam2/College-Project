@@ -43,45 +43,9 @@
 <body class="bg-gray-900 text-gray-100">
 
     <!-- Navbar -->
-    <header class="navbar">
-        <div class="nav-container">
-            <div class="logo">Foodie Zone</div>
+    <header class="navbar" id="global-navbar"></header>
 
-            <nav class="nav-links" id="navLinks">
-                <a href="index.html">Home</a>
-                <a href="about.html">About</a>
-                <a href="order.html">Order</a>
-                <a href="halls.html" class="active">Party Halls</a>
-                <a href="review.html">Reviews</a>
-                <a href="partner.html">Partner with Us</a>
-                <a href="careers.html">Job Careers</a>
-                <a href="login.html" class="nav-login">Login</a>
-                <a href="profile.html" id="navProfile"
-                    class="hidden items-center justify-center w-10 h-10 rounded-full border border-white/30 bg-emerald-700 text-white hover:bg-emerald-800 hover:scale-105 transition-all shadow-lg backdrop-blur-sm group">
-                    <span id="navUserInitial" class="font-bold text-base"></span>
-                    <i id="navUserIcon" class="fa-solid fa-user text-sm group-hover:rotate-12 transition-transform"></i>
-                </a>
-            </nav>
-            <div class="menu-icon" onclick="toggleMenu()">☰</div>
-        </div>
-    </header>
-
-    <script>
-        const user = JSON.parse(localStorage.getItem('currentUser'));
-        if (user) {
-            const profileBtn = document.getElementById('navProfile');
-            if (profileBtn) {
-                profileBtn.classList.remove('hidden');
-                profileBtn.style.display = 'flex';
-                document.querySelector('.nav-login').style.display = 'none';
-
-                if (user.username) {
-                    document.getElementById('navUserInitial').innerText = user.username.charAt(0).toUpperCase();
-                    document.getElementById('navUserIcon').classList.add('hidden');
-                }
-            }
-        }
-    </script>
+    
 
     <!-- Hero -->
     <section class="bg-emerald-900 text-white py-16 px-4 text-center">
@@ -492,26 +456,7 @@
     </div>
 
     <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-container">
-            <div class="footer-box">
-                <h3>Foodie Zone</h3>
-
-                <p>One stop for Food, Halls, and Catering.</p>
-            </div>
-            <div class="footer-box">
-                <h4>Quick Links</h4>
-                <a href="index.html">Home</a><br>
-                <a href="order.html">Order</a><br>
-                <a href="halls.html">Party Halls</a>
-            </div>
-            <div class="footer-box">
-                <h4>Contact</h4>
-                <p>Email: bookingsupport@foodiezone.com</p>
-
-            </div>
-        </div>
-    </footer>
+    <footer class="footer" id="global-footer"></footer>
     </footer>
 
     <script src="./assets/js/common.js"></script>

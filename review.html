@@ -37,44 +37,10 @@
 <body>
 
   <!-- Navbar -->
-  <header class="navbar">
-    <div class="nav-container">
-      <div class="logo">Foodie Zone</div>
-
-      <nav class="nav-links" id="navLinks">
-        <a href="index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="order.html">Order</a>
-        <a href="review.html">Reviews</a>
-        <a href="partner.html">Partner with Us</a>
-        <a href="careers.html">Job Careers</a>
-        <a href="contact.html">Contact</a>
-        <a href="login.html" class="nav-login">Login</a>
-        <a href="profile.html" id="navProfile"
-          class="hidden items-center justify-center w-10 h-10 rounded-full border border-white/30 bg-emerald-700 text-white hover:bg-emerald-800 hover:scale-105 transition-all shadow-lg backdrop-blur-sm group">
-          <span id="navUserInitial" class="font-bold text-base"></span>
-          <i id="navUserIcon" class="fa-solid fa-user text-sm group-hover:rotate-12 transition-transform"></i>
-        </a>
-      </nav>
-      <div class="menu-icon" onclick="toggleMenu()">☰</div>
-    </div>
-  </header>
+  <header class="navbar" id="global-navbar"></header>
 
   <!-- Script to check login in nav -->
-  <script>
-    const user = JSON.parse(localStorage.getItem('currentUser'));
-    if (user) {
-      const profileBtn = document.getElementById('navProfile');
-      profileBtn.classList.remove('hidden');
-      profileBtn.style.display = 'flex';
-      document.querySelector('.nav-login').style.display = 'none';
-
-      if (user.username) {
-        document.getElementById('navUserInitial').innerText = user.username.charAt(0).toUpperCase();
-        document.getElementById('navUserIcon').classList.add('hidden');
-      }
-    }
-  </script>
+  
 
   <!-- Hero Section -->
   <section class="hero-pattern py-20 px-4 text-center text-white relative overflow-hidden">
@@ -281,40 +247,7 @@
   </div>
 
   <!-- Footer -->
-  <footer class="footer">
-    <div class="footer-container">
-      <div class="footer-box">
-        <h3>Foodie Zone</h3>
-
-        <p>Discover the best restaurants near you with instant directions.</p>
-      </div>
-      <div class="footer-box">
-        <h4>Quick Links</h4>
-        <a href="index.html">Home</a><br>
-        <a href="about.html">About</a><br>
-        <a href="reviews.html">Reviews</a><br>
-        <a href="admin-login.html" style="color: #6ee7b7;">Admin Dashboard</a>
-      </div>
-      <div class="footer-box">
-        <h4>Contact</h4>
-        <p>Email: support@foodiezone.com</p>
-
-        <p>Location: Tamil Nadu</p>
-      </div>
-      <div class="footer-box">
-        <h4>Follow Us</h4>
-        <div class="social-icons">
-          <a href="#" class="social whatsapp"><i class="fa-brands fa-whatsapp"></i></a>
-          <a href="#" class="social instagram"><i class="fa-brands fa-instagram"></i></a>
-          <a href="#" class="social facebook"><i class="fa-brands fa-facebook-f"></i></a>
-        </div>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      © 2026 Foodie Zone. All rights reserved.
-
-    </div>
-  </footer>
+  <footer class="footer" id="global-footer"></footer>
 
   <script src="./assets/js/common.js"></script>
   <script>
