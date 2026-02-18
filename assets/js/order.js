@@ -357,19 +357,21 @@ function renderPackages(filterType = "Hostel") {
 
   filtered.forEach(pkg => {
     grid.innerHTML += `
-      <div class="bg-gray-50 border rounded-lg p-6 hover:shadow-lg transition">
-        <span class="text-xs font-bold uppercase tracking-wider text-gray-500">${pkg.type} Plan</span>
-        <h3 class="text-xl font-bold mt-1 text-gray-800">${pkg.name}</h3>
-        <p class="text-sm text-gray-600 mb-4">${pkg.desc}</p>
+      <div class="bg-gray-50 dark:bg-gray-800 border dark:border-gray-700 rounded-lg p-6 hover:shadow-lg transition group relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-24 h-24 bg-emerald-500/5 rounded-bl-full -mr-4 -mt-4 transition-transform group-hover:scale-110"></div>
         
-        <div class="text-2xl font-bold text-amber-700 mb-4">${pkg.price}</div>
+        <span class="text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400 relative z-10">${pkg.type} Plan</span>
+        <h3 class="text-xl font-bold mt-1 text-gray-800 dark:text-gray-100 relative z-10">${pkg.name}</h3>
+        <p class="text-sm text-gray-600 dark:text-gray-300 mb-4 relative z-10">${pkg.desc}</p>
         
-        <ul class="space-y-2 mb-6 text-sm text-gray-700">
+        <div class="text-2xl font-bold text-amber-700 dark:text-amber-500 mb-4 relative z-10">${pkg.price}</div>
+        
+        <ul class="space-y-2 mb-6 text-sm text-gray-700 dark:text-gray-300 relative z-10">
           ${pkg.features.map(f => `<li><i class="fa-solid fa-check text-green-500 mr-2"></i> ${f}</li>`).join('')}
         </ul>
 
         <button onclick="openCorporateForm('${pkg.name} (${pkg.type})')" 
-          class="w-full py-2 bg-amber-700 hover:bg-amber-800 text-white rounded font-medium transition">
+          class="w-full py-2 bg-amber-700 hover:bg-amber-800 text-white rounded font-medium transition shadow-lg shadow-amber-900/20 relative z-10">
           Book Trial / Enquire
         </button>
       </div>
