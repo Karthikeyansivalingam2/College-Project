@@ -27,20 +27,20 @@ function switchMode(mode) {
     retail.classList.remove("hidden")
     corporate.classList.add("hidden")
 
-    rBtn.classList.add("bg-amber-700", "text-white")
+    rBtn.classList.add("bg-emerald-600", "text-white")
     rBtn.classList.remove("bg-gray-200")
 
     cBtn.classList.add("bg-gray-200")
-    cBtn.classList.remove("bg-amber-700", "text-white")
+    cBtn.classList.remove("bg-emerald-600", "text-white")
   } else {
     corporate.classList.remove("hidden")
     retail.classList.add("hidden")
 
-    cBtn.classList.add("bg-amber-700", "text-white")
+    cBtn.classList.add("bg-emerald-600", "text-white")
     cBtn.classList.remove("bg-gray-200")
 
     rBtn.classList.add("bg-gray-200")
-    rBtn.classList.remove("bg-amber-700", "text-white")
+    rBtn.classList.remove("bg-emerald-600", "text-white")
 
     renderPackages()
   }
@@ -114,11 +114,11 @@ function selectCategory(category) {
   selectedCategory = category;
 
   document.querySelectorAll(".typeBtn").forEach(btn => {
-    btn.classList.remove("bg-amber-700", "text-white");
+    btn.classList.remove("bg-emerald-600", "text-white");
     btn.classList.add("bg-gray-200");
   });
   event.target.classList.remove("bg-gray-200");
-  event.target.classList.add("bg-amber-700", "text-white");
+  event.target.classList.add("bg-emerald-600", "text-white");
   renderMenu();
 }
 let teaMenu = [];
@@ -364,14 +364,14 @@ function renderPackages(filterType = "Hostel") {
         <h3 class="text-xl font-bold mt-1 text-gray-800 dark:text-gray-100 relative z-10">${pkg.name}</h3>
         <p class="text-sm text-gray-600 dark:text-gray-300 mb-4 relative z-10">${pkg.desc}</p>
         
-        <div class="text-2xl font-bold text-amber-700 dark:text-amber-500 mb-4 relative z-10">${pkg.price}</div>
+        <div class="text-2xl font-bold text-emerald-600 dark:text-emerald-400 mb-4 relative z-10">${pkg.price}</div>
         
         <ul class="space-y-2 mb-6 text-sm text-gray-700 dark:text-gray-300 relative z-10">
           ${pkg.features.map(f => `<li><i class="fa-solid fa-check text-green-500 mr-2"></i> ${f}</li>`).join('')}
         </ul>
 
         <button onclick="openCorporateForm('${pkg.name} (${pkg.type})')" 
-          class="w-full py-2 bg-amber-700 hover:bg-amber-800 text-white rounded font-medium transition shadow-lg shadow-amber-900/20 relative z-10">
+          class="w-full py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded font-medium transition shadow-lg shadow-emerald-900/20 relative z-10">
           Book Trial / Enquire
         </button>
       </div>
@@ -387,7 +387,7 @@ function openCorporateForm(packageName) {
   if (pkgInput) {
     pkgInput.value = packageName;
     pkgInput.classList.remove("text-gray-500");
-    pkgInput.classList.add("text-amber-700", "font-bold");
+    pkgInput.classList.add("text-emerald-600", "font-bold");
   }
 
   // Smooth Scroll to Form
@@ -617,4 +617,5 @@ function detectLocation() {
     alert("Geolocation is not supported by your browser.");
   }
 }
+
 
