@@ -16,7 +16,7 @@ app.use(express.static(path.join(__dirname)));
 
 // MongoDB Connection
 mongoose.connect(process.env.MONGODB_URI)
-    .then(() => console.log("Connected to MongoDB Atlas"))
+    .then(() => console.log("Connected to MongoDB Local"))
     .catch(err => console.error("MongoDB Connection Error:", err));
 
 // --- Database Schemas ---
@@ -319,4 +319,8 @@ app.post('/api/menu/add', async (req, res) => {
     } catch (err) { res.status(500).json({ success: false }); }
 });
 
-app.listen(PORT, () => console.log(`Server running at http://localhost:${PORT}`));
+if (require.main === module) {
+    app.listen(PORT, () => console.log(`Server running at http://localhost:${PORT}`));
+}
+
+module.exports = app;
