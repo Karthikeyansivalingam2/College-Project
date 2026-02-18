@@ -1,12 +1,14 @@
 
-const CACHE_NAME = 'foodie-zone-v1';
+const CACHE_NAME = 'foodie-zone-v2';
 const ASSETS_TO_CACHE = [
     './',
     './index.html',
     './assets/css/common.css',
     './assets/js/common.js',
     './manifest.json',
-    './image/large.png'
+    './image/large.png',
+    './components/navbar.html',
+    './components/footer.html'
 ];
 
 // Install Event
