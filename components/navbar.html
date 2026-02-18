@@ -9,12 +9,20 @@
         <a href="partner.html">Partner with Us</a>
         <a href="careers.html">Job Careers</a>
         <a href="login.html" class="nav-login">Login</a>
+
         <button id="installAppBtn"
             class="bg-emerald-600 text-white px-4 py-2 rounded-full font-bold shadow-lg hover:bg-emerald-700 transition hidden ml-2">
             <i class="fa-solid fa-download mr-1"></i> Install App
         </button>
+
+        <!-- Theme Toggle -->
+        <button onclick="toggleTheme()"
+            class="flex items-center justify-center w-10 h-10 rounded-full border border-white/30 bg-white/10 text-white hover:bg-white/20 hover:scale-105 transition-all shadow-lg backdrop-blur-sm ml-2">
+            <i id="themeIcon" class="fa-solid fa-moon text-emerald-500 text-xl"></i>
+        </button>
+
         <a href="profile.html" id="navProfile"
-            class="hidden items-center justify-center w-10 h-10 rounded-full border border-white/30 bg-white/10 text-white hover:bg-white/20 hover:scale-105 transition-all shadow-lg backdrop-blur-sm group">
+            class="hidden items-center justify-center w-10 h-10 rounded-full border border-white/30 bg-white/10 text-white hover:bg-white/20 hover:scale-105 transition-all shadow-lg backdrop-blur-sm group ml-2">
             <span id="navUserInitial" class="font-bold text-base"></span>
             <i id="navUserIcon" class="fa-solid fa-user text-sm group-hover:rotate-12 transition-transform"></i>
         </a>

@@ -1,4 +1,4 @@
-/* Component Loader */
+/* Component Loader & Logic */
 async function loadComponents() {
   const nav = document.getElementById('global-navbar');
   const foot = document.getElementById('global-footer');
@@ -10,16 +10,19 @@ async function loadComponents() {
         nav.innerHTML = await res.text();
         updateAuthUI();
         setActiveLink();
-        // Re-attach PWA listener if button exists
+
+        // Init Theme Icon after load
+        const isDark = localStorage.getItem('theme') === 'dark';
+        updateThemeIcon(isDark);
+
+        // Re-attach PWA listener
         if (window.deferredPrompt && document.getElementById('installAppBtn')) {
           const btn = document.getElementById('installAppBtn');
           btn.classList.remove('hidden');
           btn.addEventListener('click', () => {
             btn.style.display = 'none';
             window.deferredPrompt.prompt();
-            window.deferredPrompt.userChoice.then((choice) => {
-              window.deferredPrompt = null;
-            });
+            window.deferredPrompt.userChoice.then(() => window.deferredPrompt = null);
           });
         }
       }
@@ -38,11 +41,8 @@ function setActiveLink() {
   const path = window.location.pathname.split('/').pop() || 'index.html';
   const links = document.querySelectorAll('.nav-links a');
   links.forEach(link => {
-    if (link.getAttribute('href') === path) {
-      link.classList.add('active');
-    } else {
-      link.classList.remove('active');
-    }
+    if (link.getAttribute('href') === path) link.classList.add('active');
+    else link.classList.remove('active');
   });
 }
 
@@ -77,6 +77,31 @@ function updateAuthUI() {
   }
 }
 
+// -- Theme Logic --
+function toggleTheme() {
+  document.body.classList.toggle('dark-mode');
+  const isDark = document.body.classList.contains('dark-mode');
+  localStorage.setItem('theme', isDark ? 'dark' : 'light');
+  updateThemeIcon(isDark);
+}
+
+function updateThemeIcon(isDark) {
+  const icon = document.getElementById('themeIcon');
+  if (!icon) return;
+  if (isDark) {
+    icon.classList.remove('fa-moon', 'text-emerald-500');
+    icon.classList.add('fa-sun', 'text-yellow-400');
+  } else {
+    icon.classList.remove('fa-sun', 'text-yellow-400');
+    icon.classList.add('fa-moon', 'text-emerald-500');
+  }
+}
+
+// Init Theme Immediately
+if (localStorage.getItem('theme') === 'dark') {
+  document.body.classList.add('dark-mode');
+}
+
 document.addEventListener('DOMContentLoaded', loadComponents);
 
 /* Mobile menu toggle */
@@ -87,11 +112,9 @@ function toggleMenu() {
 /* Navbar scroll effect */
 window.addEventListener("scroll", function () {
   var navbar = document.querySelector(".navbar");
-
-  if (window.scrollY > 30) {
-    navbar.classList.add("scrolled");
-  } else {
-    navbar.classList.remove("scrolled");
+  if (navbar) {
+    if (window.scrollY > 30) navbar.classList.add("scrolled");
+    else navbar.classList.remove("scrolled");
   }
 });
 
@@ -117,19 +140,6 @@ window.addEventListener('beforeinstallprompt', (e) => {
   deferredPrompt = e;
   if (installBtn) {
     installBtn.classList.remove('hidden');
-    installBtn.addEventListener('click', () => {
-      installBtn.style.display = 'none';
-      deferredPrompt.prompt();
-      deferredPrompt.userChoice.then((choiceResult) => {
-        if (choiceResult.outcome === 'accepted') {
-          console.log('User accepted the A2HS prompt');
-        } else {
-          console.log('User dismissed the A2HS prompt');
-        }
-        deferredPrompt = null;
-      });
-    });
+    // Listener attached in loadComponents if button dynamic, or here if static
   }
 });
-
-
