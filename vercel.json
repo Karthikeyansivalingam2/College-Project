@@ -2,50 +2,22 @@
     "version": 2,
     "builds": [
         {
-            "src": "server.js",
+            "src": "api/index.js",
             "use": "@vercel/node"
         },
         {
-            "src": "*.html",
-            "use": "@vercel/static"
-        },
-        {
-            "src": "manifest.json",
-            "use": "@vercel/static"
-        },
-        {
-            "src": "service-worker.js",
-            "use": "@vercel/static"
-        },
-        {
-            "src": "script.js",
-            "use": "@vercel/static"
-        },
-        {
-            "src": "contact.js",
-            "use": "@vercel/static"
-        },
-        {
-            "src": "assets/**",
-            "use": "@vercel/static"
-        },
-        {
-            "src": "image/**",
-            "use": "@vercel/static"
-        },
-        {
-            "src": "components/**",
+            "src": "public/**",
             "use": "@vercel/static"
         }
     ],
     "routes": [
         {
             "src": "/api/(.*)",
-            "dest": "/server.js"
+            "dest": "/api/index.js"
         },
         {
             "src": "/(.*)",
-            "dest": "/$1"
+            "dest": "/public/$1"
         }
     ]
 }
