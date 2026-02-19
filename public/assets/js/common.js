@@ -5,7 +5,7 @@ async function loadComponents() {
 
   if (nav) {
     try {
-      const res = await fetch('./components/navbar.html');
+      const res = await fetch('/components/navbar.html');
       if (res.ok) {
         nav.innerHTML = await res.text();
         updateAuthUI();
@@ -31,7 +31,7 @@ async function loadComponents() {
 
   if (foot) {
     try {
-      const res = await fetch('./components/footer.html');
+      const res = await fetch('/components/footer.html');
       if (res.ok) foot.innerHTML = await res.text();
     } catch (e) { console.error("Error loading footer", e); }
   }
