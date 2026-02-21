@@ -8,26 +8,8 @@ function toggleLocationModal() {
   document.getElementById('locationModal').classList.toggle('hidden');
 }
 
-function logDebug(msg) {
-  const el = document.getElementById('debugContent');
-  if (el) {
-    const time = new Date().toLocaleTimeString();
-    el.innerHTML = `[${time}] ${msg}<br>` + el.innerHTML;
-  }
-  console.log(msg);
-}
+// Debug toggle and error handling now handled by common.js
 
-document.addEventListener('keydown', (e) => {
-  if (e.ctrlKey && e.shiftKey && e.key === 'D') {
-    document.getElementById('debugOverlay')?.classList.toggle('hidden');
-  }
-});
-
-// Global Error Catcher
-window.onerror = function (msg, url, line, col, error) {
-  logDebug(`CRASH: ${msg} line:${line}`);
-  return false;
-};
 
 function setLocation(loc) {
   const el = document.getElementById('currentLoc');

@@ -1,21 +1,30 @@
 {
-    "name": "Foodie Zone",
+    "name": "Foodie Zone - Premium Food & Events",
     "short_name": "FoodieZone",
+    "description": "Order premium food, book party halls and manage catering services in Tamil Nadu.",
+    "id": "/",
     "start_url": "./index.html",
     "display": "standalone",
     "background_color": "#111827",
     "theme_color": "#10b981",
     "scope": "./",
+    "orientation": "portrait-primary",
+    "categories": [
+        "food",
+        "lifestyle"
+    ],
     "icons": [
         {
             "src": "./image/large.png",
             "sizes": "192x192",
-            "type": "image/png"
+            "type": "image/png",
+            "purpose": "any maskable"
         },
         {
             "src": "./image/large.png",
             "sizes": "512x512",
-            "type": "image/png"
+            "type": "image/png",
+            "purpose": "any maskable"
         }
     ]
 }

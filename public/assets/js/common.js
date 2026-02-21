@@ -1,4 +1,43 @@
-/* Component Loader & Logic */
+// --- Global Debug System ---
+function logDebug(msg) {
+  console.log(`[DEBUG] ${msg}`);
+
+  let debugContent = document.getElementById('debugContent');
+  let debugOverlay = document.getElementById('debugOverlay');
+
+  // If overlay doesn't exist, create it (enables debug on all pages)
+  if (!debugOverlay) {
+    debugOverlay = document.createElement('div');
+    debugOverlay.id = 'debugOverlay';
+    debugOverlay.className = 'fixed top-20 right-4 z-[5000] bg-black/90 text-xs text-green-400 p-3 rounded-lg border border-green-500/50 hidden max-w-xs overflow-auto max-h-[400px] shadow-2xl';
+    debugOverlay.innerHTML = `<h4 class="font-bold border-b border-green-500/30 mb-2 pb-1 flex justify-between">Debug info <span class="opacity-50">Ctrl+Shift+D</span></h4><div id="debugContent"></div>`;
+    document.body.appendChild(debugOverlay);
+    debugContent = document.getElementById('debugContent');
+
+    // Add toggle listener if it's the first time
+    document.addEventListener('keydown', (e) => {
+      if (e.ctrlKey && e.shiftKey && e.key === 'D') {
+        debugOverlay.classList.toggle('hidden');
+      }
+    });
+  }
+
+  if (debugContent) {
+    const time = new Date().toLocaleTimeString();
+    const line = document.createElement('div');
+    line.className = 'mb-1 border-b border-white/5 pb-1';
+    line.innerHTML = `<span class="opacity-50">[${time}]</span> ${msg}`;
+    debugContent.prepend(line);
+  }
+}
+
+// Global Error Catcher for all pages
+window.addEventListener('error', (e) => {
+  logDebug(`GLOBAL ERROR: ${e.message} at ${e.filename}:${e.lineno}`);
+});
+
+logDebug("Global Debug Loaded - PWA System Initializing...");
+
 async function loadComponents() {
   const nav = document.getElementById('global-navbar');
   const foot = document.getElementById('global-footer');
@@ -15,16 +54,7 @@ async function loadComponents() {
         const isDark = localStorage.getItem('theme') === 'dark';
         updateThemeIcon(isDark);
 
-        // Re-attach PWA listener
-        if (window.deferredPrompt && document.getElementById('installAppBtn')) {
-          const btn = document.getElementById('installAppBtn');
-          btn.classList.remove('hidden');
-          btn.addEventListener('click', () => {
-            btn.style.display = 'none';
-            window.deferredPrompt.prompt();
-            window.deferredPrompt.userChoice.then(() => window.deferredPrompt = null);
-          });
-        }
+        // PWA button will be handled by the interval in showInstallButton()
       }
     } catch (e) { console.error("Error loading navbar", e); }
   }
@@ -127,8 +157,14 @@ function quickSearch(place) {
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('./service-worker.js')
-      .then((reg) => console.log('Service Worker Registered!', reg))
-      .catch((err) => console.log('Service Worker Failed!', err));
+      .then((reg) => {
+        console.log('SW Registered!', reg);
+        if (typeof logDebug === 'function') logDebug("PWA: Service Worker Active");
+      })
+      .catch((err) => {
+        console.log('SW Failed!', err);
+        if (typeof logDebug === 'function') logDebug("PWA: SW Error - " + err.message);
+      });
   });
 }
 
@@ -136,23 +172,30 @@ if ('serviceWorker' in navigator) {
 window.deferredPrompt = null;
 
 window.addEventListener('beforeinstallprompt', (e) => {
-  // Prevent the mini-infobar from appearing on mobile
   e.preventDefault();
-  // Stash the event so it can be triggered later.
   window.deferredPrompt = e;
+  if (typeof logDebug === 'function') logDebug("PWA: Install Prompt Detected!");
 
-  // Check if the button exists (it might be loaded dynamically)
+  // Try showing button immediately
+  showInstallButton();
+});
+
+function showInstallButton() {
   const installBtn = document.getElementById('installAppBtn');
-  if (installBtn) {
+  if (installBtn && window.deferredPrompt) {
     installBtn.classList.remove('hidden');
+    installBtn.style.display = 'flex';
 
-    // Add click listener here just in case loadComponents ran already
     installBtn.addEventListener('click', () => {
       installBtn.style.display = 'none';
       window.deferredPrompt.prompt();
-      window.deferredPrompt.userChoice.then((choiceResult) => {
+      window.deferredPrompt.userChoice.then(() => {
         window.deferredPrompt = null;
+        if (typeof logDebug === 'function') logDebug("PWA: App Installed!");
       });
     });
   }
-});
+}
+
+// Check every few seconds if button should be shown (for dynamic navbar)
+setInterval(showInstallButton, 2000);
