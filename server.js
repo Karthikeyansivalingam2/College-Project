@@ -260,14 +260,27 @@ app.get('/api/search', (req, res) => {
 // 3. Login
 app.post('/api/login', async (req, res) => {
     const { email, password } = req.body;
+    const trimmedEmail = (email || '').trim();
+    const trimmedPassword = (password || '').trim();
     try {
-        const user = await User.findOne({ $or: [{ email }, { username: email }], password });
+        // Case-insensitive username/email match
+        const user = await User.findOne({
+            $or: [
+                { email: { $regex: new RegExp('^' + trimmedEmail + '$', 'i') } },
+                { username: { $regex: new RegExp('^' + trimmedEmail + '$', 'i') } }
+            ],
+            password: trimmedPassword
+        });
         if (user) {
             res.json({ success: true, user: { username: user.username, email: user.email } });
         } else {
-            res.status(401).json({ success: false, message: "Invalid credentials." });
+            // Return 200 so frontend can read the JSON error properly
+            res.json({ success: false, message: "Invalid username or password." });
         }
-    } catch (err) { res.status(500).json({ success: false }); }
+    } catch (err) {
+        console.error("Login error:", err);
+        res.json({ success: false, message: "Server error. Please try again." });
+    }
 });
 
 // 4. Signup
