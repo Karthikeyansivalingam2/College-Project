@@ -79,47 +79,59 @@
 
     <script src="./assets/js/common.js?v=5"></script>
     <script>
-        // Check for current user to show profile icon
-        if (localStorage.getItem('currentUser')) {
-            document.getElementById('navProfile').style.display = 'inline-block';
-            document.querySelector('.nav-login').style.display = 'none';
-        }
+        document.addEventListener('DOMContentLoaded', function () {
+            // Check for remembered admin
+            const savedAdmin = localStorage.getItem('rememberedAdminUser');
+            if (savedAdmin) {
+                const adminUserField = document.getElementById('adminUser');
+                const rememberMeCheck = document.getElementById('adminRememberMe');
+                if (adminUserField) adminUserField.value = savedAdmin;
+                if (rememberMeCheck) rememberMeCheck.checked = true;
+            }
 
-        // Check for remembered admin
-        const savedAdmin = localStorage.getItem('rememberedAdminUser');
-        if (savedAdmin) {
-            document.getElementById('adminUser').value = savedAdmin;
-            document.getElementById('adminRememberMe').checked = true;
-        }
+            // Toggle Password
+            const togglePassBtn = document.getElementById('toggleAdminPass');
+            if (togglePassBtn) {
+                togglePassBtn.addEventListener('click', function () {
+                    const input = document.getElementById('adminPass');
+                    const type = input.getAttribute('type') === 'password' ? 'text' : 'password';
+                    input.setAttribute('type', type);
+                    this.classList.toggle('fa-eye');
+                    this.classList.toggle('fa-eye-slash');
+                });
+            }
 
-        // Toggle Password
-        document.getElementById('toggleAdminPass').addEventListener('click', function () {
-            const input = document.getElementById('adminPass');
-            const type = input.getAttribute('type') === 'password' ? 'text' : 'password';
-            input.setAttribute('type', type);
-            this.classList.toggle('fa-eye');
-            this.classList.toggle('fa-eye-slash');
-        });
+            const loginForm = document.getElementById('adminLoginForm');
+            if (loginForm) {
+                loginForm.addEventListener('submit', function (e) {
+                    e.preventDefault();
 
-        document.getElementById('adminLoginForm').addEventListener('submit', function (e) {
-            e.preventDefault();
+                    const userField = document.getElementById('adminUser');
+                    const passField = document.getElementById('adminPass');
+                    const rememberMeCheck = document.getElementById('adminRememberMe');
 
-            const user = document.getElementById('adminUser').value;
-            const pass = document.getElementById('adminPass').value;
-            const rememberMe = document.getElementById('adminRememberMe').checked;
+                    if (!userField || !passField) return;
 
-            if (user === 'karthik' && pass === 'karthi123') {
-                localStorage.setItem('adminLoggedIn', 'true');
+                    const user = userField.value.trim();
+                    const pass = passField.value.trim();
+                    const rememberMe = rememberMeCheck ? rememberMeCheck.checked : false;
 
-                if (rememberMe) {
-                    localStorage.setItem('rememberedAdminUser', user);
-                } else {
-                    localStorage.removeItem('rememberedAdminUser');
-                }
+                    // Support both old and new credentials
+                    if ((user === 'karthik' && pass === 'karthi123') || (user === 'admin' && pass === 'admin123')) {
+                        localStorage.setItem('adminLoggedIn', 'true');
 
-                window.location.href = 'admin.html';
-            } else {
-                alert('Invalid Admin Credentials!');
+                        if (rememberMe) {
+                            localStorage.setItem('rememberedAdminUser', user);
+                        } else {
+                            localStorage.removeItem('rememberedAdminUser');
+                        }
+
+                        // Success!
+                        window.location.href = 'admin.html';
+                    } else {
+                        alert('Invalid Admin Credentials! Use admin / admin123');
+                    }
+                });
             }
         });
     </script>

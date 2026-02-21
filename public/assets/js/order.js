@@ -8,18 +8,33 @@ function toggleLocationModal() {
   document.getElementById('locationModal').classList.toggle('hidden');
 }
 
+function logDebug(msg) {
+  const el = document.getElementById('debugContent');
+  if (el) {
+    const time = new Date().toLocaleTimeString();
+    el.innerHTML = `[${time}] ${msg}<br>` + el.innerHTML;
+  }
+  console.log(msg);
+}
+
+document.addEventListener('keydown', (e) => {
+  if (e.ctrlKey && e.shiftKey && e.key === 'D') {
+    document.getElementById('debugOverlay')?.classList.toggle('hidden');
+  }
+});
+
+// Global Error Catcher
+window.onerror = function (msg, url, line, col, error) {
+  logDebug(`CRASH: ${msg} line:${line}`);
+  return false;
+};
+
 function setLocation(loc) {
-  document.getElementById('currentLoc').innerText = loc;
+  const el = document.getElementById('currentLoc');
+  if (el) el.innerText = loc;
   localStorage.setItem('userLocation', loc);
   toggleLocationModal();
 }
-
-document.addEventListener("DOMContentLoaded", () => {
-  const savedLoc = localStorage.getItem('userLocation');
-  if (savedLoc) document.getElementById('currentLoc').innerText = savedLoc;
-  renderMenu();
-  loadSavedAddress();
-});
 function switchMode(mode) {
 
 
@@ -58,11 +73,13 @@ function updateQty(name, price, change) {
   }
 
   renderCart();
+  calculateSplit();
 }
 
 function renderCart() {
   const cartItemsEl = document.getElementById("cartItems");
   const cartBar = document.getElementById("cartBar");
+  if (!cartItemsEl || !cartBar) return;
 
   cartItemsEl.innerHTML = "";
 
@@ -82,14 +99,17 @@ function renderCart() {
     `;
   });
 
-  document.getElementById("total").innerText = total;
-  document.getElementById("cartTotal").innerText = total;
-  document.getElementById("cartCount").innerText = count;
+  const totalEl = document.getElementById("total");
+  const cartTotalEl = document.getElementById("cartTotal");
+  const cartCountEl = document.getElementById("cartCount");
+
+  if (totalEl) totalEl.innerText = total;
+  if (cartTotalEl) cartTotalEl.innerText = total;
+  if (cartCountEl) cartCountEl.innerText = count;
 
   // Show / hide cart bar
   if (count > 0) {
     cartBar.classList.remove("hidden");
-    // Also re-render menu to update ADD buttons if needed
     renderMenu();
   } else {
     cartBar.classList.add("hidden");
@@ -100,6 +120,7 @@ function renderCart() {
 function openCart() {
   document.getElementById("cartDrawer").classList.remove("hidden");
   document.getElementById("btnTotal").innerText = document.getElementById("total").innerText;
+  calculateSplit();
 }
 
 function closeCart() {
@@ -117,29 +138,55 @@ function selectCategory(category) {
     btn.classList.remove("bg-emerald-600", "text-white");
     btn.classList.add("bg-gray-200");
   });
-  event.target.classList.remove("bg-gray-200");
-  event.target.classList.add("bg-emerald-600", "text-white");
+
+  // Safe way to handle event target
+  if (window.event && window.event.target) {
+    const btn = window.event.target;
+    btn.classList.remove("bg-gray-200");
+    btn.classList.add("bg-emerald-600", "text-white");
+  }
   renderMenu();
 }
 let teaMenu = [];
 
 async function fetchMenu() {
+  logDebug("Fetching menu from API...");
   try {
-    const res = await fetch('/api/menu');
+    const res = await fetch('/api/menu?v=' + Date.now());
     teaMenu = await res.json();
+    logDebug(`Fetched ${teaMenu.length} items from server.`);
     renderMenu();
   } catch (err) {
+    logDebug(`FETCH ERROR: ${err.message}`);
     console.error("Failed to fetch menu", err);
   }
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  const savedLoc = localStorage.getItem('userLocation');
-  if (savedLoc) document.getElementById('currentLoc').innerText = savedLoc;
-  fetchMenu();
+  logDebug("Page Loaded - Initializing Scripts...");
+
+  try {
+    const savedLoc = localStorage.getItem('userLocation');
+    const locEl = document.getElementById('currentLoc');
+    if (savedLoc && locEl) locEl.innerText = savedLoc;
+
+    fetchMenu();
+    loadSavedAddress();
+    calculateCatering();
+
+    // Initial breadcrumb/UI sync
+    renderMenu();
+  } catch (err) {
+    logDebug(`INIT ERROR: ${err.message}`);
+  }
 });
 
 function renderMenu() {
+  if (!Array.isArray(teaMenu)) {
+    console.error("teaMenu is not an array:", teaMenu);
+    return;
+  }
+
   const beverageGrid = document.getElementById("beverageGrid");
   const breakfastGrid = document.getElementById("breakfastGrid");
   const lunchGrid = document.getElementById("lunchGrid");
@@ -159,19 +206,33 @@ function renderMenu() {
     if (el) el.innerHTML = "";
   });
 
-  const search = document.getElementById("searchTea") ? document.getElementById("searchTea").value.toLowerCase() : "";
+  const searchInput = document.getElementById("searchTea");
+  const search = searchInput ? searchInput.value.toLowerCase() : "";
+  const healthyToggle = document.getElementById("healthyModeToggle");
+  const isHealthyMode = healthyToggle ? healthyToggle.checked : false;
+
+  logDebug(`Rendering menu: ${teaMenu.length} items fetched.`);
+  logDebug(`Mode: Healthy=${isHealthyMode}, Category=${selectedCategory}`);
 
   // Filter by category, search AND active status
-  const filtered = teaMenu.filter(t =>
-    t.active !== false &&
-    (!selectedCategory || t.category === selectedCategory) &&
-    t.name.toLowerCase().includes(search)
-  );
+  const filtered = teaMenu.filter(t => {
+    // case-insensitive matching for category
+    const matchesCategory = !selectedCategory || (t.category && t.category.toLowerCase() === selectedCategory.toLowerCase());
+    const matchesSearch = !search || (t.name && t.name.toLowerCase().includes(search));
+    const matchesHealthy = !isHealthyMode || t.category === 'Healthy' || (t.calories && t.calories < 300);
+    const isActive = t.active !== false;
+
+    return isActive && matchesCategory && matchesSearch && matchesHealthy;
+  });
+
+  logDebug(`Filtered items: ${filtered.length}. Rendering...`);
 
   // Hide all sections initially
   [beverageSection, breakfastSection, lunchSection, dinnerSection, fastFoodSection, dietSection].forEach(s => {
     if (s) s.classList.add('hidden');
   });
+
+  logDebug(`Rendering ${filtered.length} items to grids...`);
 
   filtered.forEach(t => {
     const isFav = favorites.includes(t.name);
@@ -203,13 +264,18 @@ function renderMenu() {
       targetSection = dietSection;
     }
     else {
-      // Default to Fast Food / Snacks for everything else
       targetGrid = fastFoodGrid;
       targetSection = fastFoodSection;
     }
 
-    if (!targetGrid) return;
-    if (targetSection) targetSection.classList.remove('hidden');
+    if (!targetGrid) {
+      logDebug(`WARNING: No grid for item ${t.name} (cat: ${cat})`);
+      return;
+    }
+
+    if (targetSection) {
+      targetSection.classList.remove('hidden');
+    }
 
     const card = `
       <div class="glass-card p-4 flex justify-between items-center group mb-4 relative overflow-hidden">
@@ -217,8 +283,9 @@ function renderMenu() {
         
         <div class="flex-1 pr-4 relative z-10">
           <div class="flex items-center gap-2 mb-1">
-             <i class="fa-regular fa-square-caret-up text-[12px] ${t.category === 'Diet' ? 'text-green-500' : 'text-red-500'}"></i>
+             <i class="fa-regular fa-square-caret-up text-[12px] ${t.category === 'Healthy' ? 'text-green-500' : 'text-red-500'}"></i>
              ${t.bestseller ? `<span class="bg-amber-500/20 text-amber-500 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider shadow-[0_0_10px_rgba(245,158,11,0.2)]"><i class="fa-solid fa-star text-[9px]"></i> Bestseller</span>` : ""}
+             ${isHealthyMode && t.calories ? `<span class="bg-emerald-500/20 text-emerald-400 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider"><i class="fa-solid fa-fire text-[9px]"></i> ${t.calories} kcal</span>` : ""}
           </div>
           <h3 class="font-bold text-gray-100 text-lg mb-1 group-hover:text-emerald-400 transition-colors">${t.name}</h3>
           <p class="font-bold text-white text-base mb-2">₹${t.price}</p>
@@ -616,6 +683,33 @@ function detectLocation() {
   } else {
     alert("Geolocation is not supported by your browser.");
   }
+}
+
+/* NEW FEATURES LOGIC */
+
+function toggleHealthyMode() {
+  const isHealthy = document.getElementById("healthyModeToggle").checked;
+  if (isHealthy) {
+    showToast("Healthy Mode ON: Filtering junk food & showing calories", "success");
+  }
+  renderMenu();
+}
+
+function calculateSplit() {
+  const total = parseFloat(document.getElementById("total").innerText) || 0;
+  const friends = parseInt(document.getElementById("numFriends").value) || 1;
+  const split = friends > 0 ? (total / friends).toFixed(2) : total;
+  document.getElementById("splitAmount").innerText = split;
+}
+
+function calculateCatering() {
+  const guests = parseInt(document.getElementById("numGuests").value) || 50;
+  const perPlate = parseInt(document.getElementById("cateringType").value) || 250;
+
+  const total = guests * perPlate;
+
+  document.getElementById("cateringEstimate").innerText = total.toLocaleString();
+  document.getElementById("perPlateCost").innerText = perPlate;
 }
 
 

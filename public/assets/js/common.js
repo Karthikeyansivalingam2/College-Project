@@ -132,14 +132,27 @@ if ('serviceWorker' in navigator) {
   });
 }
 
-let deferredPrompt;
-const installBtn = document.getElementById('installAppBtn');
+// Global variable for the prompt
+window.deferredPrompt = null;
 
 window.addEventListener('beforeinstallprompt', (e) => {
+  // Prevent the mini-infobar from appearing on mobile
   e.preventDefault();
-  deferredPrompt = e;
+  // Stash the event so it can be triggered later.
+  window.deferredPrompt = e;
+
+  // Check if the button exists (it might be loaded dynamically)
+  const installBtn = document.getElementById('installAppBtn');
   if (installBtn) {
     installBtn.classList.remove('hidden');
-    // Listener attached in loadComponents if button dynamic, or here if static
+
+    // Add click listener here just in case loadComponents ran already
+    installBtn.addEventListener('click', () => {
+      installBtn.style.display = 'none';
+      window.deferredPrompt.prompt();
+      window.deferredPrompt.userChoice.then((choiceResult) => {
+        window.deferredPrompt = null;
+      });
+    });
   }
 });

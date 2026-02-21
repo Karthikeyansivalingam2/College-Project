@@ -85,44 +85,147 @@ const MenuItemSchema = new mongoose.Schema({
     category: String,
     bestseller: Boolean,
     image: String,
-    active: { type: Boolean, default: true }
+    active: { type: Boolean, default: true },
+    calories: Number
 });
 const MenuItem = mongoose.model('MenuItem', MenuItemSchema);
 
-// --- Initialization: Seed Menu Items if empty ---
-const initialMenu = [
-    { id: 1, name: "Tea", price: 40, category: "Popular", bestseller: true, image: "./assets/images/tea-order-photo_7.jpg", active: true },
-    { id: 2, name: "Masala Tea", price: 40, category: "Popular", bestseller: true, image: "./assets/images/tea-order-photo_1.jpg", active: true },
-    { id: 3, name: "Ginger Tea", price: 45, category: "Popular", bestseller: true, image: "./assets/images/tea-order-photo_2.jpg", active: true },
-    { id: 4, name: "Green Tea", price: 50, category: "Healthy", bestseller: false, image: "./assets/images/tea-order-photo_3.jpg", active: true },
-    { id: 5, name: "Irani Chai", price: 120, category: "Milk Special", bestseller: true, image: "./assets/images/tea-order-photo_4.jpg", active: true },
-    { id: 6, name: "Kashmiri Kahwa", price: 90, category: "Premium", bestseller: false, image: "./assets/images/tea-order-photo_5.jpg", active: true },
-    { id: 7, name: "Lemon Iced Tea", price: 70, category: "Cold", bestseller: false, image: "./assets/images/tea-order-photo_6.jpg", active: true },
-    { id: 8, name: "chamomile Tea", price: 50, category: "Healthy", bestseller: false, image: "./assets/images/tea-order-photo_8.jpg", active: true },
-    { id: 9, name: "Black Tea", price: 50, category: "Healthy", bestseller: false, image: "./assets/images/tea-order-photo_9.jpg", active: true },
-    { id: 10, name: "Tea with Biscuits", price: 80, category: "Snacks", bestseller: false, image: "./assets/images/tea-order-photo_10.jpg", active: true },
-    { id: 11, name: "Onion Samosa (2 pcs)", price: 30, category: "Snacks", bestseller: true, image: "https://placehold.co/400x300?text=Onion+Samosa", active: true },
-    { id: 12, name: "Egg Puff", price: 35, category: "Snacks", bestseller: false, image: "https://placehold.co/400x300?text=Egg+Puff", active: true },
-    { id: 13, name: "Bun Butter Jam", price: 25, category: "Snacks", bestseller: true, image: "https://placehold.co/400x300?text=Bun+Butter+Jam", active: true },
-    { id: 14, name: "Masala Vada (2 pcs)", price: 30, category: "Snacks", bestseller: false, image: "https://placehold.co/400x300?text=Masala+Vada", active: true },
-    { id: 15, name: "Bread Omelette", price: 50, category: "Snacks", bestseller: false, image: "https://placehold.co/400x300?text=Bread+Omelette", active: true },
-    { id: 16, name: "Veg Fried Rice", price: 90, category: "Fast Food", bestseller: true, image: "https://placehold.co/400x300?text=Fried+Rice", active: true },
-    { id: 17, name: "Chicken Noodles", price: 110, category: "Fast Food", bestseller: true, image: "https://placehold.co/400x300?text=Chicken+Noodles", active: true },
-    { id: 18, name: "Gobi Manchurian", price: 80, category: "Fast Food", bestseller: false, image: "https://placehold.co/400x300?text=Gobi+Manchurian", active: true },
-    { id: 19, name: "Idli (2 pcs)", price: 20, category: "Breakfast", bestseller: true, image: "https://placehold.co/400x300?text=Idli", active: true },
-    { id: 20, name: "Ghee Pongal", price: 40, category: "Breakfast", bestseller: true, image: "https://placehold.co/400x300?text=Pongal", active: true },
-    { id: 21, name: "Masala Dosa", price: 50, category: "Breakfast", bestseller: false, image: "https://placehold.co/400x300?text=Masala+Dosa", active: true },
-    { id: 22, name: "Vada (1 pc)", price: 10, category: "Breakfast", bestseller: false, image: "https://placehold.co/400x300?text=Vada", active: true }
+const initialMenuBase = [
+    { id: 1, name: "Normal Tea", price: 40, category: "Popular", image: "./assets/images/tea-order-photo_7.jpg", calories: 120 },
+    { id: 2, name: "Filter Coffee", price: 45, category: "Popular", image: "https://images.unsplash.com/photo-1594910410712-402287968db8?q=80&w=400", calories: 180 },
+    { id: 3, name: "Chicken Biryani", price: 220, category: "Lunch", image: "https://placehold.co/400x300?text=Chicken+Biryani", calories: 750 },
+    { id: 4, name: "Veg Meals", price: 160, category: "Lunch", image: "https://placehold.co/400x300?text=Veg+Meals", calories: 850 },
+    { id: 5, name: "Idli Sambar", price: 60, category: "Breakfast", image: "https://placehold.co/400x300?text=Idli", calories: 180 },
+    { id: 6, name: "Masala Dosa", price: 85, category: "Breakfast", image: "https://placehold.co/400x300?text=Dosa", calories: 350 },
+    { id: 7, name: "Chicken Parotta", price: 140, category: "Dinner", image: "https://placehold.co/400x300?text=Parotta", calories: 620 },
+    { id: 8, name: "Greek Salad", price: 180, category: "Healthy", image: "https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?q=80&w=400", calories: 220 },
+    { id: 9, name: "Veg Burger", price: 110, category: "Fast Food", image: "https://placehold.co/400x300?text=Burger", calories: 480 },
+    { id: 10, name: "French Fries", price: 90, category: "Fast Food", image: "https://placehold.co/400x300?text=Fries", calories: 410 }
 ];
 
+const imagePool = {
+    "Popular": [
+        "https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=400",
+        "https://images.unsplash.com/photo-1594910410712-402287968db8?q=80&w=400",
+        "https://images.unsplash.com/photo-1517673132405-a56a62b189ee?q=80&w=400",
+        "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?q=80&w=400",
+        "https://images.unsplash.com/photo-1599390805042-3c18e69817cf?q=80&w=400",
+        "https://images.unsplash.com/photo-1556910103-1c02745aae4d?q=80&w=400",
+        "https://images.unsplash.com/photo-1550583726-2a7e716ed5d2?q=80&w=400"
+    ],
+    "Lunch": [
+        "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?q=80&w=400",
+        "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=400",
+        "https://images.unsplash.com/photo-1567306301498-519dde9cead7?q=80&w=400",
+        "https://images.unsplash.com/photo-1550547660-d9450f859349?q=80&w=400",
+        "https://images.unsplash.com/photo-1565557623262-b51c2513a641?q=80&w=400",
+        "https://images.unsplash.com/photo-1626074353765-517a681e40be?q=80&w=400",
+        "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?q=80&w=400",
+        "https://images.unsplash.com/photo-1589187151032-aa00ad04100c?q=80&w=400"
+    ],
+    "Breakfast": [
+        "https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?q=80&w=400",
+        "https://images.unsplash.com/photo-1525351484163-7529414344d8?q=80&w=400",
+        "https://images.unsplash.com/photo-1482049016688-2d3e1b311543?q=80&w=400",
+        "https://images.unsplash.com/photo-1467003909585-2f8a72700288?q=80&w=400",
+        "https://images.unsplash.com/photo-1538332576228-eb5b4c4de6f5?q=80&w=400",
+        "https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?q=80&w=400",
+        "https://images.unsplash.com/photo-1513442542250-854d436a73f2?q=80&w=400"
+    ],
+    "Dinner": [
+        "https://images.unsplash.com/photo-1551183053-bf91a1d81141?q=80&w=400",
+        "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?q=80&w=400",
+        "https://images.unsplash.com/photo-1543339308-43e59d6b73a6?q=80&w=400",
+        "https://images.unsplash.com/photo-1559339352-11d035aa65de?q=80&w=400",
+        "https://images.unsplash.com/photo-1514327605112-b887c0e61c0a?q=80&w=400",
+        "https://images.unsplash.com/photo-1560717789-0ac7c58ac90a?q=80&w=400",
+        "https://images.unsplash.com/photo-1563805042-7684c019e1cb?q=80&w=400"
+    ],
+    "Healthy": [
+        "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?q=80&w=400",
+        "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=400",
+        "https://images.unsplash.com/photo-1490818387583-1baba5e638af?q=80&w=400",
+        "https://images.unsplash.com/photo-1511690656952-34342bb7c2f2?q=80&w=400",
+        "https://images.unsplash.com/photo-1490645935967-10de6ba17061?q=80&w=400",
+        "https://images.unsplash.com/photo-1547592166-23ac45744acd?q=80&w=400",
+        "https://images.unsplash.com/photo-1540420773420-3366772f4999?q=80&w=400"
+    ],
+    "Fast Food": [
+        "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=400",
+        "https://images.unsplash.com/photo-1571091718767-18b5c1457add?q=80&w=400",
+        "https://images.unsplash.com/photo-1551782450-a2132b4ba21d?q=80&w=400",
+        "https://images.unsplash.com/photo-1561758033-d89a9ad46330?q=80&w=400",
+        "https://images.unsplash.com/photo-1552566626-52f8b828add9?q=80&w=400",
+        "https://images.unsplash.com/photo-1572802419224-296b0aeee0d9?q=80&w=400",
+        "https://images.unsplash.com/photo-1550547660-d9450f859349?q=80&w=400"
+    ],
+    "Snacks": [
+        "https://images.unsplash.com/photo-1599487488170-d11ec93a730b?q=80&w=400",
+        "https://images.unsplash.com/photo-1621939514649-280e2ee25f60?q=80&w=400",
+        "https://images.unsplash.com/photo-1601050690597-df056fb1b7ea?q=80&w=400",
+        "https://images.unsplash.com/photo-1541592106381-b31e9677c0e5?q=80&w=400",
+        "https://images.unsplash.com/photo-1582196016295-f8c499d33d1a?q=80&w=400",
+        "https://images.unsplash.com/photo-1558961363-fa8fdf82db35?q=80&w=400",
+        "https://images.unsplash.com/photo-1536304993881-ff6e9eefa2a6?q=80&w=400"
+    ]
+};
+
+function generateExpandedMenu(targetCount = 300) {
+    const finalMenu = [];
+    const prefixes = ["Classic", "Spicy", "Premium", "Special", "Home Style", "Chef's", "Royal", "Hyderabadi", "Chettinad", "Malabar"];
+    const suffixes = ["Combo", "Delight", "Platter", "Bowl", "Box", "Blast", "Supreme", "Treat"];
+    // const categories = ["Popular", "Lunch", "Breakfast", "Dinner", "Healthy", "Fast Food", "Snacks", "Milk Special", "Premium", "Cold"]; // Removed as no longer directly used
+
+    // Seed with existing 120 items first (keeping manual ones) or just generate fresh
+    // For simplicity and to ensure 300, let's generate variations
+    for (let i = 1; i <= targetCount; i++) {
+        const base = initialMenuBase[i % initialMenuBase.length];
+        const prefix = prefixes[Math.floor(Math.random() * prefixes.length)];
+        const suffix = suffixes[Math.floor(Math.random() * suffixes.length)];
+
+        // Pick individual random image from pool based on category
+        const pool = imagePool[base.category] || imagePool["Popular"]; // Fallback to Popular if category not found
+        const randomImg = pool[Math.floor(Math.random() * pool.length)];
+
+        finalMenu.push({
+            id: i,
+            name: `${prefix} ${base.name} ${suffix} ${i}`,
+            price: base.price + (Math.floor(Math.random() * 10) * 10), // add random cost
+            category: base.category,
+            bestseller: Math.random() > 0.8,
+            image: randomImg,
+            active: true,
+            calories: base.calories + Math.floor(Math.random() * 100)
+        });
+    }
+    return finalMenu;
+}
+
 async function seedMenu() {
-    const count = await MenuItem.countDocuments();
-    if (count === 0) {
-        await MenuItem.insertMany(initialMenu);
-        console.log("Menu Seeded to MongoDB");
+    try {
+        const fullMenu = generateExpandedMenu(300);
+        const operations = fullMenu.map(item => ({
+            updateOne: {
+                filter: { id: item.id },
+                update: { $set: item },
+                upsert: true
+            }
+        }));
+        await MenuItem.bulkWrite(operations);
+        console.log("300 Diverse Menu Items Synced with MongoDB");
+    } catch (err) {
+        console.error("Menu Seed Error:", err);
     }
 }
 seedMenu();
+
+// Graceful error handling for server
+process.on('unhandledRejection', (reason, promise) => {
+    console.error('Unhandled Rejection at:', promise, 'reason:', reason);
+});
+process.on('uncaughtException', (err) => {
+    console.error('Uncaught Exception:', err);
+});
 
 // --- API Routes ---
 

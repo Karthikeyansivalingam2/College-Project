@@ -9,6 +9,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         .sidebar-link.active {
             background: linear-gradient(90deg, rgba(16, 185, 129, 0.2), transparent);
@@ -111,6 +112,23 @@
                         </div>
                         <p class="text-gray-400 text-xs uppercase tracking-wider font-bold mb-2">Revenue (Est)</p>
                         <h2 class="text-3xl font-bold text-white tracking-tight">₹<span id="totalRevenue">0</span></h2>
+                    </div>
+                </div>
+
+                <!-- Charts Row -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                    <div class="glass-card p-6 border border-white/10">
+                        <h3 class="text-sm font-bold text-gray-400 uppercase tracking-widest mb-4">Sales Overview</h3>
+                        <div class="h-[250px]">
+                            <canvas id="salesChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="glass-card p-6 border border-white/10">
+                        <h3 class="text-sm font-bold text-gray-400 uppercase tracking-widest mb-4">Partner Distribution
+                        </h3>
+                        <div class="h-[250px] flex justify-center">
+                            <canvas id="partnerChart"></canvas>
+                        </div>
                     </div>
                 </div>
 
@@ -253,6 +271,68 @@
         }
 
         // Fetch Data
+        // Chart Variables
+        let salesChart = null;
+        let partnerChart = null;
+
+        function updateCharts(data) {
+            const ctxSales = document.getElementById('salesChart').getContext('2d');
+            const ctxPartner = document.getElementById('partnerChart').getContext('2d');
+
+            // 1. Sales Chart (Orders count by status)
+            const statusCounts = { 'Pending': 0, 'Accepted': 0, 'Completed': 0, 'Rejected': 0 };
+            data.orders.forEach(o => { statusCounts[o.status || 'Pending']++; });
+
+            if (salesChart) salesChart.destroy();
+            salesChart = new Chart(ctxSales, {
+                type: 'bar',
+                data: {
+                    labels: Object.keys(statusCounts),
+                    datasets: [{
+                        label: 'Orders',
+                        data: Object.values(statusCounts),
+                        backgroundColor: ['#f59e0b', '#10b981', '#3b82f6', '#ef4444'],
+                        borderRadius: 8
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        y: { beginAtZero: true, grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#9ca3af' } },
+                        x: { grid: { display: false }, ticks: { color: '#9ca3af' } }
+                    }
+                }
+            });
+
+            // 2. Partner Chart (Active vs Pending)
+            const activeCount = data.partners.filter(p => p.status === 'Active').length;
+            const pendingCount = data.partners.filter(p => p.status === 'Pending').length;
+
+            if (partnerChart) partnerChart.destroy();
+            partnerChart = new Chart(ctxPartner, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Active', 'Pending'],
+                    datasets: [{
+                        data: [activeCount, pendingCount],
+                        backgroundColor: ['#10b981', '#f59e0b'],
+                        borderWidth: 0,
+                        hoverOffset: 10
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'bottom', labels: { color: '#9ca3af', usePointStyle: true, padding: 20 } }
+                    },
+                    cutout: '70%'
+                }
+            });
+        }
+
         async function loadDashboard() {
             try {
                 const res = await fetch('/api/admin/data');
@@ -261,6 +341,9 @@
                 // Stats
                 document.getElementById('totalOrders').innerText = data.orders.length;
                 document.getElementById('totalEnquiries').innerText = data.enquiries.length;
+
+                // Update Charts
+                updateCharts(data);
 
                 let revenue = 0;
 
