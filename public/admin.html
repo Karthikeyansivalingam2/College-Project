@@ -12,9 +12,9 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         .sidebar-link.active {
-            background: linear-gradient(90deg, rgba(16, 185, 129, 0.2), transparent);
-            border-left: 3px solid #10b981;
-            color: #10b981;
+            background: #fff1f2;
+            border-right: 4px solid #e23744;
+            color: #e23744;
         }
 
         /* Custom scrollbar for tables */
@@ -23,49 +23,56 @@
         }
 
         .overflow-x-auto::-webkit-scrollbar-track {
-            background: rgba(0, 0, 0, 0.2);
+            background: #f3f4f6;
         }
 
         .overflow-x-auto::-webkit-scrollbar-thumb {
-            background: rgba(255, 255, 255, 0.1);
+            background: #d1d5db;
             border-radius: 3px;
         }
     </style>
 </head>
 
-<body class="bg-gray-950 text-gray-100 min-h-screen">
+<body class="bg-gray-50 text-gray-900 min-h-screen font-medium">
 
-    <div class="flex h-screen">
+    <div class="flex h-screen overflow-hidden">
         <!-- Sidebar -->
         <aside id="sidebar"
-            class="fixed inset-y-0 left-0 z-50 w-64 glass border-r border-white/5 flex flex-col transform -translate-x-full md:translate-x-0 md:static transition-transform duration-300">
-            <div class="p-6 text-2xl font-bold border-b border-white/5 flex justify-between items-center text-white">
-                <span class="flex items-center gap-2"><i class="fa-solid fa-user-shield text-emerald-500"></i> Foodie
-                    Admin</span>
-                <button onclick="toggleSidebar()" class="md:hidden text-gray-400 hover:text-white"><i
-                        class="fa-solid fa-xmark"></i></button>
+            class="fixed inset-y-0 left-0 z-50 w-72 bg-white border-r border-transparent flex flex-col transform -translate-x-full lg:translate-x-0 lg:static transition-transform duration-300 shadow-2xl">
+            <div class="p-8 border-b border-gray-50 flex justify-between items-center bg-white">
+                <span class="flex items-center gap-3">
+                    <div
+                        class="w-10 h-10 bg-red-500 rounded-lg flex items-center justify-center text-white font-black text-2xl shadow-lg shadow-red-500/20">
+                        F</div>
+                    <span class="text-gray-900 font-black text-2xl tracking-tighter uppercase">Admin Panel</span>
+                </span>
+                <button onclick="toggleSidebar()"
+                    class="lg:hidden text-gray-400 hover:text-red-500 transition-colors"><i
+                        class="fa-solid fa-xmark text-xl"></i></button>
             </div>
-            <nav class="flex-1 p-4 space-y-2 overflow-y-auto">
+            <nav class="flex-1 p-6 space-y-3 overflow-y-auto">
+                <div class="text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] mb-4 px-4">Core Management
+                </div>
                 <button onclick="showSection('orders')"
-                    class="sidebar-link active w-full text-left py-3 px-4 rounded-xl hover:bg-white/5 flex items-center gap-3 transition text-gray-300 font-medium">
+                    class="sidebar-link active w-full text-left py-4 px-5 rounded-2xl hover:bg-gray-50 flex items-center gap-4 transition-all font-bold text-gray-600">
                     <i class="fa-solid fa-cart-shopping w-5"></i> Retail Orders
                 </button>
                 <button onclick="showSection('enquiries')"
-                    class="sidebar-link w-full text-left py-3 px-4 rounded-xl hover:bg-white/5 flex items-center gap-3 transition text-gray-300 font-medium">
+                    class="sidebar-link w-full text-left py-4 px-5 rounded-2xl hover:bg-gray-50 flex items-center gap-4 transition-all font-bold text-gray-600">
                     <i class="fa-solid fa-envelope w-5"></i> Enquiries
                 </button>
                 <button onclick="showSection('partners')"
-                    class="sidebar-link w-full text-left py-3 px-4 rounded-xl hover:bg-white/5 flex items-center gap-3 transition text-gray-300 font-medium">
-                    <i class="fa-solid fa-handshake w-5"></i> Partners
+                    class="sidebar-link w-full text-left py-4 px-5 rounded-2xl hover:bg-gray-50 flex items-center gap-4 transition-all font-bold text-gray-600">
+                    <i class="fa-solid fa-handshake w-5"></i> Partner Enq
                 </button>
                 <button onclick="showSection('careers')"
-                    class="sidebar-link w-full text-left py-3 px-4 rounded-xl hover:bg-white/5 flex items-center gap-3 transition text-gray-300 font-medium">
-                    <i class="fa-solid fa-briefcase w-5"></i> Careers
+                    class="sidebar-link w-full text-left py-4 px-5 rounded-2xl hover:bg-gray-50 flex items-center gap-4 transition-all font-bold text-gray-600">
+                    <i class="fa-solid fa-briefcase w-5"></i> Career Enq
                 </button>
 
-                <div class="pt-4 mt-auto border-t border-white/5">
+                <div class="pt-8 mt-8 border-t border-gray-50">
                     <button onclick="logout()"
-                        class="w-full text-left py-3 px-4 rounded-xl hover:bg-red-500/10 flex items-center gap-3 text-red-400 hover:text-red-300 transition font-medium">
+                        class="w-full text-left py-4 px-5 rounded-2xl hover:bg-red-50 flex items-center gap-4 text-gray-500 hover:text-red-600 transition-all font-bold">
                         <i class="fa-solid fa-right-from-bracket w-5"></i> Logout
                     </button>
                 </div>
@@ -73,60 +80,80 @@
         </aside>
 
         <!-- Overlay for mobile -->
-        <div id="sidebarOverlay" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-40 hidden md:hidden"
+        <div id="sidebarOverlay" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 hidden lg:hidden"
             onclick="toggleSidebar()">
         </div>
 
         <!-- Main Content -->
-        <main class="flex-1 overflow-hidden flex flex-col h-screen">
+        <main class="flex-1 overflow-hidden flex flex-col h-screen bg-gray-50">
             <!-- Mobile Header -->
             <header
-                class="glass shadow p-4 md:hidden flex justify-between items-center sticky top-0 z-30 border-b border-white/5 shrink-0">
-                <h1 class="text-xl font-bold text-white">Foodie Admin</h1>
+                class="bg-white shadow-sm p-5 lg:hidden flex justify-between items-center sticky top-0 z-30 border-b border-gray-100 shrink-0">
+                <h1 class="text-2xl font-black text-gray-900 tracking-tighter uppercase">Foodie Admin</h1>
                 <button onclick="toggleSidebar()"
-                    class="text-gray-300 hover:text-white p-2 rounded-lg hover:bg-white/5"><i
-                        class="fa-solid fa-bars text-xl"></i></button>
+                    class="text-gray-500 hover:text-red-500 p-2 rounded-xl hover:bg-red-50 transition-all"><i
+                        class="fa-solid fa-bars text-2xl"></i></button>
             </header>
 
-            <div class="flex-grow overflow-y-auto p-4 md:p-8">
+            <div class="flex-grow overflow-y-auto p-6 lg:p-12">
+
+                <!-- Header Intro -->
+                <div class="mb-10 lg:flex items-center justify-between">
+                    <div>
+                        <h2 class="text-4xl font-black text-gray-900 tracking-tighter uppercase mb-2">Dashboard Overview
+                        </h2>
+                        <p class="text-gray-500 font-bold uppercase tracking-widest text-xs">Real-time control center
+                            for Foodie Zone</p>
+                    </div>
+                </div>
 
                 <!-- Stats Row -->
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                    <div class="glass-card p-6 relative overflow-hidden group">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+                    <div
+                        class="bg-white p-8 rounded-[2rem] border border-gray-100 shadow-sm relative overflow-hidden group hover:shadow-xl transition-all duration-500">
                         <div
-                            class="absolute -right-6 -top-6 w-24 h-24 bg-blue-500/10 rounded-full group-hover:bg-blue-500/20 transition-all">
+                            class="absolute -right-6 -top-6 w-24 h-24 bg-red-50 rounded-full group-hover:scale-150 transition-all duration-700 opacity-50">
                         </div>
-                        <p class="text-gray-400 text-xs uppercase tracking-wider font-bold mb-2">Total Orders</p>
-                        <h2 class="text-3xl font-bold text-white tracking-tight" id="totalOrders">0</h2>
+                        <p class="text-gray-400 text-[10px] uppercase font-black tracking-widest mb-4 relative z-10">
+                            Total Orders</p>
+                        <h2 class="text-5xl font-black text-gray-900 tracking-tighter relative z-10" id="totalOrders">0
+                        </h2>
                     </div>
-                    <div class="glass-card p-6 relative overflow-hidden group">
+                    <div
+                        class="bg-white p-8 rounded-[2rem] border border-gray-100 shadow-sm relative overflow-hidden group hover:shadow-xl transition-all duration-500">
                         <div
-                            class="absolute -right-6 -top-6 w-24 h-24 bg-green-500/10 rounded-full group-hover:bg-green-500/20 transition-all">
+                            class="absolute -right-6 -top-6 w-24 h-24 bg-blue-50 rounded-full group-hover:scale-150 transition-all duration-700 opacity-50">
                         </div>
-                        <p class="text-gray-400 text-xs uppercase tracking-wider font-bold mb-2">Total Enquiries</p>
-                        <h2 class="text-3xl font-bold text-white tracking-tight" id="totalEnquiries">0</h2>
+                        <p class="text-gray-400 text-[10px] uppercase font-black tracking-widest mb-4 relative z-10">
+                            Total Enquiries</p>
+                        <h2 class="text-5xl font-black text-gray-900 tracking-tighter relative z-10"
+                            id="totalEnquiries">0</h2>
                     </div>
-                    <div class="glass-card p-6 relative overflow-hidden group">
+                    <div
+                        class="bg-white p-8 rounded-[2rem] border border-gray-100 shadow-sm relative overflow-hidden group hover:shadow-xl transition-all duration-500">
                         <div
-                            class="absolute -right-6 -top-6 w-24 h-24 bg-purple-500/10 rounded-full group-hover:bg-purple-500/20 transition-all">
+                            class="absolute -right-6 -top-6 w-24 h-24 bg-amber-50 rounded-full group-hover:scale-150 transition-all duration-700 opacity-50">
                         </div>
-                        <p class="text-gray-400 text-xs uppercase tracking-wider font-bold mb-2">Revenue (Est)</p>
-                        <h2 class="text-3xl font-bold text-white tracking-tight">₹<span id="totalRevenue">0</span></h2>
+                        <p class="text-gray-400 text-[10px] uppercase font-black tracking-widest mb-4 relative z-10">
+                            Revenue (Est)</p>
+                        <h2 class="text-5xl font-black text-gray-900 tracking-tighter relative z-10">₹<span
+                                id="totalRevenue">0</span></h2>
                     </div>
                 </div>
 
                 <!-- Charts Row -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                    <div class="glass-card p-6 border border-white/10">
-                        <h3 class="text-sm font-bold text-gray-400 uppercase tracking-widest mb-4">Sales Overview</h3>
-                        <div class="h-[250px]">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+                    <div class="bg-white p-8 rounded-[2.5rem] border border-gray-100 shadow-sm">
+                        <h3 class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-6 px-1">Sales
+                            Performance</h3>
+                        <div class="h-[300px]">
                             <canvas id="salesChart"></canvas>
                         </div>
                     </div>
-                    <div class="glass-card p-6 border border-white/10">
-                        <h3 class="text-sm font-bold text-gray-400 uppercase tracking-widest mb-4">Partner Distribution
-                        </h3>
-                        <div class="h-[250px] flex justify-center">
+                    <div class="bg-white p-8 rounded-[2.5rem] border border-gray-100 shadow-sm">
+                        <h3 class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-6 px-1">Partner
+                            Network</h3>
+                        <div class="h-[300px] flex justify-center">
                             <canvas id="partnerChart"></canvas>
                         </div>
                     </div>
@@ -134,25 +161,44 @@
 
                 <!-- Orders Section -->
                 <div id="ordersSection" class="animate-fade-in-up">
-                    <h2 class="text-2xl font-bold mb-6 text-white flex items-center gap-2"><i
-                            class="fa-solid fa-list-check text-emerald-500"></i> Live Orders</h2>
-                    <div class="glass-card overflow-hidden border border-white/10">
+                    <div class="flex items-center justify-between mb-8">
+                        <div>
+                            <h3 class="text-2xl font-black text-gray-900 tracking-tighter uppercase">Recent Orders</h3>
+                            <p class="text-gray-400 text-[10px] font-black uppercase tracking-widest mt-1">Live from
+                                storefront</p>
+                        </div>
+                        <div
+                            class="w-10 h-10 bg-red-50 text-red-500 rounded-xl flex items-center justify-center animate-pulse">
+                            <i class="fa-solid fa-circle text-[8px]"></i>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-[2.5rem] border border-gray-100 shadow-sm overflow-hidden">
                         <div class="overflow-x-auto">
-                            <table class="w-full text-left border-collapse min-w-[700px]">
-                                <thead class="bg-black/20 text-gray-400 uppercase text-xs tracking-wider">
-                                    <tr>
-                                        <th class="p-5 font-semibold">Order ID</th>
-                                        <th class="p-5 font-semibold">Customer</th>
-                                        <th class="p-5 font-semibold">Items</th>
-                                        <th class="p-5 font-semibold">City</th>
-                                        <th class="p-5 font-semibold text-right">Total</th>
-                                        <th class="p-5 font-semibold text-center">Status</th>
+                            <table class="w-full text-left border-collapse min-w-[800px]">
+                                <thead>
+                                    <tr class="bg-gray-50/50 border-b border-gray-50">
+                                        <th class="p-6 text-[10px] font-black text-gray-400 uppercase tracking-widest">
+                                            ID / Tracking</th>
+                                        <th class="p-6 text-[10px] font-black text-gray-400 uppercase tracking-widest">
+                                            Customer Details</th>
+                                        <th class="p-6 text-[10px] font-black text-gray-400 uppercase tracking-widest">
+                                            Items ordered</th>
+                                        <th class="p-6 text-[10px] font-black text-gray-400 uppercase tracking-widest">
+                                            Store City</th>
+                                        <th
+                                            class="p-6 text-[10px] font-black text-gray-400 uppercase tracking-widest text-right">
+                                            Total Payable</th>
+                                        <th
+                                            class="p-6 text-[10px] font-black text-gray-400 uppercase tracking-widest text-center">
+                                            Lifecycle</th>
                                     </tr>
                                 </thead>
-                                <tbody id="ordersTableBody" class="divide-y divide-white/5 text-sm">
-                                    <!-- JS will populate this -->
+                                <tbody id="ordersTableBody" class="divide-y divide-gray-50 text-sm">
                                     <tr>
-                                        <td colspan="6" class="p-8 text-center text-gray-500">Loading orders...</td>
+                                        <td colspan="6"
+                                            class="p-12 text-center text-gray-400 font-bold uppercase tracking-widest">
+                                            Syncing with DB...</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -162,33 +208,41 @@
 
                 <!-- Enquiries Section -->
                 <div id="enquiriesSection" class="hidden animate-fade-in-up">
-                    <h2 class="text-2xl font-bold mb-6 text-white flex items-center gap-2"><i
-                            class="fa-solid fa-envelope-open-text text-blue-500"></i> Corporate Enquiries</h2>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="enquiriesGrid">
-                        <!-- JS will populate -->
+                    <h3 class="text-2xl font-black text-gray-900 tracking-tighter uppercase mb-8">Catering Enquiries
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="enquiriesGrid">
+                        <!-- JS populate -->
                     </div>
                 </div>
 
                 <!-- Partners Section -->
                 <div id="partnersSection" class="hidden animate-fade-in-up">
-                    <h2 class="text-2xl font-bold mb-6 text-white flex items-center gap-2"><i
-                            class="fa-solid fa-handshake text-purple-500"></i> Partner Applications</h2>
-                    <div class="glass-card overflow-hidden border border-white/10">
+                    <h3 class="text-2xl font-black text-gray-900 tracking-tighter uppercase mb-8">B2B Partner
+                        Applications</h3>
+                    <div class="bg-white rounded-[2.5rem] border border-gray-100 shadow-sm overflow-hidden">
                         <div class="overflow-x-auto">
                             <table class="w-full text-left border-collapse min-w-[800px]">
-                                <thead class="bg-black/20 text-gray-400 uppercase text-xs tracking-wider">
-                                    <tr>
-                                        <th class="p-5 font-semibold">Partner ID</th>
-                                        <th class="p-5 font-semibold">Business Name</th>
-                                        <th class="p-5 font-semibold">Location</th>
-                                        <th class="p-5 font-semibold">Contact</th>
-                                        <th class="p-5 font-semibold">Date</th>
-                                        <th class="p-5 font-semibold">Status</th>
-                                        <th class="p-5 font-semibold">Actions</th>
+                                <thead>
+                                    <tr class="bg-gray-50/50 border-b border-gray-50">
+                                        <th class="p-6 text-[10px] font-black text-gray-400 uppercase tracking-widest">
+                                            PID</th>
+                                        <th class="p-6 text-[10px] font-black text-gray-400 uppercase tracking-widest">
+                                            Outlet Name</th>
+                                        <th class="p-6 text-[10px] font-black text-gray-400 uppercase tracking-widest">
+                                            Location</th>
+                                        <th class="p-6 text-[10px] font-black text-gray-400 uppercase tracking-widest">
+                                            Contact Point</th>
+                                        <th class="p-6 text-[10px] font-black text-gray-400 uppercase tracking-widest">
+                                            Applied On</th>
+                                        <th class="p-6 text-[10px] font-black text-gray-400 uppercase tracking-widest">
+                                            Status</th>
+                                        <th
+                                            class="p-6 text-[10px] font-black text-gray-400 uppercase tracking-widest text-center">
+                                            Manage</th>
                                     </tr>
                                 </thead>
-                                <tbody id="partnersTableBody" class="divide-y divide-white/5 text-sm">
-                                    <!-- JS will populate -->
+                                <tbody id="partnersTableBody" class="divide-y divide-gray-50 text-sm">
+                                    <!-- JS populate -->
                                 </tbody>
                             </table>
                         </div>
@@ -197,23 +251,30 @@
 
                 <!-- Careers Section -->
                 <div id="careersSection" class="hidden animate-fade-in-up">
-                    <h2 class="text-2xl font-bold mb-6 text-white flex items-center gap-2"><i
-                            class="fa-solid fa-briefcase text-orange-500"></i> Job Applications</h2>
-                    <div class="glass-card overflow-hidden border border-white/10">
+                    <h3 class="text-2xl font-black text-gray-900 tracking-tighter uppercase mb-8">Career Applications
+                    </h3>
+                    <div class="bg-white rounded-[2.5rem] border border-gray-100 shadow-sm overflow-hidden">
                         <div class="overflow-x-auto">
-                            <table class="w-full text-left border-collapse min-w-[700px]">
-                                <thead class="bg-black/20 text-gray-400 uppercase text-xs tracking-wider">
-                                    <tr>
-                                        <th class="p-5 font-semibold">App ID</th>
-                                        <th class="p-5 font-semibold">Applicant</th>
-                                        <th class="p-5 font-semibold">Role</th>
-                                        <th class="p-5 font-semibold">Experience</th>
-                                        <th class="p-5 font-semibold">Contact</th>
-                                        <th class="p-5 font-semibold">Status</th>
+                            <table class="w-full text-left border-collapse min-w-[800px]">
+                                <thead>
+                                    <tr class="bg-gray-50/50 border-b border-gray-50">
+                                        <th class="p-6 text-[10px] font-black text-gray-400 uppercase tracking-widest">
+                                            APP ID</th>
+                                        <th class="p-6 text-[10px] font-black text-gray-400 uppercase tracking-widest">
+                                            Applicant</th>
+                                        <th class="p-6 text-[10px] font-black text-gray-400 uppercase tracking-widest">
+                                            Target Role</th>
+                                        <th class="p-6 text-[10px] font-black text-gray-400 uppercase tracking-widest">
+                                            Exp Profile</th>
+                                        <th class="p-6 text-[10px] font-black text-gray-400 uppercase tracking-widest">
+                                            Verification</th>
+                                        <th
+                                            class="p-6 text-[10px] font-black text-gray-400 uppercase tracking-widest text-center">
+                                            State</th>
                                     </tr>
                                 </thead>
-                                <tbody id="careersTableBody" class="divide-y divide-white/5 text-sm">
-                                    <!-- JS will populate -->
+                                <tbody id="careersTableBody" class="divide-y divide-gray-50 text-sm">
+                                    <!-- JS populate -->
                                 </tbody>
                             </table>
                         </div>
@@ -232,7 +293,6 @@
             overlay.classList.toggle('hidden');
         }
 
-        // Simple View Switcher
         function showSection(id) {
             const sidebar = document.getElementById('sidebar');
             const overlay = document.getElementById('sidebarOverlay');
@@ -241,7 +301,6 @@
                 overlay.classList.add('hidden');
             }
 
-            // Update Sidebar Active State
             document.querySelectorAll('.sidebar-link').forEach(link => {
                 link.classList.remove('active');
                 if (link.getAttribute('onclick').includes(id)) {
@@ -249,16 +308,15 @@
                 }
             });
 
-            document.getElementById('ordersSection').classList.add('hidden');
-            document.getElementById('enquiriesSection').classList.add('hidden');
-            document.getElementById('careersSection').classList.add('hidden');
-            document.getElementById('partnersSection').classList.add('hidden');
-
+            const sections = ['orders', 'enquiries', 'careers', 'partners'];
+            sections.forEach(s => {
+                const el = document.getElementById(s + 'Section');
+                if (el) el.classList.add('hidden');
+            });
 
             document.getElementById(id + 'Section').classList.remove('hidden');
         }
 
-        // Auth Check
         if (!localStorage.getItem('adminLoggedIn')) {
             window.location.href = 'admin-login.html';
         }
@@ -270,8 +328,6 @@
             }
         }
 
-        // Fetch Data
-        // Chart Variables
         let salesChart = null;
         let partnerChart = null;
 
@@ -279,7 +335,6 @@
             const ctxSales = document.getElementById('salesChart').getContext('2d');
             const ctxPartner = document.getElementById('partnerChart').getContext('2d');
 
-            // 1. Sales Chart (Orders count by status)
             const statusCounts = { 'Pending': 0, 'Accepted': 0, 'Completed': 0, 'Rejected': 0 };
             data.orders.forEach(o => { statusCounts[o.status || 'Pending']++; });
 
@@ -291,8 +346,8 @@
                     datasets: [{
                         label: 'Orders',
                         data: Object.values(statusCounts),
-                        backgroundColor: ['#f59e0b', '#10b981', '#3b82f6', '#ef4444'],
-                        borderRadius: 8
+                        backgroundColor: ['#f87171', '#ef4444', '#b91c1c', '#7f1d1d'],
+                        borderRadius: 12
                     }]
                 },
                 options: {
@@ -300,13 +355,12 @@
                     maintainAspectRatio: false,
                     plugins: { legend: { display: false } },
                     scales: {
-                        y: { beginAtZero: true, grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#9ca3af' } },
-                        x: { grid: { display: false }, ticks: { color: '#9ca3af' } }
+                        y: { beginAtZero: true, grid: { color: '#f3f4f6' }, ticks: { font: { weight: 'bold' } } },
+                        x: { grid: { display: false }, ticks: { font: { weight: 'bold' } } }
                     }
                 }
             });
 
-            // 2. Partner Chart (Active vs Pending)
             const activeCount = data.partners.filter(p => p.status === 'Active').length;
             const pendingCount = data.partners.filter(p => p.status === 'Pending').length;
 
@@ -314,21 +368,21 @@
             partnerChart = new Chart(ctxPartner, {
                 type: 'doughnut',
                 data: {
-                    labels: ['Active', 'Pending'],
+                    labels: ['Active Partners', 'Pending Review'],
                     datasets: [{
                         data: [activeCount, pendingCount],
-                        backgroundColor: ['#10b981', '#f59e0b'],
+                        backgroundColor: ['#ef4444', '#fecaca'],
                         borderWidth: 0,
-                        hoverOffset: 10
+                        hoverOffset: 15
                     }]
                 },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
                     plugins: {
-                        legend: { position: 'bottom', labels: { color: '#9ca3af', usePointStyle: true, padding: 20 } }
+                        legend: { position: 'bottom', labels: { usePointStyle: true, padding: 30, font: { weight: 'bold' } } }
                     },
-                    cutout: '70%'
+                    cutout: '80%'
                 }
             });
         }
@@ -338,183 +392,150 @@
                 const res = await fetch('/api/admin/data');
                 const data = await res.json();
 
-                // Stats
                 document.getElementById('totalOrders').innerText = data.orders.length;
                 document.getElementById('totalEnquiries').innerText = data.enquiries.length;
-
-                // Update Charts
                 updateCharts(data);
 
                 let revenue = 0;
-
                 const tableBody = document.getElementById('ordersTableBody');
                 tableBody.innerHTML = '';
 
                 if (data.orders.length === 0) {
-                    tableBody.innerHTML = `<tr><td colspan="6" class="p-8 text-center text-gray-400">No orders received yet.</td></tr>`;
+                    tableBody.innerHTML = `<tr><td colspan="6" class="p-12 text-center text-gray-400 font-bold uppercase tracking-widest">No orders received yet.</td></tr>`;
                 }
 
                 data.orders.reverse().forEach(order => {
-                    // Calc revenue safely
                     const price = parseFloat(order.total) || 0;
                     revenue += price;
 
                     const row = `
-                        <tr class="hover:bg-white/5 transition border-t border-white/5">
-                            <td class="p-5 font-mono font-semibold text-emerald-400">${order.orderId || 'N/A'}</td>
-                            <td class="p-5">
-                                <div class="font-bold text-gray-100">${order.name}</div>
-                                <div class="text-gray-400 text-xs">${order.mobile}</div>
+                        <tr class="hover:bg-gray-50/50 transition duration-300">
+                            <td class="p-6 font-mono font-black text-red-500 text-xs tracking-tighter">#${order.orderId || 'N/A'}</td>
+                            <td class="p-6">
+                                <div class="font-black text-gray-900 uppercase tracking-tighter text-sm">${order.name}</div>
+                                <div class="text-gray-400 text-[10px] font-bold uppercase tracking-widest">${order.mobile}</div>
                             </td>
-                            <td class="p-5">
-                                <ul class="list-disc list-inside text-gray-400 text-xs">
-                                    ${Object.keys(order.items).map(k => `<li>${k} <span class="text-gray-500">x${order.items[k].qty}</span></li>`).join('')}
+                            <td class="p-6">
+                                <ul class="space-y-1">
+                                    ${Object.keys(order.items).map(k => `<li class="text-xs font-bold text-gray-600 uppercase tracking-tight flex items-center gap-2"><div class="w-1 h-1 bg-red-400 rounded-full"></div> ${k} <span class="text-gray-400">x${order.items[k].qty}</span></li>`).join('')}
                                 </ul>
                             </td>
-                            <td class="p-5 text-gray-400 text-sm">${order.city || '<span class="text-red-400">Missing</span>'}</td>
-                            <td class="p-5 font-bold text-right text-white">₹${order.total}</td>
-                            <td class="p-5 text-center"><span class="px-2.5 py-1 rounded-full text-xs font-bold border ${getStatusColor(order.status)}">${order.status}</span></td>
+                            <td class="p-6 text-gray-500 text-xs font-black tracking-widest uppercase">${order.city || 'GLOBAL'}</td>
+                            <td class="p-6 font-black text-right text-gray-900 text-base">₹${order.total}</td>
+                            <td class="p-6 text-center"><span class="px-4 py-1.5 rounded-xl text-[10px] font-black uppercase tracking-widest shadow-sm ${getStatusColor(order.status)}">${order.status}</span></td>
                         </tr>
                     `;
                     tableBody.innerHTML += row;
                 });
 
-                document.getElementById('totalRevenue').innerText = revenue;
+                document.getElementById('totalRevenue').innerText = revenue.toLocaleString();
 
-                // Load Enquiries
+                // Enquiries
                 const enqGrid = document.getElementById('enquiriesGrid');
                 enqGrid.innerHTML = '';
                 if (data.enquiries.length === 0) {
-                    enqGrid.innerHTML = `<div class="col-span-2 text-center text-gray-400 p-8 glass-card">No enquiries yet.</div>`;
+                    enqGrid.innerHTML = `<div class="col-span-3 text-center text-gray-400 p-12 bg-white rounded-3xl border border-gray-100 font-bold uppercase tracking-widest">Inbox Empty</div>`;
                 }
                 data.enquiries.reverse().forEach(enq => {
                     const row = `
-                        <div class="glass-card p-6 border border-white/10 group hover:shadow-emerald-500/10 transition">
-                            <div class="flex justify-between mb-3">
-                                <span class="font-bold text-lg text-white group-hover:text-emerald-400 transition">${enq.name}</span>
-                                <span class="bg-blue-500/20 text-blue-400 text-xs px-2 py-1 rounded border border-blue-500/30">${enq.enquiryId || 'NEW'}</span>
+                        <div class="bg-white p-8 rounded-[2.5rem] border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-500 group relative overflow-hidden">
+                            <div class="absolute top-0 right-0 w-24 h-24 bg-red-50 rounded-bl-full opacity-50 -mr-4 -mt-4"></div>
+                            <div class="flex justify-between items-start mb-6 relative z-10">
+                                <div>
+                                    <h4 class="font-black text-gray-900 uppercase tracking-tighter text-lg mb-1 group-hover:text-red-500 transition-colors">${enq.name}</h4>
+                                    <p class="text-[10px] font-black uppercase tracking-widest text-red-500">${enq.company || 'Private Party'}</p>
+                                </div>
+                                <span class="bg-gray-50 text-gray-400 text-[9px] font-black px-2 py-1 rounded uppercase tracking-widest">${enq.enquiryId || 'NEW'}</span>
                             </div>
-                            <p class="text-emerald-400 font-semibold mb-3 text-sm flex items-center gap-2"><i class="fa-solid fa-building"></i> ${enq.company || 'Company N/A'}</p>
-                            <div class="space-y-2 text-sm text-gray-400 mb-4">
-                                <p class="flex items-center gap-2"><i class="fa-solid fa-phone w-4 text-gray-500"></i> ${enq.mobile}</p>
-                                <p class="flex items-center gap-2"><i class="fa-solid fa-envelope w-4 text-gray-500"></i> ${enq.email}</p>
+                            <div class="space-y-3 mb-8 relative z-10">
+                                <div class="flex items-center gap-3 text-xs font-bold text-gray-500">
+                                    <i class="fa-solid fa-phone text-red-400 w-4"></i> ${enq.mobile}
+                                </div>
+                                <div class="flex items-center gap-3 text-xs font-bold text-gray-500">
+                                    <i class="fa-solid fa-envelope text-red-400 w-4"></i> ${enq.email}
+                                </div>
                             </div>
-                            <div class="pt-4 border-t border-white/5 flex gap-3">
-                                <a href="tel:${enq.mobile}" class="flex-1 bg-green-500/10 text-green-400 py-2 rounded text-center text-xs font-bold hover:bg-green-500/20 border border-green-500/20 transition uppercase tracking-wider">Call</a>
-                                <a href="mailto:${enq.email}" class="flex-1 bg-white/5 text-gray-300 py-2 rounded text-center text-xs font-bold hover:bg-white/10 border border-white/10 transition uppercase tracking-wider">Email</a>
+                            <div class="flex gap-2 relative z-10">
+                                <a href="tel:${enq.mobile}" class="flex-1 bg-red-500 text-white py-3 rounded-xl text-center text-[10px] font-black uppercase tracking-widest hover:bg-red-600 transition shadow-lg shadow-red-500/20 active:scale-95">Call</a>
+                                <a href="mailto:${enq.email}" class="flex-1 bg-gray-50 text-gray-500 py-3 rounded-xl text-center text-[10px] font-black uppercase tracking-widest hover:bg-gray-100 transition active:scale-95">Reply</a>
                             </div>
                         </div>
                     `;
                     enqGrid.innerHTML += row;
                 });
 
-
-                // Load Job Applications
+                // Careers
                 const careersBody = document.getElementById('careersTableBody');
                 careersBody.innerHTML = '';
-
                 if (!data.jobApplications || data.jobApplications.length === 0) {
-                    careersBody.innerHTML = `<tr><td colspan="6" class="p-8 text-center text-gray-400">No applications received yet.</td></tr>`;
+                    careersBody.innerHTML = `<tr><td colspan="6" class="p-12 text-center text-gray-400 font-bold uppercase tracking-widest">No applicants yet.</td></tr>`;
                 } else {
                     data.jobApplications.reverse().forEach(app => {
-                        const date = app.date ? new Date(app.date).toLocaleDateString() : 'N/A';
-
-                        const row = `
-                            <tr class="hover:bg-white/5 transition border-t border-white/5">
-                                <td class="p-5 font-mono text-emerald-400 text-sm">${app.appId}</td>
-                                <td class="p-5 font-bold text-gray-100">${app.name}</td>
-                                <td class="p-5">
-                                    <span class="bg-blue-500/10 text-blue-400 border border-blue-500/20 px-2 py-1 rounded text-xs font-bold">${app.role}</span>
+                        careersBody.innerHTML += `
+                            <tr class="hover:bg-gray-50/50 transition duration-300">
+                                <td class="p-6 font-black text-red-500 text-xs tracking-widest">${app.appId}</td>
+                                <td class="p-6">
+                                    <div class="font-black text-gray-900 uppercase tracking-tighter text-sm">${app.name}</div>
+                                    <div class="text-gray-400 text-[10px] font-bold uppercase tracking-widest">${app.email}</div>
                                 </td>
-                                <td class="p-5 text-gray-400 text-sm max-w-xs truncate" title="${app.experience}">${app.experience}</td>
-                                <td class="p-5 text-xs">
-                                    <p class="text-gray-300 font-medium">${app.mobile}</p>
-                                    <p class="text-gray-500">${app.email}</p>
-                                </td>
-                                <td class="p-5"><span class="bg-green-500/10 text-green-400 border border-green-500/20 px-2.5 py-1 rounded-full text-xs font-bold">New</span></td>
+                                <td class="p-6"><span class="bg-red-50 text-red-600 text-[10px] font-black px-3 py-1 rounded-lg uppercase tracking-widest shadow-sm">${app.role}</span></td>
+                                <td class="p-6 text-gray-500 text-xs font-bold uppercase tracking-tight max-w-xs truncate">${app.experience}</td>
+                                <td class="p-6 text-xs font-black text-gray-900 tracking-widest">${app.mobile}</td>
+                                <td class="p-6 text-center"><span class="bg-amber-50 text-amber-600 text-[10px] font-black px-3 py-1 rounded-lg uppercase tracking-widest">Under Review</span></td>
                             </tr>
                         `;
-                        careersBody.innerHTML += row;
                     });
                 }
 
-
-                // Load Partners
+                // Partners
                 const partnersBody = document.getElementById('partnersTableBody');
                 partnersBody.innerHTML = '';
-
                 if (!data.partners || data.partners.length === 0) {
-                    partnersBody.innerHTML = `<tr><td colspan="6" class="p-8 text-center text-gray-400">No partner applications yet.</td></tr>`;
+                    partnersBody.innerHTML = `<tr><td colspan="7" class="p-12 text-center text-gray-400 font-bold uppercase tracking-widest">No B2B requests.</td></tr>`;
                 } else {
                     data.partners.reverse().forEach(ptr => {
                         const date = ptr.date ? new Date(ptr.date).toLocaleDateString() : 'N/A';
-                        const row = `
-                        <tr class="hover:bg-white/5 transition border-t border-white/5">
-                            <td class="p-5 font-mono text-emerald-400 text-sm">${ptr.partnerId}</td>
-                            <td class="p-5 font-bold text-gray-100">${ptr.businessName}</td>
-                            <td class="p-5 text-gray-300 text-sm">${ptr.city}</td>
-                            <td class="p-5 font-mono text-gray-400 text-xs">${ptr.mobile || 'N/A'}</td>
-                            <td class="p-5 text-gray-500 text-xs">${date}</td>
-                            <td class="p-5">
-                                <span class="px-2.5 py-1 rounded-full text-xs font-bold border ${ptr.status === 'Active' ? 'bg-green-500/10 text-green-400 border-green-500/20' : (ptr.status === 'Pending' ? 'bg-yellow-500/10 text-yellow-400 border-yellow-500/20' : 'bg-red-500/10 text-red-400 border-red-500/20')}">
-                                    ${ptr.status}
-                                </span>
-                            </td>
-                            <td class="p-5 space-x-2">
-                                ${ptr.status === 'Pending' ? `
-                                    <button onclick="updatePartnerStatus('${ptr.partnerId}', 'Active')" class="text-green-400 hover:text-green-300 hover:scale-110 transition p-1" title="Approve">
-                                        <i class="fa-solid fa-circle-check text-xl"></i>
-                                    </button>
-                                    <button onclick="updatePartnerStatus('${ptr.partnerId}', 'Rejected')" class="text-red-400 hover:text-red-300 hover:scale-110 transition p-1" title="Reject">
-                                        <i class="fa-solid fa-circle-xmark text-xl"></i>
-                                    </button>
-                                ` : '<span class="text-gray-600 text-xs font-bold uppercase">Processed</span>'}
-                            </td>
-                        </tr>
+                        partnersBody.innerHTML += `
+                            <tr class="hover:bg-gray-50/50 transition duration-300">
+                                <td class="p-6 font-black text-red-500 text-xs tracking-widest">${ptr.partnerId}</td>
+                                <td class="p-6 font-black text-gray-900 uppercase tracking-tighter text-sm">${ptr.businessName}</td>
+                                <td class="p-6 text-gray-500 text-xs font-black tracking-widest uppercase">${ptr.city}</td>
+                                <td class="p-6 font-bold text-gray-700 text-xs tracking-widest">${ptr.mobile || 'SECURE'}</td>
+                                <td class="p-6 text-gray-400 text-[10px] font-black uppercase tracking-widest">${date}</td>
+                                <td class="p-6">
+                                    <span class="px-3 py-1 rounded-lg text-[10px] font-black uppercase tracking-widest shadow-sm ${ptr.status === 'Active' ? 'bg-red-600 text-white' : (ptr.status === 'Pending' ? 'bg-amber-50 text-amber-600' : 'bg-gray-100 text-gray-400')}">
+                                        ${ptr.status}
+                                    </span>
+                                </td>
+                                <td class="p-6 text-center">
+                                    ${ptr.status === 'Pending' ? `
+                                        <div class="flex gap-2 justify-center">
+                                            <button onclick="updatePartnerStatus('${ptr.partnerId}', 'Active')" class="w-8 h-8 rounded-lg bg-red-50 text-red-500 hover:bg-red-500 hover:text-white transition-all shadow-sm">
+                                                <i class="fa-solid fa-check text-sm"></i>
+                                            </button>
+                                            <button onclick="updatePartnerStatus('${ptr.partnerId}', 'Rejected')" class="w-8 h-8 rounded-lg bg-gray-50 text-gray-400 hover:bg-gray-200 transition-all shadow-sm">
+                                                <i class="fa-solid fa-xmark text-sm"></i>
+                                            </button>
+                                        </div>
+                                    ` : '<i class="fa-solid fa-circle-check text-red-200"></i>'}
+                                </td>
+                            </tr>
                         `;
-                        partnersBody.innerHTML += row;
                     });
                 }
 
-
-
-            } catch (e) {
-                console.error(e);
-            }
+            } catch (e) { console.error(e); }
         }
 
         function getStatusColor(status) {
-            if (status === 'Accepted') return 'bg-green-500/10 text-green-400 border-green-500/20';
-            if (status === 'Rejected') return 'bg-red-500/10 text-red-400 border-red-500/20';
-            return 'bg-yellow-500/10 text-yellow-500 border-yellow-500/20';
-        }
-
-        async function updateStatus(orderId, status) {
-            if (!confirm(`Are you sure you want to mark this order as ${status}?`)) return;
-
-            try {
-                const res = await fetch('/api/order/status', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ orderId, status })
-                });
-                const data = await res.json();
-
-                if (data.success) {
-                    // Refresh data
-                    loadDashboard();
-                } else {
-                    alert("Failed to update status");
-                }
-            } catch (e) {
-                console.error(e);
-                alert("Error connecting to server");
-            }
+            if (status === 'Accepted') return 'bg-red-600 text-white shadow-red-500/20';
+            if (status === 'Rejected') return 'bg-gray-100 text-gray-400';
+            if (status === 'Completed') return 'bg-gray-900 text-white';
+            return 'bg-amber-50 text-amber-600';
         }
 
         async function updatePartnerStatus(partnerId, status) {
             if (!confirm(`Mark partner ${partnerId} as ${status}?`)) return;
-
             try {
                 const res = await fetch('/api/partner/status', {
                     method: 'POST',
@@ -523,18 +544,11 @@
                 });
                 const data = await res.json();
                 if (data.success) loadDashboard();
-            } catch (e) {
-                console.error(e);
-                alert("Server Error");
-            }
+            } catch (e) { alert("Server Error"); }
         }
 
-        // Init
         loadDashboard();
-
-        // Poll every 5 seconds
-        setInterval(loadDashboard, 5000);
-
+        setInterval(loadDashboard, 10000); // Polling every 10s
     </script>
 </body>
 

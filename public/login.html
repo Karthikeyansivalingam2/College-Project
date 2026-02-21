@@ -12,116 +12,125 @@
   <style>
     body {
       font-family: 'Outfit', sans-serif;
-      background-color: #111827;
-      color: #f3f4f6;
+      background-color: #f8f8f8;
+      color: #1f2937;
     }
   </style>
 </head>
 
 <body class="flex items-center justify-center min-h-screen p-4">
 
-  <div class="bg-gray-800 rounded-2xl shadow-2xl flex overflow-hidden w-full max-w-4xl min-h-[500px]">
+  <div
+    class="bg-white rounded-3xl shadow-[0_32px_64px_-16px_rgba(0,0,0,0.1)] flex overflow-hidden w-full max-w-4xl min-h-[600px] border border-gray-100">
 
     <!-- Left Side: Image & Branding -->
     <div
-      class="hidden md:flex w-1/2 bg-emerald-900 relative flex-col justify-center items-center text-white p-8 text-center">
+      class="hidden md:flex w-1/2 bg-red-600 relative flex-col justify-center items-center text-white p-12 text-center">
 
       <div class="absolute inset-0 z-0 opacity-40">
         <img src="https://images.unsplash.com/photo-1543353071-873f17a7a088?q=80&w=800"
           class="w-full h-full object-cover">
       </div>
 
-      <div class="relative z-10">
-        <h1 class="text-4xl font-bold mb-2">Foodie Zone</h1>
+      <div class="relative z-10 transition-transform hover:scale-105 duration-500">
+        <h1 class="text-5xl font-black mb-4 tracking-tighter uppercase">Foodie Zone</h1>
 
-        <p class="text-emerald-100">Experience the Joy of Authentic Food</p>
+        <p class="text-red-50 text-xl font-medium leading-relaxed">Experience the Joy of Authentic Food</p>
       </div>
     </div>
 
     <!-- Right Side: Forms -->
-    <div class="w-full md:w-1/2 p-8 md:p-12 relative">
+    <div class="w-full md:w-1/2 p-10 md:p-14 relative flex flex-col justify-center">
 
       <!-- Navbar Back Link -->
-      <a href="index.html" class="absolute top-4 right-4 text-gray-400 hover:text-white text-sm">
-        <i class="fa-solid fa-arrow-left"></i> Back to Home
+      <a href="index.html"
+        class="absolute top-6 right-8 text-gray-400 hover:text-red-500 text-sm font-bold uppercase tracking-widest transition-colors">
+        <i class="fa-solid fa-arrow-left mr-2"></i> Home
       </a>
 
       <!-- Tabs -->
-      <div class="flex gap-6 mb-8 border-b">
+      <div class="flex gap-8 mb-10 border-b border-gray-100">
         <button onclick="switchTab('login')" id="tabLogin"
-          class="pb-2 border-b-2 border-emerald-500 font-bold text-emerald-500">Login</button>
+          class="pb-4 border-b-4 border-red-500 font-black text-red-500 uppercase tracking-widest text-sm">Login</button>
         <button onclick="switchTab('signup')" id="tabSignup"
-          class="pb-2 border-b-2 border-transparent text-gray-400 hover:text-white">Sign Up</button>
+          class="pb-4 border-b-4 border-transparent text-gray-400 hover:text-red-500 font-black uppercase tracking-widest text-sm transition-all">Sign
+          Up</button>
       </div>
 
       <!-- Login Form -->
-      <form id="loginForm" class="space-y-4">
-        <h2 class="text-2xl font-bold mb-4">Welcome Back</h2>
+      <form id="loginForm" class="space-y-6">
+        <div>
+          <h2 class="text-3xl font-black text-gray-900 mb-2 tracking-tighter">Welcome Back</h2>
+          <p class="text-gray-400 font-medium mb-8">Enter your details to continue</p>
+        </div>
 
         <div>
-          <label class="block text-sm font-medium text-gray-300">Phone or Email</label>
+          <label class="block text-xs font-black text-gray-400 uppercase tracking-widest mb-2">Phone or Email</label>
           <input type="text" id="loginUser"
-            class="w-full border border-gray-600 rounded-lg p-3 bg-gray-700 text-white focus:outline-emerald-500"
+            class="w-full border border-gray-100 rounded-2xl p-4 bg-gray-50 text-gray-900 focus:outline-none focus:ring-4 focus:ring-red-500/10 focus:border-red-500 transition-all font-bold placeholder-gray-300"
             placeholder="Enter your details">
         </div>
 
         <div class="relative">
-          <label class="block text-sm font-medium text-gray-300">Password</label>
+          <label class="block text-xs font-black text-gray-400 uppercase tracking-widest mb-2">Password</label>
           <input type="password" id="loginPass"
-            class="w-full border border-gray-600 rounded-lg p-3 bg-gray-700 text-white focus:outline-emerald-500 pr-10"
+            class="w-full border border-gray-100 rounded-2xl p-4 bg-gray-50 text-gray-900 focus:outline-none focus:ring-4 focus:ring-red-500/10 focus:border-red-500 transition-all font-bold placeholder-gray-300 pr-12"
             placeholder="••••••••">
-          <i class="fa-solid fa-eye absolute right-4 top-9 text-gray-400 cursor-pointer" id="toggleLoginPass"></i>
+          <i class="fa-solid fa-eye absolute right-4 top-11 text-gray-300 cursor-pointer hover:text-red-500 transition-colors"
+            id="toggleLoginPass"></i>
 
-          <div class="flex justify-between items-center mt-2">
-            <label class="flex items-center gap-2 text-sm text-gray-400 cursor-pointer">
+          <div class="flex justify-between items-center mt-3">
+            <label
+              class="flex items-center gap-2 text-xs text-gray-500 cursor-pointer font-bold uppercase tracking-tighter hover:text-red-500 transition-colors">
               <input type="checkbox" id="userRememberMe"
-                class="w-4 h-4 rounded border-gray-600 text-emerald-600 bg-gray-700">
+                class="w-4 h-4 rounded-lg border-gray-200 text-red-500 focus:ring-red-500/20">
               Remember me
             </label>
-            <a href="#" class="text-xs text-emerald-500 hover:text-emerald-400">Forgot Password?</a>
+            <a href="#" class="text-xs text-red-500 font-bold uppercase tracking-tighter hover:underline">Forgot?</a>
           </div>
         </div>
 
         <button type="button" onclick="handleLogin()"
-          class="w-full bg-emerald-600 text-white font-bold py-3 rounded-lg hover:bg-emerald-700 transition mt-6 disabled:opacity-50">
+          class="w-full bg-red-500 text-white font-black py-4 rounded-2xl hover:bg-red-600 transition-all shadow-xl shadow-red-500/20 mt-4 active:scale-[0.98] uppercase tracking-widest">
           Login Securely
         </button>
       </form>
 
       <!-- Signup Form -->
-      <form id="signupForm" class="space-y-4 hidden">
-        <h2 class="text-2xl font-bold mb-4">Create Account</h2>
+      <form id="signupForm" class="space-y-6 hidden">
+        <div>
+          <h2 class="text-3xl font-black text-gray-900 mb-2 tracking-tighter">Create Account</h2>
+          <p class="text-gray-400 font-medium mb-8">Join the Foodie Zone network</p>
+        </div>
 
         <div>
-          <label class="block text-sm font-medium text-gray-300">Username</label>
+          <label class="block text-xs font-black text-gray-400 uppercase tracking-widest mb-2">Username</label>
           <input type="text" id="signupUser"
-            class="w-full border border-gray-600 rounded-lg p-3 bg-gray-700 text-white focus:outline-emerald-500"
+            class="w-full border border-gray-100 rounded-2xl p-4 bg-gray-50 text-gray-900 focus:outline-none focus:ring-4 focus:ring-red-500/10 focus:border-red-500 transition-all font-bold placeholder-gray-300"
             placeholder="karthikeyan">
         </div>
 
         <div>
-          <label class="block text-sm font-medium text-gray-300">Email Address</label>
+          <label class="block text-xs font-black text-gray-400 uppercase tracking-widest mb-2">Email Address</label>
           <input type="email" id="signupEmail"
-            class="w-full border border-gray-600 rounded-lg p-3 bg-gray-700 text-white focus:outline-emerald-500"
+            class="w-full border border-gray-100 rounded-2xl p-4 bg-gray-50 text-gray-900 focus:outline-none focus:ring-4 focus:ring-red-500/10 focus:border-red-500 transition-all font-bold placeholder-gray-300"
             placeholder="name@example.com">
         </div>
 
         <div>
-          <label class="block text-sm font-medium text-gray-300">Create Password</label>
+          <label class="block text-xs font-black text-gray-400 uppercase tracking-widest mb-2">Create Password</label>
           <input type="password" id="signupPass"
-            class="w-full border border-gray-600 rounded-lg p-3 bg-gray-700 text-white focus:outline-emerald-500"
+            class="w-full border border-gray-100 rounded-2xl p-4 bg-gray-50 text-gray-900 focus:outline-none focus:ring-4 focus:ring-red-500/10 focus:border-red-500 transition-all font-bold placeholder-gray-300"
             placeholder="Minimum 6 chars">
         </div>
 
         <button type="button" onclick="handleSignup()"
-          class="w-full bg-emerald-600 text-white font-bold py-3 rounded-lg hover:bg-emerald-700 transition mt-6">
+          class="w-full bg-red-500 text-white font-black py-4 rounded-2xl hover:bg-red-600 transition-all shadow-xl shadow-red-500/20 mt-4 active:scale-[0.98] uppercase tracking-widest">
           Sign Up
         </button>
       </form>
 
     </div>
-  </div>
-
   </div>
 
   <script src="assets/js/toast.js"></script>
@@ -154,16 +163,16 @@
       if (tab === 'login') {
         loginForm.classList.remove('hidden');
         signupForm.classList.add('hidden');
-        tabLogin.classList.add('border-emerald-500', 'text-emerald-500');
+        tabLogin.classList.add('border-red-500', 'text-red-500');
         tabLogin.classList.remove('border-transparent', 'text-gray-400');
-        tabSignup.classList.remove('border-emerald-500', 'text-emerald-500');
+        tabSignup.classList.remove('border-red-500', 'text-red-500');
         tabSignup.classList.add('border-transparent', 'text-gray-400');
       } else {
         loginForm.classList.add('hidden');
         signupForm.classList.remove('hidden');
-        tabSignup.classList.add('border-emerald-500', 'text-emerald-500');
+        tabSignup.classList.add('border-red-500', 'text-red-500');
         tabSignup.classList.remove('border-transparent', 'text-gray-400');
-        tabLogin.classList.remove('border-emerald-500', 'text-emerald-500');
+        tabLogin.classList.remove('border-red-500', 'text-red-500');
         tabLogin.classList.add('border-transparent', 'text-gray-400');
       }
     }
@@ -253,4 +262,3 @@
 </body>
 
 </html>
-

@@ -16,91 +16,106 @@
     </style>
 </head>
 
-<body class="min-h-screen flex items-center justify-center p-4">
+<body class="bg-[#f8f8f8] min-h-screen flex items-center justify-center p-4">
 
     <div
-        class="bg-gray-800 rounded-3xl shadow-2xl flex overflow-hidden w-full max-w-4xl min-h-[500px] border border-gray-700">
+        class="bg-white rounded-[2.5rem] shadow-[0_32px_64px_-16px_rgba(0,0,0,0.1)] flex overflow-hidden w-full max-w-4xl min-h-[600px] border border-gray-100">
         <!-- Left Side: Promo -->
         <div
-            class="hidden md:flex w-1/2 bg-emerald-900 relative flex-col justify-center items-center text-white p-12 text-center">
-            <div class="absolute inset-0 z-0 opacity-30">
+            class="hidden md:flex w-1/2 bg-red-600 relative flex-col justify-center items-center text-white p-12 text-center">
+            <div class="absolute inset-0 z-0 opacity-40">
                 <img src="https://images.unsplash.com/photo-1552566626-52f8b828add9?q=80&w=800"
                     class="w-full h-full object-cover">
             </div>
-            <div class="relative z-10">
-                <h2 class="text-3xl font-bold mb-4">Partner Portal</h2>
-                <p class="text-emerald-100 text-lg leading-relaxed">Manager your restaurant, orders, and earnings in one
-                    place.</p>
 
-                <div class="mt-8 flex flex-col items-center gap-4">
-                    <div class="flex items-center gap-3 text-sm">
-                        <i class="fa-solid fa-circle-check text-emerald-400"></i>
-                        <span>Real-time Order Tracking</span>
+            <div class="relative z-10">
+                <div
+                    class="w-16 h-16 bg-white/20 backdrop-blur-md rounded-2xl flex items-center justify-center text-2xl mb-8 mx-auto shadow-xl">
+                    <i class="fa-solid fa-handshake"></i>
+                </div>
+                <h2 class="text-4xl font-black mb-4 tracking-tighter uppercase">Partner Portal</h2>
+                <p class="text-red-50 text-lg font-medium leading-relaxed opacity-90">Manage your business, orders, and
+                    growth in one powerful dashboard.</p>
+
+                <div class="mt-12 space-y-4">
+                    <div
+                        class="flex items-center gap-4 bg-white/10 backdrop-blur-sm p-4 rounded-2xl border border-white/10 hover:bg-white/20 transition-all cursor-default">
+                        <div class="w-8 h-8 bg-red-500 rounded-lg flex items-center justify-center shadow-lg">
+                            <i class="fa-solid fa-bolt text-xs"></i>
+                        </div>
+                        <span class="font-bold text-sm tracking-wide">Real-time Order Tracking</span>
                     </div>
-                    <div class="flex items-center gap-3 text-sm">
-                        <i class="fa-solid fa-circle-check text-emerald-400"></i>
-                        <span>Easy Earnings Withdrawal</span>
-                    </div>
-                    <div class="flex items-center gap-3 text-sm">
-                        <i class="fa-solid fa-circle-check text-emerald-400"></i>
-                        <span>Menu Management</span>
+                    <div
+                        class="flex items-center gap-4 bg-white/10 backdrop-blur-sm p-4 rounded-2xl border border-white/10 hover:bg-white/20 transition-all cursor-default">
+                        <div class="w-8 h-8 bg-red-500 rounded-lg flex items-center justify-center shadow-lg">
+                            <i class="fa-solid fa-wallet text-xs"></i>
+                        </div>
+                        <span class="font-bold text-sm tracking-wide">Instant Earnings Withdrawal</span>
                     </div>
                 </div>
             </div>
         </div>
 
         <!-- Right Side: Login Form -->
-        <div class="w-full md:w-1/2 p-10 md:p-16 relative bg-gray-800">
-            <a href="partner.html" class="absolute top-6 right-8 text-gray-400 hover:text-emerald-400 transition">
-                <i class="fa-solid fa-arrow-left"></i> Back
+        <div class="w-full md:w-1/2 p-10 md:p-16 relative flex flex-col justify-center bg-white">
+            <a href="partner.html"
+                class="absolute top-8 right-10 text-gray-400 hover:text-red-500 font-black uppercase tracking-widest text-[10px] transition-colors">
+                <i class="fa-solid fa-arrow-left mr-2"></i> Register
             </a>
 
-            <div class="mb-10">
-                <h1 class="text-3xl font-bold text-gray-100 mb-2">Partner Login</h1>
-                <p class="text-gray-400">Welcome back! Please enter your details.</p>
+            <div class="mb-12">
+                <span
+                    class="bg-red-50 text-red-500 text-[10px] font-black px-3 py-1 rounded-lg uppercase tracking-[0.2em] mb-4 inline-block shadow-sm">Merchant
+                    Access</span>
+                <h1 class="text-4xl font-black text-gray-900 tracking-tighter uppercase mb-2">Partner Login</h1>
+                <p class="text-gray-400 font-medium">Welcome back! Please authenticate.</p>
             </div>
 
             <form id="partnerLoginForm" class="space-y-6">
-                <div>
-                    <label class="block text-sm font-medium text-gray-300 mb-1">Partner ID</label>
-                    <div class="relative">
-                        <i class="fa-solid fa-id-card absolute left-4 top-4 text-gray-400"></i>
+                <div class="space-y-2">
+                    <label class="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Partner
+                        ID</label>
+                    <div class="relative group">
+                        <i
+                            class="fa-solid fa-id-card absolute left-4 top-4 text-gray-400 group-focus-within:text-red-500 transition-colors"></i>
                         <input type="text" id="partnerId" required
-                            class="w-full pl-12 pr-4 py-3.5 bg-gray-700 border border-gray-600 text-white rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 transition placeholder-gray-400"
+                            class="w-full pl-12 pr-4 py-4 bg-gray-50 border border-gray-100 text-gray-900 rounded-2xl focus:outline-none focus:ring-4 focus:ring-red-500/10 focus:border-red-500 transition-all font-bold placeholder-gray-300"
                             placeholder="PTR-####">
                     </div>
                 </div>
 
-                <div>
-                    <label class="block text-sm font-medium text-gray-300 mb-1">Password</label>
-                    <div class="relative">
-                        <i class="fa-solid fa-lock absolute left-4 top-4 text-gray-400"></i>
+                <div class="space-y-2">
+                    <label class="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Password</label>
+                    <div class="relative group">
+                        <i
+                            class="fa-solid fa-lock absolute left-4 top-4 text-gray-400 group-focus-within:text-red-500 transition-colors"></i>
                         <input type="password" id="password" required
-                            class="w-full pl-12 pr-12 py-3.5 bg-gray-700 border border-gray-600 text-white rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 transition placeholder-gray-400"
+                            class="w-full pl-12 pr-12 py-4 bg-gray-50 border border-gray-100 text-gray-900 rounded-2xl focus:outline-none focus:ring-4 focus:ring-red-500/10 focus:border-red-500 transition-all font-bold placeholder-gray-300"
                             placeholder="••••••••">
-                        <i class="fa-solid fa-eye absolute right-4 top-4 text-gray-400 cursor-pointer"
+                        <i class="fa-solid fa-eye absolute right-4 top-4 text-gray-300 cursor-pointer hover:text-red-500 transition-colors"
                             id="togglePassword"></i>
                     </div>
-                    <div class="flex justify-between items-center mt-3">
-                        <label class="flex items-center gap-2 text-sm text-gray-400 cursor-pointer">
+                    <div class="flex justify-between items-center mt-4 px-1">
+                        <label
+                            class="flex items-center gap-2 text-[10px] font-black uppercase text-gray-400 cursor-pointer hover:text-red-500 transition-colors">
                             <input type="checkbox" id="rememberMe"
-                                class="w-4 h-4 rounded border-gray-500 text-emerald-600 focus:ring-emerald-500 bg-gray-700">
-                            Remember me
+                                class="w-4 h-4 rounded-lg border-gray-200 text-red-500 focus:ring-red-500/20">
+                            Stay Signed In
                         </label>
-                        <a href="#" class="text-sm text-emerald-400 hover:underline">Forgot password?</a>
+                        <a href="#"
+                            class="text-[10px] font-black uppercase text-red-500 hover:text-red-600 tracking-widest transition-colors">Forgot?</a>
                     </div>
                 </div>
 
-                <div class="pt-4">
+                <div class="pt-6">
                     <button type="submit"
-                        class="w-full bg-emerald-600 text-white font-bold py-4 rounded-xl hover:bg-emerald-700 transition shadow-lg hover:shadow-xl active:scale-[0.98]">
-                        Login to Dashboard
+                        class="w-full bg-red-500 text-white font-black py-5 rounded-[1.5rem] hover:bg-red-600 transition-all shadow-xl shadow-red-500/20 active:scale-[0.98] uppercase tracking-widest text-xs">
+                        Enter Dashboard
                     </button>
                 </div>
 
-                <p class="text-center text-sm text-gray-400">
-                    Not a partner yet? <a href="partner.html" class="text-emerald-400 font-bold hover:underline">Apply
-                        Now</a>
+                <p class="text-center text-[10px] font-black text-gray-400 uppercase tracking-widest mt-8">
+                    Not a partner? <a href="partner.html" class="text-red-500 hover:text-red-600">Start application</a>
                 </p>
             </form>
         </div>
@@ -159,6 +174,7 @@
             }
         });
     </script>
+</body>
 </body>
 
 </html>

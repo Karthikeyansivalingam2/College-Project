@@ -11,9 +11,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         .sidebar-link.active {
-            background: linear-gradient(90deg, rgba(16, 185, 129, 0.2), transparent);
-            border-left: 3px solid #10b981;
-            color: #10b981;
+            background: #fef2f2;
+            color: #ef4444;
+            border-right: 4px solid #ef4444;
         }
 
         /* Custom scrollbar for tables */
@@ -22,64 +22,68 @@
         }
 
         .overflow-x-auto::-webkit-scrollbar-track {
-            background: rgba(0, 0, 0, 0.2);
+            background: #f1f1f1;
         }
 
         .overflow-x-auto::-webkit-scrollbar-thumb {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 3px;
+            background: #e2e2e2;
+            border-radius: 10px;
         }
     </style>
 </head>
 
-<body class="min-h-screen flex">
+<body class="bg-[#fcfcfc] text-gray-900 min-h-screen flex">
 
     <!-- Sidebar -->
     <aside id="partnerSidebar"
-        class="fixed inset-y-0 left-0 z-50 w-64 glass border-r border-white/5 flex flex-col transform -translate-x-full lg:translate-x-0 lg:static transition-transform duration-300 h-screen shrink-0">
+        class="fixed inset-y-0 left-0 z-50 w-72 bg-white border-r border-gray-100 flex flex-col transform -translate-x-full lg:translate-x-0 lg:static transition-transform duration-300 h-screen shrink-0 shadow-xl lg:shadow-none">
 
-        <div class="p-6 border-b border-white/5 flex justify-between items-center">
-            <h1 class="text-xl font-bold text-white flex items-center gap-2">
-                <i class="fa-solid fa-utensils text-emerald-500"></i> Partner Center
+        <div class="p-8 border-b border-gray-50 flex justify-between items-center">
+            <h1 class="text-2xl font-black text-gray-900 flex items-center gap-3 uppercase tracking-tighter">
+                <div
+                    class="w-10 h-10 bg-red-500 rounded-xl flex items-center justify-center text-white shadow-lg shadow-red-500/20">
+                    <i class="fa-solid fa-utensils text-lg"></i>
+                </div>
+                Partner
             </h1>
-            <button onclick="togglePartnerSidebar()" class="lg:hidden text-gray-400 hover:text-white">
+            <button onclick="togglePartnerSidebar()" class="lg:hidden text-gray-400 hover:text-red-500">
                 <i class="fa-solid fa-xmark text-xl"></i>
             </button>
         </div>
 
-        <nav class="flex-grow p-4 space-y-2 overflow-y-auto">
+        <nav class="flex-grow p-6 space-y-2 overflow-y-auto">
             <button onclick="showSection('dashboard')"
-                class="sidebar-link active flex items-center gap-3 w-full p-3 rounded-xl hover:bg-white/5 transition text-left text-gray-300 font-medium">
-                <i class="fa-solid fa-chart-line w-5"></i> Dashboard
+                class="sidebar-link active flex items-center gap-4 w-full p-4 rounded-2xl hover:bg-gray-50 transition-all text-left text-gray-600 font-bold uppercase tracking-widest text-[10px]">
+                <i class="fa-solid fa-chart-line text-sm"></i> Dashboard
             </button>
             <button onclick="showSection('live-orders')"
-                class="sidebar-link flex items-center gap-3 w-full p-3 rounded-xl hover:bg-white/5 transition text-left text-gray-300 font-medium">
-                <i class="fa-solid fa-list-check w-5"></i> Live Orders
+                class="sidebar-link flex items-center gap-4 w-full p-4 rounded-2xl hover:bg-gray-50 transition-all text-left text-gray-600 font-bold uppercase tracking-widest text-[10px]">
+                <i class="fa-solid fa-list-check text-sm"></i> Live Orders
             </button>
             <button onclick="showSection('menu')"
-                class="sidebar-link flex items-center gap-3 w-full p-3 rounded-xl hover:bg-white/5 transition text-left text-gray-300 font-medium">
-                <i class="fa-solid fa-book-open w-5"></i> Menu Manager
+                class="sidebar-link flex items-center gap-4 w-full p-4 rounded-2xl hover:bg-gray-50 transition-all text-left text-gray-600 font-bold uppercase tracking-widest text-[10px]">
+                <i class="fa-solid fa-book-open text-sm"></i> Menu Manager
             </button>
             <button onclick="showSection('earnings')"
-                class="sidebar-link flex items-center gap-3 w-full p-3 rounded-xl hover:bg-white/5 transition text-left text-gray-300 font-medium">
-                <i class="fa-solid fa-wallet w-5"></i> Earnings
+                class="sidebar-link flex items-center gap-4 w-full p-4 rounded-2xl hover:bg-gray-50 transition-all text-left text-gray-600 font-bold uppercase tracking-widest text-[10px]">
+                <i class="fa-solid fa-wallet text-sm"></i> Earnings
             </button>
             <button onclick="showSection('reviews')"
-                class="sidebar-link flex items-center gap-3 w-full p-3 rounded-xl hover:bg-white/5 transition text-left text-gray-300 font-medium">
-                <i class="fa-solid fa-comments w-5"></i> Reviews
+                class="sidebar-link flex items-center gap-4 w-full p-4 rounded-2xl hover:bg-gray-50 transition-all text-left text-gray-600 font-bold uppercase tracking-widest text-[10px]">
+                <i class="fa-solid fa-comments text-sm"></i> Reviews
             </button>
         </nav>
 
-        <div class="p-4 border-t border-white/5">
+        <div class="p-6 border-t border-gray-50">
             <button onclick="logout()"
-                class="flex items-center gap-3 w-full p-3 rounded-xl hover:bg-red-500/10 text-red-400 hover:text-red-300 transition font-medium">
+                class="flex items-center gap-4 w-full p-4 rounded-2xl hover:bg-red-50 text-gray-400 hover:text-red-500 transition-all font-bold uppercase tracking-widest text-[10px]">
                 <i class="fa-solid fa-right-from-bracket"></i> Logout
             </button>
         </div>
     </aside>
 
     <!-- Overlay -->
-    <div id="partnerOverlay" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-40 hidden lg:hidden"
+    <div id="partnerOverlay" class="fixed inset-0 bg-black/40 backdrop-blur-sm z-40 hidden lg:hidden"
         onclick="togglePartnerSidebar()">
     </div>
 
@@ -87,106 +91,137 @@
     <main class="flex-grow flex flex-col h-screen overflow-hidden">
         <!-- Header -->
         <header
-            class="glass border-b border-white/5 sticky top-0 z-30 px-6 py-4 flex justify-between items-center shrink-0">
+            class="bg-white border-b border-gray-100 sticky top-0 z-30 px-6 py-5 flex justify-between items-center shrink-0 shadow-sm">
             <div class="flex items-center gap-4">
                 <button onclick="togglePartnerSidebar()"
-                    class="lg:hidden text-gray-300 p-2 hover:bg-white/5 rounded-lg transition"><i
+                    class="lg:hidden text-gray-500 p-2 hover:bg-gray-100 rounded-xl transition"><i
                         class="fa-solid fa-bars text-xl"></i></button>
                 <div>
-                    <h2 class="text-xl md:text-2xl font-bold text-white tracking-tight" id="businessName">Loading...
+                    <h2 class="text-xl md:text-2xl font-black text-gray-900 tracking-tighter uppercase"
+                        id="businessName">Loading...
                     </h2>
-                    <p class="text-xs md:text-sm text-gray-400">Partner ID: <span id="partnerIdDisplay"
-                            class="font-mono text-emerald-400">...</span></p>
+                    <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest mt-0.5">Partner ID: <span
+                            id="partnerIdDisplay" class="text-red-500">...</span></p>
                 </div>
             </div>
 
             <div class="flex items-center gap-6">
                 <div class="text-right hidden sm:block">
-                    <p class="text-xs text-gray-400 uppercase tracking-widest font-semibold mb-0.5">Store Status</p>
-                    <p class="text-sm font-bold text-green-400 flex items-center justify-end gap-2">
-                        <span class="relative flex h-2.5 w-2.5">
+                    <p class="text-[9px] text-gray-400 uppercase tracking-widest font-black mb-1">Store Status</p>
+                    <p class="text-xs font-black text-red-500 uppercase flex items-center justify-end gap-2">
+                        <span class="relative flex h-2 w-2">
                             <span
-                                class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                            <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span>
+                                class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
                         </span>
-                        Open
+                        Online
                     </p>
                 </div>
-                <img id="partnerAvatar" src="https://ui-avatars.com/api/?name=Partner"
-                    class="w-10 h-10 rounded-full border-2 border-emerald-500/50 shadow-lg shadow-emerald-500/20">
+                <div class="w-12 h-12 bg-gray-50 p-1 rounded-2xl shadow-inner group cursor-pointer relative">
+                    <img id="partnerAvatar" src="https://ui-avatars.com/api/?name=Partner"
+                        class="w-full h-full rounded-xl object-cover">
+                    <div class="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 border-2 border-white rounded-full">
+                    </div>
+                </div>
             </div>
         </header>
 
         <!-- Dynamic Content -->
-        <div class="flex-grow overflow-y-auto p-4 md:p-8">
+        <div class="flex-grow overflow-y-auto p-6 lg:p-10">
 
             <!-- DASHBOARD SECTION -->
             <div id="section-dashboard" class="max-w-7xl mx-auto animate-fade-in-up">
+                <div class="mb-10">
+                    <h3 class="text-3xl font-black text-gray-900 tracking-tighter uppercase mb-1">Performance Overview
+                    </h3>
+                    <p class="text-[11px] font-bold text-gray-400 uppercase tracking-widest">Real-time metrics for your
+                        kitchen</p>
+                </div>
+
                 <!-- Quick Stats -->
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-                    <div class="glass-card p-6 relative overflow-hidden group">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-10">
+                    <div
+                        class="bg-white p-8 rounded-[2rem] border border-gray-100 shadow-sm relative overflow-hidden group hover:shadow-xl transition-all duration-300">
                         <div
-                            class="absolute -right-6 -top-6 w-24 h-24 bg-emerald-500/10 rounded-full group-hover:bg-emerald-500/20 transition-all">
+                            class="absolute -right-4 -top-4 w-20 h-20 bg-red-50 rounded-full group-hover:scale-150 transition-all duration-500">
                         </div>
-                        <p class="text-gray-400 text-xs mb-2 uppercase tracking-wider font-bold">Today's Orders</p>
-                        <div class="flex items-end gap-3">
-                            <span class="text-4xl font-bold text-white tracking-tight" id="statOrders">0</span>
+                        <p class="text-gray-400 text-[10px] mb-4 uppercase tracking-widest font-black relative z-10">
+                            Today's Orders</p>
+                        <div class="flex items-center gap-3 relative z-10">
+                            <span class="text-5xl font-black text-gray-900 tracking-tighter" id="statOrders">0</span>
                             <span
-                                class="text-emerald-400 text-xs font-bold font-mono bg-emerald-500/10 px-2 py-1 rounded-full">+12%</span>
+                                class="text-red-500 text-[10px] font-black bg-red-50 px-2 py-1 rounded-lg uppercase tracking-widest">+12%</span>
                         </div>
                     </div>
-                    <div class="glass-card p-6 relative overflow-hidden group">
+                    <div
+                        class="bg-white p-8 rounded-[2rem] border border-gray-100 shadow-sm relative overflow-hidden group hover:shadow-xl transition-all duration-300">
                         <div
-                            class="absolute -right-6 -top-6 w-24 h-24 bg-blue-500/10 rounded-full group-hover:bg-blue-500/20 transition-all">
+                            class="absolute -right-4 -top-4 w-20 h-20 bg-gray-50 rounded-full group-hover:scale-150 transition-all duration-500">
                         </div>
-                        <p class="text-gray-400 text-xs mb-2 uppercase tracking-wider font-bold">Today's Earnings</p>
-                        <div class="flex items-baseline gap-2">
-                            <span class="text-4xl font-bold text-white tracking-tight">₹<span
+                        <p class="text-gray-400 text-[10px] mb-4 uppercase tracking-widest font-black relative z-10">
+                            Today's Earnings</p>
+                        <div class="flex items-baseline gap-2 relative z-10">
+                            <span class="text-5xl font-black text-gray-900 tracking-tighter">₹<span
                                     id="statEarnings">0</span></span>
                         </div>
                     </div>
-                    <div class="glass-card p-6 relative overflow-hidden group">
+                    <div
+                        class="bg-white p-8 rounded-[2rem] border border-gray-100 shadow-sm relative overflow-hidden group hover:shadow-xl transition-all duration-300">
                         <div
-                            class="absolute -right-6 -top-6 w-24 h-24 bg-orange-500/10 rounded-full group-hover:bg-orange-500/20 transition-all">
+                            class="absolute -right-4 -top-4 w-20 h-20 bg-amber-50 rounded-full group-hover:scale-150 transition-all duration-500">
                         </div>
-                        <p class="text-gray-400 text-xs mb-2 uppercase tracking-wider font-bold">Pending Requests</p>
-                        <div class="flex items-baseline gap-2">
-                            <span class="text-4xl font-bold text-orange-400 tracking-tight" id="statPending">0</span>
+                        <p class="text-gray-400 text-[10px] mb-4 uppercase tracking-widest font-black relative z-10">
+                            Pending Requests</p>
+                        <div class="flex items-baseline gap-2 relative z-10">
+                            <span class="text-5xl font-black text-amber-500 tracking-tighter" id="statPending">0</span>
                         </div>
                     </div>
-                    <div class="glass-card p-6 relative overflow-hidden group">
+                    <div
+                        class="bg-white p-8 rounded-[2rem] border border-gray-100 shadow-sm relative overflow-hidden group hover:shadow-xl transition-all duration-300">
                         <div
-                            class="absolute -right-6 -top-6 w-24 h-24 bg-purple-500/10 rounded-full group-hover:bg-purple-500/20 transition-all">
+                            class="absolute -right-4 -top-4 w-20 h-20 bg-red-50 rounded-full group-hover:scale-150 transition-all duration-500">
                         </div>
-                        <p class="text-gray-400 text-xs mb-2 uppercase tracking-wider font-bold">Average Rating</p>
-                        <div class="flex items-baseline gap-2">
-                            <span class="text-4xl font-bold text-white tracking-tight" id="statRating">0.0</span>
-                            <i class="fa-solid fa-star text-yellow-400 text-lg"></i>
+                        <p class="text-gray-400 text-[10px] mb-4 uppercase tracking-widest font-black relative z-10">
+                            Average Rating</p>
+                        <div class="flex items-center gap-3 relative z-10">
+                            <span class="text-5xl font-black text-gray-900 tracking-tighter" id="statRating">0.0</span>
+                            <i class="fa-solid fa-star text-red-500 text-2xl"></i>
                         </div>
                     </div>
                 </div>
 
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
                     <!-- Recent Orders -->
-                    <div class="lg:col-span-2 glass-card overflow-hidden flex flex-col">
-                        <div class="p-6 border-b border-white/5 flex justify-between items-center bg-white/5">
-                            <h3 class="font-bold text-white text-lg">Recent Live Orders</h3>
+                    <div
+                        class="lg:col-span-2 bg-white rounded-[2.5rem] border border-gray-100 shadow-sm overflow-hidden flex flex-col">
+                        <div class="p-8 border-b border-gray-50 flex justify-between items-center">
+                            <h3 class="font-black text-gray-900 tracking-tighter uppercase text-xl">Recent Activity</h3>
                             <button onclick="showSection('live-orders')"
-                                class="text-xs font-bold text-emerald-400 hover:text-emerald-300 uppercase tracking-wider">View
-                                All</button>
+                                class="text-[10px] font-black text-red-500 hover:text-red-700 uppercase tracking-widest transition-colors">View
+                                Queue</button>
                         </div>
                         <div class="overflow-x-auto">
                             <table class="w-full text-left">
-                                <thead class="bg-black/20 text-xs text-gray-400 uppercase tracking-wider">
-                                    <tr>
-                                        <th class="px-6 py-4 font-semibold whitespace-nowrap">Order ID</th>
-                                        <th class="px-6 py-4 font-semibold whitespace-nowrap">Customer</th>
-                                        <th class="px-6 py-4 font-semibold whitespace-nowrap">Total</th>
-                                        <th class="px-6 py-4 font-semibold whitespace-nowrap">Status</th>
-                                        <th class="px-6 py-4 font-semibold whitespace-nowrap">Time</th>
+                                <thead>
+                                    <tr class="bg-gray-50/50">
+                                        <th
+                                            class="px-8 py-4 text-[10px] font-black text-gray-400 uppercase tracking-widest">
+                                            Order ID</th>
+                                        <th
+                                            class="px-8 py-4 text-[10px] font-black text-gray-400 uppercase tracking-widest">
+                                            Customer</th>
+                                        <th
+                                            class="px-8 py-4 text-[10px] font-black text-gray-400 uppercase tracking-widest">
+                                            Amount</th>
+                                        <th
+                                            class="px-8 py-4 text-[10px] font-black text-gray-400 uppercase tracking-widest text-center">
+                                            Status</th>
+                                        <th
+                                            class="px-8 py-4 text-[10px] font-black text-gray-400 uppercase tracking-widest">
+                                            Time</th>
                                     </tr>
                                 </thead>
-                                <tbody id="ordersTableBody" class="divide-y divide-white/5">
+                                <tbody id="ordersTableBody" class="divide-y divide-gray-50 font-bold text-sm">
                                     <!-- Loaded via JS -->
                                 </tbody>
                             </table>
@@ -194,38 +229,52 @@
                     </div>
 
                     <!-- Profile Info -->
-                    <div class="glass-card p-6">
-                        <h3 class="font-bold text-white mb-6 flex items-center gap-3 text-lg">
-                            <div class="w-8 h-8 rounded-lg bg-emerald-500/20 flex items-center justify-center">
-                                <i class="fa-solid fa-circle-info text-emerald-500"></i>
+                    <div class="bg-white p-8 rounded-[2.5rem] border border-gray-100 shadow-sm">
+                        <h3
+                            class="font-black text-gray-900 mb-8 flex items-center gap-3 text-xl tracking-tighter uppercase">
+                            <div class="w-10 h-10 rounded-xl bg-red-50 flex items-center justify-center text-red-500">
+                                <i class="fa-solid fa-store text-sm"></i>
                             </div>
-                            Business Profile
+                            Store Info
                         </h3>
 
                         <div class="space-y-6">
-                            <div>
-                                <p class="text-xs text-gray-500 uppercase tracking-widest font-bold mb-2">Account Status
-                                </p>
-                                <span
-                                    class="inline-block px-3 py-1 bg-green-500/20 text-green-400 rounded-full text-xs font-bold border border-green-500/20 shadow-[0_0_10px_rgba(34,197,94,0.1)]"
-                                    id="partnerStatus">Active</span>
+                            <div class="group">
+                                <p class="text-[10px] text-gray-400 uppercase tracking-widest font-black mb-3 px-1">
+                                    Verification Status</p>
+                                <div class="bg-red-50 p-4 rounded-2xl border border-red-100 flex items-center gap-3">
+                                    <div class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></div>
+                                    <span class="text-xs font-black text-red-600 uppercase tracking-widest"
+                                        id="partnerStatus">Active Partner</span>
+                                </div>
                             </div>
-                            <div>
-                                <p class="text-xs text-gray-500 uppercase tracking-widest font-bold mb-1">Commission
-                                    Rate</p>
-                                <p class="text-base font-bold text-white">10% <span
-                                        class="text-gray-500 font-normal text-sm">per order</span></p>
+                            <div class="flex justify-between items-center py-4 border-b border-gray-50">
+                                <div>
+                                    <p class="text-[10px] text-gray-400 uppercase tracking-widest font-black mb-1">
+                                        Commission Rate</p>
+                                    <p class="text-lg font-black text-gray-900">10% <span
+                                            class="text-gray-400 text-[10px]">Flat</span></p>
+                                </div>
+                                <div
+                                    class="w-10 h-10 bg-gray-50 rounded-xl flex items-center justify-center text-gray-400">
+                                    <i class="fa-solid fa-chart-pie text-sm"></i>
+                                </div>
                             </div>
-                            <div>
-                                <p class="text-xs text-gray-500 uppercase tracking-widest font-bold mb-1">Settlement
-                                    Cycle</p>
-                                <p class="text-base font-bold text-white">Weekly <span
-                                        class="text-gray-500 font-normal text-sm">(Every Monday)</span></p>
+                            <div class="flex justify-between items-center py-4 border-b border-gray-50">
+                                <div>
+                                    <p class="text-[10px] text-gray-400 uppercase tracking-widest font-black mb-1">
+                                        Payout Schedule</p>
+                                    <p class="text-lg font-black text-gray-900 tracking-tighter">Every Monday</p>
+                                </div>
+                                <div
+                                    class="w-10 h-10 bg-gray-50 rounded-xl flex items-center justify-center text-gray-400">
+                                    <i class="fa-solid fa-calendar-week text-sm"></i>
+                                </div>
                             </div>
-                            <div class="pt-6 mt-2 border-t border-white/5">
+                            <div class="pt-6">
                                 <button
-                                    class="w-full bg-white/5 text-gray-300 font-bold py-3 rounded-xl hover:bg-white/10 transition border border-white/5 hover:border-emerald-500/50 hover:text-white">
-                                    Edit Profile
+                                    class="w-full bg-gray-900 text-white font-black py-4 rounded-2xl hover:bg-black transition-all shadow-xl active:scale-[0.98] uppercase tracking-widest text-[10px]">
+                                    Optimize Profile
                                 </button>
                             </div>
                         </div>
@@ -235,23 +284,35 @@
 
             <!-- LIVE ORDERS SECTION -->
             <div id="section-live-orders" class="hidden max-w-7xl mx-auto animate-fade-in-up">
-                <div class="glass-card overflow-hidden border border-white/10">
-                    <div class="p-6 border-b border-white/10 bg-white/5">
-                        <h3 class="font-bold text-white text-xl">All Live Orders</h3>
+                <div class="bg-white rounded-[2.5rem] border border-gray-100 shadow-sm overflow-hidden">
+                    <div class="p-8 border-b border-gray-100">
+                        <h3 class="font-black text-gray-900 text-2xl tracking-tighter uppercase">Live Kitchen Queue</h3>
                     </div>
                     <div class="overflow-x-auto">
                         <table class="w-full text-left">
-                            <thead class="bg-black/20 text-xs text-gray-400 uppercase tracking-wider">
-                                <tr>
-                                    <th class="px-6 py-5 font-semibold whitespace-nowrap">Order ID</th>
-                                    <th class="px-6 py-5 font-semibold whitespace-nowrap">Customer</th>
-                                    <th class="px-6 py-5 font-semibold whitespace-nowrap">Items</th>
-                                    <th class="px-6 py-5 font-semibold whitespace-nowrap">Total</th>
-                                    <th class="px-6 py-5 font-semibold whitespace-nowrap">Status</th>
-                                    <th class="px-6 py-5 font-semibold whitespace-nowrap">Action</th>
+                            <thead>
+                                <tr class="bg-gray-50/50">
+                                    <th
+                                        class="px-8 py-5 text-[10px] font-black text-gray-400 uppercase tracking-widest">
+                                        Order ID</th>
+                                    <th
+                                        class="px-8 py-5 text-[10px] font-black text-gray-400 uppercase tracking-widest">
+                                        Customer</th>
+                                    <th
+                                        class="px-8 py-5 text-[10px] font-black text-gray-400 uppercase tracking-widest">
+                                        Items</th>
+                                    <th
+                                        class="px-8 py-5 text-[10px] font-black text-gray-400 uppercase tracking-widest">
+                                        Total</th>
+                                    <th
+                                        class="px-8 py-5 text-[10px] font-black text-gray-400 uppercase tracking-widest text-center">
+                                        Status</th>
+                                    <th
+                                        class="px-8 py-5 text-[10px] font-black text-gray-400 uppercase tracking-widest text-center">
+                                        Management</th>
                                 </tr>
                             </thead>
-                            <tbody id="fullOrdersTableBody" class="divide-y divide-white/5 text-sm">
+                            <tbody id="fullOrdersTableBody" class="divide-y divide-gray-50 text-sm font-bold">
                                 <!-- Loaded via JS -->
                             </tbody>
                         </table>
@@ -261,42 +322,55 @@
 
             <!-- MENU MANAGER SECTION -->
             <div id="section-menu" class="hidden max-w-7xl mx-auto animate-fade-in-up">
-                <div class="flex justify-between items-center mb-8">
-                    <h3 class="font-bold text-white text-2xl">Menu Manager</h3>
+                <div class="flex justify-between items-center mb-10 px-2">
+                    <div>
+                        <h3 class="font-black text-gray-900 text-3xl tracking-tighter uppercase">Menu Catalog</h3>
+                        <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest mt-1">Manage your
+                            storefront items</p>
+                    </div>
                     <button onclick="addNewItem()"
-                        class="btn-primary flex items-center gap-2 shadow-lg shadow-emerald-500/20">
-                        <i class="fa-solid fa-plus"></i> Add New Item
+                        class="bg-red-500 text-white px-8 py-4 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-red-600 transition-all shadow-xl shadow-red-500/20 flex items-center gap-3">
+                        <i class="fa-solid fa-plus text-[10px]"></i> New Product
                     </button>
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="menuGrid">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10" id="menuGrid">
                     <!-- Loaded via JS -->
                 </div>
             </div>
 
             <!-- EARNINGS SECTION -->
             <div id="section-earnings" class="hidden max-w-7xl mx-auto animate-fade-in-up">
-                <div class="glass-card p-8 border border-white/10">
-                    <h3 class="font-bold text-white text-2xl mb-8">Earnings Overview</h3>
+                <div
+                    class="bg-white p-10 rounded-[3rem] border border-gray-100 shadow-sm relative overflow-hidden group">
                     <div
-                        class="h-72 bg-black/40 rounded-2xl flex items-center justify-center text-gray-500 font-medium border border-white/5">
-                        <div class="text-center">
-                            <i class="fa-solid fa-chart-column text-4xl mb-3 opacity-50"></i>
-                            <p>[ Interactive Earnings Chart ]</p>
+                        class="absolute top-0 right-0 w-64 h-64 bg-red-50 rounded-bl-[10rem] opacity-40 -mr-20 -mt-20 group-hover:scale-110 transition-transform duration-700">
+                    </div>
+
+                    <h3 class="font-black text-gray-900 text-3xl tracking-tighter uppercase mb-10 relative z-10">
+                        Financial Health</h3>
+                    <div
+                        class="h-80 bg-gray-50/50 rounded-[2.5rem] flex flex-col items-center justify-center text-gray-400 font-medium border border-gray-100 border-dashed relative z-10 transition-colors hover:bg-white hover:border-red-100">
+                        <div class="text-center p-8 bg-white rounded-3xl shadow-sm border border-gray-50 scale-110">
+                            <i class="fa-solid fa-chart-line text-4xl mb-4 text-red-500 opacity-20"></i>
+                            <p class="text-xs font-black uppercase tracking-widest text-gray-400">Interaction Chart
+                                Coming Soon</p>
                         </div>
                     </div>
-                    <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
-                        <div class="p-6 bg-emerald-500/10 rounded-2xl border border-emerald-500/20">
-                            <p class="text-xs text-emerald-400 font-bold uppercase tracking-widest mb-1">This Month</p>
-                            <p class="text-3xl font-bold text-white shadow-emerald-500/10">₹42,940</p>
+                    <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8 relative z-10">
+                        <div class="p-8 bg-red-500 rounded-[2.2rem] shadow-xl shadow-red-500/20 text-white">
+                            <p class="text-[10px] font-black uppercase tracking-widest mb-4 opacity-80">This Month's
+                                Gross</p>
+                            <p class="text-4xl font-black tracking-tighter uppercase">₹42,940</p>
                         </div>
-                        <div class="p-6 bg-blue-500/10 rounded-2xl border border-blue-500/20">
-                            <p class="text-xs text-blue-400 font-bold uppercase tracking-widest mb-1">Total Payout</p>
-                            <p class="text-3xl font-bold text-white">₹1,28,400</p>
-                        </div>
-                        <div class="p-6 bg-purple-500/10 rounded-2xl border border-purple-500/20">
-                            <p class="text-xs text-purple-400 font-bold uppercase tracking-widest mb-1">Commission Paid
+                        <div class="p-8 bg-white border border-gray-100 rounded-[2.2rem] shadow-sm">
+                            <p class="text-[10px] text-gray-400 font-black uppercase tracking-widest mb-4">Total Settled
                             </p>
-                            <p class="text-3xl font-bold text-white">₹12,840</p>
+                            <p class="text-4xl font-black text-gray-900 tracking-tighter uppercase">₹1,28,400</p>
+                        </div>
+                        <div class="p-8 bg-white border border-gray-100 rounded-[2.2rem] shadow-sm">
+                            <p class="text-[10px] text-gray-400 font-black uppercase tracking-widest mb-4">Flat
+                                Commision</p>
+                            <p class="text-4xl font-black text-red-500 tracking-tighter uppercase">₹12,840</p>
                         </div>
                     </div>
                 </div>
@@ -338,7 +412,6 @@
             // Update Sidebar UI
             document.querySelectorAll('.sidebar-link').forEach(link => {
                 link.classList.remove('active');
-                // Check if the onclick attribute contains the id
                 if (link.getAttribute('onclick').includes(id)) link.classList.add('active');
             });
 
@@ -351,17 +424,15 @@
             }
         }
 
-
-
         function renderSkeleton() {
             const tbody = document.getElementById('ordersTableBody');
             tbody.innerHTML = Array(5).fill(0).map(() => `
-                <tr>
-                    <td class="px-6 py-4"><div class="h-4 w-16 bg-white/10 rounded animate-pulse"></div></td>
-                    <td class="px-6 py-4"><div class="h-4 w-32 bg-white/10 rounded animate-pulse"></div></td>
-                    <td class="px-6 py-4"><div class="h-4 w-12 bg-white/10 rounded animate-pulse"></div></td>
-                    <td class="px-6 py-4"><div class="h-6 w-20 bg-white/10 rounded-full animate-pulse"></div></td>
-                    <td class="px-6 py-4"><div class="h-3 w-16 bg-white/10 rounded animate-pulse"></div></td>
+                <tr class="animate-pulse">
+                    <td class="px-8 py-4"><div class="h-3 w-12 bg-gray-100 rounded-full"></div></td>
+                    <td class="px-8 py-4"><div class="h-3 w-24 bg-gray-100 rounded-full"></div></td>
+                    <td class="px-8 py-4"><div class="h-3 w-10 bg-gray-100 rounded-full"></div></td>
+                    <td class="px-8 py-4"><div class="h-6 w-20 bg-gray-100 rounded-lg mx-auto"></div></td>
+                    <td class="px-8 py-4"><div class="h-2 w-16 bg-gray-100 rounded-full"></div></td>
                 </tr>
             `).join('');
         }
@@ -370,17 +441,16 @@
             if (!dashboardData) return;
             const tbody = document.getElementById('ordersTableBody');
             tbody.innerHTML = dashboardData.recentOrders.slice(0, 5).map(order => `
-                <tr class="hover:bg-white/5 transition border-t border-white/5 cursor-pointer">
-                    <td class="px-6 py-4 font-mono text-sm text-emerald-400 font-bold">${order.id}</td>
-                    <td class="px-6 py-4 text-sm font-medium text-gray-200">${order.customer}</td>
-                    <td class="px-6 py-4 text-sm font-bold text-white">₹${order.total}</td>
-                    <td class="px-6 py-4">
-                        <span
-                            class="px-2.5 py-1 ${order.status === 'Completed' ? 'bg-green-500/20 text-green-400 border-green-500/20' : (order.status === 'Pending' ? 'bg-orange-500/20 text-orange-400 border-orange-500/20' : 'bg-blue-500/20 text-blue-400 border-blue-500/20')} border rounded-md text-xs font-bold uppercase tracking-wide">
+                <tr class="hover:bg-gray-50/50 transition duration-300 cursor-pointer group">
+                    <td class="px-8 py-5 font-black text-red-500 text-xs tracking-tighter group-hover:pl-10 transition-all">#${order.id}</td>
+                    <td class="px-8 py-5 text-gray-900 uppercase tracking-tighter text-sm font-black">${order.customer}</td>
+                    <td class="px-8 py-5 text-gray-900 text-base font-black">₹${order.total}</td>
+                    <td class="px-8 py-5 text-center">
+                        <span class="px-3 py-1.5 rounded-xl text-[10px] font-black uppercase tracking-widest shadow-sm ${getStatusColor(order.status)}">
                             ${order.status}
                         </span>
                     </td>
-                    <td class="px-6 py-4 text-xs text-gray-500">${order.time}</td>
+                    <td class="px-8 py-5 text-[10px] font-black text-gray-400 uppercase tracking-widest">${order.time}</td>
                 </tr>
             `).join('');
         }
@@ -399,14 +469,14 @@
                 document.getElementById('businessName').innerText = dashboardData.businessName;
                 document.getElementById('partnerIdDisplay').innerText = dashboardData.partnerId;
                 document.getElementById('partnerAvatar').src =
-                    `https://ui-avatars.com/api/?name=${encodeURIComponent(dashboardData.businessName)}&background=10b981&color=fff`;
+                    `https://ui-avatars.com/api/?name=${encodeURIComponent(dashboardData.businessName)}&background=ef4444&color=fff&rounded=true`;
 
                 // Update Stats
                 document.getElementById('statOrders').innerText = dashboardData.stats.todayOrders;
-                document.getElementById('statEarnings').innerText = dashboardData.stats.totalEarnings;
+                document.getElementById('statEarnings').innerText = dashboardData.stats.totalEarnings.toLocaleString();
                 document.getElementById('statPending').innerText = dashboardData.stats.pendingOrders;
                 document.getElementById('statRating').innerText = dashboardData.stats.rating;
-                document.getElementById('partnerStatus').innerText = dashboardData.status || 'Active';
+                document.getElementById('partnerStatus').innerText = (dashboardData.status || 'Active') + ' Partner';
 
                 renderDashboardOrders();
 
@@ -418,7 +488,6 @@
 
             } catch (err) {
                 console.error(err);
-                // Only logout if it's a 404 or persistent error
                 if (err.message && err.message.includes('404')) {
                     alert("Session expired. Please login again.");
                     logout();
@@ -431,33 +500,40 @@
             if (!dashboardData) return;
 
             tbody.innerHTML = dashboardData.recentOrders.map(order => `
-    <tr class="hover:bg-white/5 transition border-t border-white/5">
-        <td class="px-6 py-4 font-mono font-bold text-emerald-400 border-l-2 border-transparent hover:border-emerald-500">${order.id}</td>
-        <td class="px-6 py-4 font-bold text-gray-200">${order.customer}</td>
-        <td class="px-6 py-4 text-gray-400 text-sm">${order.itemsSummary || 'Varies'}</td>
-        <td class="px-6 py-4 font-bold text-white">₹${order.total}</td>
-        <td class="px-6 py-4">
-             <span
-                class="px-2 py-1 ${order.status === 'Completed' ? 'bg-green-500/10 text-green-400' : (order.status === 'Pending' ? 'bg-orange-500/10 text-orange-400' : 'bg-blue-500/10 text-blue-400')} rounded text-xs font-bold">
-                ${order.status}
-            </span>
-        </td>
-        <td class="px-6 py-4">
-            ${order.status === 'Pending' ? `
-            <button onclick="updateOrderStatus('${order.id}', 'Preparing')"
-                class="bg-green-600/20 border border-green-600/50 text-green-400 px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-green-600 hover:text-white transition">ACCEPT</button>
-            ` : (order.status === 'Preparing' ? `
-            <button onclick="updateOrderStatus('${order.id}', 'Out for Delivery')"
-                class="bg-blue-600/20 border border-blue-600/50 text-blue-400 px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-blue-600 hover:text-white transition">SHIP ORDER</button>
-            ` : (order.status === 'Out for Delivery' ? `
-            <button onclick="updateOrderStatus('${order.id}', 'Completed')"
-                class="bg-emerald-600/20 border border-emerald-600/50 text-emerald-400 px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-emerald-600 hover:text-white transition">COMPLETE</button>
-            ` : (order.status === 'Completed' || order.status === 'Delivered' ? `
-            <span class="text-gray-500 font-bold text-xs flex items-center gap-1"><i class="fa-solid fa-check-double"></i> Done</span>
-            ` : '<span class="text-gray-500">Processed</span>')))}
-        </td>
-    </tr>
-    `).join('');
+                <tr class="hover:bg-gray-50/50 transition duration-300">
+                    <td class="px-8 py-6 font-black text-red-500 text-xs tracking-tighter">#${order.id}</td>
+                    <td class="px-8 py-6 text-gray-900 uppercase tracking-tighter text-sm font-black">${order.customer}</td>
+                    <td class="px-8 py-6 text-gray-500 text-xs font-bold uppercase tracking-tight max-w-xs truncate">${order.itemsSummary || 'Multiple Items'}</td>
+                    <td class="px-8 py-6 text-gray-900 text-base font-black">₹${order.total}</td>
+                    <td class="px-8 py-6 text-center">
+                         <span class="px-3 py-1.5 rounded-xl text-[10px] font-black uppercase tracking-widest shadow-sm ${getStatusColor(order.status)}">
+                            ${order.status}
+                        </span>
+                    </td>
+                    <td class="px-8 py-6">
+                        <div class="flex justify-center gap-3">
+                            ${order.status === 'Pending' ? `
+                            <button onclick="updateOrderStatus('${order.id}', 'Preparing')"
+                                class="bg-red-500 text-white px-6 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-red-600 transition shadow-lg shadow-red-500/10 active:scale-95">Accept</button>
+                            ` : (order.status === 'Preparing' ? `
+                            <button onclick="updateOrderStatus('${order.id}', 'Out for Delivery')"
+                                class="bg-gray-900 text-white px-6 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-black transition shadow-lg active:scale-95">Ready</button>
+                            ` : (order.status === 'Out for Delivery' ? `
+                            <button onclick="updateOrderStatus('${order.id}', 'Completed')"
+                                class="bg-red-50 text-red-500 border border-red-100 px-6 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-red-100 transition active:scale-95">Deliver</button>
+                            ` : `<span class="text-gray-300 text-[10px] font-black uppercase tracking-widest flex items-center gap-2 justify-center"><i class="fa-solid fa-circle-check"></i> Processed</span>`))}
+                        </div>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function getStatusColor(status) {
+            if (status === 'Completed' || status === 'Delivered') return 'bg-gray-900 text-white shadow-black/20';
+            if (status === 'Pending') return 'bg-amber-50 text-amber-600 border border-amber-100';
+            if (status === 'Preparing' || status === 'Accepted') return 'bg-red-600 text-white shadow-red-500/20';
+            if (status === 'Out for Delivery') return 'bg-blue-600 text-white shadow-blue-500/20';
+            return 'bg-gray-100 text-gray-500';
         }
 
         async function updateOrderStatus(orderId, newStatus) {
@@ -469,15 +545,13 @@
                 });
                 const data = await res.json();
                 if (data.success) {
-                    initDashboard(); // Refresh data
-                    // No need to manually call renderLiveOrders as initDashboard does it if visible
+                    initDashboard();
                 }
             } catch (err) {
                 console.error(err);
             }
         }
 
-        // Global Menu State
         let menuItems = [];
 
         async function fetchMenuItems() {
@@ -493,35 +567,32 @@
         function renderMenuManager() {
             const grid = document.getElementById('menuGrid');
             grid.innerHTML = menuItems.map(item => `
-        <div class="glass-card p-4 group relative overflow-hidden transition-all hover:-translate-y-1 hover:shadow-emerald-500/10 ${item.active ? '' : 'opacity-60 grayscale'}">
-            <div class="absolute inset-x-0 bottom-0 h-1 bg-gradient-to-r from-emerald-500 to-teal-500 scale-x-0 group-hover:scale-x-100 transition-transform"></div>
-            
-            <div class="relative mb-4">
-                <img src="${item.image}" class="w-full h-40 object-cover rounded-xl shadow-md">
-                <span class="absolute top-2 right-2 px-2.5 py-1 bg-black/80 backdrop-blur rounded-lg text-[10px] font-bold uppercase tracking-wider text-white border border-white/10">${item.category}</span>
-            </div>
-            
-            <div class="flex justify-between items-start mb-2">
-                <h4 class="font-bold text-white text-lg leading-tight">${item.name}</h4>
-                <div class="flex flex-col items-end">
-                    <span class="text-xs font-bold ${item.active ? 'text-green-400' : 'text-red-400'} flex items-center gap-1">
-                        <span class="w-1.5 h-1.5 rounded-full ${item.active ? 'bg-green-400' : 'bg-red-400'}"></span>
-                        ${item.active ? 'Active' : 'Hidden'}
-                    </span>
+                <div class="bg-white rounded-[2.5rem] p-6 border border-gray-100 shadow-sm hover:shadow-2xl transition-all duration-500 group relative flex flex-col ${item.active ? '' : 'opacity-60 grayscale scale-95'}">
+                    <div class="relative h-52 mb-8 rounded-[1.8rem] overflow-hidden shadow-xl">
+                        <img src="${item.image}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                        <div class="absolute top-4 right-4 bg-white/95 text-gray-900 px-3 py-1.5 rounded-xl text-[9px] font-black uppercase tracking-widest shadow-xl border border-gray-100">${item.category}</div>
+                    </div>
+                    
+                    <div class="flex-grow space-y-2 mb-8">
+                        <div class="flex justify-between items-start">
+                            <h4 class="font-black text-gray-900 text-xl tracking-tighter uppercase leading-tight group-hover:text-red-500 transition-colors">${item.name}</h4>
+                            <span class="text-2xl font-black text-gray-900">₹${item.price}</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                             <div class="w-2 h-2 rounded-full ${item.active ? 'bg-red-500' : 'bg-gray-300'}"></div>
+                             <span class="text-[10px] font-black uppercase tracking-widest text-gray-400">${item.active ? 'Live' : 'Hidden'}</span>
+                        </div>
+                    </div>
+                    
+                    <div class="flex gap-3">
+                        <button onclick="editItem(${item.id})" class="flex-1 bg-gray-50 text-gray-500 py-4 rounded-2xl text-[10px] font-black uppercase tracking-widest hover:bg-gray-100 transition active:scale-95">Price</button>
+                        <button onclick="toggleItemStatus(${item.id}, ${item.active})" 
+                            class="flex-1 py-4 rounded-2xl text-[10px] font-black uppercase tracking-widest transition shadow-lg active:scale-95 ${item.active ? 'bg-red-500 text-white shadow-red-500/20 hover:bg-red-600' : 'bg-gray-900 text-white shadow-black/20 hover:bg-black'}">
+                            ${item.active ? 'Disable' : 'Enable'}
+                        </button>
+                    </div>
                 </div>
-            </div>
-            
-            <p class="text-emerald-400 font-bold text-xl mb-4">₹${item.price}</p>
-            
-            <div class="flex gap-3">
-                <button onclick="editItem(${item.id})" class="flex-1 bg-white/5 text-gray-300 py-2 rounded-lg text-xs font-bold border border-white/10 hover:bg-white/10 hover:text-white transition">EDIT</button>
-                <button onclick="toggleItemStatus(${item.id}, ${item.active})" 
-                    class="flex-1 py-2 rounded-lg text-xs font-bold border transition ${item.active ? 'bg-red-500/10 text-red-400 border-red-500/20 hover:bg-red-500/20' : 'bg-green-500/10 text-green-400 border-green-500/20 hover:bg-green-500/20'}">
-                    ${item.active ? 'DISABLE' : 'ENABLE'}
-                </button>
-            </div>
-        </div>
-    `).join('');
+            `).join('');
         }
 
         async function toggleItemStatus(id, currentStatus) {
@@ -580,16 +651,16 @@
 
         initDashboard();
 
-        // Auto-refresh every 5 seconds to show new orders
+        // Auto-refresh every 10 seconds to show new orders
         setInterval(() => {
             initDashboard();
-        }, 5000);
+        }, 10000);
     </script>
     <script src="assets/js/common.js"></script>
     <script src="assets/js/toast.js"></script>
     <script>
         // Use Global Toast instead of alert
-        window.alert = function (msg) { showToast(msg, msg.includes('success') || msg.includes('Success') || msg.includes('accepted') ? 'success' : 'info'); };
+        window.alert = function (msg) { showToast(msg, msg.toLowerCase().includes('success') ? 'success' : 'info'); };
     </script>
 </body>
 

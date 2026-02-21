@@ -14,64 +14,66 @@
         }
 
         .hero-pattern {
-            background-color: #064e3b;
-            background-image: url("https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=1920&auto=format&fit=crop");
-            background-blend-mode: overlay;
+            background-color: #e23744;
+            background-image: url("https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=1920&auto=format&fit=crop");
+            background-blend-mode: multiply;
             background-size: cover;
             background-position: center;
         }
     </style>
 </head>
 
-<body class="bg-gray-900 text-gray-100">
+<body class="bg-white text-gray-900">
 
     <!-- Navbar -->
-    <nav class="absolute top-0 left-0 w-full z-20 flex justify-between items-center px-8 py-5">
-        <div class="flex items-center gap-2">
+    <nav class="absolute top-0 left-0 w-full z-20 flex justify-between items-center px-8 py-6">
+        <div class="flex items-center gap-3">
             <div
-                class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-emerald-700 font-bold text-xl shadow-lg">
+                class="w-10 h-10 bg-red-600 rounded-lg flex items-center justify-center text-white font-black text-2xl shadow-xl">
                 F</div>
-            <span class="text-white font-bold text-2xl tracking-wide">Foodie Zone <span
-                    class="text-emerald-300 font-normal text-lg">Partner</span></span>
+            <span class="text-white font-black text-3xl tracking-tighter">Foodie Zone <span
+                    class="text-red-100 font-medium text-lg tracking-normal opacity-80">Partner</span></span>
         </div>
-        <div class="hidden md:flex gap-6 items-center">
-            <a href="index.html" class="text-white hover:text-emerald-200 transition font-medium">Home</a>
-            <a href="contact.html" class="text-white hover:text-emerald-200 transition font-medium">Contact Us</a>
+        <div class="hidden md:flex gap-8 items-center">
+            <a href="index.html"
+                class="text-white hover:text-red-100 transition font-bold text-sm uppercase tracking-widest">Home</a>
+            <a href="contact.html"
+                class="text-white hover:text-red-100 transition font-bold text-sm uppercase tracking-widest">Support</a>
             <a href="partner-login.html"
-                class="bg-emerald-600 text-white px-5 py-2 rounded-full hover:bg-emerald-700 transition font-bold shadow-md">Partner
+                class="bg-white text-red-600 px-6 py-2.5 rounded-lg hover:bg-red-50 transition font-black shadow-xl text-sm uppercase tracking-widest">Partner
                 Login</a>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <div class="relative min-h-screen flex items-center justify-center hero-pattern pt-20 pb-10 px-4">
-        <div class="container mx-auto flex flex-col md:flex-row items-center justify-between gap-12 max-w-6xl">
+    <div class="relative min-h-screen flex items-center justify-center hero-pattern pt-24 pb-16 px-4">
+        <div class="container mx-auto flex flex-col lg:flex-row items-center justify-between gap-16 max-w-7xl">
 
             <!-- Left Text -->
-            <div class="text-white md:w-1/2 space-y-6">
+            <div class="text-white lg:w-3/5 space-y-10 py-10">
                 <span
-                    class="bg-emerald-600/30 border border-emerald-500/50 text-emerald-100 px-4 py-1 rounded-full text-sm font-medium backdrop-blur-sm">🚀
-                    Join 500+ Top Restaurants</span>
-                <h1 class="text-5xl md:text-6xl font-bold leading-tight">Grow your business with <span
-                        class="text-emerald-400">Foodie Zone</span></h1>
-                <p class="text-xl text-gray-200 leading-relaxed">Partner with us to reach more customers, streamline
-                    your orders, and boost your kitchen's potential.</p>
+                    class="bg-white/10 border border-white/20 text-white px-5 py-2 rounded-xl text-sm font-black backdrop-blur-md uppercase tracking-[0.2em]">🚀
+                    Empowering 500+ Outlets</span>
+                <h1 class="text-6xl lg:text-8xl font-black leading-[0.9] tracking-tighter">Grow your business with <span
+                        class="text-white/40">Foodie Zone</span></h1>
+                <p class="text-2xl text-red-50 leading-relaxed font-medium max-w-2xl">Partner with Tamil Nadu's fastest
+                    growing food network. Reach thousands of new customers daily.</p>
 
-                <div class="flex gap-4 pt-4">
+                <div class="flex flex-wrap gap-6 pt-6">
                     <div
-                        class="flex items-center gap-3 bg-black/30 p-3 rounded-lg backdrop-blur-md border border-white/10">
-                        <i class="fa-solid fa-store text-emerald-400 text-2xl"></i>
+                        class="flex items-center gap-4 bg-white/10 p-5 rounded-2xl backdrop-blur-xl border border-white/10 shadow-2xl">
+                        <i class="fa-solid fa-store text-white text-3xl"></i>
                         <div>
-                            <p class="text-2xl font-bold">0%</p>
-                            <p class="text-xs text-gray-300">Commission for 1st Month</p>
+                            <p class="text-3xl font-black">0%</p>
+                            <p class="text-xs font-bold text-red-100 uppercase tracking-widest">First Month Comm</p>
                         </div>
                     </div>
                     <div
-                        class="flex items-center gap-3 bg-black/30 p-3 rounded-lg backdrop-blur-md border border-white/10">
-                        <i class="fa-solid fa-users text-emerald-400 text-2xl"></i>
+                        class="flex items-center gap-4 bg-white/10 p-5 rounded-2xl backdrop-blur-xl border border-white/10 shadow-2xl">
+                        <i class="fa-solid fa-users text-white text-3xl"></i>
                         <div>
-                            <p class="text-2xl font-bold">10k+</p>
-                            <p class="text-xs text-gray-300">Daily Active Users</p>
+                            <p class="text-3xl font-black">10k+</p>
+                            <p class="text-xs font-bold text-red-100 uppercase tracking-widest">Daily Active Users</p>
                         </div>
                     </div>
                 </div>
@@ -79,103 +81,112 @@
 
             <!-- Registration Card -->
             <div
-                class="bg-gray-800 p-8 md:p-10 rounded-2xl shadow-2xl w-full max-w-md relative z-10 transition hover:-translate-y-1 duration-300 border border-gray-700">
-                <h2 class="text-3xl font-bold text-gray-100 mb-2">Get Started</h2>
-                <p class="text-gray-400 mb-6 text-sm">Create your partner account in minutes.</p>
+                class="bg-white p-10 lg:p-12 rounded-[2rem] shadow-[0_32px_64px_-16px_rgba(0,0,0,0.2)] w-full max-w-lg relative z-10 transition-all hover:scale-[1.02] duration-500 border border-gray-100">
+                <h2 class="text-4xl font-black text-gray-900 mb-2 tracking-tighter">Get Started</h2>
+                <p class="text-gray-400 mb-10 text-base font-medium">Register your property in 2 minutes.</p>
 
-                <form class="space-y-4" id="partnerForm">
+                <form class="space-y-6" id="partnerForm">
                     <div>
-                        <label class="block text-sm font-medium text-gray-300 mb-1">Business Name</label>
+                        <label class="block text-xs font-black text-gray-400 uppercase tracking-widest mb-2">Business
+                            Name</label>
                         <div class="relative">
-                            <i class="fa-solid fa-shop absolute left-3 top-3.5 text-gray-400"></i>
+                            <i class="fa-solid fa-shop absolute left-4 top-4 text-gray-300"></i>
                             <input type="text" id="businessName" required
-                                class="w-full pl-10 pr-4 py-3 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 transition bg-gray-700 focus:bg-gray-600 text-white text-sm placeholder-gray-400"
-                                placeholder="Restaurant Name">
+                                class="w-full pl-12 pr-4 py-4 border border-gray-100 rounded-2xl focus:outline-none focus:ring-4 focus:ring-red-500/10 focus:border-red-500 transition-all bg-gray-50 font-bold text-gray-900 text-base placeholder-gray-300"
+                                placeholder="e.g. Tasty Kitchen">
                         </div>
                     </div>
                     <div>
-                        <label class="block text-sm font-medium text-gray-300 mb-1">Owner Mobile</label>
+                        <label class="block text-xs font-black text-gray-400 uppercase tracking-widest mb-2">Mobile
+                            Number</label>
                         <div class="relative">
-                            <i class="fa-solid fa-phone absolute left-3 top-3.5 text-gray-400"></i>
+                            <i class="fa-solid fa-phone absolute left-4 top-4 text-gray-300"></i>
                             <input type="tel" id="mobile" required
-                                class="w-full pl-10 pr-4 py-3 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 transition bg-gray-700 focus:bg-gray-600 text-white text-sm placeholder-gray-400"
+                                class="w-full pl-12 pr-4 py-4 border border-gray-100 rounded-2xl focus:outline-none focus:ring-4 focus:ring-red-500/10 focus:border-red-500 transition-all bg-gray-50 font-bold text-gray-900 text-base placeholder-gray-300"
                                 placeholder="98765 43210">
                         </div>
                     </div>
                     <div>
-                        <label class="block text-sm font-medium text-gray-300 mb-1">Create Password</label>
+                        <label
+                            class="block text-xs font-black text-gray-400 uppercase tracking-widest mb-2">Password</label>
                         <div class="relative">
-                            <i class="fa-solid fa-lock absolute left-3 top-3.5 text-gray-400"></i>
+                            <i class="fa-solid fa-lock absolute left-4 top-4 text-gray-300"></i>
                             <input type="password" id="regPassword" required
-                                class="w-full pl-10 pr-4 py-3 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 transition bg-gray-700 focus:bg-gray-600 text-white text-sm placeholder-gray-400"
-                                placeholder="Min 6 characters">
+                                class="w-full pl-12 pr-4 py-4 border border-gray-100 rounded-2xl focus:outline-none focus:ring-4 focus:ring-red-500/10 focus:border-red-500 transition-all bg-gray-50 font-bold text-gray-900 text-base placeholder-gray-300"
+                                placeholder="Create strong password">
                         </div>
                     </div>
                     <div>
-                        <label class="block text-sm font-medium text-gray-300 mb-1">City</label>
+                        <label class="block text-xs font-black text-gray-400 uppercase tracking-widest mb-2">Primary
+                            City</label>
                         <div class="relative">
-                            <i class="fa-solid fa-location-dot absolute left-3 top-3.5 text-gray-400"></i>
+                            <i class="fa-solid fa-location-dot absolute left-4 top-4 text-gray-300"></i>
                             <select id="city"
-                                class="w-full pl-10 pr-4 py-3 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 transition bg-gray-700 focus:bg-gray-600 text-white text-sm appearance-none cursor-pointer">
+                                class="w-full pl-12 pr-4 py-4 border border-gray-100 rounded-2xl focus:outline-none focus:ring-4 focus:ring-red-500/10 focus:border-red-500 transition-all bg-gray-50 font-black text-gray-900 text-base appearance-none cursor-pointer">
                                 <option>Chennai</option>
                                 <option>Madurai</option>
                                 <option>Coimbatore</option>
                                 <option>Salem</option>
                             </select>
                             <i
-                                class="fa-solid fa-chevron-down absolute right-4 top-4 text-xs text-gray-400 pointer-events-none"></i>
+                                class="fa-solid fa-chevron-down absolute right-5 top-5 text-gray-400 pointer-events-none"></i>
                         </div>
                     </div>
                     <button type="button" onclick="registerPartner()"
-                        class="w-full bg-emerald-600 text-white font-bold py-3.5 rounded-lg hover:bg-emerald-700 transition shadow-lg active:scale-[0.98] mt-2">Register
+                        class="w-full bg-red-600 text-white font-black py-5 rounded-2xl hover:bg-red-700 transition-all shadow-2xl shadow-red-500/20 active:scale-[0.98] mt-4 text-lg uppercase tracking-widest">Register
                         Now</button>
-                    <p class="text-xs text-center text-gray-400 mt-4">By clicking Register, you agree to our <a href="#"
-                            class="text-emerald-500 hover:underline">Terms & Conditions</a></p>
+                    <p class="text-[10px] text-center text-gray-400 mt-6 font-bold uppercase tracking-widest">Safe &
+                        Secure • <a href="#" class="text-red-500 hover:underline">Terms of Service</a></p>
                 </form>
             </div>
         </div>
     </div>
 
     <!-- How it Works Section -->
-    <section class="py-20 bg-gray-800">
-        <div class="container mx-auto px-4 text-center max-w-5xl">
-            <h2 class="text-3xl md:text-4xl font-bold text-gray-100 mb-12">Get Live in <span class="text-emerald-500">3
+    <section class="py-32 bg-gray-50">
+        <div class="container mx-auto px-4 text-center max-w-6xl">
+            <h2 class="text-4xl md:text-5xl font-black text-gray-900 mb-16 tracking-tighter">Get Live in <span
+                    class="text-red-500">3
                     Easy Steps</span></h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
-                <div class="p-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-16">
+                <div class="space-y-6 group">
                     <div
-                        class="w-20 h-20 mx-auto bg-emerald-900/30 rounded-full flex items-center justify-center mb-6 shadow-sm border border-emerald-900/50">
-                        <i class="fa-solid fa-file-signature text-emerald-500 text-3xl"></i>
+                        class="w-24 h-24 mx-auto bg-red-50 rounded-[2rem] flex items-center justify-center shadow-xl border border-red-100 group-hover:scale-110 transition-transform duration-500">
+                        <i class="fa-solid fa-file-signature text-red-500 text-4xl"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-gray-100 mb-3">1. Register</h3>
-                    <p class="text-gray-400 text-sm">Fill in your details and set your business password.</p>
+                    <h3 class="text-2xl font-black text-gray-900">1. Register</h3>
+                    <p class="text-gray-500 font-medium px-4">Fill in your business details and set your dashboard
+                        password.</p>
                 </div>
-                <div class="p-6">
+                <div class="space-y-6 group">
                     <div
-                        class="w-20 h-20 mx-auto bg-emerald-900/30 rounded-full flex items-center justify-center mb-6 shadow-sm border border-emerald-900/50">
-                        <i class="fa-solid fa-utensils text-emerald-500 text-3xl"></i>
+                        class="w-24 h-24 mx-auto bg-red-50 rounded-[2rem] flex items-center justify-center shadow-xl border border-red-100 group-hover:scale-110 transition-transform duration-500">
+                        <i class="fa-solid fa-utensils text-red-500 text-4xl"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-gray-100 mb-3">2. Setup</h3>
-                    <p class="text-gray-400 text-sm">Upload context and menu items to your dashboard.</p>
+                    <h3 class="text-2xl font-black text-gray-900">2. Setup</h3>
+                    <p class="text-gray-500 font-medium px-4">Upload your brand photos and menu items to your profile.
+                    </p>
                 </div>
-                <div class="p-6">
+                <div class="space-y-6 group">
                     <div
-                        class="w-20 h-20 mx-auto bg-emerald-900/30 rounded-full flex items-center justify-center mb-6 shadow-sm border border-emerald-900/50">
-                        <i class="fa-solid fa-rocket text-emerald-500 text-3xl"></i>
+                        class="w-24 h-24 mx-auto bg-red-50 rounded-[2rem] flex items-center justify-center shadow-xl border border-red-100 group-hover:scale-110 transition-transform duration-500">
+                        <i class="fa-solid fa-rocket text-red-500 text-4xl"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-gray-100 mb-3">3. Go Live</h3>
-                    <p class="text-gray-400 text-sm">Start receiving orders and grow your brand.</p>
+                    <h3 class="text-2xl font-black text-gray-900">3. Go Live</h3>
+                    <p class="text-gray-500 font-medium px-4">Start receiving orders instantly and watch your brand
+                        grow.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="bg-gray-900 text-gray-400 py-10 mt-auto text-center border-t border-gray-800">
+    <footer class="bg-white text-gray-400 py-16 text-center border-t border-gray-100">
         <div class="container mx-auto">
-            <h3 class="text-white text-2xl font-bold mb-2">Foodie Zone Partner</h3>
-            <p class="mb-6">Grow with us. Serve the best.</p>
-            <p class="text-sm">&copy; 2026 Foodie Zone Inc. All rights reserved.</p>
+            <h3 class="text-gray-900 text-3xl font-black mb-2 tracking-tighter uppercase">Foodie Zone Partner</h3>
+            <p class="mb-10 font-bold text-sm tracking-widest uppercase">Grow with us. Serve the best.</p>
+            <p class="text-[10px] font-black uppercase tracking-widest">&copy; 2026 Foodie Zone Inc. All rights
+                reserved.</p>
         </div>
     </footer>
 
@@ -213,4 +224,3 @@
 </body>
 
 </html>
-

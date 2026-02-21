@@ -12,155 +12,76 @@
   <link rel="stylesheet" href="./assets/css/common.css">
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#10b981">
-  <style>
-    body {
-      font-family: 'Outfit', sans-serif;
-    }
-
-    .hero-bg {
-      background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.8)), url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=1600');
-      background-size: cover;
-      background-position: center;
-    }
-
-    /* Dark Mode Overrides */
-    body.dark-mode {
-      background-color: #111827;
-      color: #f3f4f6;
-    }
-
-    body.dark-mode .bg-white {
-      background-color: #1f2937;
-      color: #e5e7eb;
-    }
-
-    body.dark-mode .text-gray-800,
-    body.dark-mode .text-gray-900 {
-      color: #f3f4f6;
-    }
-
-    body.dark-mode .text-gray-500,
-    body.dark-mode .text-gray-600 {
-      color: #9ca3af;
-    }
-
-    body.dark-mode .navbar,
-    body.dark-mode .footer {
-      background-color: #0f172a;
-      color: #cbd5e1;
-    }
-
-    body.dark-mode .shadow-lg,
-    body.dark-mode .shadow-sm {
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
-    }
-  </style>
 </head>
 
-<body class="bg-gray-900 text-gray-100">
+<body class="bg-white text-gray-900">
 
   <!-- Navbar -->
   <header class="navbar" id="global-navbar"></header>
 
 
 
-  <!-- Hero Section -->
-  <section class="relative h-[600px] flex items-center justify-center text-center text-white overflow-hidden">
-    <!-- Parallax Background -->
+  <!-- Hero Section (Zomato Style) -->
+  <section class="relative h-[550px] flex items-center justify-center text-center text-white overflow-hidden">
+    <!-- Clean Background Image -->
     <div class="absolute inset-0 z-0">
       <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=1920"
-        class="w-full h-full object-cover brightness-50" alt="Food Background">
+        class="w-full h-full object-cover brightness-[0.75]" alt="Premium Food Platter">
     </div>
 
-    <!-- Content -->
-    <div class="relative z-10 px-4 max-w-4xl mx-auto animate-fade-in-up">
-      <span
-        class="bg-emerald-600/80 text-emerald-50 px-4 py-1 rounded-full text-sm font-semibold tracking-wide mb-6 inline-block backdrop-blur-sm border border-emerald-500/50">
-        #1 Food & Event Service in Tamil Nadu
-      </span>
-
-      <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight drop-shadow-xl">
-        Taste the <span class="text-emerald-400">Tradition</span>
+    <!-- Content Area -->
+    <div class="relative z-10 px-4 max-w-5xl mx-auto animate-fade-in-up">
+      <h1 class="text-5xl md:text-7xl font-extrabold mb-8 leading-tight drop-shadow-lg">
+        Foodie Zone
       </h1>
-
-      <p class="text-lg md:text-2xl mb-10 text-gray-200 font-light max-w-2xl mx-auto">
-        From homely hostel mess plans to grand wedding feasts—we deliver happiness.
+      <p class="text-xl md:text-3xl mb-12 text-white font-medium max-w-3xl mx-auto">
+        Discover the best food & drinks in Tamil Nadu
       </p>
 
-      <!-- Glass Search Bar -->
-      <!-- Swiggy-Inspired Search System -->
-      <div class="w-full max-w-4xl mx-auto z-50 relative text-left">
+      <!-- Zomato Search Box -->
+      <div class="w-full max-w-4xl mx-auto">
+        <div class="flex flex-col md:flex-row bg-white rounded-xl shadow-2xl overflow-hidden p-2">
 
-        <div
-          class="flex flex-col md:flex-row bg-white !bg-white !text-gray-800 rounded-2xl shadow-2xl overflow-visible transition-all duration-300 hover:shadow-green-500/20 ring-1 ring-black/5">
-
-          <!-- Location Input -->
-          <div class="relative flex-1 group border-b md:border-b-0 md:border-r border-gray-200">
-            <div id="locationBox"
-              class="flex items-center p-4 cursor-pointer hover:bg-gray-50 transition-colors rounded-t-2xl md:rounded-l-2xl">
-              <i
-                class="fa-solid fa-location-dot text-emerald-500 text-xl mx-2 transform group-hover:scale-110 transition-transform"></i>
-              <div class="flex-1 ml-3">
-                <input type="text" id="locationInput"
-                  class="w-full font-bold text-gray-700 !text-gray-700 outline-none bg-transparent placeholder-gray-500 !placeholder-gray-500 text-lg cursor-pointer truncate"
-                  placeholder="Enter your delivery location" value="" autocomplete="off" readonly>
-              </div>
-              <i id="locationArrow"
-                class="fa-solid fa-chevron-down text-emerald-500 text-sm mx-2 transition-transform duration-300"></i>
-            </div>
-
-            <!-- Dropdown Menu -->
-            <div id="locationDropdown"
-              class="absolute top-[110%] left-0 w-full bg-white rounded-xl shadow-xl p-1 hidden animate-fade-in z-50 border border-gray-100 ring-1 ring-black/5 origin-top">
-              <!-- Locate Me -->
-              <div onclick="detectLocation()"
-                class="flex items-start gap-4 p-4 hover:bg-gray-50 rounded-lg cursor-pointer transition-all group/item mb-1">
-                <i class="fa-solid fa-location-crosshairs text-emerald-500 text-xl mt-1"></i>
-                <div>
-                  <h4 class="font-bold text-gray-700 group-hover/item:text-emerald-500 transition-colors">Use my current
-                    location</h4>
-                  <p class="text-xs text-gray-500 mt-0.5 font-medium">Using GPS</p>
-                </div>
-              </div>
-            </div>
+          <!-- Location -->
+          <div class="flex-1 flex items-center p-4 border-b md:border-b-0 md:border-r border-gray-100 group">
+            <i class="fa-solid fa-location-dot text-red-500 text-xl mx-2"></i>
+            <input type="text" id="locationInput"
+              class="w-full font-semibold text-gray-800 outline-none bg-transparent placeholder-gray-400 text-lg"
+              placeholder="Chennai, Tamil Nadu" autocomplete="off">
           </div>
 
-          <!-- Search Area -->
-          <div class="flex-[1.5] flex items-center p-2 relative">
-            <div class="flex-1 flex items-center px-4">
-              <i class="fa-solid fa-magnifying-glass text-gray-400 text-lg mr-3"></i>
-              <input type="text"
-                class="w-full font-medium text-gray-700 !text-gray-700 outline-none placeholder-gray-400 !placeholder-gray-400 text-lg"
-                placeholder="Search for restaurant, item or more">
-            </div>
-            <button id="searchBtnDesktop" onclick="findServices()"
-              class="hidden md:block bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-green-600 hover:to-green-700 text-white px-8 py-3 rounded-xl font-bold text-base shadow-lg hover:shadow-emerald-500/30 transition-all transform active:scale-95">
-              Search
-            </button>
+          <!-- Search Food -->
+          <div class="flex-[1.5] flex items-center p-4">
+            <i class="fa-solid fa-magnifying-glass text-gray-400 text-lg mr-3"></i>
+            <input type="text"
+              class="w-full font-medium text-gray-700 outline-none bg-transparent placeholder-gray-400 text-lg"
+              placeholder="Search for restaurant, item or more">
           </div>
-          <button id="searchBtnMobile" onclick="findServices()"
-            class="md:hidden bg-emerald-600 text-white py-4 font-bold text-lg uppercase shadow-inner">
-            Search Food
+
+          <button onclick="findServices()"
+            class="bg-red-500 hover:bg-red-600 text-white px-10 py-4 rounded-lg font-bold text-lg transition-all transform active:scale-95 shadow-lg shadow-red-500/20">
+            Search
           </button>
         </div>
       </div>
-
-      <!-- Quick Stats -->
-      <div class="mt-12 grid grid-cols-3 gap-4 md:gap-8 max-w-2xl mx-auto">
-        <div class="text-center">
-          <p class="text-2xl md:text-3xl font-bold text-emerald-400">10k+</p>
-          <p class="text-[10px] md:text-xs text-gray-300 uppercase tracking-widest">Happy Eaters</p>
-        </div>
-        <div class="text-center border-x border-white/20">
-          <p class="text-2xl md:text-3xl font-bold text-emerald-400">50+</p>
-          <p class="text-[10px] md:text-xs text-gray-300 uppercase tracking-widest">Partner Halls</p>
-        </div>
-        <div class="text-center">
-          <p class="text-2xl md:text-3xl font-bold text-emerald-400">4.8</p>
-          <p class="text-[10px] md:text-xs text-gray-300 uppercase tracking-widest">User Rating</p>
-        </div>
-      </div>
     </div>
+  </section>
+
+  <!-- Quick Stats -->
+  <div class="mt-12 grid grid-cols-3 gap-4 md:gap-8 max-w-2xl mx-auto">
+    <div class="text-center">
+      <p class="text-3xl md:text-4xl font-black text-red-500">10k+</p>
+      <p class="text-[10px] md:text-xs text-gray-500 uppercase tracking-widest font-bold">Happy Eaters</p>
+    </div>
+    <div class="text-center border-x border-gray-100">
+      <p class="text-3xl md:text-4xl font-black text-red-500">50+</p>
+      <p class="text-[10px] md:text-xs text-gray-500 uppercase tracking-widest font-bold">Partner Halls</p>
+    </div>
+    <div class="text-center">
+      <p class="text-3xl md:text-4xl font-black text-red-500">4.8</p>
+      <p class="text-[10px] md:text-xs text-gray-500 uppercase tracking-widest font-bold">User Rating</p>
+    </div>
+  </div>
   </section>
 
   <!-- Features / Why Us -->
@@ -207,77 +128,62 @@
     </div>
   </section>
 
-  <!-- Services Section -->
-  <section class="max-w-7xl mx-auto py-20 px-4 bg-gray-800 rounded-3xl my-10 relative overflow-hidden">
-    <!-- Decorative Blob -->
-    <div class="absolute -top-24 -left-24 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl"></div>
+  <!-- Services Section (Zomato Style) -->
+  <section class="max-w-7xl mx-auto py-24 px-4 bg-white">
+    <div class="text-center mb-16">
+      <h2 class="text-3xl md:text-5xl font-extrabold text-gray-900 mb-4">Explore Our Services</h2>
+      <p class="text-gray-500 text-lg">Delicious food and premium catering tailored for you</p>
+    </div>
 
-    <div class="relative z-10">
-      <h2 class="text-3xl md:text-4xl font-bold text-center text-white mb-14">Explore Our Services</h2>
-
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <!-- Service Card 1 -->
-        <div
-          class="bg-gray-900 rounded-2xl shadow-lg p-1 group hover:shadow-2xl transition duration-500 border border-gray-700">
-          <div class="relative h-56 overflow-hidden rounded-xl">
-            <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=800"
-              class="w-full h-full object-cover transition duration-700 group-hover:scale-110">
-            <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
-            <div class="absolute bottom-4 left-4 text-white">
-              <span class="bg-emerald-600 text-xs font-bold px-2 py-1 rounded mb-2 inline-block">MOST POPULAR</span>
-              <h3 class="text-2xl font-bold">Daily Mess</h3>
-            </div>
-          </div>
-          <div class="p-6">
-            <p class="text-gray-400 mb-6 text-sm line-clamp-2">Healthy, home-style meals delivered to your hostel or
-              room. Breakfast, Lunch & Dinner plans.</p>
-            <a href="order.html"
-              class="block w-full text-center border-2 border-emerald-600 text-emerald-500 font-bold py-3 rounded-lg hover:bg-emerald-600 hover:text-white transition uppercase tracking-wide text-sm">
-              View Menu
-            </a>
-          </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+      <!-- Service Card 1 -->
+      <div class="z-card group">
+        <div class="relative h-64 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=800"
+            class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
         </div>
-
-        <!-- Service Card 2 -->
-        <div
-          class="bg-gray-900 rounded-2xl shadow-lg p-1 group hover:shadow-2xl transition duration-500 border border-gray-700">
-          <div class="relative h-56 overflow-hidden rounded-xl">
-            <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=800"
-              class="w-full h-full object-cover transition duration-700 group-hover:scale-110">
-            <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
-            <div class="absolute bottom-4 left-4 text-white">
-              <h3 class="text-2xl font-bold">Corporate Catering</h3>
-            </div>
-          </div>
-          <div class="p-6">
-            <p class="text-gray-400 mb-6 text-sm line-clamp-2">Bulk food solutions for offices and events. Snacks, Tea,
-              and Executive Lunches.</p>
-            <a href="order.html"
-              class="block w-full text-center border-2 border-gray-700 text-gray-300 font-bold py-3 rounded-lg hover:border-emerald-500 hover:text-emerald-400 transition uppercase tracking-wide text-sm">
-              Get Quote
-            </a>
-          </div>
+        <div class="p-6">
+          <h3 class="text-2xl font-bold text-gray-800 mb-2">Daily Mess</h3>
+          <p class="text-gray-500 mb-6 text-sm">Healthy, home-style meals delivered to your doorstep. Breakfast, Lunch &
+            Dinner plans.</p>
+          <a href="order.html"
+            class="block w-full text-center border border-red-500 text-red-500 font-bold py-3 rounded-lg hover:bg-red-500 hover:text-white transition-all text-sm uppercase tracking-wider">
+            View Menu
+          </a>
         </div>
+      </div>
 
-        <!-- Service Card 3 -->
-        <div
-          class="bg-gray-900 rounded-2xl shadow-lg p-1 group hover:shadow-2xl transition duration-500 border border-gray-700">
-          <div class="relative h-56 overflow-hidden rounded-xl">
-            <img src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?q=80&w=800"
-              class="w-full h-full object-cover transition duration-700 group-hover:scale-110">
-            <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
-            <div class="absolute bottom-4 left-4 text-white">
-              <h3 class="text-2xl font-bold">Party Halls</h3>
-            </div>
-          </div>
-          <div class="p-6">
-            <p class="text-gray-400 mb-6 text-sm line-clamp-2">Book premium banquet halls for Weddings, Birthdays, and
-              Receptions.</p>
-            <a href="halls.html"
-              class="block w-full text-center border-2 border-gray-700 text-gray-300 font-bold py-3 rounded-lg hover:border-emerald-500 hover:text-emerald-400 transition uppercase tracking-wide text-sm">
-              Book Hall
-            </a>
-          </div>
+      <!-- Service Card 2 -->
+      <div class="z-card group">
+        <div class="relative h-64 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=800"
+            class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
+        </div>
+        <div class="p-6">
+          <h3 class="text-2xl font-bold text-gray-800 mb-2">Corporate Catering</h3>
+          <p class="text-gray-500 mb-6 text-sm">Professional meal services for offices and corporate events in Chennai &
+            Salem.</p>
+          <a href="contact.html"
+            class="block w-full text-center border border-red-500 text-red-500 font-bold py-3 rounded-lg hover:bg-red-500 hover:text-white transition-all text-sm uppercase tracking-wider">
+            Enquire Now
+          </a>
+        </div>
+      </div>
+
+      <!-- Service Card 3 -->
+      <div class="z-card group">
+        <div class="relative h-64 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?q=80&w=800"
+            class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
+        </div>
+        <div class="p-6">
+          <h3 class="text-2xl font-bold text-gray-800 mb-2">Party Halls</h3>
+          <p class="text-gray-500 mb-6 text-sm">Book premium banquet halls for weddings, birthdays and private
+            celebrations.</p>
+          <a href="halls.html"
+            class="block w-full text-center border border-red-500 text-red-500 font-bold py-3 rounded-lg hover:bg-red-500 hover:text-white transition-all text-sm uppercase tracking-wider">
+            Check Halls
+          </a>
         </div>
       </div>
     </div>
@@ -312,9 +218,9 @@
       <!-- City Card -->
       <a href="#"
         onclick="selectCity('Madurai'); document.querySelector('.hero-bg').scrollIntoView({behavior:'smooth'})"
-        class="group relative h-64 rounded-2xl overflow-hidden cursor-pointer shadow-lg mt-0 md:mt-8">
-        <img src="https://images.unsplash.com/photo-1578564969153-06ac3f2935bc?q=80&w=800"
-          class="w-full h-full object-cover transition duration-700 group-hover:scale-110 group-hover:rotate-1">
+        class="group relative h-72 rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 block mt-0 md:mt-8">
+        <img src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?q=80&w=1200"
+          class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
         <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
         <div class="absolute bottom-0 left-0 w-full p-6">
           <h3 class="text-white text-xl font-bold group-hover:text-amber-300 transition">Madurai</h3>

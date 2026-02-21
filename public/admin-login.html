@@ -12,70 +12,72 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 
-<body class="bg-gray-900 text-gray-100 flex flex-col min-h-screen">
+<body class="bg-[#f8f8f8] text-gray-900 flex flex-col min-h-screen">
 
     <!-- Navbar -->
     <header class="navbar" id="global-navbar"></header>
 
     <!-- Main Content -->
-    <main class="flex-grow flex items-center justify-center py-10 px-4">
-        <div class="bg-gray-800 p-8 rounded-xl shadow-lg w-full max-w-md border border-gray-700">
-            <h1 class="text-2xl font-bold text-center text-emerald-500 mb-6">Admin Login</h1>
+    <main class="flex-grow flex items-center justify-center py-20 px-4">
+        <div
+            class="bg-white p-10 md:p-14 rounded-[2.5rem] shadow-[0_32px_64px_-16px_rgba(0,0,0,0.1)] w-full max-w-md border border-gray-100 relative overflow-hidden group">
+            <!-- Branded Accent -->
+            <div class="absolute top-0 left-0 w-full h-2 bg-red-500"></div>
 
-            <form id="adminLoginForm" class="space-y-4">
-                <div>
-                    <label class="block text-sm font-medium text-gray-300">Username</label>
+            <div class="text-center mb-10">
+                <div
+                    class="w-16 h-16 bg-red-50 text-red-500 rounded-2xl flex items-center justify-center text-2xl mb-6 mx-auto shadow-inner">
+                    <i class="fa-solid fa-user-shield"></i>
+                </div>
+                <h1 class="text-3xl font-black text-gray-900 tracking-tighter uppercase mb-2">Admin Portal</h1>
+                <p class="text-gray-400 font-bold uppercase tracking-widest text-[10px]">Secure management access</p>
+            </div>
+
+            <form id="adminLoginForm" class="space-y-6">
+                <div class="space-y-2">
+                    <label class="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Username</label>
                     <input type="text" id="adminUser"
-                        class="w-full border border-gray-600 bg-gray-700 text-white rounded p-3 focus:outline-emerald-500"
-                        placeholder="Enter username">
+                        class="w-full border border-gray-100 rounded-2xl p-4 bg-gray-50 text-gray-900 focus:outline-none focus:ring-4 focus:ring-red-500/10 focus:border-red-500 transition-all font-bold placeholder-gray-300"
+                        placeholder="Admin account">
                 </div>
 
-                <div>
-                    <label class="block text-sm font-medium text-gray-300">Password</label>
-                    <div class="relative">
+                <div class="space-y-2 relative">
+                    <label class="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Password</label>
+                    <div class="relative group/pass">
                         <input type="password" id="adminPass"
-                            class="w-full border border-gray-600 bg-gray-700 text-white rounded p-3 focus:outline-emerald-500 pr-10"
+                            class="w-full border border-gray-100 rounded-2xl p-4 bg-gray-50 text-gray-900 focus:outline-none focus:ring-4 focus:ring-red-500/10 focus:border-red-500 transition-all font-bold placeholder-gray-300 pr-12"
                             placeholder="••••••••">
-                        <i class="fa-solid fa-eye absolute right-4 top-4 text-gray-400 cursor-pointer"
+                        <i class="fa-solid fa-eye absolute right-4 top-4 text-gray-300 cursor-pointer hover:text-red-500 transition-colors"
                             id="toggleAdminPass"></i>
                     </div>
-                    <label class="flex items-center gap-2 text-sm text-gray-400 mt-2 cursor-pointer">
+                </div>
+
+                <div class="flex items-center justify-between px-1">
+                    <label
+                        class="flex items-center gap-2 text-xs text-gray-500 font-bold uppercase tracking-tighter hover:text-red-500 cursor-pointer transition-colors">
                         <input type="checkbox" id="adminRememberMe"
-                            class="w-4 h-4 rounded border-gray-600 bg-gray-700 text-emerald-600">
-                        Remember me
+                            class="w-4 h-4 rounded-lg border-gray-200 text-red-500 focus:ring-red-500/20">
+                        Stay authenticated
                     </label>
                 </div>
 
                 <button type="submit"
-                    class="w-full bg-emerald-600 text-white font-bold py-3 rounded hover:bg-emerald-700 transition">Login</button>
+                    class="w-full bg-red-500 text-white font-black py-5 rounded-[1.5rem] hover:bg-red-600 transition-all shadow-xl shadow-red-500/20 active:scale-[0.98] uppercase tracking-widest text-xs mt-4">
+                    Authenticate Securely
+                </button>
             </form>
 
-            <p class="text-center mt-4 text-sm">
-                <a href="index.html" class="text-gray-400 hover:text-white">Back to Website</a>
-            </p>
+            <div class="text-center mt-10">
+                <a href="index.html"
+                    class="text-[10px] font-black uppercase tracking-widest text-gray-400 hover:text-red-500 transition-colors">
+                    <i class="fa-solid fa-arrow-left mr-2"></i> Return to Storefront
+                </a>
+            </div>
         </div>
     </main>
 
     <!-- Footer -->
-    <footer class="footer mt-auto">
-        <div class="footer-container">
-            <div class="footer-box">
-                <h3>Semma Taste</h3>
-                <p>One stop for Food, Halls, and Catering.</p>
-            </div>
-            <div class="footer-box">
-                <h4>Quick Links</h4>
-                <a href="index.html">Home</a><br>
-                <a href="order.html">Order</a><br>
-                <a href="halls.html">Party Halls</a>
-            </div>
-            <div class="footer-box">
-                <h4>Contact</h4>
-                <p>Email: careers@foodiezone.com</p>
-
-            </div>
-        </div>
-    </footer>
+    <footer class="footer" id="global-footer"></footer>
 
     <script src="./assets/js/common.js?v=7"></script>
     <script>

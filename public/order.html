@@ -15,55 +15,46 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 
-<body class="bg-gray-900 text-gray-100">
+<body class="bg-white text-gray-900">
   <!-- Navbar -->
   <header class="navbar" id="global-navbar"></header>
 
-  <!-- Debug Overlay -->
-  <div id="debugOverlay"
-    class="fixed top-20 right-4 z-[5000] bg-black/90 text-xs text-green-400 p-3 rounded-lg border border-green-500/50 hidden max-w-xs overflow-auto max-h-[400px]">
-    <h4 class="font-bold border-b border-green-500/30 mb-2 pb-1">Debug Info</h4>
-    <div id="debugContent">Initializing...</div>
-  </div>
-
-
-
   <!-- Hero / Category Filter -->
-  <div class="max-w-7xl mx-auto px-4 py-6">
-    <div class="flex flex-col md:flex-row justify-between items-center mb-6 gap-4">
+  <div class="max-w-7xl mx-auto px-4 py-8">
+    <div class="flex flex-col md:flex-row justify-between items-center mb-8 gap-6">
 
-      <div class="flex gap-2">
+      <div class="flex gap-4 p-1 bg-gray-100 rounded-xl">
         <button id="retailBtn" onclick="switchMode('retail')"
-          class="px-6 py-2 bg-emerald-700 text-white rounded-full font-bold shadow-md hover:bg-emerald-600 transition">Retail
+          class="px-8 py-2.5 bg-red-500 text-white rounded-lg font-bold shadow-lg transition-all">Retail
           Order</button>
         <button id="packageBtn" onclick="switchMode('monthly')"
-          class="px-6 py-2 bg-gray-800 text-gray-300 rounded-full font-medium hover:bg-gray-700 transition">Subscriptions</button>
+          class="px-8 py-2.5 bg-transparent text-gray-600 rounded-lg font-bold hover:bg-gray-200 transition-all">Subscriptions</button>
       </div>
 
-      <div id="retailFilters" class="flex gap-2 w-full md:w-auto overflow-x-auto pb-2 items-center">
+      <div id="retailFilters" class="flex gap-3 w-full md:w-auto overflow-x-auto pb-2 items-center">
         <button onclick="selectCategory(null)"
-          class="whitespace-nowrap px-4 py-1.5 rounded-full border border-gray-700 hover:bg-gray-800 text-sm text-gray-300">All</button>
+          class="whitespace-nowrap px-5 py-2 rounded-lg border border-gray-200 hover:border-red-400 hover:text-red-500 text-sm font-semibold transition-all">All</button>
         <button onclick="selectCategory('Popular')"
-          class="whitespace-nowrap px-4 py-1.5 rounded-full border border-gray-700 hover:bg-gray-800 text-sm text-gray-300">Popular</button>
+          class="whitespace-nowrap px-5 py-2 rounded-lg border border-gray-200 hover:border-red-400 hover:text-red-500 text-sm font-semibold transition-all">Popular</button>
         <button onclick="selectCategory('Healthy')"
-          class="whitespace-nowrap px-4 py-1.5 rounded-full border border-emerald-900 text-emerald-400 bg-emerald-900/20 text-sm">Diet/Healthy</button>
+          class="whitespace-nowrap px-5 py-2 rounded-lg border border-red-100 bg-red-50 text-red-500 text-sm font-bold">Diet/Healthy</button>
 
         <!-- Healthy Mode Toggle -->
-        <div class="flex items-center gap-2 ml-4 bg-gray-800/50 px-3 py-1.5 rounded-full border border-emerald-500/30">
-          <span class="text-[10px] font-bold text-emerald-500 uppercase tracking-tighter">Healthy Mode</span>
+        <div class="flex items-center gap-2 ml-4 bg-gray-50 px-4 py-2 rounded-lg border border-gray-100">
+          <span class="text-[11px] font-bold text-gray-700 uppercase tracking-tighter">Healthy Mode</span>
           <label class="relative inline-flex items-center cursor-pointer">
             <input type="checkbox" id="healthyModeToggle" class="sr-only peer" onchange="toggleHealthyMode()">
             <div
-              class="w-9 h-5 bg-gray-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-emerald-600">
+              class="w-10 h-5 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-200 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-red-500">
             </div>
           </label>
         </div>
       </div>
 
-      <div id="retailSearch" class="relative w-full md:w-64">
-        <input type="text" id="searchTea" onkeyup="renderMenu()" placeholder="Search items..."
-          class="w-full pl-10 pr-4 py-2 border border-gray-700 bg-gray-800 text-gray-200 rounded-full focus:outline-none focus:ring-2 focus:ring-emerald-500 placeholder-gray-500">
-        <i class="fa-solid fa-search absolute left-3 top-3 text-gray-500"></i>
+      <div id="retailSearch" class="relative w-full md:w-72">
+        <input type="text" id="searchTea" onkeyup="renderMenu()" placeholder="Search for dishes..."
+          class="w-full pl-11 pr-4 py-3 border border-gray-200 bg-gray-50 text-gray-800 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500/20 focus:border-red-500 placeholder-gray-400">
+        <i class="fa-solid fa-search absolute left-4 top-4 text-gray-400"></i>
       </div>
     </div>
 
@@ -72,32 +63,32 @@
 
       <!-- Beverages -->
       <div id="beverageSection">
-        <h3 class="text-xl font-bold text-gray-100 mb-4 border-l-4 border-emerald-600 pl-3">Hot & Cold Beverages</h3>
-        <div id="beverageGrid" class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-4 mb-8"></div>
+        <h3 class="text-2xl font-extrabold text-gray-900 mb-6 border-l-4 border-red-500 pl-4">Hot & Cold Beverages</h3>
+        <div id="beverageGrid" class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6 mb-12"></div>
       </div>
 
       <!-- Breakfast -->
       <div id="breakfastSection">
-        <h3 class="text-xl font-bold text-gray-100 mb-4 border-l-4 border-emerald-500 pl-3">Breakfast Specials</h3>
-        <div id="breakfastGrid" class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-4 mb-8"></div>
+        <h3 class="text-2xl font-extrabold text-gray-900 mb-6 border-l-4 border-red-500 pl-4">Breakfast Specials</h3>
+        <div id="breakfastGrid" class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6 mb-12"></div>
       </div>
 
       <!-- Lunch -->
       <div id="lunchSection">
-        <h3 class="text-xl font-bold text-gray-100 mb-4 border-l-4 border-emerald-600 pl-3">Lunch Meals & Biryani</h3>
-        <div id="lunchGrid" class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-4 mb-8"></div>
+        <h3 class="text-2xl font-extrabold text-gray-900 mb-6 border-l-4 border-red-500 pl-4">Lunch Meals & Biryani</h3>
+        <div id="lunchGrid" class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6 mb-12"></div>
       </div>
 
       <!-- Dinner -->
       <div id="dinnerSection">
-        <h3 class="text-xl font-bold text-gray-100 mb-4 border-l-4 border-emerald-600 pl-3">Dinner Delights</h3>
-        <div id="dinnerGrid" class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-4 mb-8"></div>
+        <h3 class="text-2xl font-extrabold text-gray-900 mb-6 border-l-4 border-red-500 pl-4">Dinner Delights</h3>
+        <div id="dinnerGrid" class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6 mb-12"></div>
       </div>
 
       <!-- Fast Food / Snacks -->
       <div id="fastFoodSection">
-        <h3 class="text-xl font-bold text-gray-100 mb-4 border-l-4 border-emerald-500 pl-3">Fast Food & Snacks</h3>
-        <div id="fastFoodGrid" class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-4 mb-8"></div>
+        <h3 class="text-2xl font-extrabold text-gray-900 mb-6 border-l-4 border-red-500 pl-4">Fast Food & Snacks</h3>
+        <div id="fastFoodGrid" class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6 mb-12"></div>
       </div>
 
       <!-- Diet -->
@@ -113,7 +104,7 @@
 
   <!-- CART BAR (SWIGGY STYLE) -->
   <div id="cartBar" style="position:fixed; bottom:0;"
-    class="left-0 right-0 hidden bg-emerald-700 shadow-2xl z-40 transition-all duration-300">
+    class="left-0 right-0 hidden bg-red-600 shadow-2xl z-40 transition-all duration-300">
 
     <div class="max-w-4xl mx-auto flex justify-between items-center px-4 py-3">
       <div class="text-white">
@@ -148,11 +139,11 @@
           <span class="text-xs font-bold text-gray-400 uppercase tracking-wider"><i class="fa-solid fa-users mr-1"></i>
             Split Bill</span>
           <input type="number" id="numFriends" value="1" min="1" oninput="calculateSplit()"
-            class="w-12 bg-gray-800 border border-gray-700 rounded text-center text-sm p-1 outline-none focus:border-emerald-500">
+            class="w-12 bg-gray-800 border border-gray-700 rounded text-center text-sm p-1 outline-none focus:border-red-500">
         </div>
         <p class="text-xs text-gray-500 flex justify-between">
           <span>Each friend pays:</span>
-          <span class="text-emerald-400 font-bold">₹<span id="splitAmount">0</span></span>
+          <span class="text-red-500 font-bold">₹<span id="splitAmount">0</span></span>
         </p>
       </div>
 
@@ -161,24 +152,24 @@
         <div class="flex justify-between items-center mb-4">
           <h4 class="font-bold text-gray-200 text-lg">Delivery Address</h4>
           <button onclick="toggleAddressEdit()"
-            class="text-emerald-400 text-xs font-bold uppercase tracking-wider hidden hover:text-emerald-300"
+            class="text-red-500 text-xs font-bold uppercase tracking-wider hidden hover:text-red-400"
             id="changeAddressBtn">CHANGE</button>
         </div>
 
         <!-- Saved Address View -->
         <div id="savedAddressView"
-          class="hidden glass-card p-5 border border-emerald-500/30 relative overflow-hidden group cursor-pointer hover:border-emerald-500/60 transition-all bg-gray-800/50">
+          class="hidden glass-card p-5 border border-red-500/30 relative overflow-hidden group cursor-pointer hover:border-red-500/60 transition-all bg-gray-800/50">
           <div
-            class="absolute -right-4 -top-4 w-24 h-24 bg-emerald-500/10 rounded-full group-hover:scale-110 transition-transform">
+            class="absolute -right-4 -top-4 w-24 h-24 bg-red-500/10 rounded-full group-hover:scale-110 transition-transform">
           </div>
 
           <div class="relative z-10">
             <div class="flex items-center justify-between mb-3">
-              <div class="flex items-center gap-2 bg-emerald-500/10 px-2 py-1 rounded-md border border-emerald-500/20">
-                <i class="fa-solid fa-house text-emerald-400 text-xs"></i>
-                <span class="font-bold text-emerald-400 uppercase tracking-wider text-[10px]">Home</span>
+              <div class="flex items-center gap-2 bg-red-500/10 px-2 py-1 rounded-md border border-red-500/20">
+                <i class="fa-solid fa-house text-red-500 text-xs"></i>
+                <span class="font-bold text-red-500 uppercase tracking-wider text-[10px]">Home</span>
               </div>
-              <i class="fa-solid fa-circle-check text-emerald-500 text-lg shadow-emerald-500/50 drop-shadow-lg"></i>
+              <i class="fa-solid fa-circle-check text-red-500 text-lg shadow-red-500/50 drop-shadow-lg"></i>
             </div>
 
             <h5 class="font-bold text-white text-base mb-1 flex items-center gap-2">
@@ -195,7 +186,7 @@
         <!-- Edit/Add Form View -->
         <div id="addressFormView" class="space-y-4">
           <button onclick="detectLocation()"
-            class="w-full py-3 bg-emerald-900/20 border border-emerald-500/30 text-emerald-400 rounded-xl font-bold text-sm flex items-center justify-center gap-2 hover:bg-emerald-900/40 hover:border-emerald-500/50 transition shadow-lg shadow-emerald-900/10 group">
+            class="w-full py-3 bg-red-900/20 border border-red-500/30 text-red-400 rounded-xl font-bold text-sm flex items-center justify-center gap-2 hover:bg-red-900/40 hover:border-red-500/50 transition shadow-lg shadow-red-900/10 group">
             <i class="fa-solid fa-location-crosshairs group-hover:animate-pulse"></i> Use Current Location
             <span class="text-gray-500 font-normal text-xs ml-1">(GPS)</span>
           </button>
@@ -209,25 +200,25 @@
           <form class="space-y-3">
             <div class="relative group">
               <i
-                class="fa-solid fa-user absolute left-3 top-3.5 text-gray-500 text-sm group-focus-within:text-emerald-500 transition-colors"></i>
+                class="fa-solid fa-user absolute left-3 top-3.5 text-gray-500 text-sm group-focus-within:text-red-500 transition-colors"></i>
               <input type="text" id="txtName"
-                class="w-full border border-gray-700 bg-gray-800/50 text-gray-200 rounded-xl p-3 pl-10 text-sm focus:ring-1 focus:ring-emerald-500 focus:border-emerald-500 outline-none placeholder-gray-500 transition-all font-medium"
+                class="w-full border border-gray-700 bg-gray-800/50 text-gray-200 rounded-xl p-3 pl-10 text-sm focus:ring-1 focus:ring-red-500 focus:border-red-500 outline-none placeholder-gray-500 transition-all font-medium"
                 placeholder="Receiver Name">
             </div>
 
             <div class="relative group">
               <i
-                class="fa-solid fa-phone absolute left-3 top-3.5 text-gray-500 text-sm group-focus-within:text-emerald-500 transition-colors"></i>
+                class="fa-solid fa-phone absolute left-3 top-3.5 text-gray-500 text-sm group-focus-within:text-red-500 transition-colors"></i>
               <input type="tel" id="txtMobile"
-                class="w-full border border-gray-700 bg-gray-800/50 text-gray-200 rounded-xl p-3 pl-10 text-sm focus:ring-1 focus:ring-emerald-500 focus:border-emerald-500 outline-none placeholder-gray-500 transition-all font-mono"
+                class="w-full border border-gray-700 bg-gray-800/50 text-gray-200 rounded-xl p-3 pl-10 text-sm focus:ring-1 focus:ring-red-500 focus:border-red-500 outline-none placeholder-gray-500 transition-all font-mono"
                 placeholder="Mobile Number">
             </div>
 
             <div class="relative group">
               <i
-                class="fa-solid fa-map-pin absolute left-3 top-3.5 text-gray-500 text-sm group-focus-within:text-emerald-500 transition-colors"></i>
+                class="fa-solid fa-map-pin absolute left-3 top-3.5 text-gray-500 text-sm group-focus-within:text-red-500 transition-colors"></i>
               <textarea id="txtAddress"
-                class="w-full border border-gray-700 bg-gray-800/50 text-gray-200 rounded-xl p-3 pl-10 h-24 text-sm focus:ring-1 focus:ring-emerald-500 focus:border-emerald-500 outline-none placeholder-gray-500 transition-all resize-none leading-relaxed"
+                class="w-full border border-gray-700 bg-gray-800/50 text-gray-200 rounded-xl p-3 pl-10 h-24 text-sm focus:ring-1 focus:ring-red-500 focus:border-red-500 outline-none placeholder-gray-500 transition-all resize-none leading-relaxed"
                 placeholder="Complete Address (House No, Street, Landmark)"></textarea>
             </div>
           </form>
@@ -235,61 +226,69 @@
       </div>
 
       <button id="payBtn" onclick="processPayment()"
-        class="w-full mt-6 bg-green-600 text-white py-4 rounded-xl text-lg font-bold shadow-lg hover:bg-green-700 transition">
+        class="w-full mt-6 bg-red-600 text-white py-4 rounded-xl text-lg font-bold shadow-lg hover:bg-red-700 transition">
         Proceed to Pay ₹<span id="btnTotal">0</span>
       </button>
-
-
 
       <button onclick="closeCart()" class="w-full mt-2 text-gray-500 text-sm">
         Close
       </button>
     </div>
   </div>
+  </div>
+  </div>
 
-  <div id="monthlySection" class="hidden">
+  <div id="monthlySection" class="hidden max-w-7xl mx-auto px-4 py-8">
 
-    <h2 class="text-2xl font-bold mb-4 text-center">Subscriptions & Catering Plans</h2>
+    <div class="mb-12 text-center">
+      <h2 class="text-4xl font-black text-gray-900 tracking-tighter uppercase mb-2">Partner Subscriptions</h2>
+      <p class="text-gray-500 font-bold uppercase tracking-widest text-xs">Premium Catering & Mess Solutions</p>
+    </div>
 
     <!-- Tabs -->
-    <div class="flex flex-wrap justify-center gap-2 mb-6 border-b pb-4">
+    <div class="flex flex-wrap justify-center gap-3 mb-10">
       <button onclick="filterPackages('Hostel')"
-        class="px-4 py-2 bg-emerald-900/30 text-emerald-300 border border-emerald-700/50 rounded-full font-medium hover:bg-emerald-900/50 transition">Hostel/Mess</button>
+        class="pkg-tab-btn active px-8 py-2.5 bg-red-500 text-white rounded-xl font-bold transition-all shadow-lg shadow-red-500/20">Hostel/Mess</button>
       <button onclick="filterPackages('Senior')"
-        class="px-4 py-2 bg-gray-800 text-gray-400 border border-gray-700 rounded-full font-medium hover:bg-gray-700 transition">Senior
+        class="pkg-tab-btn px-8 py-2.5 bg-white border border-gray-200 text-gray-600 rounded-xl font-bold hover:border-red-400 hover:text-red-500 transition-all shadow-sm">Senior
         Diet</button>
       <button onclick="filterPackages('Corporate')"
-        class="px-4 py-2 bg-gray-800 text-gray-400 border border-gray-700 rounded-full font-medium hover:bg-gray-700 transition">Corporate</button>
+        class="pkg-tab-btn px-8 py-2.5 bg-white border border-gray-200 text-gray-600 rounded-xl font-bold hover:border-red-400 hover:text-red-500 transition-all shadow-sm">Corporate</button>
       <button onclick="filterPackages('Event')"
-        class="px-4 py-2 bg-gray-800 text-gray-400 border border-gray-700 rounded-full font-medium hover:bg-gray-700 transition">Event
+        class="pkg-tab-btn px-8 py-2.5 bg-white border border-gray-200 text-gray-600 rounded-xl font-bold hover:border-red-400 hover:text-red-500 transition-all shadow-sm">Event
         Catering</button>
     </div>
 
-    <div id="packageGrid" class="grid grid-cols-1 md:grid-cols-3 gap-6 p-2"></div>
+    <div id="packageGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mb-20"></div>
 
     <!-- Catering Calculator -->
     <div
-      class="max-w-4xl mx-auto mt-12 mb-16 p-8 bg-gradient-to-br from-gray-800 to-gray-900 rounded-3xl border border-emerald-500/20 shadow-2xl overflow-hidden relative group">
+      class="max-w-5xl mx-auto mb-20 bg-white rounded-[3rem] border border-gray-100 shadow-2xl overflow-hidden relative group">
       <div
-        class="absolute -right-20 -top-20 w-48 h-48 bg-emerald-500/5 rounded-full blur-3xl group-hover:bg-emerald-500/10 transition-colors">
+        class="absolute -right-20 -top-20 w-80 h-80 bg-red-50 rounded-full blur-3xl opacity-50 group-hover:opacity-100 transition-opacity">
       </div>
 
-      <div class="relative z-10">
-        <h3 class="text-2xl font-bold text-center mb-6 flex items-center justify-center gap-3">
-          <i class="fa-solid fa-calculator text-emerald-500"></i> Catering Cost Estimator
-        </h3>
+      <div class="relative z-10 p-10 md:p-16">
+        <div class="flex items-center justify-center gap-3 mb-10">
+          <div
+            class="w-12 h-12 bg-red-50 text-red-500 rounded-2xl flex items-center justify-center text-xl shadow-inner">
+            <i class="fa-solid fa-calculator"></i>
+          </div>
+          <h3 class="text-3xl font-black text-gray-900 tracking-tighter uppercase">Catering Cost Estimator</h3>
+        </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-          <div class="space-y-4">
-            <div>
-              <label class="block text-sm font-medium text-gray-400 mb-2">Number of Guests</label>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+          <div class="space-y-8">
+            <div class="space-y-3">
+              <label class="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Number of
+                Guests</label>
               <input type="number" id="numGuests" value="50" min="10" step="10" oninput="calculateCatering()"
-                class="w-full bg-gray-800 border border-gray-700 rounded-xl p-4 text-2xl font-bold text-emerald-400 focus:ring-2 focus:ring-emerald-500 outline-none shadow-inner">
+                class="w-full bg-gray-50 border border-transparent focus:border-red-500 focus:bg-white rounded-2xl p-5 text-3xl font-black text-gray-900 outline-none transition-all shadow-inner">
             </div>
-            <div>
-              <label class="block text-sm font-medium text-gray-400 mb-2">Service Type</label>
+            <div class="space-y-3">
+              <label class="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Service Type</label>
               <select id="cateringType" onchange="calculateCatering()"
-                class="w-full bg-gray-800 border border-gray-700 rounded-xl p-4 font-bold text-gray-200 focus:ring-2 focus:ring-emerald-500 outline-none">
+                class="w-full bg-gray-50 border border-transparent focus:border-red-500 focus:bg-white rounded-2xl p-5 font-black text-gray-800 outline-none transition-all cursor-pointer appearance-none shadow-inner">
                 <option value="250">Standard (Snacks + Tiffin)</option>
                 <option value="450">Premium (Full Meals + Veg)</option>
                 <option value="650">Grand (Multi-Cuisine + Non-Veg)</option>
@@ -297,63 +296,77 @@
             </div>
           </div>
 
-          <div class="bg-black/20 rounded-2xl p-6 border border-white/5 text-center">
-            <p class="text-gray-400 text-xs uppercase tracking-widest font-bold mb-2">Estimated Total</p>
-            <h4 class="text-5xl font-black text-white mb-2">₹<span id="cateringEstimate">12,500</span></h4>
-            <p class="text-emerald-500 text-sm font-medium">₹<span id="perPlateCost">250</span> per plate</p>
+          <div class="bg-gray-900 rounded-[2.5rem] p-10 text-center shadow-2xl relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-full h-1 bg-red-500"></div>
+            <p class="text-gray-400 text-[10px] uppercase font-black tracking-[0.2em] mb-4">Estimated Total</p>
+            <h4 class="text-6xl font-black text-white mb-3">₹<span id="cateringEstimate">12,500</span></h4>
+            <p class="text-red-400 text-xs font-black uppercase tracking-widest mb-10">₹<span
+                id="perPlateCost">250</span> Per Plate</p>
 
             <button
               onclick="openCorporateForm('Catering for ' + document.getElementById('numGuests').value + ' guests')"
-              class="mt-6 w-full py-4 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-bold transition shadow-lg shadow-emerald-900/20 active:scale-95">
+              class="w-full py-5 bg-red-500 hover:bg-red-600 text-white rounded-2xl font-black text-xs uppercase tracking-widest transition-all shadow-xl shadow-red-500/30 active:scale-95">
               Lock This Price
             </button>
           </div>
         </div>
       </div>
     </div>
-    <div>
-      <form id="enquiryForm" class="max-w-sm mx-auto space-y-4"
-        style="background: #1f2937; padding: 20px; border-radius: 10px; margin-top: 20px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5); color: #f3f4f6;">
-        <h1 class="text-2xl font-bold text-center mb-4 text-white">Enquire Form</h1>
 
-        <!-- Selected Package Display -->
-        <div>
-          <label class="block mb-2.5 text-sm font-medium text-gray-300">Interested Package</label>
+    <!-- Enquiry Form -->
+    <div class="max-w-2xl mx-auto mb-24">
+      <form id="enquiryForm" class="bg-white border border-gray-100 rounded-[3rem] p-10 md:p-16 shadow-2xl space-y-8">
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-black text-gray-900 tracking-tighter uppercase mb-2">Service Enquiry</h2>
+          <p class="text-gray-400 font-bold uppercase tracking-widest text-[10px]">Customize your subscription package
+          </p>
+        </div>
+
+        <div class="space-y-2">
+          <label class="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Interested Package</label>
           <input type="text" id="txtSelectedPackage" readonly
-            class="bg-gray-700 border border-gray-600 text-gray-300 text-sm rounded block w-full px-2.5 py-2 cursor-not-allowed"
+            class="w-full bg-gray-50 border border-gray-100 text-red-500 p-5 rounded-2xl font-black text-sm outline-none cursor-not-allowed uppercase"
             value="General Enquiry" />
         </div>
-        <div>
-          <label for="visitors" class="block mb-2.5 text-sm font-medium text-gray-300">Name </label>
-          <input type="text" id="txtEnqName"
-            class="bg-gray-700 border border-gray-600 text-gray-200 text-sm rounded block w-full px-2.5 py-2 shadow-xs placeholder:text-gray-500"
-            placeholder="Name" />
-          <span class="text-red-400" id="spnEnqErrorName"></span>
-        </div>
-        <div>
-          <label for="visitors" class="block mb-2.5 text-sm font-medium text-gray-300">Mobile Number </label>
-          <input type="text" id="txtEnqMobile"
-            class="bg-gray-700 border border-gray-600 text-gray-200 text-sm rounded block w-full px-2.5 py-2 shadow-xs placeholder:text-gray-500"
-            placeholder="Mobile Number" />
-          <span class="text-red-400" id="spnEnqErrorMobile"></span>
-        </div>
-        <div>
-          <label for="visitors" class="block mb-2.5 text-sm font-medium text-gray-300">Email </label>
-          <input type="text" id="txtEnqEmail"
-            class="bg-gray-700 border border-gray-600 text-gray-200 text-sm rounded block w-full px-2.5 py-2 shadow-xs placeholder:text-gray-500"
-            placeholder="Mobile Number" />
-          <span class="text-red-400" id="spnEnqErrorEmail"></span>
-        </div>
-        <div>
-          <label for="visitors" class="block mb-2.5 text-sm font-medium text-gray-300">Company Name </label>
-          <input type="text" id="txtEnqComapny"
-            class="bg-gray-700 border border-gray-600 text-gray-200 text-sm rounded block w-full px-2.5 py-2 shadow-xs placeholder:text-gray-500"
-            placeholder="Mobile Number" />
-          <span class="text-red-400" id="spnEnqErrorComapny"></span>
-        </div>
-        <button type="button" id="btnEnquire"
-          class=" text-white bg-emerald-700 box-border border border-transparent hover:bg-emerald-800 focus:ring-4 focus:ring-emerald-500 shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none mt-100 rounded ">Submit</button>
 
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div class="space-y-2">
+            <label class="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Full Name</label>
+            <input type="text" id="txtEnqName" placeholder="Enter name"
+              class="w-full bg-gray-50 border border-transparent focus:border-red-500 focus:bg-white p-5 rounded-2xl font-bold text-gray-800 outline-none transition-all shadow-sm" />
+            <span class="text-[9px] font-black uppercase text-red-500 px-1" id="spnEnqErrorName"></span>
+          </div>
+          <div class="space-y-2">
+            <label class="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Mobile Number</label>
+            <input type="tel" id="txtEnqMobile" placeholder="+91 XXXX XXXX XX"
+              class="w-full bg-gray-50 border border-transparent focus:border-red-500 focus:bg-white p-5 rounded-2xl font-bold text-gray-800 outline-none transition-all shadow-sm" />
+            <span class="text-[9px] font-black uppercase text-red-500 px-1" id="spnEnqErrorMobile"></span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div class="space-y-2">
+            <label class="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Email Address</label>
+            <input type="email" id="txtEnqEmail" placeholder="name@company.com"
+              class="w-full bg-gray-50 border border-transparent focus:border-red-500 focus:bg-white p-5 rounded-2xl font-bold text-gray-800 outline-none transition-all shadow-sm" />
+            <span class="text-[9px] font-black uppercase text-red-500 px-1" id="spnEnqErrorEmail"></span>
+          </div>
+          <div class="space-y-2">
+            <label class="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Organization Name</label>
+            <input type="text" id="txtEnqComapny" placeholder="School / Office Name"
+              class="w-full bg-gray-50 border border-transparent focus:border-red-500 focus:bg-white p-5 rounded-2xl font-bold text-gray-800 outline-none transition-all shadow-sm" />
+            <span class="text-[9px] font-black uppercase text-red-500 px-1" id="spnEnqErrorComapny"></span>
+          </div>
+        </div>
+
+        <div class="pt-6">
+          <button type="button" id="btnEnquire"
+            class="w-full bg-red-500 text-white p-5 rounded-[1.5rem] font-black text-sm uppercase tracking-widest hover:bg-red-600 shadow-xl shadow-red-500/20 active:scale-95 transition-all">
+            Send Message
+          </button>
+          <p class="text-center text-gray-400 text-[9px] font-black uppercase tracking-[0.2em] mt-8">Our team typically
+            responds within 2 hours</p>
+        </div>
       </form>
     </div>
   </div>
