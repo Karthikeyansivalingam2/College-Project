@@ -416,10 +416,10 @@
   <div id="ackModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-[2000]">
     <div class="bg-white rounded-lg shadow-2xl w-full max-w-lg overflow-hidden transform transition-all scale-100">
       <!-- Header -->
-      <div class="bg-emerald-700 p-6 text-white text-center relative">
+      <div class="bg-red-600 p-6 text-white text-center relative">
         <h2 class="text-2xl font-bold mb-1">Foodie Zone</h2>
 
-        <p class="text-emerald-100 text-sm">Enquiry Acknowledgement</p>
+        <p class="text-red-100 text-sm">Enquiry Acknowledgement</p>
         <button onclick="closeAckModal()" class="absolute top-4 right-4 text-white hover:text-gray-200">
           <i class="fa-solid fa-times text-xl"></i>
         </button>
@@ -428,8 +428,8 @@
       <!-- Body -->
       <div class="p-8">
         <div class="text-center mb-6">
-          <div class="inline-flex items-center justify-center w-12 h-12 bg-emerald-900 rounded-full mb-3">
-            <i class="fa-solid fa-check text-emerald-500 text-xl"></i>
+          <div class="inline-flex items-center justify-center w-12 h-12 bg-red-50 text-red-500 rounded-full mb-3">
+            <i class="fa-solid fa-check text-xl"></i>
           </div>
           <h3 class="text-xl font-bold text-gray-800">Application Sent Successfully!</h3>
           <p class="text-gray-600 text-sm mt-1">Reference ID: <span id="ackRefId"
@@ -458,7 +458,7 @@
           </div>
           <div class="grid grid-cols-3 gap-2 pt-2 border-t mt-2">
             <span class="text-gray-500 col-span-1">Package:</span>
-            <span class="font-bold text-emerald-700 col-span-2 text-right" id="ackPackage">-</span>
+            <span class="font-bold text-red-600 col-span-2 text-right" id="ackPackage">-</span>
           </div>
         </div>
 
@@ -469,7 +469,7 @@
         </p>
 
         <button onclick="closeAckModal()"
-          class="w-full mt-6 bg-emerald-700 text-white py-3 rounded-lg font-bold hover:bg-emerald-800 transition">
+          class="w-full mt-6 bg-red-600 text-white py-3 rounded-lg font-bold hover:bg-red-700 transition shadow-lg shadow-red-500/20">
           Close Receipt
         </button>
       </div>

@@ -44,7 +44,11 @@ function switchMode(mode) {
 
 /* RETAIL LOGIC */
 let cart = {};
-function updateQty(name, price, change) {
+function updateCart(name, change) {
+  // Find item to get its price
+  const item = foodMenu.find(i => i.name === name);
+  const price = item ? item.price : 0;
+
   cart[name] = cart[name] || { price, qty: 0 };
   cart[name].qty += change;
 
@@ -115,7 +119,7 @@ function selectCategory(category) {
   selectedCategory = category;
 
   document.querySelectorAll(".typeBtn").forEach(btn => {
-    btn.classList.remove("bg-emerald-600", "text-white");
+    btn.classList.remove("bg-red-500", "text-white");
     btn.classList.add("bg-gray-200");
   });
 
@@ -123,7 +127,7 @@ function selectCategory(category) {
   if (window.event && window.event.target) {
     const btn = window.event.target;
     btn.classList.remove("bg-gray-200");
-    btn.classList.add("bg-emerald-600", "text-white");
+    btn.classList.add("bg-red-500", "text-white");
   }
   renderMenu();
 }
@@ -186,7 +190,7 @@ function renderMenu() {
     if (el) el.innerHTML = "";
   });
 
-  const searchInput = document.getElementById("searchMenu");
+  const searchInput = document.getElementById("searchTea");
   const search = searchInput ? searchInput.value.toLowerCase() : "";
   const healthyToggle = document.getElementById("healthyModeToggle");
   const isHealthyMode = healthyToggle ? healthyToggle.checked : false;
@@ -284,12 +288,12 @@ function renderMenu() {
              <div class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-[85%]">
                 ${cartItem.qty > 0 ? `
                   <div class="flex items-center justify-between bg-white border border-red-500 text-red-500 rounded-lg shadow-lg font-bold overflow-hidden">
-                    <button onclick="updateCart('${t.name}', -1)" class="px-2 py-1.5 hover:bg-red-50 transition-colors">-</button>
+                    <button onclick="updateCart('${t.name.replace(/'/g, "\\'")}', -1)" class="px-2 py-1.5 hover:bg-red-50 transition-colors">-</button>
                     <span class="px-2 text-sm">${cartItem.qty}</span>
-                    <button onclick="updateCart('${t.name}', 1)" class="px-2 py-1.5 hover:bg-red-50 transition-colors">+</button>
+                    <button onclick="updateCart('${t.name.replace(/'/g, "\\'")}', 1)" class="px-2 py-1.5 hover:bg-red-50 transition-colors">+</button>
                   </div>
                 ` : `
-                  <button onclick="updateCart('${t.name}', 1)" 
+                  <button onclick="updateCart('${t.name.replace(/'/g, "\\'")}', 1)" 
                     class="w-full bg-white border border-gray-200 text-red-500 py-1.5 rounded-lg font-extrabold text-xs shadow-lg hover:border-red-500 hover:bg-red-50 transition-all uppercase tracking-tighter">
                     ADD
                   </button>
@@ -300,7 +304,7 @@ function renderMenu() {
         </div>
 
         <!-- Wishlist Button -->
-        <button onclick="toggleFavorite('${t.name}')" 
+        <button onclick="toggleFavorite('${t.name.replace(/'/g, "\\'")}')" 
           class="absolute top-2 right-2 w-8 h-8 flex items-center justify-center rounded-full bg-white/80 backdrop-blur-sm border border-gray-100 shadow-sm hover:scale-110 transition-transform z-20">
           <i class="${isFav ? 'fa-solid text-red-500' : 'fa-regular text-gray-400'} fa-heart"></i>
         </button>
@@ -312,7 +316,7 @@ function renderMenu() {
 }
 
 
-function toggleFav(name) {
+function toggleFavorite(name) {
   favorites = favorites.includes(name)
     ? favorites.filter(f => f !== name)
     : [...favorites, name];
