@@ -90,8 +90,9 @@
           </div>
         </div>
 
-        <button type="button" onclick="handleLogin()"
-          class="w-full bg-red-500 text-white font-black py-4 rounded-2xl hover:bg-red-600 transition-all shadow-xl shadow-red-500/20 mt-4 active:scale-[0.98] uppercase tracking-widest">
+        <button type="button" id="loginBtn" onclick="handleLogin()"
+          class="w-full bg-red-500 text-white font-black py-4 rounded-2xl hover:bg-red-600 transition-all shadow-xl shadow-red-500/20 mt-4 active:scale-[0.98] uppercase tracking-widest flex items-center justify-center gap-2">
+          <i class="fa-solid fa-right-to-bracket"></i>
           Login Securely
         </button>
       </form>
@@ -124,9 +125,10 @@
             placeholder="Minimum 6 chars">
         </div>
 
-        <button type="button" onclick="handleSignup()"
-          class="w-full bg-red-500 text-white font-black py-4 rounded-2xl hover:bg-red-600 transition-all shadow-xl shadow-red-500/20 mt-4 active:scale-[0.98] uppercase tracking-widest">
-          Sign Up
+        <button type="button" id="signupBtn" onclick="handleSignup()"
+          class="w-full bg-red-500 text-white font-black py-4 rounded-2xl hover:bg-red-600 transition-all shadow-xl shadow-red-500/20 mt-4 active:scale-[0.98] uppercase tracking-widest flex items-center justify-center gap-2">
+          <i class="fa-solid fa-user-plus"></i>
+          Create My Account
         </button>
       </form>
 
@@ -177,47 +179,82 @@
       }
     }
 
+    function setLoginLoading(loading) {
+      const btn = document.getElementById('loginBtn');
+      if (loading) {
+        btn.disabled = true;
+        btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Verifying...';
+        btn.classList.add('opacity-70', 'cursor-not-allowed');
+      } else {
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fa-solid fa-right-to-bracket"></i> Login Securely';
+        btn.classList.remove('opacity-70', 'cursor-not-allowed');
+      }
+    }
+
+    function setSignupLoading(loading) {
+      const btn = document.getElementById('signupBtn');
+      if (loading) {
+        btn.disabled = true;
+        btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Creating Account...';
+        btn.classList.add('opacity-70', 'cursor-not-allowed');
+      } else {
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fa-solid fa-user-plus"></i> Create My Account';
+        btn.classList.remove('opacity-70', 'cursor-not-allowed');
+      }
+    }
+
     async function handleSignup() {
-      const username = document.getElementById('signupUser').value;
-      const email = document.getElementById('signupEmail').value;
+      const username = document.getElementById('signupUser').value.trim();
+      const email = document.getElementById('signupEmail').value.trim();
       const password = document.getElementById('signupPass').value;
 
       if (!username || !email || !password) {
         alert("Please fill all fields");
         return;
       }
+      if (password.length < 6) {
+        alert("Password must be at least 6 characters");
+        return;
+      }
 
+      setSignupLoading(true);
       try {
         const res = await fetch('/api/signup', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ username, email, password })
         });
-
         const data = await res.json();
         if (data.success) {
           alert("Account created successfully! Please login.");
           switchTab('login');
         } else {
-          alert(data.message || "Signup failed");
+          alert(data.message || "Signup failed. Try a different username.");
         }
       } catch (e) {
-        console.error("Signup error", e);
-        alert("Connection error. Is the server running?");
+        alert("Network error. Please check your connection.");
+      } finally {
+        setSignupLoading(false);
       }
     }
 
     async function handleLogin() {
-      const user = document.getElementById('loginUser').value;
+      const user = document.getElementById('loginUser').value.trim();
       const pass = document.getElementById('loginPass').value;
       const rememberMe = document.getElementById('userRememberMe').checked;
 
       if (!user) {
-        alert("Please enter username");
+        alert("Please enter your username or email");
+        return;
+      }
+      if (!pass) {
+        alert("Please enter your password");
         return;
       }
 
-      // Try connecting to backend
+      setLoginLoading(true);
       try {
         const res = await fetch('/api/login', {
           method: 'POST',
@@ -225,32 +262,22 @@
           body: JSON.stringify({ email: user, password: pass })
         });
 
-        if (res.ok) {
-          const data = await res.json();
-          if (data.success) {
-            localStorage.setItem('currentUser', JSON.stringify(data.user));
-
-            if (rememberMe) {
-              localStorage.setItem('rememberedUserEmail', user);
-            } else {
-              localStorage.removeItem('rememberedUserEmail');
-            }
-
-            window.location.href = 'index.html';
-            return;
+        const data = await res.json();
+        if (data.success) {
+          localStorage.setItem('currentUser', JSON.stringify(data.user));
+          if (rememberMe) {
+            localStorage.setItem('rememberedUserEmail', user);
           } else {
-            alert(data.message || "Invalid credentials");
+            localStorage.removeItem('rememberedUserEmail');
           }
+          window.location.href = 'index.html';
+          return;
         } else {
-          // Server is there but returned error (e.g. 401)
-          const data = await res.json();
-          alert(data.message || "Login failed");
+          alert(data.message || "Invalid username or password");
+          setLoginLoading(false);
         }
       } catch (e) {
-        console.log("Offline login fallback", e);
-        // Fallback if server is not running or network error, 
-        // just so the user can test the UI without backend.
-        // Store valid JSON so profile doesn't crash.
+        // Offline fallback
         const u = { username: user, email: user + '@example.com' };
         localStorage.setItem('currentUser', JSON.stringify(u));
         alert("Logged in (Offline Mode)");
