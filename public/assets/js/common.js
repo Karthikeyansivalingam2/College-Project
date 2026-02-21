@@ -96,11 +96,11 @@ function updateAuthUI() {
       const icon = document.getElementById('navUserIcon');
       if (icon) icon.classList.add('hidden');
 
-      // Premium color mapping
-      const colors = ['bg-orange-500', 'bg-emerald-500', 'bg-blue-500', 'bg-rose-500', 'bg-amber-500', 'bg-indigo-500'];
+      // Red-theme color mapping for profile initial
+      const colors = ['bg-red-500', 'bg-orange-500', 'bg-blue-500', 'bg-rose-500', 'bg-amber-500', 'bg-indigo-500'];
       const colorIndex = initial.charCodeAt(0) % colors.length;
       if (profileBtn) {
-        profileBtn.classList.remove('bg-white/10');
+        profileBtn.classList.remove('bg-white/10', 'bg-red-500', 'bg-orange-500', 'bg-blue-500', 'bg-rose-500', 'bg-amber-500', 'bg-indigo-500');
         profileBtn.classList.add(colors[colorIndex]);
       }
     }
@@ -119,11 +119,11 @@ function updateThemeIcon(isDark) {
   const icon = document.getElementById('themeIcon');
   if (!icon) return;
   if (isDark) {
-    icon.classList.remove('fa-moon', 'text-emerald-500');
+    icon.classList.remove('fa-moon', 'text-red-500');
     icon.classList.add('fa-sun', 'text-yellow-400');
   } else {
     icon.classList.remove('fa-sun', 'text-yellow-400');
-    icon.classList.add('fa-moon', 'text-emerald-500');
+    icon.classList.add('fa-moon', 'text-red-500');
   }
 }
 
