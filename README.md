@@ -60,11 +60,7 @@ Foodiee serves as a platform connecting three key stakeholders:
 *   `server.js`: Main backend entry point containing all API routes.
 *   `PROJECT_REPORT.md`: Detailed system requirements and design documentation.
 
-## Team
+
 Developed by:
 1.  Karthikeyan
-2.  Abirami
-3.  Nithiya
-4.  Suganya
-5.  Natherdeen
-6.  Dinesh
+
