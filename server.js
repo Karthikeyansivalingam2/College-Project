@@ -12,8 +12,25 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+// ─── No-Cache Headers for HTML / CSS / JS ───────────────────────────────────
+// Always serve fresh code — no stale page issues
+app.use((req, res, next) => {
+    const ext = path.extname(req.path);
+    if (['.html', '.css', '.js'].includes(ext) || req.path === '/' || !ext) {
+        res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+        res.setHeader('Pragma', 'no-cache');
+        res.setHeader('Expires', '0');
+    } else if (['.png', '.jpg', '.jpeg', '.gif', '.svg', '.ico', '.webp'].includes(ext)) {
+        // Images: Cache for 7 days
+        res.setHeader('Cache-Control', 'public, max-age=604800');
+    }
+    next();
+});
+
 // Serve static files from 'public' directory
 app.use(express.static(path.join(__dirname, 'public')));
+
 
 // MongoDB Connection
 mongoose.connect(process.env.MONGODB_URI)
