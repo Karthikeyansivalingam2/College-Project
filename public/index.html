@@ -54,10 +54,19 @@
           <!-- Search Food -->
           <div class="flex-[1.5] flex items-center p-4">
             <i class="fa-solid fa-magnifying-glass text-gray-400 text-lg mr-3"></i>
-            <input type="text"
+            <input type="text" id="homeSearchInput"
               class="w-full font-medium text-gray-700 outline-none bg-transparent placeholder-gray-400 text-lg"
               placeholder="Search for restaurant, item or more">
           </div>
+
+          <!-- Voice Search Mic Button -->
+          <button id="homeVoiceBtn" onclick="startHomeVoiceSearch()" title="🎤 Click & Speak to Search!"
+            class="flex items-center justify-center w-14 h-full bg-gray-50 hover:bg-red-50 text-red-500 border-l border-gray-100 transition-all group mx-1 rounded-lg">
+            <div class="flex flex-col items-center gap-0.5">
+              <i class="fa-solid fa-microphone text-lg group-hover:animate-pulse"></i>
+              <span class="text-[9px] font-bold uppercase tracking-wider">Voice</span>
+            </div>
+          </button>
 
           <button onclick="findServices()"
             class="bg-red-500 hover:bg-red-600 text-white px-10 py-4 rounded-lg font-bold text-lg transition-all transform active:scale-95 shadow-lg shadow-red-500/20">
@@ -404,6 +413,42 @@
       } else {
         showToast("Geolocation is not supported by your browser", 'error');
       }
+    }
+
+    // 🎤 HOME PAGE VOICE SEARCH
+    function startHomeVoiceSearch() {
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (!SpeechRecognition) {
+        showToast('❌ Voice search not supported in this browser. Try Chrome!', 'error');
+        return;
+      }
+      const recognition = new SpeechRecognition();
+      recognition.lang = 'en-IN';
+      recognition.interimResults = false;
+
+      const btn = document.getElementById('homeVoiceBtn');
+      const input = document.getElementById('homeSearchInput');
+
+      btn.innerHTML = '<i class="fa-solid fa-circle-dot text-red-500 animate-pulse text-xl"></i>';
+      showToast('🎤 Listening... Speak now!', 'info');
+
+      recognition.onresult = (e) => {
+        const text = e.results[0][0].transcript;
+        if (input) input.value = text;
+        btn.innerHTML = '<div class="flex flex-col items-center gap-0.5"><i class="fa-solid fa-microphone text-lg"></i><span class="text-[9px] font-bold uppercase tracking-wider">Voice</span></div>';
+        showToast(`🎤 Searching: "${text}"`, 'success');
+        // Redirect to order page with search
+        setTimeout(() => {
+          window.location.href = `order.html?q=${encodeURIComponent(text)}`;
+        }, 800);
+      };
+
+      recognition.onerror = () => {
+        btn.innerHTML = '<div class="flex flex-col items-center gap-0.5"><i class="fa-solid fa-microphone text-lg"></i><span class="text-[9px] font-bold uppercase tracking-wider">Voice</span></div>';
+        showToast('❌ Could not hear. Try again!', 'error');
+      };
+
+      recognition.start();
     }
   </script>
 
