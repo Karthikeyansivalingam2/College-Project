@@ -53,8 +53,12 @@
 
       <div id="retailSearch" class="relative w-full md:w-72">
         <input type="text" id="searchTea" onkeyup="renderMenu()" placeholder="Search for dishes..."
-          class="w-full pl-11 pr-4 py-3 border border-gray-200 bg-gray-50 text-gray-800 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500/20 focus:border-red-500 placeholder-gray-400">
+          class="w-full pl-11 pr-10 py-3 border border-gray-200 bg-gray-50 text-gray-800 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500/20 focus:border-red-500 placeholder-gray-400">
         <i class="fa-solid fa-search absolute left-4 top-4 text-gray-400"></i>
+        <button id="voiceSearchBtn" title="Voice Search"
+          class="absolute right-3 top-3 text-gray-400 hover:text-red-500 transition-colors">
+          <i class="fa-solid fa-microphone"></i>
+        </button>
       </div>
     </div>
 
@@ -408,9 +412,12 @@
     </div>
   </div>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script src="./assets/js/common.js?v=7"></script>
   <script src="./assets/js/toast.js"></script>
   <script src="./assets/js/order.js?v=3"></script>
+  <script src="./assets/js/features.js"></script>
+  <script>document.addEventListener('DOMContentLoaded', () => initVoiceSearch('searchTea'));</script>
 
   <!-- ACKNOWLEDGEMENT MODAL -->
   <div id="ackModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-[2000]">

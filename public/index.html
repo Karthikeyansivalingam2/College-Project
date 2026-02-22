@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="./assets/css/common.css">
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#10b981">
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 </head>
 
 <body class="bg-white text-gray-900">
@@ -407,10 +408,60 @@
   </script>
 
   <script src="./assets/js/toast.js"></script>
+  <script src="./assets/js/features.js"></script>
+  <script src="./assets/js/common.js?v=6"></script>
   <script>
     // Override alert with toast
     window.alert = function (msg) { showToast(msg, msg.includes('success') || msg.includes('Success') ? 'success' : 'info'); };
+    // Auto-show spin wheel for first-time visitors
+    window.addEventListener('load', () => {
+      const lastSpun = localStorage.getItem('lastSpinDate');
+      const today = new Date().toDateString();
+      if (lastSpun !== today) {
+        setTimeout(openSpinWheel, 3000);
+      }
+    });
   </script>
+
+  <!-- 🎰 SPIN WHEEL FLOATING BUTTON -->
+  <button onclick="openSpinWheel()"
+    class="fixed bottom-20 right-5 z-50 w-14 h-14 rounded-full bg-gradient-to-br from-yellow-400 to-red-500 text-white shadow-2xl flex items-center justify-center hover:scale-110 transition-transform animate-bounce"
+    title="Spin for Offers!">
+    <span class="text-xl">🎰</span>
+  </button>
+
+  <!-- 🎰 SPIN WHEEL MODAL -->
+  <div id="spinModal" class="fixed inset-0 bg-black/70 z-[100] hidden items-center justify-center p-4">
+    <div class="bg-white rounded-3xl shadow-2xl max-w-sm w-full overflow-hidden">
+      <!-- Header -->
+      <div class="bg-gradient-to-r from-red-500 to-red-600 p-5 text-center">
+        <h2 class="text-xl font-black text-white">🎰 Daily Lucky Spin!</h2>
+        <p class="text-red-100 text-xs mt-1">Spin once a day to win exclusive offers!</p>
+      </div>
+      <!-- Wheel -->
+      <div class="p-5 text-center">
+        <div class="relative inline-block">
+          <!-- Pointer -->
+          <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1 z-10">
+            <div
+              class="w-0 h-0 border-l-[10px] border-r-[10px] border-t-[20px] border-l-transparent border-r-transparent border-t-red-600">
+            </div>
+          </div>
+          <canvas id="spinCanvas" width="260" height="260" class="rounded-full shadow-xl"></canvas>
+        </div>
+        <div id="spinResult" class="min-h-[60px]"></div>
+        <button id="spinBtn" onclick="spinWheel()"
+          class="mt-3 w-full py-3 bg-gradient-to-r from-red-500 to-red-600 text-white font-black rounded-2xl shadow-lg shadow-red-500/30 hover:opacity-90 transition active:scale-95 uppercase tracking-wider">
+          🎉 SPIN NOW!
+        </button>
+        <button onclick="closeSpinModal()"
+          class="mt-2 w-full py-2 text-gray-400 text-sm hover:text-gray-600 transition">
+          Maybe Later
+        </button>
+      </div>
+    </div>
+  </div>
+
 </body>
 
 </html>

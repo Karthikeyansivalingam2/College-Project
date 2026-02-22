@@ -3,32 +3,38 @@
 
     <!-- Main Navigation Links -->
     <nav class="nav-links" id="navLinks">
-        <a href="index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="order.html">Order</a>
-        <a href="halls.html">Party Halls</a>
-        <a href="review.html">Reviews</a>
-        <a href="partner.html">Partner</a>
-        <a href="careers.html">Careers</a>
-    </nav>
+        <a href="index.html" data-lang="home">Home</a>
+        <a href="about.html" data-lang="about">About</a>
+        <a href="order.html" data-lang="order">Order</a>
+        <a href="halls.html" data-lang="halls">Party Halls</a>
+        <a href="review.html" data-lang="reviews">Reviews</a>
+        <a href="partner.html" data-lang="partner">Partner with Us</a>
+        <a href="careers.html" data-lang="careers">Job Careers</a>
+        <a href="login.html" class="nav-login" data-lang="login">Login</a>
 
-    <!-- Professional Action Zone (Right Side) -->
-    <div class="nav-actions">
         <button id="installAppBtn"
-            class="bg-red-500 text-white px-4 py-2 rounded-full font-bold shadow-lg hover:bg-red-600 transition hidden"
-            style="font-family:'Outfit',sans-serif;">
+            class="bg-emerald-600 text-white px-4 py-2 rounded-full font-bold shadow-lg hover:bg-emerald-700 transition hidden ml-2">
             <i class="fa-solid fa-download mr-1"></i> Install App
         </button>
 
-        <a href="login.html" class="nav-login" id="navLoginBtn">Login</a>
+        <!-- Tamil Language Toggle -->
+        <button id="langToggleBtn" onclick="toggleLanguage()" title="Switch Language"
+            class="flex items-center justify-center w-10 h-10 rounded-full border border-white/30 bg-white/10 text-white hover:bg-white/20 hover:scale-105 transition-all shadow-lg backdrop-blur-sm ml-2">
+            <span class="text-xs font-black">தமிழ்</span>
+        </button>
+
+        <!-- Theme Toggle -->
+        <button onclick="toggleTheme()"
+            class="flex items-center justify-center w-10 h-10 rounded-full border border-white/30 bg-white/10 text-white hover:bg-white/20 hover:scale-105 transition-all shadow-lg backdrop-blur-sm ml-2">
+            <i id="themeIcon" class="fa-solid fa-moon text-emerald-500 text-xl"></i>
+        </button>
 
         <a href="profile.html" id="navProfile"
-            class="hidden items-center justify-center w-10 h-10 rounded-full bg-red-500 text-white font-black text-base hover:bg-red-600 hover:scale-105 transition-all shadow-lg"
-            style="display:none;">
-            <span id="navUserInitial"></span>
-            <i id="navUserIcon" class="fa-solid fa-user text-sm"></i>
+            class="hidden items-center justify-center w-10 h-10 rounded-full border border-white/30 bg-white/10 text-white hover:bg-white/20 hover:scale-105 transition-all shadow-lg backdrop-blur-sm group ml-2">
+            <span id="navUserInitial" class="font-bold text-base"></span>
+            <i id="navUserIcon" class="fa-solid fa-user text-sm group-hover:rotate-12 transition-transform"></i>
         </a>
+    </nav>
 
-        <div class="menu-icon ml-2" onclick="toggleMenu()">☰</div>
-    </div>
+    <div class="menu-icon ml-2" onclick="toggleMenu()">☰</div>
 </div>
