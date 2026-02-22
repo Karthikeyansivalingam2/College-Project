@@ -113,7 +113,7 @@ const MenuItem = mongoose.model('MenuItem', MenuItemSchema);
 const realMenu = [
 
     // ── BEVERAGES / POPULAR ──────────────────────────────────
-    { id: 1, name: "Filter Coffee", price: 45, category: "Popular", bestseller: true, calories: 120, image: "https://images.unsplash.com/photo-1594910410712-402287968db8?q=80&w=400" },
+    { id: 1, name: "Filter Coffee", price: 45, category: "Popular", bestseller: true, calories: 120, image: "image/filter-coffee.png" },
     { id: 2, name: "Masala Chai", price: 35, category: "Popular", bestseller: true, calories: 110, image: "https://images.unsplash.com/photo-1517673132405-a56a62b189ee?q=80&w=400" },
     { id: 3, name: "Lemon Tea", price: 30, category: "Popular", bestseller: false, calories: 60, image: "https://images.unsplash.com/photo-1556910103-1c02745aae4d?q=80&w=400" },
     { id: 4, name: "Cold Coffee", price: 80, category: "Popular", bestseller: true, calories: 200, image: "https://images.unsplash.com/photo-1561047029-3000c68339ca?q=80&w=400" },

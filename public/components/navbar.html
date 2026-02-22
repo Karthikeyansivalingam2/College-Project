@@ -1,5 +1,7 @@
 <div class="nav-container">
-    <div class="logo">Foodie Zone</div>
+    <a href="index.html" class="logo" style="display:flex; align-items:center; text-decoration:none;">
+        <img src="/image/logo.svg" alt="Foodie Zone Logo" style="height:48px; width:auto;">
+    </a>
 
     <!-- Main Navigation Links -->
     <nav class="nav-links" id="navLinks">
@@ -13,21 +15,11 @@
         <a href="login.html" class="nav-login" data-lang="login">Login</a>
 
         <button id="installAppBtn"
-            class="bg-emerald-600 text-white px-4 py-2 rounded-full font-bold shadow-lg hover:bg-emerald-700 transition hidden ml-2">
+            class="bg-red-500 text-white px-4 py-2 rounded-full font-bold shadow-lg hover:bg-red-600 transition hidden ml-2">
             <i class="fa-solid fa-download mr-1"></i> Install App
         </button>
 
-        <!-- Tamil Language Toggle -->
-        <button id="langToggleBtn" onclick="toggleLanguage()" title="Switch Language"
-            class="flex items-center justify-center w-10 h-10 rounded-full border border-white/30 bg-white/10 text-white hover:bg-white/20 hover:scale-105 transition-all shadow-lg backdrop-blur-sm ml-2">
-            <span class="text-xs font-black">தமிழ்</span>
-        </button>
 
-        <!-- Theme Toggle -->
-        <button onclick="toggleTheme()"
-            class="flex items-center justify-center w-10 h-10 rounded-full border border-white/30 bg-white/10 text-white hover:bg-white/20 hover:scale-105 transition-all shadow-lg backdrop-blur-sm ml-2">
-            <i id="themeIcon" class="fa-solid fa-moon text-emerald-500 text-xl"></i>
-        </button>
 
         <a href="profile.html" id="navProfile"
             class="hidden items-center justify-center w-10 h-10 rounded-full border border-white/30 bg-white/10 text-white hover:bg-white/20 hover:scale-105 transition-all shadow-lg backdrop-blur-sm group ml-2">
