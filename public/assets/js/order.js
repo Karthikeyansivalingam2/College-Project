@@ -574,7 +574,9 @@ btnEnquire.addEventListener("click", function (event) {
       name: txtEnqName.value,
       mobile: txtEnqMobile.value,
       email: txtEnqEmail.value,
-      company: txtEnqComapny.value
+      company: txtEnqComapny.value,
+      package: document.getElementById("txtSelectedPackage") ? document.getElementById("txtSelectedPackage").value : "",
+      guests: document.getElementById("numGuests") ? document.getElementById("numGuests").value : 0
     };
 
     fetch('/api/enquire', {
@@ -617,6 +619,7 @@ function showAckModal(id, details) {
 
   const pkg = document.getElementById("txtSelectedPackage").value;
   document.getElementById('ackPackage').innerText = pkg;
+  document.getElementById('ackGuests').innerText = details.guests || 0;
 
   // Show
   modal.classList.remove('hidden');

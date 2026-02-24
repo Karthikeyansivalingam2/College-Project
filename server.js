@@ -79,6 +79,8 @@ const EnquirySchema = new mongoose.Schema({
     email: String,
     mobile: String,
     company: String,
+    package: String,
+    guests: Number,
     date: { type: Date, default: Date.now }
 });
 const Enquiry = mongoose.model('Enquiry', EnquirySchema);
