@@ -22,20 +22,20 @@ function switchMode(mode) {
     retail.classList.remove("hidden")
     corporate.classList.add("hidden")
 
-    rBtn.classList.add("bg-red-500", "text-white", "shadow-lg")
-    rBtn.classList.remove("bg-transparent", "text-gray-600")
+    rBtn.classList.add("bg-orange-600", "text-white", "shadow-xl")
+    rBtn.classList.remove("bg-transparent", "text-gray-500")
 
-    cBtn.classList.add("bg-transparent", "text-gray-600")
-    cBtn.classList.remove("bg-red-500", "text-white", "shadow-lg")
+    cBtn.classList.add("bg-transparent", "text-gray-500")
+    cBtn.classList.remove("bg-orange-600", "text-white", "shadow-xl")
   } else {
     corporate.classList.remove("hidden")
     retail.classList.add("hidden")
 
-    cBtn.classList.add("bg-red-500", "text-white", "shadow-lg")
-    cBtn.classList.remove("bg-transparent", "text-gray-600")
+    cBtn.classList.add("bg-orange-600", "text-white", "shadow-xl")
+    cBtn.classList.remove("bg-transparent", "text-gray-500")
 
-    rBtn.classList.add("bg-transparent", "text-gray-600")
-    rBtn.classList.remove("bg-red-500", "text-white", "shadow-lg")
+    rBtn.classList.add("bg-transparent", "text-gray-500")
+    rBtn.classList.remove("bg-orange-600", "text-white", "shadow-xl")
 
     renderPackages()
   }
@@ -119,15 +119,15 @@ function selectCategory(category) {
   selectedCategory = category;
 
   document.querySelectorAll(".typeBtn").forEach(btn => {
-    btn.classList.remove("bg-red-500", "text-white");
-    btn.classList.add("bg-gray-200");
+    btn.classList.remove("bg-orange-600", "text-white");
+    btn.classList.add("bg-white/5");
   });
 
   // Safe way to handle event target
   if (window.event && window.event.target) {
     const btn = window.event.target;
-    btn.classList.remove("bg-gray-200");
-    btn.classList.add("bg-red-500", "text-white");
+    btn.classList.remove("bg-white/5");
+    btn.classList.add("bg-orange-600", "text-white");
   }
   renderMenu();
 }
@@ -262,51 +262,51 @@ function renderMenu() {
     }
 
     const card = `
-      <div class="bg-white border border-gray-100 p-4 flex justify-between items-center group mb-4 relative overflow-hidden rounded-xl shadow-sm hover:shadow-md transition-all">
+      <div class="bg-[#111] border border-white/5 p-5 flex justify-between items-center group mb-4 relative overflow-hidden rounded-[2rem] shadow-2xl hover:border-orange-500/30 transition-all">
         
         <div class="flex-1 pr-6 relative z-10">
-          <div class="flex items-center gap-2 mb-2">
-             <i class="fa-regular fa-square-caret-up text-[12px] ${t.category === 'Healthy' ? 'text-green-500' : 'text-red-500'}"></i>
-             ${t.bestseller ? `<span class="bg-amber-100 text-amber-600 text-[10px] font-bold px-2 py-0.5 rounded uppercase tracking-wider">Bestseller</span>` : ""}
-             ${isHealthyMode && t.calories ? `<span class="bg-red-50 text-red-500 text-[10px] font-bold px-2 py-0.5 rounded uppercase tracking-wider">${t.calories} kcal</span>` : ""}
+          <div class="flex items-center gap-2 mb-3">
+             <i class="fa-regular fa-square-caret-up text-[12px] ${t.category === 'Healthy' ? 'text-green-500' : 'text-orange-500'}"></i>
+             ${t.bestseller ? `<span class="bg-orange-500/10 text-orange-500 text-[9px] font-black px-2 py-0.5 rounded uppercase tracking-[0.2em] border border-orange-500/20">Bestseller</span>` : ""}
+             ${isHealthyMode && t.calories ? `<span class="bg-orange-500 text-white text-[9px] font-black px-2 py-0.5 rounded uppercase tracking-wider">${t.calories} kcal</span>` : ""}
           </div>
-          <h3 class="font-extrabold text-gray-800 text-lg mb-1 group-hover:text-red-500 transition-colors">${t.name}</h3>
-          <p class="font-bold text-gray-900 text-base mb-2">₹${t.price}</p>
-          <div class="flex items-center gap-4 text-xs text-gray-500 font-medium bg-gray-50 px-3 py-1.5 rounded-lg inline-flex">
-            <span><i class="fa-regular fa-clock mr-1"></i> ${t.prep_time || "15 mins"}</span>
-            <span class="text-gray-300">|</span>
-            <span><i class="fa-solid fa-star text-amber-400 mr-1"></i> ${t.rating || "4.2"}</span>
+          <h3 class="font-black text-white text-xl mb-1 uppercase italic tracking-tighter group-hover:text-orange-500 transition-colors">${t.name}</h3>
+          <p class="font-black text-white text-base mb-4">₹${t.price}</p>
+          <div class="flex items-center gap-4 text-[10px] text-gray-400 font-black uppercase tracking-[0.1em] bg-white/5 px-4 py-2 rounded-xl inline-flex border border-white/5">
+            <span><i class="fa-regular fa-clock mr-1 text-orange-500"></i> ${t.prep_time || "15 MINS"}</span>
+            <span class="text-white/10">|</span>
+            <span><i class="fa-solid fa-star text-orange-500 mr-1"></i> ${t.rating || "4.2"}</span>
           </div>
         </div>
 
         <div class="flex flex-col items-center gap-2 relative z-10">
-          <div class="relative w-28 h-28 rounded-xl overflow-hidden shadow-inner border border-gray-100">
+          <div class="relative w-32 h-32 rounded-2xl overflow-hidden shadow-2xl border border-white/10 bg-[var(--bg-main)]">
              <img src="${t.image || 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=300'}" 
-                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                  class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-90 group-hover:opacity-100">
              
-             <!-- Add Button (Zomato Style Style Overlay) -->
-             <div class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-[85%]">
+             <!-- Add Button (StepUp Style) -->
+             <div class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-[90%]">
                 ${cartItem.qty > 0 ? `
-                  <div class="flex items-center justify-between bg-white border border-red-500 text-red-500 rounded-lg shadow-lg font-bold overflow-hidden">
-                    <button onclick="updateCart('${t.name.replace(/'/g, "\\'")}', -1)" class="px-2 py-1.5 hover:bg-red-50 transition-colors">-</button>
-                    <span class="px-2 text-sm">${cartItem.qty}</span>
-                    <button onclick="updateCart('${t.name.replace(/'/g, "\\'")}', 1)" class="px-2 py-1.5 hover:bg-red-50 transition-colors">+</button>
+                  <div class="flex items-center justify-between bg-orange-600 text-white rounded-xl shadow-2xl font-black overflow-hidden border border-orange-400/30">
+                    <button onclick="updateCart('${t.name.replace(/'/g, "\\'")}', -1)" class="flex-1 py-2 hover:bg-black/20 transition-colors font-black text-lg">-</button>
+                    <span class="px-3 text-sm">${cartItem.qty}</span>
+                    <button onclick="updateCart('${t.name.replace(/'/g, "\\'")}', 1)" class="flex-1 py-2 hover:bg-black/20 transition-colors font-black text-lg">+</button>
                   </div>
                 ` : `
                   <button onclick="updateCart('${t.name.replace(/'/g, "\\'")}', 1)" 
-                    class="w-full bg-white border border-gray-200 text-red-500 py-1.5 rounded-lg font-extrabold text-xs shadow-lg hover:border-red-500 hover:bg-red-50 transition-all uppercase tracking-tighter">
-                    ADD
+                    class="w-full bg-white text-black py-2.5 rounded-xl font-black text-[10px] shadow-2xl transition-all uppercase tracking-[0.2em] border-none hover:bg-orange-600 hover:text-white cursor-pointer transform active:scale-95">
+                    ADD +
                   </button>
                 `}
              </div>
           </div>
-          <p class="text-[9px] text-gray-400 font-bold uppercase mt-1">Customizable</p>
+          <p class="text-[9px] text-gray-500 font-black uppercase tracking-widest mt-2">Elite Selection</p>
         </div>
 
-        <!-- Wishlist Button -->
+        <!-- Wishlist -->
         <button onclick="toggleFavorite('${t.name.replace(/'/g, "\\'")}')" 
-          class="absolute top-2 right-2 w-8 h-8 flex items-center justify-center rounded-full bg-white/80 backdrop-blur-sm border border-gray-100 shadow-sm hover:scale-110 transition-transform z-20">
-          <i class="${isFav ? 'fa-solid text-red-500' : 'fa-regular text-gray-400'} fa-heart"></i>
+          class="absolute top-4 right-4 w-9 h-9 flex items-center justify-center rounded-full bg-black/50 backdrop-blur-md border border-white/5 text-white hover:border-orange-500/50 hover:scale-110 transition-all z-20">
+          <i class="${isFav ? 'fa-solid text-orange-500 shadow-[0_0_15px_rgba(255,107,0,0.5)]' : 'fa-regular text-gray-400'} fa-heart"></i>
         </button>
       </div>
     `;
@@ -403,9 +403,9 @@ function filterPackages(type) {
   const buttons = document.querySelectorAll('.pkg-tab-btn');
   buttons.forEach(btn => {
     if (btn.innerText.includes(type)) {
-      btn.className = "pkg-tab-btn active px-8 py-2.5 bg-red-500 text-white rounded-xl font-bold transition-all shadow-lg shadow-red-500/20";
+      btn.className = "pkg-tab-btn active px-8 py-2.5 bg-orange-600 text-white rounded-xl font-bold transition-all shadow-xl shadow-orange-600/20";
     } else {
-      btn.className = "pkg-tab-btn px-8 py-2.5 bg-white border border-gray-200 text-gray-600 rounded-xl font-bold hover:border-red-400 hover:text-red-500 transition-all shadow-sm";
+      btn.className = "pkg-tab-btn px-8 py-2.5 bg-white/5 border border-white/10 text-gray-400 rounded-xl font-bold hover:border-orange-500 hover:text-orange-500 transition-all shadow-sm";
     }
   });
   renderPackages(type);
@@ -425,22 +425,25 @@ function renderPackages(filterType = "Hostel") {
 
   filtered.forEach(pkg => {
     grid.innerHTML += `
-      <div class="bg-white border border-gray-100 rounded-[2.5rem] p-10 hover:shadow-2xl transition-all duration-500 group relative overflow-hidden">
-        <div class="absolute top-0 right-0 w-32 h-32 bg-red-50 rounded-bl-full -mr-8 -mt-8 transition-transform group-hover:scale-110 opacity-50"></div>
+      <div class="bg-[#111] border border-white/5 rounded-[3rem] p-12 hover:shadow-[0_20px_60px_rgba(0,0,0,0.6)] hover:border-orange-500/20 transition-all duration-700 group relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-40 h-40 bg-orange-600/5 rounded-bl-[5rem] -mr-10 -mt-10 transition-transform group-hover:scale-125 opacity-40"></div>
         
         <div class="relative z-10">
-          <span class="text-[10px] font-black uppercase tracking-[0.2em] text-gray-400 mb-2 block">${pkg.type} Subscription</span>
-          <h3 class="text-2xl font-black text-gray-900 mb-2 group-hover:text-red-500 transition-colors uppercase tracking-tighter">${pkg.name}</h3>
-          <p class="text-gray-500 font-bold text-xs uppercase tracking-widest mb-8 leading-relaxed">${pkg.desc}</p>
+          <div class="w-16 h-16 bg-white/5 rounded-2xl flex items-center justify-center mb-8 border border-white/5 group-hover:bg-orange-600 group-hover:text-white transition-all duration-500">
+             <i class="fa-solid fa-crown text-2xl text-orange-500 group-hover:text-white"></i>
+          </div>
+          <span class="text-[9px] font-black uppercase tracking-[0.3em] text-orange-500 mb-2 block">${pkg.type} Elite</span>
+          <h3 class="text-3xl font-black text-white mb-3 group-hover:text-orange-500 transition-colors uppercase italic tracking-tighter leading-none">${pkg.name}</h3>
+          <p class="text-gray-500 font-black text-[10px] uppercase tracking-widest mb-10 leading-relaxed">${pkg.desc}</p>
           
-          <div class="text-3xl font-black text-gray-900 mb-8 flex items-baseline gap-2">
+          <div class="text-3xl font-black text-white mb-10 flex items-baseline gap-2 italic">
             ${pkg.price}
           </div>
           
-          <ul class="space-y-4 mb-10 text-xs font-bold text-gray-600 uppercase tracking-wide">
+          <ul class="space-y-5 mb-12 text-[11px] font-black text-gray-400 uppercase tracking-widest">
             ${pkg.features.map(f => `
-              <li class="flex items-center gap-3">
-                <div class="w-5 h-5 bg-red-50 text-red-500 rounded-full flex items-center justify-center text-[8px]">
+              <li class="flex items-center gap-4">
+                <div class="w-6 h-6 bg-white/5 text-orange-500 rounded-full flex items-center justify-center text-[10px] border border-white/5">
                   <i class="fa-solid fa-check"></i>
                 </div>
                 ${f}
@@ -449,8 +452,8 @@ function renderPackages(filterType = "Hostel") {
           </ul>
 
           <button onclick="openCorporateForm('${pkg.name} (${pkg.type})')" 
-            class="w-full py-5 bg-red-500 hover:bg-red-600 text-white rounded-2xl font-black text-xs uppercase tracking-widest transition-all shadow-xl shadow-red-500/20 active:scale-[0.98]">
-            Book Trial / Enquire
+            class="w-full py-5 bg-orange-600 hover:bg-orange-500 text-white rounded-2xl font-black text-[10px] uppercase tracking-[0.2em] transition-all shadow-2xl shadow-orange-600/30 active:scale-[0.98] border-none cursor-pointer">
+            Initialize Access <i class="fa-solid fa-arrow-right ml-2"></i>
           </button>
         </div>
       </div>
@@ -465,7 +468,7 @@ function openCorporateForm(packageName) {
   if (pkgInput) {
     pkgInput.value = packageName;
     pkgInput.classList.remove("text-gray-500");
-    pkgInput.classList.add("text-red-500", "font-black");
+    pkgInput.classList.add("text-orange-500", "font-black");
   }
 
   const form = document.getElementById("enquiryForm");

@@ -5,15 +5,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Partner Dashboard - Foodie Zone</title>
-    <link href="assets/css/common.css" rel="stylesheet">
+    <link href="assets/css/common.css?v=2" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         .sidebar-link.active {
-            background: #fef2f2;
+            background: rgba(239, 68, 68, 0.1);
             color: #ef4444;
             border-right: 4px solid #ef4444;
+        }
+
+        body.light-mode .sidebar-link.active {
+            background: #fef2f2;
         }
 
         /* Custom scrollbar for tables */
@@ -32,11 +36,11 @@
     </style>
 </head>
 
-<body class="bg-[#fcfcfc] text-gray-900 min-h-screen flex">
+<body class="bg-[var(--bg-main)] text-[var(--text-main)] min-h-screen flex">
 
     <!-- Sidebar -->
     <aside id="partnerSidebar"
-        class="fixed inset-y-0 left-0 z-50 w-72 bg-white border-r border-gray-100 flex flex-col transform -translate-x-full lg:translate-x-0 lg:static transition-transform duration-300 h-screen shrink-0 shadow-xl lg:shadow-none">
+        class="fixed inset-y-0 left-0 z-50 w-72 bg-[var(--bg-card)] border-r border-[var(--border-light)] flex flex-col transform -translate-x-full lg:translate-x-0 lg:static transition-transform duration-300 h-screen shrink-0 shadow-xl lg:shadow-none">
 
         <div class="p-8 border-b border-gray-50 flex justify-between items-center">
             <h1 class="text-2xl font-black text-gray-900 flex items-center gap-3 uppercase tracking-tighter">
@@ -91,7 +95,7 @@
     <main class="flex-grow flex flex-col h-screen overflow-hidden">
         <!-- Header -->
         <header
-            class="bg-white border-b border-gray-100 sticky top-0 z-30 px-6 py-5 flex justify-between items-center shrink-0 shadow-sm">
+            class="bg-[var(--bg-card)] border-b border-[var(--border-light)] sticky top-0 z-30 px-6 py-5 flex justify-between items-center shrink-0 shadow-sm">
             <div class="flex items-center gap-4">
                 <button onclick="togglePartnerSidebar()"
                     class="lg:hidden text-gray-500 p-2 hover:bg-gray-100 rounded-xl transition"><i

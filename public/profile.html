@@ -4,89 +4,119 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Profile - Foodie Zone</title>
+    <title>My Profile - Foodiee Elite</title>
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./assets/css/common.css">
+    <link rel="stylesheet" href="./assets/css/common.css?v=2">
     <script src="assets/js/toast.js"></script>
     <style>
         body {
             font-family: 'Outfit', sans-serif;
         }
     </style>
-</head>
 
-<body class="bg-gray-50 text-gray-900 min-h-screen">
+<body class="bg-[var(--bg-main)] text-gray-100 min-h-screen">
 
     <!-- Global Navbar -->
     <header class="navbar" id="global-navbar"></header>
 
-    <div class="max-w-4xl mx-auto p-6 mt-6">
+    <div class="max-w-4xl mx-auto p-6 content-padding">
 
         <!-- Profile Header -->
-        <!-- Profile Header -->
         <div
-            class="bg-white rounded-2xl shadow-sm p-8 mb-6 flex flex-col md:flex-row items-center md:items-start gap-6 border border-gray-100">
-            <div class="w-24 h-24 bg-red-100 rounded-full flex items-center justify-center text-4xl text-red-500 font-bold uppercase"
+            class="bg-[var(--bg-card)] rounded-[2.5rem] shadow-2xl p-10 mb-8 flex flex-col md:flex-row items-center md:items-start gap-8 border border-[var(--border-light)] relative overflow-hidden group">
+
+            <div
+                class="absolute -right-10 -top-10 w-40 h-40 bg-orange-600/5 rounded-full blur-3xl group-hover:bg-orange-600/10 transition-all duration-700">
+            </div>
+
+            <div class="w-32 h-32 bg-orange-600 text-white rounded-[2rem] flex items-center justify-center text-5xl font-black italic shadow-2xl relative z-10 border-4 border-[#0a0a0a]"
                 id="avatar">
                 U
             </div>
-            <div class="text-center md:text-left">
-                <h1 class="text-3xl font-bold text-gray-900" id="profileName">Loading...</h1>
-                <p class="text-gray-500" id="profileEmail">...</p>
-                <div class="mt-4 flex flex-wrap gap-2 justify-center md:justify-start">
+
+            <div class="text-center md:text-left relative z-10">
+                <h1 class="text-4xl font-black italic uppercase tracking-tighter mb-1" id="profileName"
+                    style="color:var(--text-dark)">
+                    Loading...</h1>
+                <p class="text-gray-500 font-bold uppercase tracking-widest text-xs" id="profileEmail">...</p>
+
+                <div class="mt-6 flex flex-wrap gap-3 justify-center md:justify-start">
                     <span
-                        class="px-3 py-1 bg-green-50 text-green-600 border border-green-200 rounded-full text-sm font-medium">✅
-                        Active Member</span>
+                        class="px-5 py-2 bg-orange-600/10 text-orange-500 border border-orange-500/20 rounded-xl text-[10px] font-black uppercase tracking-widest">
+                        <i class="fa-solid fa-crown mr-2"></i> Elite Member</span>
+
                     <button onclick="openEditModal()"
-                        class="px-3 py-1 bg-gray-100 text-gray-600 hover:bg-gray-200 rounded-full text-sm font-medium transition">
-                        <i class="fa-solid fa-pen-to-square mr-1"></i> Edit Profile
+                        class="px-5 py-2 bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white border border-white/10 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all cursor-pointer">
+                        <i class="fa-solid fa-pen-to-square mr-2"></i> Update Protocol
                     </button>
-                    <!-- Display Extra Info -->
-                    <div id="extraInfo" class="w-full text-sm text-gray-500 mt-2"></div>
+
+                    <button onclick="logout()"
+                        class="px-5 py-2 bg-white/5 text-orange-600 hover:bg-orange-600 hover:text-white border border-orange-600/20 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all cursor-pointer">
+                        <i class="fa-solid fa-power-off mr-2"></i> Terminate
+                    </button>
+                </div>
+
+                <!-- Display Extra Info -->
+                <div id="extraInfo"
+                    class="text-[10px] font-black uppercase tracking-widest text-gray-600 mt-6 flex flex-wrap gap-6 items-center justify-center md:justify-start">
                 </div>
             </div>
         </div>
 
         <!-- Edit Profile Modal -->
-        <div id="editModal" class="fixed inset-0 bg-black/60 hidden items-center justify-center z-50">
-            <div class="bg-white p-6 rounded-2xl w-full max-w-md shadow-2xl transform transition-all border border-gray-100"
+        <div id="editModal"
+            class="fixed inset-0 bg-black/80 hidden items-center justify-center z-[2000] backdrop-blur-sm">
+            <div class="bg-[var(--bg-card)] p-10 rounded-[2.5rem] w-full max-w-lg shadow-[0_32px_80px_rgba(0,0,0,0.8)] border border-[var(--border-light)] group"
                 id="modalContent">
-                <h2 class="text-xl font-bold mb-4 text-gray-900">Edit Profile</h2>
-                <form id="editForm" class="space-y-4">
-                    <div>
-                        <label class="block text-sm font-semibold text-gray-600 mb-1">Phone</label>
+                <div class="mb-8">
+                    <h2 class="text-3xl font-black italic uppercase tracking-tighter" style="color:var(--text-dark)">
+                        Edit
+                        Protocol</h2>
+                    <div class="h-1 w-12 bg-orange-600 mt-2 rounded-full"></div>
+                </div>
+
+                <form id="editForm" class="space-y-6">
+                    <div class="group">
+                        <label
+                            class="block text-[10px] font-black text-gray-500 uppercase tracking-widest mb-3 ml-1">Access
+                            Channel (Phone)</label>
                         <input type="tel" id="editPhone"
-                            class="w-full bg-gray-50 border border-gray-200 text-gray-800 p-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-400"
-                            placeholder="+91 98765 43210">
+                            class="w-full bg-white/5 border border-white/5 text-white p-5 rounded-2xl focus:outline-none focus:ring-2 focus:ring-orange-600/20 focus:border-orange-600 transition-all font-bold placeholder-gray-600"
+                            placeholder="+91 XXXXX XXXXX">
                     </div>
-                    <div>
-                        <label class="block text-sm font-semibold text-gray-600 mb-1">Address</label>
+                    <div class="group">
+                        <label
+                            class="block text-[10px] font-black text-gray-500 uppercase tracking-widest mb-3 ml-1">Node
+                            Address (Delivery)</label>
                         <textarea id="editAddress"
-                            class="w-full bg-gray-50 border border-gray-200 text-gray-800 p-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-400"
-                            rows="3" placeholder="123, Street Name, City"></textarea>
+                            class="w-full bg-white/5 border border-white/5 text-white p-5 rounded-2xl focus:outline-none focus:ring-2 focus:ring-orange-600/20 focus:border-orange-600 transition-all font-bold placeholder-gray-600 resize-none h-32"
+                            placeholder="Complete physical address..."></textarea>
                     </div>
-                    <div class="flex justify-end gap-3 mt-6">
+                    <div class="flex justify-end gap-4 mt-10">
                         <button type="button" onclick="closeEditModal()"
-                            class="px-4 py-2 text-gray-500 hover:bg-gray-100 rounded-lg transition">Cancel</button>
+                            class="px-8 py-4 text-gray-500 font-black uppercase tracking-widest text-[10px] hover:text-white transition-all cursor-pointer">Abort</button>
                         <button type="submit"
-                            class="px-6 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 font-semibold transition">Save
-                            Changes</button>
+                            class="px-10 py-4 bg-orange-600 text-white rounded-2xl hover:bg-orange-500 font-black uppercase tracking-widest text-[10px] shadow-2xl shadow-orange-600/30 transition-all cursor-pointer border-none">Update
+                            Matrix</button>
                     </div>
                 </form>
             </div>
         </div>
 
         <!-- Order History -->
-        <h2 class="text-2xl font-bold text-gray-900 mb-4">Order History</h2>
+        <div class="flex items-center gap-4 mb-8">
+            <h2 class="text-3xl font-black text-white italic uppercase tracking-tighter">Operational Logs</h2>
+            <div class="h-1 flex-1 bg-white/5 rounded-full"></div>
+        </div>
 
-        <div class="bg-white rounded-2xl shadow-sm overflow-hidden border border-gray-100" id="ordersContainer">
+        <div class="space-y-6" id="ordersContainer">
             <!-- Loading State -->
-            <div class="p-8 text-center text-gray-400">
-                <i class="fa-solid fa-circle-notch fa-spin text-2xl mb-2 text-red-400"></i>
-                <p>Loading your orders...</p>
+            <div class="p-16 text-center bg-[#111] rounded-[2.5rem] border border-white/5">
+                <i class="fa-solid fa-atom fa-spin text-4xl mb-4 text-orange-600"></i>
+                <p class="text-xs font-black uppercase tracking-[0.3em] text-gray-500">Retrieving History...</p>
             </div>
         </div>
 
@@ -122,8 +152,8 @@
             // Populate extra info if exists
             if (user.phone || user.address) {
                 document.getElementById('extraInfo').innerHTML = `
-                    <p><i class="fa-solid fa-phone w-4"></i> ${user.phone || 'N/A'}</p>
-                    <p><i class="fa-solid fa-location-dot w-4"></i> ${user.address || 'N/A'}</p>
+                    <p class="flex items-center gap-2"><i class="fa-solid fa-phone text-orange-500 text-sm"></i> ${user.phone || 'N/A'}</p>
+                    <p class="flex items-center gap-2"><i class="fa-solid fa-location-dot text-orange-500 text-sm"></i> ${user.address || 'N/A'}</p>
                 `;
             }
         }
@@ -169,7 +199,7 @@
 
             // Safety check for user
             if (!user || !user.username) {
-                container.innerHTML = `<div class="p-8 text-center text-red-400">Please login properly.</div>`;
+                container.innerHTML = `<div class="p-8 text-center text-orange-500 font-black uppercase text-xs">Identity Required</div>`;
                 return;
             }
 
@@ -185,46 +215,58 @@
 
                 if (orders.length === 0) {
                     container.innerHTML = `
-                        <div class="p-10 text-center">
-                            <i class="fa-solid fa-utensils text-4xl text-gray-600 mb-4"></i>
-                            <h3 class="text-lg font-semibold text-gray-400">No orders yet</h3>
-                            <a href="order.html" class="text-emerald-500 hover:underline mt-2 inline-block">Order some food now</a>
+                        <div class="p-20 text-center bg-[#111] rounded-[2.5rem] border border-white/5 group">
+                            <i class="fa-solid fa-utensils text-5xl text-gray-800 mb-6 group-hover:text-orange-500 transition-all"></i>
+                            <h3 class="text-xl font-black text-gray-500 uppercase tracking-tighter italic">No history found in database</h3>
+                            <a href="order.html" class="bg-orange-600 text-white px-8 py-3 rounded-xl font-black uppercase tracking-widest text-[9px] mt-8 inline-block shadow-2xl shadow-orange-600/20 hover:bg-orange-500 transition-all">Initialize First Order</a>
                         </div>
                     `;
                     return;
                 }
 
                 orders.reverse().forEach(order => {
-                    const date = order.date ? new Date(order.date).toLocaleDateString() : 'Date N/A';
-                    const statusColor = order.status === 'Pending' ? 'text-yellow-600 bg-yellow-50 border border-yellow-200' : 'text-green-600 bg-green-50 border border-green-200';
+                    const date = order.date ? new Date(order.date).toLocaleDateString(undefined, { day: 'numeric', month: 'short', year: 'numeric' }) : 'N/A';
+
+                    const statusConfig = order.status === 'Pending'
+                        ? { icon: 'fa-spinner fa-spin', text: 'PROCESSING', color: 'text-orange-500 bg-orange-500/10 border-orange-500/20' }
+                        : { icon: 'fa-check', text: 'VERIFIED', color: 'text-emerald-500 bg-emerald-500/10 border-emerald-500/20' };
 
                     let itemsHtml = '';
                     if (order.items && typeof order.items === 'object') {
                         itemsHtml = Object.keys(order.items).map(k =>
-                            `<span class="text-gray-600 text-sm bg-gray-100 px-2 py-1 rounded-lg mr-2 mb-2 inline-block">${k} x${order.items[k].qty}</span>`
+                            `<span class="text-[9px] font-black text-gray-400 bg-white/5 border border-white/5 px-3 py-1.5 rounded-lg mr-2 mb-2 inline-block uppercase tracking-widest">${k} <span class="text-orange-500">x${order.items[k].qty}</span></span>`
                         ).join('');
                     }
 
                     const html = `
-                        <div class="p-6 border-b border-gray-100 last:border-0 hover:bg-gray-50 transition">
-                            <div class="flex justify-between items-start mb-3">
-                                <div>
-                                    <h3 class="font-bold text-lg text-red-500">${order.orderId || 'ORD-###'}</h3>
-                                    <p class="text-xs text-gray-400">${date}</p>
+                        <div class="bg-[#111] p-8 rounded-[2.5rem] border border-white/5 hover:border-orange-500/30 transition-all duration-500 group relative overflow-hidden">
+                            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-8">
+                                <div class="flex items-center gap-6">
+                                    <div class="w-14 h-14 bg-white/5 text-orange-500 rounded-2xl flex items-center justify-center text-xl border border-white/5 group-hover:bg-orange-600 group-hover:text-white transition-all">
+                                        <i class="fa-solid fa-cube"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-black text-2xl text-white italic uppercase tracking-tighter leading-none mb-1">${order.orderId || 'ORD-###'}</h3>
+                                        <p class="text-[10px] text-gray-600 font-black uppercase tracking-widest">${date}</p>
+                                    </div>
                                 </div>
-                                <div class="text-right">
-                                    <div class="font-bold text-lg text-gray-900">₹${order.total || 0}</div>
-                                    <span class="text-xs px-2 py-1 rounded-full font-medium ${statusColor}">${order.status || 'Received'}</span>
+                                <div class="text-left md:text-right flex flex-col md:items-end gap-2">
+                                    <div class="font-black text-2xl text-white italic tracking-tighter">₹${order.total || 0}</div>
+                                    <span class="text-[9px] px-4 py-1.5 rounded-full font-black uppercase tracking-widest border ${statusConfig.color}">
+                                        <i class="fa-solid ${statusConfig.icon} mr-1.5"></i> ${statusConfig.text}
+                                    </span>
                                 </div>
                             </div>
                             
-                            <div class="mb-3">
+                            <div class="mb-8 pt-6 border-t border-white/5 flex flex-wrap">
                                 ${itemsHtml}
                             </div>
                             
-                            <div class="flex justify-between items-center text-sm text-gray-500 mt-4 pt-3 border-t border-gray-100">
-                                <span><i class="fa-solid fa-credit-card mr-1 text-gray-400"></i> ${order.paymentMethod || 'Online'}</span>
-                                <a href="thanks-order.html?orderId=${order.orderId}" class="text-red-500 hover:text-red-600 font-bold"><i class="fa-solid fa-location-arrow mr-1"></i> Track Order</a>
+                            <div class="flex flex-col md:flex-row justify-between items-center gap-6 text-[10px] text-gray-600 font-black uppercase tracking-widest pt-6 border-t border-white/5">
+                                <span class="flex items-center gap-2"><i class="fa-solid fa-credit-card text-orange-500 text-sm"></i> ${order.paymentMethod || 'Online Protocol'}</span>
+                                <a href="thanks-order.html?orderId=${order.orderId}" class="bg-white/5 text-white hover:bg-orange-600 hover:text-white border border-white/5 px-6 py-3 rounded-xl transition-all shadow-xl group-hover:shadow-orange-600/10">
+                                    <i class="fa-solid fa-location-arrow mr-2"></i> Track Shipment
+                                </a>
                             </div>
                         </div>
                     `;
@@ -234,10 +276,10 @@
             } catch (e) {
                 console.error(e);
                 container.innerHTML = `
-                    <div class="p-8 text-center text-red-400">
-                        <p>No orders found or server unavailable.</p>
-                        <p class="text-xs text-gray-500 mt-2">Make sure 'npm run start' is running.</p>
-                        <button onclick="location.reload()" class="mt-2 text-sm text-gray-300 underline">Retry</button>
+                    <div class="p-16 text-center bg-[#111] rounded-[2.5rem] border border-white/5">
+                        <i class="fa-solid fa-triangle-exclamation text-4xl text-orange-600 mb-4"></i>
+                        <p class="text-xs font-black uppercase tracking-widest text-gray-500">Database Connection Interrupted</p>
+                        <button onclick="location.reload()" class="mt-6 text-[10px] font-black uppercase tracking-widest text-orange-500 border border-orange-500/20 px-6 py-3 rounded-xl hover:bg-orange-600 hover:text-white transition-all">Retry Handshake</button>
                     </div>`;
             }
         }

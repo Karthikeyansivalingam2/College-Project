@@ -10,7 +10,7 @@
   <link href="./src/output.css" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="./assets/css/common.css">
+  <link rel="stylesheet" href="./assets/css/common.css?v=2">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -20,7 +20,7 @@
 
 <!-- ================= NAVBAR ================= -->
 
-<body class="bg-white text-gray-900">
+<body>
   <header class="navbar" id="global-navbar"></header>
 
   <!-- ================= HERO ================= -->
@@ -55,17 +55,17 @@
       <!-- Text -->
       <div>
         <h4 class="text-red-500 font-bold uppercase tracking-widest text-sm mb-2">Our Story</h4>
-        <h2 class="text-3xl md:text-5xl font-extrabold text-gray-900 mb-6 leading-tight">
+        <h2 class="text-3xl md:text-5xl font-extrabold mb-6 leading-tight" style="color:var(--text-dark)">
           More Than Just a Delivery App
         </h2>
 
-        <p class="text-gray-600 mb-6 leading-relaxed text-lg font-medium">
+        <p class="mb-6 leading-relaxed text-lg font-medium" style="color:var(--text-main)">
           Foodie Zone started with a simple idea: good food should be accessible to everyone, everywhere. What began
           as a small initiative to connect local tea shops has now evolved into Tamil Nadu's most comprehensive food
           service ecosystem.
         </p>
 
-        <p class="text-gray-500 leading-relaxed">
+        <p class="leading-relaxed" style="color:var(--text-muted)">
           We understand that food is personal. Whether you are a student missing home-cooked meals, a corporate team
           needing a productivity boost, or a family celebrating a milestone, we bring the best culinary partners to
           your doorstep.
@@ -75,24 +75,26 @@
 
     <!-- Mission & Vision -->
     <div class="grid md:grid-cols-2 gap-8">
-      <div
-        class="bg-gray-50 p-10 rounded-2xl border border-gray-100 hover:border-red-500 transition-all duration-300 shadow-sm">
+      <div class="p-10 rounded-2xl border hover:border-red-500 transition-all duration-300 shadow-sm"
+        style="background:var(--bg-card);border-color:var(--border-light)">
         <div class="w-14 h-14 bg-red-50 rounded-xl flex items-center justify-center mb-6">
           <i class="fa-solid fa-bullseye text-2xl text-red-500"></i>
         </div>
-        <h3 class="text-2xl font-bold text-gray-900 mb-4">Our Mission</h3>
-        <p class="text-gray-600 leading-relaxed font-medium">To revolutionize the food industry by empowering local
+        <h3 class="text-2xl font-bold mb-4" style="color:var(--text-dark)">Our Mission</h3>
+        <p class="leading-relaxed font-medium" style="color:var(--text-main)">To revolutionize the food industry by
+          empowering local
           eateries, ensuring hygiene
           standards, and delivering joy through every meal served.</p>
       </div>
 
-      <div
-        class="bg-gray-50 p-10 rounded-2xl border border-gray-100 hover:border-red-500 transition-all duration-300 shadow-sm">
+      <div class="p-10 rounded-2xl border hover:border-red-500 transition-all duration-300 shadow-sm"
+        style="background:var(--bg-card);border-color:var(--border-light)">
         <div class="w-14 h-14 bg-red-50 rounded-xl flex items-center justify-center mb-6">
           <i class="fa-solid fa-earth-asia text-2xl text-red-500"></i>
         </div>
-        <h3 class="text-2xl font-bold text-gray-900 mb-4">Our Vision</h3>
-        <p class="text-gray-600 leading-relaxed font-medium">To become the most trusted food partner in South India,
+        <h3 class="text-2xl font-bold mb-4" style="color:var(--text-dark)">Our Vision</h3>
+        <p class="leading-relaxed font-medium" style="color:var(--text-main)">To become the most trusted food partner in
+          South India,
           known for quality,
           reliability, and our commitment to customer satisfaction.</p>
       </div>
@@ -102,26 +104,26 @@
 
 
   <!-- ================= FEATURES ================= -->
-  <section class="py-16 bg-gray-900">
+  <section class="py-16" style="background:var(--bg-secondary)">
 
     <div class="max-w-6xl mx-auto grid md:grid-cols-3 gap-10 text-center">
 
-      <div class="p-6 shadow rounded-xl bg-gray-800 border border-gray-700">
+      <div class="p-6 shadow rounded-xl" style="background:var(--bg-card);border:1px solid var(--border-light)">
         <i class="fa-solid fa-utensils text-3xl text-emerald-500 mb-4"></i>
-        <h3 class="font-semibold text-lg text-gray-100">Diverse Menu</h3>
-        <p class="text-gray-400 mt-2">From Beverages to Biryani, we serve it all.</p>
+        <h3 class="font-semibold text-lg" style="color:var(--text-dark)">Diverse Menu</h3>
+        <p class="mt-2" style="color:var(--text-muted)">From Beverages to Biryani, we serve it all.</p>
       </div>
 
-      <div class="p-6 shadow rounded-xl bg-gray-800 border border-gray-700">
+      <div class="p-6 shadow rounded-xl" style="background:var(--bg-card);border:1px solid var(--border-light)">
         <i class="fa-solid fa-calendar-check text-3xl text-emerald-500 mb-4"></i>
-        <h3 class="font-semibold text-lg text-gray-100">Catering & Events</h3>
-        <p class="text-gray-400 mt-2">Professional catering for corporate & personal events.</p>
+        <h3 class="font-semibold text-lg" style="color:var(--text-dark)">Catering &amp; Events</h3>
+        <p class="mt-2" style="color:var(--text-muted)">Professional catering for corporate &amp; personal events.</p>
       </div>
 
-      <div class="p-6 shadow rounded-xl bg-gray-800 border border-gray-700">
+      <div class="p-6 shadow rounded-xl" style="background:var(--bg-card);border:1px solid var(--border-light)">
         <i class="fa-solid fa-truck-fast text-3xl text-emerald-500 mb-4"></i>
-        <h3 class="font-semibold text-lg text-gray-100">Fast Delivery</h3>
-        <p class="text-gray-400 mt-2">Hot and fresh food delivered to your doorstep.</p>
+        <h3 class="font-semibold text-lg" style="color:var(--text-dark)">Fast Delivery</h3>
+        <p class="mt-2" style="color:var(--text-muted)">Hot and fresh food delivered to your doorstep.</p>
       </div>
 
     </div>

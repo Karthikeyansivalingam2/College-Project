@@ -8,11 +8,11 @@
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./assets/css/common.css">
+    <link rel="stylesheet" href="./assets/css/common.css?v=2">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 
-<body class="bg-[#f8f8f8] text-gray-900 flex flex-col min-h-screen">
+<body class="bg-[var(--bg-main)] text-[var(--text-main)] flex flex-col min-h-screen">
 
     <!-- Navbar -->
     <header class="navbar" id="global-navbar"></header>
@@ -20,7 +20,7 @@
     <!-- Main Content -->
     <main class="flex-grow flex items-center justify-center py-20 px-4">
         <div
-            class="bg-white p-10 md:p-14 rounded-[2.5rem] shadow-[0_32px_64px_-16px_rgba(0,0,0,0.1)] w-full max-w-md border border-gray-100 relative overflow-hidden group">
+            class="bg-[var(--bg-card)] p-10 md:p-14 rounded-[2.5rem] shadow-[var(--shadow-standard)] w-full max-w-md border border-[var(--border-light)] relative overflow-hidden group">
             <!-- Branded Accent -->
             <div class="absolute top-0 left-0 w-full h-2 bg-red-500"></div>
 
@@ -29,7 +29,8 @@
                     class="w-16 h-16 bg-red-50 text-red-500 rounded-2xl flex items-center justify-center text-2xl mb-6 mx-auto shadow-inner">
                     <i class="fa-solid fa-user-shield"></i>
                 </div>
-                <h1 class="text-3xl font-black text-gray-900 tracking-tighter uppercase mb-2">Admin Portal</h1>
+                <h1 class="text-3xl font-black text-[var(--text-dark)] tracking-tighter uppercase mb-2">Admin Portal
+                </h1>
                 <p class="text-gray-400 font-bold uppercase tracking-widest text-[10px]">Secure management access</p>
             </div>
 
@@ -56,7 +57,7 @@
                     <label
                         class="flex items-center gap-2 text-xs text-gray-500 font-bold uppercase tracking-tighter hover:text-red-500 cursor-pointer transition-colors">
                         <input type="checkbox" id="adminRememberMe"
-                            class="w-4 h-4 rounded-lg border-gray-200 text-red-500 focus:ring-red-500/20">
+                            class="w-4 h-4 rounded-lg border-[var(--border-light)] text-red-500 focus:ring-red-500/20 bg-[var(--bg-main)]">
                         Stay authenticated
                     </label>
                 </div>

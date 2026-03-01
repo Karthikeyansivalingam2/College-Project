@@ -51,8 +51,8 @@ async function loadComponents() {
         setActiveLink();
 
         // Init Theme Icon after load
-        const isDark = localStorage.getItem('theme') === 'dark';
-        updateThemeIcon(isDark);
+        const isLight = localStorage.getItem('theme') === 'light';
+        updateThemeIcon(!isLight);
 
         // PWA button will be handled by the interval in showInstallButton()
       }
@@ -109,27 +109,32 @@ function updateAuthUI() {
 
 // -- Theme Logic --
 function toggleTheme() {
-  document.body.classList.toggle('dark-mode');
-  const isDark = document.body.classList.contains('dark-mode');
-  localStorage.setItem('theme', isDark ? 'dark' : 'light');
-  updateThemeIcon(isDark);
+  document.documentElement.classList.toggle('light-mode');
+  document.body.classList.toggle('light-mode');
+  const isLight = document.body.classList.contains('light-mode');
+  localStorage.setItem('theme', isLight ? 'light' : 'dark');
+  updateThemeIcon(!isLight);
 }
 
 function updateThemeIcon(isDark) {
   const icon = document.getElementById('themeIcon');
   if (!icon) return;
   if (isDark) {
-    icon.classList.remove('fa-moon', 'text-red-500');
-    icon.classList.add('fa-sun', 'text-yellow-400');
+    icon.classList.remove('fa-sun');
+    icon.classList.add('fa-moon');
   } else {
-    icon.classList.remove('fa-sun', 'text-yellow-400');
-    icon.classList.add('fa-moon', 'text-red-500');
+    icon.classList.remove('fa-moon');
+    icon.classList.add('fa-sun');
   }
 }
 
 // Init Theme Immediately
-if (localStorage.getItem('theme') === 'dark') {
-  document.body.classList.add('dark-mode');
+if (localStorage.getItem('theme') === 'light') {
+  document.documentElement.classList.add('light-mode');
+  document.body.classList.add('light-mode');
+} else {
+  // Ensure default is dark if no preference
+  localStorage.setItem('theme', 'dark');
 }
 
 document.addEventListener('DOMContentLoaded', loadComponents);

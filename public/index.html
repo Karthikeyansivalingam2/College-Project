@@ -9,140 +9,137 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./assets/css/common.css">
+  <link rel="stylesheet" href="./assets/css/common.css?v=2">
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#10b981">
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 </head>
 
-<body class="bg-white text-gray-900">
+<body class="text-gray-100">
 
   <!-- Navbar -->
   <header class="navbar" id="global-navbar"></header>
 
 
 
-  <!-- Hero Section (Zomato Style) -->
-  <section class="relative h-[550px] flex items-center justify-center text-center text-white overflow-hidden">
+  <!-- Hero Section (StepUp Style) -->
+  <section class="relative h-[700px] flex items-center justify-center text-center text-white overflow-hidden">
     <!-- Clean Background Image -->
     <div class="absolute inset-0 z-0">
-      <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=1920"
-        class="w-full h-full object-cover brightness-[0.75]" alt="Premium Food Platter">
+      <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=1920"
+        class="w-full h-full object-cover brightness-[0.4] contrast-125" alt="Premium Food Platter">
+      <div class="absolute inset-0 bg-gradient-to-b from-transparent via-[var(--bg-main)]/50 to-[var(--bg-main)]"></div>
     </div>
 
     <!-- Content Area -->
-    <div class="relative z-10 px-4 max-w-5xl mx-auto animate-fade-in-up">
-      <h1 class="text-5xl md:text-7xl font-extrabold mb-8 leading-tight drop-shadow-lg">
-        Foodie Zone
+    <div class="relative z-10 px-4 max-w-6xl mx-auto animate-fade-in-up">
+      <span
+        class="bg-orange-600 text-[10px] font-black uppercase tracking-[0.3em] px-4 py-2 rounded-lg mb-8 inline-block shadow-lg">New
+        Season 2024</span>
+      <h1 class="text-6xl md:text-[100px] font-black mb-6 leading-[0.9] tracking-tighter uppercase italic">
+        Step Into <br> <span class="text-orange-500">The Future</span>
       </h1>
-      <p class="text-xl md:text-3xl mb-12 text-white font-medium max-w-3xl mx-auto">
-        Discover the best food & drinks in Tamil Nadu
+      <p class="text-lg md:text-xl mb-12 text-gray-300 font-medium max-w-2xl mx-auto uppercase tracking-wider">
+        Experience the next generation of food & catering. <br>Engineered for excellence in Tamil Nadu.
       </p>
 
-      <!-- Zomato Search Box -->
+      <!-- Glass Search Box -->
       <div class="w-full max-w-4xl mx-auto">
-        <div class="flex flex-col md:flex-row bg-white rounded-xl shadow-2xl overflow-hidden p-2">
+        <div
+          class="flex flex-col md:flex-row bg-white/5 backdrop-blur-2xl rounded-[2rem] border border-white/10 shadow-2xl overflow-hidden p-3 scale-105">
 
           <!-- Location -->
-          <div class="flex-1 flex items-center p-4 border-b md:border-b-0 md:border-r border-gray-100 group">
-            <i class="fa-solid fa-location-dot text-red-500 text-xl mx-2"></i>
+          <div class="flex-1 flex items-center p-4 border-b md:border-b-0 md:border-r border-white/10 group">
+            <i class="fa-solid fa-location-dot text-orange-500 text-xl mx-2"></i>
             <input type="text" id="locationInput"
-              class="w-full font-semibold text-gray-800 outline-none bg-transparent placeholder-gray-400 text-lg"
-              placeholder="Chennai, Tamil Nadu" autocomplete="off">
+              class="w-full font-bold text-white outline-none bg-transparent placeholder-gray-500 text-lg border-none focus:ring-0"
+              placeholder="Your Location" autocomplete="off">
           </div>
 
           <!-- Search Food -->
           <div class="flex-[1.5] flex items-center p-4">
-            <i class="fa-solid fa-magnifying-glass text-gray-400 text-lg mr-3"></i>
+            <i class="fa-solid fa-magnifying-glass text-gray-500 text-lg mr-3"></i>
             <input type="text" id="homeSearchInput"
-              class="w-full font-medium text-gray-700 outline-none bg-transparent placeholder-gray-400 text-lg"
-              placeholder="Search for restaurant, item or more">
+              class="w-full font-bold text-white outline-none bg-transparent placeholder-gray-500 text-lg border-none focus:ring-0"
+              placeholder="Search for your favorite dish...">
           </div>
 
-          <!-- Voice Search Mic Button -->
-          <button id="homeVoiceBtn" onclick="startHomeVoiceSearch()" title="🎤 Click & Speak to Search!"
-            class="flex items-center justify-center w-14 h-full bg-gray-50 hover:bg-red-50 text-red-500 border-l border-gray-100 transition-all group mx-1 rounded-lg">
-            <div class="flex flex-col items-center gap-0.5">
-              <i class="fa-solid fa-microphone text-lg group-hover:animate-pulse"></i>
-              <span class="text-[9px] font-bold uppercase tracking-wider">Voice</span>
-            </div>
-          </button>
-
           <button onclick="findServices()"
-            class="bg-red-500 hover:bg-red-600 text-white px-10 py-4 rounded-lg font-bold text-lg transition-all transform active:scale-95 shadow-lg shadow-red-500/20">
-            Search
+            class="bg-orange-600 hover:bg-orange-500 text-white px-12 py-5 rounded-2xl font-black text-xs uppercase tracking-widest transition-all transform active:scale-95 shadow-2xl shadow-orange-500/40 border-none cursor-pointer flex items-center gap-3">
+            Explores <i class="fa-solid fa-arrow-right"></i>
           </button>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Quick Stats -->
-  <div class="mt-12 grid grid-cols-3 gap-4 md:gap-8 max-w-2xl mx-auto">
+  <!-- Quick Stats (Dark Mode) -->
+  <div
+    class="mt-[-60px] relative z-20 grid grid-cols-3 gap-4 md:gap-8 max-w-4xl mx-auto bg-[var(--bg-secondary)] p-10 rounded-[2.5rem] border border-[var(--border-light)] shadow-2xl">
     <div class="text-center">
-      <p class="text-3xl md:text-4xl font-black text-red-500">10k+</p>
-      <p class="text-[10px] md:text-xs text-gray-500 uppercase tracking-widest font-bold">Happy Eaters</p>
+      <p class="text-4xl md:text-5xl font-black text-orange-500 tracking-tighter italic">10k+</p>
+      <p class="text-[9px] md:text-[10px] text-gray-500 uppercase tracking-[0.2em] font-black mt-2">Active Members</p>
     </div>
-    <div class="text-center border-x border-gray-100">
-      <p class="text-3xl md:text-4xl font-black text-red-500">50+</p>
-      <p class="text-[10px] md:text-xs text-gray-500 uppercase tracking-widest font-bold">Partner Halls</p>
+    <div class="text-center border-x border-white/5">
+      <p class="text-4xl md:text-5xl font-black text-orange-500 tracking-tighter italic">50+</p>
+      <p class="text-[9px] md:text-[10px] text-gray-500 uppercase tracking-[0.2em] font-black mt-2">Partner Halls</p>
     </div>
     <div class="text-center">
-      <p class="text-3xl md:text-4xl font-black text-red-500">4.8</p>
-      <p class="text-[10px] md:text-xs text-gray-500 uppercase tracking-widest font-bold">User Rating</p>
+      <p class="text-4xl md:text-5xl font-black text-orange-500 tracking-tighter italic">4.8</p>
+      <p class="text-[9px] md:text-[10px] text-gray-500 uppercase tracking-[0.2em] font-black mt-2">Global Rating</p>
     </div>
   </div>
   </section>
 
-  <!-- Features / Why Us -->
-  <section class="py-16 bg-white">
-    <div class="max-w-6xl mx-auto px-4">
-      <div class="text-center mb-16">
-        <h2 class="text-gray-400 font-semibold tracking-widest uppercase text-sm mb-2">Why Foodie Zone?</h2>
-
-        <h3 class="text-4xl font-bold text-gray-900">More than just food delivery</h3>
+  <!-- Features Section (StepUp Dark) -->
+  <section class="py-24 bg-[var(--bg-main)]">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="max-w-2xl mb-20">
+        <h2 class="text-orange-500 font-black tracking-[0.3em] uppercase text-xs mb-4">The Evolution</h2>
+        <h3 class="text-5xl md:text-6xl font-black text-white italic uppercase tracking-tighter leading-none">More than
+          just <br> delivery service</h3>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         <!-- Feature 1 -->
-        <div class="flex flex-col items-center text-center p-6 transition hover:-translate-y-2 duration-300">
-          <div
-            class="w-16 h-16 bg-green-100 text-green-600 rounded-2xl flex items-center justify-center text-3xl mb-6 shadow-sm rotate-3">
+        <div class="z-card feature-card p-10 group overflow-hidden">
+          <div class="feature-icon bg-gradient-to-br from-orange-500 via-lime-400 to-green-500 text-white">
             <i class="fa-solid fa-leaf"></i>
           </div>
-          <h4 class="text-xl font-bold text-gray-800 mb-3">Hygenic & Fresh</h4>
-          <p class="text-gray-500 leading-relaxed">Safety first. Our partners follow strict hygiene protocols to ensure
-            every bite is safe.</p>
+          <h4 class="feature-title">Hygienic & Fresh</h4>
+          <p class="feature-desc">Safety first. Our partners follow strict protocols to ensure every bite is perfection.</p>
         </div>
         <!-- Feature 2 -->
-        <div class="flex flex-col items-center text-center p-6 transition hover:-translate-y-2 duration-300">
-          <div
-            class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-2xl flex items-center justify-center text-3xl mb-6 shadow-sm -rotate-2">
+        <div class="z-card feature-card p-10 group overflow-hidden">
+          <div class="feature-icon bg-gradient-to-br from-orange-500 via-yellow-400 to-red-500 text-white">
             <i class="fa-solid fa-clock"></i>
           </div>
-          <h4 class="text-xl font-bold text-gray-800 mb-3">On-Time Delivery</h4>
-          <p class="text-gray-500 leading-relaxed">Whether it's your daily lunchbox or a wedding banquet, we value your
-            time.</p>
+          <h4 class="feature-title">Precision Speed</h4>
+          <p class="feature-desc">Timed to the second. From our kitchen to your door with unmatched velocity.</p>
         </div>
         <!-- Feature 3 -->
-        <div class="flex flex-col items-center text-center p-6 transition hover:-translate-y-2 duration-300">
-          <div
-            class="w-16 h-16 bg-blue-100 text-blue-600 rounded-2xl flex items-center justify-center text-3xl mb-6 shadow-sm rotate-1">
+        <div class="z-card feature-card p-10 group overflow-hidden">
+          <div class="feature-icon bg-gradient-to-br from-orange-500 via-pink-400 to-red-500 text-white">
             <i class="fa-solid fa-wallet"></i>
           </div>
-          <h4 class="text-xl font-bold text-gray-800 mb-3">Pocket Friendly</h4>
-          <p class="text-gray-500 leading-relaxed">Premium quality doesn't always have to be expensive. Plans starting @
-            ₹99.</p>
+          <h4 class="feature-title">Smart Pricing</h4>
+          <p class="feature-desc">Future-proof subscriptions starting at elite prices. Quality without compromise.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Services Section (Zomato Style) -->
-  <section class="max-w-7xl mx-auto py-24 px-4 bg-white">
-    <div class="text-center mb-16">
-      <h2 class="text-3xl md:text-5xl font-extrabold text-gray-900 mb-4">Explore Our Services</h2>
-      <p class="text-gray-500 text-lg">Delicious food and premium catering tailored for you</p>
+  <!-- Explore Services -->
+  <section class="max-w-7xl mx-auto py-32 px-4 bg-[var(--bg-main)]">
+    <div class="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">
+      <div class="max-w-2xl">
+        <h2 class="text-6xl md:text-7xl font-black text-white italic uppercase tracking-tighter leading-none mb-6">
+          Explore <br>Our Collections</h2>
+        <p class="text-gray-500 text-xl font-medium">Precision-crafted food experiences for every moment of your life.
+        </p>
+      </div>
+      <button class="btn-secondary group">View All Collections <i
+          class="fa-solid fa-arrow-right ml-2 group-hover:translate-x-2 transition-transform"></i></button>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-10">

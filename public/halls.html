@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#10b981">
-    <link rel="stylesheet" href="./assets/css/common.css">
+    <link rel="stylesheet" href="./assets/css/common.css?v=2">
     <style>
         body {
             font-family: 'Outfit', sans-serif;
@@ -40,7 +40,7 @@
     </style>
 </head>
 
-<body class="bg-white text-gray-900">
+<body>
 
     <!-- Navbar -->
     <header class="navbar" id="global-navbar"></header>
@@ -104,8 +104,8 @@
                                 class="fa-solid fa-star"></i>
                         </div>
                     </div>
-                    <h3
-                        class="text-2xl font-black text-gray-900 mb-2 group-hover:text-red-600 transition-colors uppercase tracking-tighter">
+                    <h3 class="text-2xl font-black mb-2 group-hover:text-red-600 transition-colors uppercase tracking-tighter"
+                        style="color:var(--text-dark)">
                         Golden Banquet Hall</h3>
                     <p class="text-gray-500 font-bold text-xs uppercase tracking-widest mb-6"><i
                             class="fa-solid fa-location-dot text-red-500 mr-2"></i> Anna Nagar, Chennai</p>
@@ -113,7 +113,7 @@
                         <div>
                             <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">Per Session
                             </p>
-                            <div class="text-2xl font-black text-gray-900">₹15,000</div>
+                            <div class="text-2xl font-black" style="color:var(--text-dark)">₹15,000</div>
                         </div>
                         <button onclick="bookHall('Golden Banquet Hall')"
                             class="bg-red-500 text-white px-8 py-3 rounded-xl font-black text-xs uppercase tracking-widest hover:bg-red-600 active:scale-95 transition-all shadow-lg shadow-red-500/20">Book</button>
@@ -136,8 +136,8 @@
                     <span
                         class="bg-red-50 text-red-600 text-[10px] font-black px-2 py-1 rounded uppercase tracking-widest mb-3 inline-block">Luxury
                         Venue</span>
-                    <h3
-                        class="text-2xl font-black text-gray-900 mb-2 group-hover:text-red-600 transition-colors uppercase tracking-tighter">
+                    <h3 class="text-2xl font-black mb-2 group-hover:text-red-600 transition-colors uppercase tracking-tighter"
+                        style="color:var(--text-dark)">
                         Royal Grand Palace</h3>
                     <p class="text-gray-500 font-bold text-xs uppercase tracking-widest mb-6"><i
                             class="fa-solid fa-location-dot text-red-500 mr-2"></i> Salem Main Road</p>
@@ -151,7 +151,7 @@
                         <div>
                             <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">Per Session
                             </p>
-                            <div class="text-2xl font-black text-gray-900">₹40,000</div>
+                            <div class="text-2xl font-black" style="color:var(--text-dark)">₹40,000</div>
                         </div>
                         <button onclick="bookHall('Royal Grand Palace')"
                             class="bg-red-500 text-white px-8 py-3 rounded-xl font-black text-xs uppercase tracking-widest hover:bg-red-600 active:scale-95 transition-all shadow-lg shadow-red-500/20">Book</button>
@@ -174,8 +174,8 @@
                     <span
                         class="bg-red-50 text-red-600 text-[10px] font-black px-2 py-1 rounded uppercase tracking-widest mb-3 inline-block">Cozy
                         Space</span>
-                    <h3
-                        class="text-2xl font-black text-gray-900 mb-2 group-hover:text-red-600 transition-colors uppercase tracking-tighter">
+                    <h3 class="text-2xl font-black mb-2 group-hover:text-red-600 transition-colors uppercase tracking-tighter"
+                        style="color:var(--text-dark)">
                         Mini Party Roof</h3>
                     <p class="text-gray-500 font-bold text-xs uppercase tracking-widest mb-6"><i
                             class="fa-solid fa-location-dot text-red-500 mr-2"></i> Erode Bypass</p>
@@ -183,7 +183,7 @@
                         <div>
                             <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">Per Session
                             </p>
-                            <div class="text-2xl font-black text-gray-900">₹8,000</div>
+                            <div class="text-2xl font-black" style="color:var(--text-dark)">₹8,000</div>
                         </div>
                         <button onclick="bookHall('Mini Party Roof')"
                             class="bg-red-500 text-white px-8 py-3 rounded-xl font-black text-xs uppercase tracking-widest hover:bg-red-600 active:scale-95 transition-all shadow-lg shadow-red-500/20">Book</button>
@@ -195,7 +195,7 @@
             <div class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl border border-gray-100 transition-all duration-500 hall-card group"
                 data-category="wedding">
                 <div class="h-64 overflow-hidden relative">
-                    <img src="https://images.unsplash.com/photo-1519225448526-0a09ad386b19?q=80&w=800"
+                    <img src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=800"
                         class="w-full h-full object-cover hall-img transition duration-700 group-hover:scale-110">
                     <div
                         class="absolute top-4 right-4 bg-white/95 text-gray-900 px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest shadow-xl border border-gray-100">
@@ -215,7 +215,7 @@
                         <div>
                             <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">Per Session
                             </p>
-                            <div class="text-2xl font-black text-gray-900">₹1,50,000</div>
+                            <div class="text-2xl font-black" style="color:var(--text-dark)">₹1,50,000</div>
                         </div>
                         <button onclick="bookHall('Grand Wedding Palace')"
                             class="bg-red-500 text-white px-8 py-3 rounded-xl font-black text-xs uppercase tracking-widest hover:bg-red-600 active:scale-95 transition-all shadow-lg shadow-red-500/20">Book</button>
@@ -227,7 +227,7 @@
             <div class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl border border-gray-100 transition-all duration-500 hall-card group"
                 data-category="birthday">
                 <div class="h-64 overflow-hidden relative">
-                    <img src="https://images.unsplash.com/photo-1530103043960-ef38714abb15?q=80&w=800"
+                    <img src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?q=80&w=800"
                         class="w-full h-full object-cover hall-img transition duration-700 group-hover:scale-110">
                     <div
                         class="absolute top-4 right-4 bg-white/95 text-gray-900 px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest shadow-xl border border-gray-100">
@@ -247,7 +247,7 @@
                         <div>
                             <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">Per Session
                             </p>
-                            <div class="text-2xl font-black text-gray-900">₹12,000</div>
+                            <div class="text-2xl font-black" style="color:var(--text-dark)">₹12,000</div>
                         </div>
                         <button onclick="bookHall('Skyline Party Suite')"
                             class="bg-red-500 text-white px-8 py-3 rounded-xl font-black text-xs uppercase tracking-widest hover:bg-red-600 active:scale-95 transition-all shadow-lg shadow-red-500/20">Book</button>
@@ -279,7 +279,7 @@
                         <div>
                             <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">Per Session
                             </p>
-                            <div class="text-2xl font-black text-gray-900">₹25,000</div>
+                            <div class="text-2xl font-black" style="color:var(--text-dark)">₹25,000</div>
                         </div>
                         <button onclick="bookHall('Elite Corporate Hub')"
                             class="bg-red-500 text-white px-8 py-3 rounded-xl font-black text-xs uppercase tracking-widest hover:bg-red-600 active:scale-95 transition-all shadow-lg shadow-red-500/20">Book</button>
@@ -311,7 +311,7 @@
                         <div>
                             <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">Per Session
                             </p>
-                            <div class="text-2xl font-black text-gray-900">₹60,000</div>
+                            <div class="text-2xl font-black" style="color:var(--text-dark)">₹60,000</div>
                         </div>
                         <button onclick="bookHall('Green Garden Lawn')"
                             class="bg-red-500 text-white px-8 py-3 rounded-xl font-black text-xs uppercase tracking-widest hover:bg-red-600 active:scale-95 transition-all shadow-lg shadow-red-500/20">Book</button>
@@ -323,7 +323,7 @@
             <div class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl border border-gray-100 transition-all duration-500 hall-card group"
                 data-category="corporate">
                 <div class="h-64 overflow-hidden relative">
-                    <img src="https://images.unsplash.com/photo-1504384308090-c54be385509c?q=80&w=800"
+                    <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=800"
                         class="w-full h-full object-cover hall-img transition duration-700 group-hover:scale-110">
                     <div
                         class="absolute top-4 right-4 bg-white/95 text-gray-900 px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest shadow-xl border border-gray-100">
@@ -343,7 +343,7 @@
                         <div>
                             <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">Per Session
                             </p>
-                            <div class="text-2xl font-black text-gray-900">₹45,000</div>
+                            <div class="text-2xl font-black" style="color:var(--text-dark)">₹45,000</div>
                         </div>
                         <button onclick="bookHall('Sapphire Convention')"
                             class="bg-red-500 text-white px-8 py-3 rounded-xl font-black text-xs uppercase tracking-widest hover:bg-red-600 active:scale-95 transition-all shadow-lg shadow-red-500/20">Book</button>
@@ -355,7 +355,7 @@
             <div class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl border border-gray-100 transition-all duration-500 hall-card group"
                 data-category="birthday">
                 <div class="h-64 overflow-hidden relative">
-                    <img src="https://images.unsplash.com/photo-1514525253440-b393452e8d26?q=80&w=800"
+                    <img src="https://images.unsplash.com/photo-1516062423079-7ca13cdc7f5a?q=80&w=800"
                         class="w-full h-full object-cover hall-img transition duration-700 group-hover:scale-110">
                     <div
                         class="absolute top-4 right-4 bg-white/95 text-gray-900 px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest shadow-xl border border-gray-100">
@@ -375,7 +375,7 @@
                         <div>
                             <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">Per Session
                             </p>
-                            <div class="text-2xl font-black text-gray-900">₹12,000</div>
+                            <div class="text-2xl font-black" style="color:var(--text-dark)">₹12,000</div>
                         </div>
                         <button onclick="bookHall('Moonlit Roof Deck')"
                             class="bg-red-500 text-white px-8 py-3 rounded-xl font-black text-xs uppercase tracking-widest hover:bg-red-600 active:scale-95 transition-all shadow-lg shadow-red-500/20">Book</button>
@@ -388,9 +388,11 @@
     <!-- Booking Modal (Red & White Theme) -->
     <div id="bookingModal"
         class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[2000] hidden items-center justify-center p-4">
-        <div class="bg-white w-full max-w-lg rounded-[2.5rem] overflow-hidden shadow-2xl animate-fade-in-up">
-            <div class="bg-white p-8 border-b border-gray-50 relative">
-                <h2 class="text-3xl font-black text-gray-900 tracking-tighter uppercase mb-2" id="hallNameDisplay">Book
+        <div class="w-full max-w-lg rounded-[2.5rem] overflow-hidden shadow-2xl animate-fade-in-up"
+            style="background:var(--bg-card)">
+            <div class="p-8 border-b" style="background:var(--bg-card);border-color:var(--border-light)">
+                <h2 class="text-3xl font-black tracking-tighter uppercase mb-2" id="hallNameDisplay"
+                    style="color:var(--text-dark)">Book
                     Hall</h2>
                 <p class="text-gray-500 font-bold uppercase tracking-widest text-xs">Secure your event date and time</p>
                 <button onclick="closeModal()"

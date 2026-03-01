@@ -5,16 +5,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard - Foodie Zone</title>
-    <link href="assets/css/common.css" rel="stylesheet">
+    <link href="assets/css/common.css?v=2" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         .sidebar-link.active {
-            background: #fff1f2;
-            border-right: 4px solid #e23744;
-            color: #e23744;
+            background: rgba(255, 107, 0, 0.1);
+            border-right: 4px solid #ff6b00;
+            color: #ff6b00;
         }
 
         /* Custom scrollbar for tables */
@@ -23,31 +23,32 @@
         }
 
         .overflow-x-auto::-webkit-scrollbar-track {
-            background: #f3f4f6;
+            background: #1a1a1a;
         }
 
         .overflow-x-auto::-webkit-scrollbar-thumb {
-            background: #d1d5db;
+            background: #333;
             border-radius: 3px;
         }
     </style>
 </head>
 
-<body class="bg-gray-50 text-gray-900 min-h-screen font-medium">
+<body class="bg-[var(--bg-main)] text-[var(--text-main)] min-h-screen font-medium">
 
     <div class="flex h-screen overflow-hidden">
         <!-- Sidebar -->
         <aside id="sidebar"
-            class="fixed inset-y-0 left-0 z-50 w-72 bg-white border-r border-transparent flex flex-col transform -translate-x-full lg:translate-x-0 lg:static transition-transform duration-300 shadow-2xl">
-            <div class="p-8 border-b border-gray-50 flex justify-between items-center bg-white">
+            class="fixed inset-y-0 left-0 z-50 w-72 bg-[var(--bg-secondary)] border-r border-[var(--border-light)] flex flex-col transform -translate-x-full lg:translate-x-0 lg:static transition-transform duration-300 shadow-2xl">
+            <div
+                class="p-8 border-b border-[var(--border-light)] flex justify-between items-center bg-[var(--bg-secondary)]">
                 <span class="flex items-center gap-3">
                     <div
-                        class="w-10 h-10 bg-red-500 rounded-lg flex items-center justify-center text-white font-black text-2xl shadow-lg shadow-red-500/20">
+                        class="w-10 h-10 bg-orange-600 rounded-lg flex items-center justify-center text-white font-black text-2xl shadow-lg shadow-orange-600/20">
                         F</div>
-                    <span class="text-gray-900 font-black text-2xl tracking-tighter uppercase">Admin Panel</span>
+                    <span class="text-white font-black text-2xl tracking-tighter uppercase italic">Elite Admin</span>
                 </span>
                 <button onclick="toggleSidebar()"
-                    class="lg:hidden text-gray-400 hover:text-red-500 transition-colors"><i
+                    class="lg:hidden text-gray-400 hover:text-orange-500 transition-colors"><i
                         class="fa-solid fa-xmark text-xl"></i></button>
             </div>
             <nav class="flex-1 p-6 space-y-3 overflow-y-auto">
@@ -69,10 +70,14 @@
                     class="sidebar-link w-full text-left py-4 px-5 rounded-2xl hover:bg-gray-50 flex items-center gap-4 transition-all font-bold text-gray-600">
                     <i class="fa-solid fa-briefcase w-5"></i> Career Enq
                 </button>
+                <button onclick="showSection('menu')"
+                    class="sidebar-link w-full text-left py-4 px-5 rounded-2xl hover:bg-gray-50 flex items-center gap-4 transition-all font-bold text-gray-600">
+                    <i class="fa-solid fa-list w-5"></i> Menu Manager
+                </button>
 
-                <div class="pt-8 mt-8 border-t border-gray-50">
+                <div class="pt-8 mt-8 border-t border-white/5">
                     <button onclick="logout()"
-                        class="w-full text-left py-4 px-5 rounded-2xl hover:bg-red-50 flex items-center gap-4 text-gray-500 hover:text-red-600 transition-all font-bold">
+                        class="w-full text-left py-4 px-5 rounded-2xl hover:bg-white/5 flex items-center gap-4 text-gray-500 hover:text-orange-500 transition-all font-bold">
                         <i class="fa-solid fa-right-from-bracket w-5"></i> Logout
                     </button>
                 </div>
@@ -85,13 +90,13 @@
         </div>
 
         <!-- Main Content -->
-        <main class="flex-1 overflow-hidden flex flex-col h-screen bg-gray-50">
+        <main class="flex-1 overflow-hidden flex flex-col h-screen bg-[var(--bg-main)]">
             <!-- Mobile Header -->
             <header
-                class="bg-white shadow-sm p-5 lg:hidden flex justify-between items-center sticky top-0 z-30 border-b border-gray-100 shrink-0">
-                <h1 class="text-2xl font-black text-gray-900 tracking-tighter uppercase">Foodie Admin</h1>
+                class="bg-[#111] shadow-sm p-5 lg:hidden flex justify-between items-center sticky top-0 z-30 border-b border-white/5 shrink-0">
+                <h1 class="text-2xl font-black text-white tracking-tighter uppercase italic">Foodiee Admin</h1>
                 <button onclick="toggleSidebar()"
-                    class="text-gray-500 hover:text-red-500 p-2 rounded-xl hover:bg-red-50 transition-all"><i
+                    class="text-gray-500 hover:text-orange-500 p-2 rounded-xl hover:bg-white/5 transition-all"><i
                         class="fa-solid fa-bars text-2xl"></i></button>
             </header>
 
@@ -110,7 +115,7 @@
                 <!-- Stats Row -->
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
                     <div
-                        class="bg-white p-8 rounded-[2rem] border border-gray-100 shadow-sm relative overflow-hidden group hover:shadow-xl transition-all duration-500">
+                        class="bg-[var(--bg-card)] p-8 rounded-[2rem] border border-[var(--border-light)] shadow-sm relative overflow-hidden group hover:shadow-xl transition-all duration-500">
                         <div
                             class="absolute -right-6 -top-6 w-24 h-24 bg-red-50 rounded-full group-hover:scale-150 transition-all duration-700 opacity-50">
                         </div>
@@ -120,7 +125,7 @@
                         </h2>
                     </div>
                     <div
-                        class="bg-white p-8 rounded-[2rem] border border-gray-100 shadow-sm relative overflow-hidden group hover:shadow-xl transition-all duration-500">
+                        class="bg-[var(--bg-card)] p-8 rounded-[2rem] border border-[var(--border-light)] shadow-sm relative overflow-hidden group hover:shadow-xl transition-all duration-500">
                         <div
                             class="absolute -right-6 -top-6 w-24 h-24 bg-blue-50 rounded-full group-hover:scale-150 transition-all duration-700 opacity-50">
                         </div>
@@ -130,7 +135,7 @@
                             id="totalEnquiries">0</h2>
                     </div>
                     <div
-                        class="bg-white p-8 rounded-[2rem] border border-gray-100 shadow-sm relative overflow-hidden group hover:shadow-xl transition-all duration-500">
+                        class="bg-[var(--bg-card)] p-8 rounded-[2rem] border border-[var(--border-light)] shadow-sm relative overflow-hidden group hover:shadow-xl transition-all duration-500">
                         <div
                             class="absolute -right-6 -top-6 w-24 h-24 bg-amber-50 rounded-full group-hover:scale-150 transition-all duration-700 opacity-50">
                         </div>
@@ -281,6 +286,20 @@
                     </div>
                 </div>
 
+                <!-- Menu Section -->
+                <div id="menuSection" class="hidden animate-fade-in-up">
+                    <div class="flex items-center justify-between mb-8">
+                        <h3 class="text-2xl font-black text-gray-900 tracking-tighter uppercase">Menu Manager</h3>
+                        <button onclick="openMenuAddModal()"
+                            class="bg-red-500 text-white px-6 py-2 rounded-xl font-bold hover:bg-red-600 transition shadow-lg shadow-red-500/20">
+                            <i class="fa-solid fa-plus mr-2"></i> Add Item
+                        </button>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="menuGrid">
+                        <!-- JS populate -->
+                    </div>
+                </div>
+
             </div>
         </main>
     </div>
@@ -352,6 +371,58 @@
         </div>
     </div>
 
+    <!-- Menu Item Add Modal -->
+    <div id="menuModal"
+        class="fixed inset-0 bg-black/50 backdrop-blur-sm z-[100] hidden items-center justify-center p-4">
+        <div class="bg-white rounded-[2.5rem] w-full max-w-md overflow-hidden shadow-2xl">
+            <div class="p-8 border-b border-gray-50 flex justify-between items-center">
+                <h3 class="text-2xl font-black text-gray-900 tracking-tighter uppercase">Add Menu Item</h3>
+                <button onclick="closeMenuAddModal()" class="text-gray-400 hover:text-red-500 transition-all"><i
+                        class="fa-solid fa-xmark text-lg"></i></button>
+            </div>
+            <form id="menuForm" class="p-8 space-y-4">
+                <div>
+                    <label class="text-[10px] font-black text-gray-400 uppercase tracking-widest block mb-1 px-1">Item
+                        Name</label>
+                    <input type="text" name="name" required
+                        class="w-full bg-gray-50 border border-gray-100 p-4 rounded-2xl text-sm font-bold focus:outline-none focus:ring-2 focus:ring-red-400">
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label
+                            class="text-[10px] font-black text-gray-400 uppercase tracking-widest block mb-1 px-1">Price
+                            (₹)</label>
+                        <input type="number" name="price" required
+                            class="w-full bg-gray-50 border border-gray-100 p-4 rounded-2xl text-sm font-bold focus:outline-none focus:ring-2 focus:ring-red-400">
+                    </div>
+                    <div>
+                        <label
+                            class="text-[10px] font-black text-gray-400 uppercase tracking-widest block mb-1 px-1">Category</label>
+                        <select name="category"
+                            class="w-full bg-gray-50 border border-gray-100 p-4 rounded-2xl text-sm font-bold focus:outline-none">
+                            <option>Popular</option>
+                            <option>Breakfast</option>
+                            <option>Lunch</option>
+                            <option>Dinner</option>
+                            <option>Fast Food</option>
+                            <option>Healthy</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <label class="text-[10px] font-black text-gray-400 uppercase tracking-widest block mb-1 px-1">Image
+                        URL</label>
+                    <input type="text" name="image"
+                        value="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=400"
+                        class="w-full bg-gray-50 border border-gray-100 p-4 rounded-2xl text-sm font-bold focus:outline-none">
+                </div>
+                <button type="submit"
+                    class="w-full bg-red-500 text-white py-4 rounded-2xl font-black uppercase tracking-widest hover:bg-red-600 transition shadow-xl shadow-red-500/20 active:scale-95">Create
+                    Item</button>
+            </form>
+        </div>
+    </div>
+
     <script>
         function toggleSidebar() {
             const sidebar = document.getElementById('sidebar');
@@ -375,7 +446,7 @@
                 }
             });
 
-            const sections = ['orders', 'enquiries', 'careers', 'partners'];
+            const sections = ['orders', 'enquiries', 'careers', 'partners', 'menu'];
             sections.forEach(s => {
                 const el = document.getElementById(s + 'Section');
                 if (el) el.classList.add('hidden');
@@ -600,9 +671,94 @@
                         `;
                     });
                 }
-
+                loadMenu();
             } catch (e) { console.error(e); }
         }
+
+        async function loadMenu() {
+            try {
+                const res = await fetch('/api/menu');
+                const menu = await res.json();
+                const grid = document.getElementById('menuGrid');
+                grid.innerHTML = '';
+
+                menu.forEach(item => {
+                    grid.innerHTML += `
+                        <div class="bg-white p-6 rounded-[2rem] border border-gray-100 shadow-sm hover:shadow-lg transition-all">
+                            <div class="flex items-center gap-4 mb-4">
+                                <img src="${item.image}" class="w-16 h-16 rounded-2xl object-cover shadow-sm">
+                                <div>
+                                    <h4 class="font-black text-gray-900 uppercase tracking-tighter text-base">${item.name}</h4>
+                                    <p class="text-[10px] text-red-500 font-bold uppercase tracking-widest">${item.category}</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between gap-4">
+                                <div class="flex-1">
+                                    <label class="text-[9px] font-black text-gray-400 uppercase tracking-widest block mb-1">Price</label>
+                                    <input type="number" onchange="updateMenuPrice(${item.id}, this.value)" value="${item.price}" class="w-full bg-gray-50 border border-gray-100 p-2 rounded-xl text-xs font-black focus:outline-none focus:ring-1 focus:ring-red-400">
+                                </div>
+                                <div class="flex-shrink-0">
+                                    <label class="text-[9px] font-black text-gray-400 uppercase tracking-widest block mb-1">Active</label>
+                                    <button onclick="toggleMenuItem(${item.id}, ${!item.active})" class="w-12 h-6 rounded-full transition-all relative ${item.active ? 'bg-red-500' : 'bg-gray-200'}">
+                                        <div class="w-4 h-4 bg-white rounded-full absolute top-1 ${item.active ? 'right-1' : 'left-1'} transition-all"></div>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+            } catch (e) { console.error(e); }
+        }
+
+        async function updateMenuPrice(id, price) {
+            try {
+                await fetch('/api/menu/update', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ id, price })
+                });
+            } catch (e) { alert("Error updating price"); }
+        }
+
+        async function toggleMenuItem(id, active) {
+            try {
+                await fetch('/api/menu/update', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ id, active })
+                });
+                loadMenu();
+            } catch (e) { alert("Error toggling item"); }
+        }
+
+        function openMenuAddModal() {
+            document.getElementById('menuModal').classList.remove('hidden');
+            document.getElementById('menuModal').classList.add('flex');
+        }
+
+        function closeMenuAddModal() {
+            document.getElementById('menuModal').classList.add('hidden');
+            document.getElementById('menuModal').classList.remove('flex');
+        }
+
+        document.getElementById('menuForm').addEventListener('submit', async function (e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
+            try {
+                const res = await fetch('/api/menu/add', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                const result = await res.json();
+                if (result.success) {
+                    closeMenuAddModal();
+                    loadMenu();
+                    this.reset();
+                }
+            } catch (e) { alert("Error adding item"); }
+        });
 
         function viewEnquiry(enq) {
             document.getElementById('modalEnqId').innerText = enq.enquiryId || 'NEW';

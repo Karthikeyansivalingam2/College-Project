@@ -8,11 +8,11 @@
 
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./assets/css/common.css">
+  <link rel="stylesheet" href="./assets/css/common.css?v=2">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 
-<body class="bg-white text-gray-900 flex flex-col min-h-screen">
+<body class="flex flex-col min-h-screen">
 
   <!-- Navbar -->
   <header class="navbar" id="global-navbar"></header>
@@ -33,18 +33,18 @@
 
     <div class="flex items-center gap-4 mb-12">
       <div class="w-1.5 h-10 bg-red-500 rounded-full"></div>
-      <h2 class="text-3xl font-black text-gray-900 tracking-tighter uppercase">Open Positions</h2>
+      <h2 class="text-3xl font-black tracking-tighter uppercase" style="color:var(--text-dark)">Open Positions</h2>
     </div>
 
     <div id="jobs" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 
       <!-- Job 1 -->
-      <div
-        class="bg-white p-8 rounded-2xl shadow-sm hover:shadow-2xl transition-all duration-300 border border-gray-100 group">
+      <div class="p-8 rounded-2xl shadow-sm hover:shadow-2xl transition-all duration-300 border group"
+        style="background:var(--bg-card);border-color:var(--border-light)">
         <div class="flex justify-between items-start mb-6">
           <div>
-            <h3
-              class="text-2xl font-black text-gray-900 group-hover:text-red-500 transition-colors uppercase tracking-tighter">
+            <h3 class="text-2xl font-black group-hover:text-red-500 transition-colors uppercase tracking-tighter"
+              style="color:var(--text-dark)">
               Master Chef</h3>
             <p class="text-sm text-gray-400 font-bold uppercase tracking-widest"><i
                 class="fa-solid fa-location-dot text-red-500"></i> Chennai</p>
@@ -58,7 +58,7 @@
             required at premium establishments.</p>
         </div>
         <div class="flex justify-between items-center pt-6 border-t border-gray-50">
-          <p class="font-black text-gray-900 text-lg">₹25k - ₹35k</p>
+          <p class="font-black text-lg" style="color:var(--text-dark)">₹25k - ₹35k</p>
           <button onclick="scrollToApply('Master Chef')"
             class="bg-red-500 text-white px-6 py-2.5 rounded-xl font-black text-xs uppercase tracking-widest hover:bg-red-600 transition-all shadow-lg shadow-red-500/10 active:scale-95">Apply
             Now</button>
@@ -66,12 +66,12 @@
       </div>
 
       <!-- Job 2 -->
-      <div
-        class="bg-white p-8 rounded-2xl shadow-sm hover:shadow-2xl transition-all duration-300 border border-gray-100 group">
+      <div class="p-8 rounded-2xl shadow-sm hover:shadow-2xl transition-all duration-300 border group"
+        style="background:var(--bg-card);border-color:var(--border-light)">
         <div class="flex justify-between items-start mb-6">
           <div>
-            <h3
-              class="text-2xl font-black text-gray-900 group-hover:text-red-500 transition-colors uppercase tracking-tighter">
+            <h3 class="text-2xl font-black group-hover:text-red-500 transition-colors uppercase tracking-tighter"
+              style="color:var(--text-dark)">
               Service Staff</h3>
             <p class="text-sm text-gray-400 font-bold uppercase tracking-widest"><i
                 class="fa-solid fa-location-dot text-red-500"></i> Salem</p>
@@ -84,7 +84,7 @@
             happy with your smile.</p>
         </div>
         <div class="flex justify-between items-center pt-6 border-t border-gray-50">
-          <p class="font-black text-gray-900 text-lg">₹12k - ₹15k</p>
+          <p class="font-black text-lg" style="color:var(--text-dark)">₹12k - ₹15k</p>
           <button onclick="scrollToApply('Service Staff')"
             class="bg-red-500 text-white px-6 py-2.5 rounded-xl font-black text-xs uppercase tracking-widest hover:bg-red-600 transition-all shadow-lg shadow-red-500/10 active:scale-95">Apply
             Now</button>
@@ -92,12 +92,12 @@
       </div>
 
       <!-- Job 3 -->
-      <div
-        class="bg-white p-8 rounded-2xl shadow-sm hover:shadow-2xl transition-all duration-300 border border-gray-100 group">
+      <div class="p-8 rounded-2xl shadow-sm hover:shadow-2xl transition-all duration-300 border group"
+        style="background:var(--bg-card);border-color:var(--border-light)">
         <div class="flex justify-between items-start mb-6">
           <div>
-            <h3
-              class="text-2xl font-black text-gray-900 group-hover:text-red-500 transition-colors uppercase tracking-tighter">
+            <h3 class="text-2xl font-black group-hover:text-red-500 transition-colors uppercase tracking-tighter"
+              style="color:var(--text-dark)">
               Delivery Partner</h3>
             <p class="text-sm text-gray-400 font-bold uppercase tracking-widest"><i
                 class="fa-solid fa-location-dot text-red-500"></i> Erode</p>
@@ -111,7 +111,7 @@
             mandatory for payout calculations.</p>
         </div>
         <div class="flex justify-between items-center pt-6 border-t border-gray-50">
-          <p class="font-black text-gray-900 text-lg">₹15k + Fuel</p>
+          <p class="font-black text-lg" style="color:var(--text-dark)">₹15k + Fuel</p>
           <button onclick="scrollToApply('Delivery Partner')"
             class="bg-red-500 text-white px-6 py-2.5 rounded-xl font-black text-xs uppercase tracking-widest hover:bg-red-600 transition-all shadow-lg shadow-red-500/10 active:scale-95">Apply
             Now</button>
@@ -121,41 +121,47 @@
     </div>
 
     <!-- Application Form -->
-    <div id="applySection" class="mt-24 bg-gray-50 p-10 lg:p-14 rounded-3xl border border-gray-100 max-w-3xl mx-auto">
-      <h2 class="text-4xl font-black text-gray-900 text-center mb-2 tracking-tighter uppercase">Apply Now</h2>
+    <div id="applySection" class="mt-24 p-10 lg:p-14 rounded-3xl border max-w-3xl mx-auto"
+      style="background:var(--bg-card);border-color:var(--border-light)">
+      <h2 class="text-4xl font-black text-center mb-2 tracking-tighter uppercase" style="color:var(--text-dark)">Apply
+        Now</h2>
       <p class="text-center text-gray-500 font-medium mb-10">Join the revolution in food tech & delivery.</p>
 
       <form id="careerForm" class="space-y-6">
         <div class="space-y-2">
           <label class="block text-xs font-black text-gray-400 uppercase tracking-widest">Selected Role</label>
           <input type="text" id="jobRole" readonly name="role"
-            class="w-full bg-white border border-gray-100 rounded-2xl p-4 text-red-500 font-black text-lg shadow-sm outline-none"
-            value="General Application">
+            class="w-full border rounded-2xl p-4 text-red-500 font-black text-lg shadow-sm outline-none"
+            style="background:var(--bg-card);border-color:var(--border-light)" value="General Application">
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div class="space-y-2">
             <label class="block text-xs font-black text-gray-400 uppercase tracking-widest">Full Name</label>
             <input type="text" id="appName" placeholder="e.g. Karthikeyan" required
-              class="w-full bg-white border border-gray-100 text-gray-900 rounded-2xl p-4 focus:outline-none focus:ring-4 focus:ring-red-500/10 focus:border-red-500 font-bold transition-all shadow-sm">
+              class="w-full border rounded-2xl p-4 focus:outline-none focus:ring-4 focus:ring-red-500/10 focus:border-red-500 font-bold transition-all shadow-sm"
+              style="background:var(--bg-card);border-color:var(--border-light);color:var(--text-dark)">
           </div>
           <div class="space-y-2">
             <label class="block text-xs font-black text-gray-400 uppercase tracking-widest">Mobile Number</label>
             <input type="text" id="appMobile" placeholder="98765 43210" required
-              class="w-full bg-white border border-gray-100 text-gray-900 rounded-2xl p-4 focus:outline-none focus:ring-4 focus:ring-red-500/10 focus:border-red-500 font-bold transition-all shadow-sm">
+              class="w-full border rounded-2xl p-4 focus:outline-none focus:ring-4 focus:ring-red-500/10 focus:border-red-500 font-bold transition-all shadow-sm"
+              style="background:var(--bg-card);border-color:var(--border-light);color:var(--text-dark)">
           </div>
         </div>
 
         <div class="space-y-2">
           <label class="block text-xs font-black text-gray-400 uppercase tracking-widest">Email Address</label>
           <input type="email" id="appEmail" placeholder="hello@example.com" required
-            class="w-full bg-white border border-gray-100 text-gray-900 rounded-2xl p-4 focus:outline-none focus:ring-4 focus:ring-red-500/10 focus:border-red-500 font-bold transition-all shadow-sm">
+            class="w-full border rounded-2xl p-4 focus:outline-none focus:ring-4 focus:ring-red-500/10 focus:border-red-500 font-bold transition-all shadow-sm"
+            style="background:var(--bg-card);border-color:var(--border-light);color:var(--text-dark)">
         </div>
 
         <div class="space-y-2">
           <label class="block text-xs font-black text-gray-400 uppercase tracking-widest">Your Experience</label>
           <textarea id="appExp" placeholder="Tell us about your previous work..." rows="4" required
-            class="w-full bg-white border border-gray-100 text-gray-900 rounded-2xl p-4 focus:outline-none focus:ring-4 focus:ring-red-500/10 focus:border-red-500 font-bold transition-all shadow-sm"></textarea>
+            class="w-full border rounded-2xl p-4 focus:outline-none focus:ring-4 focus:ring-red-500/10 focus:border-red-500 font-bold transition-all shadow-sm"
+            style="background:var(--bg-card);border-color:var(--border-light);color:var(--text-dark)"></textarea>
         </div>
 
         <button type="submit"
@@ -200,7 +206,7 @@
   </main>
 
   <!-- Footer -->
-  <footer class="footer mt-auto bg-white border-t border-gray-100 py-16">
+  <footer class="footer mt-auto border-t" style="background:var(--bg-secondary);border-color:var(--border-light)">
     <div
       class="footer-container max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-12 text-center md:text-left">
       <div class="footer-box space-y-4">
