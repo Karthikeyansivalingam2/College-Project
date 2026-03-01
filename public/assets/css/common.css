@@ -1082,3 +1082,137 @@ body.light-mode .footer-box h3,
 body.light-mode .footer-box h4 {
   color: #111827;
 }
+
+/* =====================================================
+   MOBILE RESPONSIVENESS
+   ===================================================== */
+
+.menu-icon {
+  display: none !important;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 1024px) {
+  .menu-icon {
+    display: block !important;
+    z-index: 1001;
+    color: var(--text-dark) !important;
+  }
+
+  .nav-links {
+    position: fixed;
+    top: -100vh;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: var(--bg-main);
+    flex-direction: column;
+    justify-content: center;
+    gap: 1.5rem;
+    transition: all 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+    z-index: 1000;
+  }
+
+  .nav-links.active {
+    top: 0;
+  }
+
+  .nav-links a {
+    font-size: 1.2rem;
+    width: 80%;
+    text-align: center;
+    padding: 1rem;
+    border-bottom: 1px solid var(--border-light);
+  }
+
+  .nav-actions {
+    margin-top: 1rem;
+    flex-direction: column;
+    gap: 1.5rem;
+    width: 80%;
+    align-items: center;
+  }
+
+  .nav-container {
+    padding: 1rem;
+  }
+
+  /* Responsive Typography */
+  h1 {
+    font-size: 3rem !important;
+    line-height: 1.1 !important;
+  }
+
+  h2 {
+    font-size: 2.2rem !important;
+    line-height: 1.2 !important;
+  }
+
+  p {
+    font-size: 1rem !important;
+    line-height: 1.5 !important;
+  }
+
+  .text-6xl,
+  .text-8xl {
+    font-size: 3.2rem !important;
+    line-height: 1.1 !important;
+  }
+
+  .text-2xl {
+    font-size: 1.2rem !important;
+    line-height: 1.5 !important;
+  }
+
+  /* Hero Section Mobile */
+  .hero-pattern {
+    padding-top: 100px !important;
+    padding-bottom: 60px !important;
+    min-height: auto !important;
+  }
+
+  .hero-pattern .container {
+    flex-direction: column;
+    text-align: center;
+    gap: 3rem !important;
+  }
+
+  .hero-pattern .lg\:w-3\/5 {
+    width: 100% !important;
+    order: 1;
+  }
+
+  .hero-pattern .max-w-lg {
+    width: 100% !important;
+    order: 2;
+  }
+
+  .flex-wrap {
+    justify-content: center;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  h1 {
+    font-size: 2.2rem !important;
+  }
+
+  .text-6xl,
+  .text-8xl {
+    font-size: 2.5rem !important;
+    line-height: 1.1 !important;
+  }
+
+  .nav-container {
+    gap: 1rem;
+  }
+
+  .logo span {
+    font-size: 1.4rem;
+  }
+
+  .logo-box {
+    width: 32px;
+    height: 32px;
+  }
+}
