@@ -4,13 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Party Halls - Foodie Zone</title>
+    <title>Party Halls - Foodiee</title>
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#10b981">
+    <meta name="theme-color" content="#ff6b00">
     <link rel="stylesheet" href="./assets/css/common.css?v=2">
     <style>
         body {
@@ -24,7 +24,7 @@
         /* Custom Date Picker Styling */
         input[type="date"] {
             color-scheme: light;
-            accent-color: #e23744;
+            accent-color: #ff6b00;
         }
 
         /* Optimize Calendar Icon */
@@ -36,6 +36,25 @@
 
         input[type="date"]::-webkit-calendar-picker-indicator:hover {
             opacity: 1;
+        }
+
+        /* Filter Button Styles - using CSS variables to override dark mode */
+        .filter-btn-active {
+            background-color: var(--primary-color) !important;
+            color: #ffffff !important;
+            border: none !important;
+            box-shadow: 0 4px 15px rgba(255, 107, 0, 0.4) !important;
+        }
+
+        .filter-btn-inactive {
+            background-color: var(--bg-card) !important;
+            color: var(--text-muted) !important;
+            border: 1.5px solid var(--border-light) !important;
+        }
+
+        .filter-btn-inactive:hover {
+            border-color: var(--primary-color) !important;
+            color: var(--primary-color) !important;
         }
     </style>
 </head>
@@ -54,8 +73,9 @@
                 class="w-full h-full object-cover brightness-50" alt="Banquet Hall">
         </div>
         <div class="relative z-10 px-4">
-            <h1 class="text-4xl md:text-5xl font-extrabold mb-4">Celebrate with Foodie Zone</h1>
-            <p class="text-red-50 text-lg md:text-xl font-medium tracking-tight">Premium Event Spaces for your Special
+            <h1 class="text-4xl md:text-5xl font-extrabold mb-4">Celebrate with Foodiee</h1>
+            <p class="text-orange-50 text-lg md:text-xl font-medium tracking-tight">Premium Event Spaces for your
+                Special
                 Moments</p>
         </div>
     </section>
@@ -64,16 +84,16 @@
     <section class="max-w-6xl mx-auto px-4 py-10">
         <div class="flex gap-4 overflow-x-auto pb-4 justify-center">
             <button onclick="filterHalls('all')"
-                class="filter-btn bg-red-500 text-white px-8 py-2.5 rounded-lg whitespace-nowrap shadow-lg font-bold transition-all">All
+                class="filter-btn filter-btn-active px-8 py-2.5 rounded-lg whitespace-nowrap font-bold transition-all">All
                 Halls</button>
             <button onclick="filterHalls('wedding')"
-                class="filter-btn bg-white border border-gray-200 text-gray-600 px-8 py-2.5 rounded-lg whitespace-nowrap hover:border-red-400 hover:text-red-500 shadow-sm font-bold transition-all">Wedding
+                class="filter-btn filter-btn-inactive px-8 py-2.5 rounded-lg whitespace-nowrap font-bold transition-all">Wedding
                 Halls</button>
             <button onclick="filterHalls('birthday')"
-                class="filter-btn bg-white border border-gray-200 text-gray-600 px-8 py-2.5 rounded-lg whitespace-nowrap hover:border-red-400 hover:text-red-500 shadow-sm font-bold transition-all">Birthday
+                class="filter-btn filter-btn-inactive px-8 py-2.5 rounded-lg whitespace-nowrap font-bold transition-all">Birthday
                 Party</button>
             <button onclick="filterHalls('corporate')"
-                class="filter-btn bg-white border border-gray-200 text-gray-600 px-8 py-2.5 rounded-lg whitespace-nowrap hover:border-red-400 hover:text-red-500 shadow-sm font-bold transition-all">Corporate
+                class="filter-btn filter-btn-inactive px-8 py-2.5 rounded-lg whitespace-nowrap font-bold transition-all">Corporate
                 Events</button>
         </div>
     </section>
@@ -90,13 +110,13 @@
                         class="w-full h-full object-cover hall-img transition duration-700 group-hover:scale-110">
                     <div
                         class="absolute top-4 right-4 bg-white/95 text-gray-900 px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest shadow-xl border border-gray-100">
-                        <i class="fa-solid fa-user-group text-red-500 mr-1.5"></i> 200 Guests
+                        <i class="fa-solid fa-user-group text-orange-500 mr-1.5"></i> 200 Guests
                     </div>
                 </div>
                 <div class="p-8">
                     <div class="flex items-center gap-2 mb-3">
                         <span
-                            class="bg-red-50 text-red-600 text-[10px] font-black px-2 py-1 rounded uppercase tracking-widest">Premium
+                            class="bg-orange-50 text-orange-600 text-[10px] font-black px-2 py-1 rounded uppercase tracking-widest">Premium
                             Choice</span>
                         <div class="flex text-amber-400 text-[10px]">
                             <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
@@ -104,11 +124,11 @@
                                 class="fa-solid fa-star"></i>
                         </div>
                     </div>
-                    <h3 class="text-2xl font-black mb-2 group-hover:text-red-600 transition-colors uppercase tracking-tighter"
+                    <h3 class="text-2xl font-black mb-2 group-hover:text-orange-600 transition-colors uppercase tracking-tighter"
                         style="color:var(--text-dark)">
                         Golden Banquet Hall</h3>
                     <p class="text-gray-500 font-bold text-xs uppercase tracking-widest mb-6"><i
-                            class="fa-solid fa-location-dot text-red-500 mr-2"></i> Anna Nagar, Chennai</p>
+                            class="fa-solid fa-location-dot text-orange-500 mr-2"></i> Anna Nagar, Chennai</p>
                     <div class="flex justify-between items-center pt-6 border-t border-gray-50">
                         <div>
                             <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">Per Session
@@ -116,7 +136,7 @@
                             <div class="text-2xl font-black" style="color:var(--text-dark)">₹15,000</div>
                         </div>
                         <button onclick="bookHall('Golden Banquet Hall')"
-                            class="bg-red-500 text-white px-8 py-3 rounded-xl font-black text-xs uppercase tracking-widest hover:bg-red-600 active:scale-95 transition-all shadow-lg shadow-red-500/20">Book</button>
+                            class="bg-orange-500 text-white px-8 py-3 rounded-xl font-black text-xs uppercase tracking-widest hover:bg-orange-600 active:scale-95 transition-all shadow-lg shadow-orange-500/20">Book</button>
                     </div>
                 </div>
             </div>
@@ -129,18 +149,18 @@
                         class="w-full h-full object-cover hall-img transition duration-700 group-hover:scale-110">
                     <div
                         class="absolute top-4 right-4 bg-white/95 text-gray-900 px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest shadow-xl border border-gray-100">
-                        <i class="fa-solid fa-user-group text-red-500 mr-1.5"></i> 500 Guests
+                        <i class="fa-solid fa-user-group text-orange-500 mr-1.5"></i> 500 Guests
                     </div>
                 </div>
                 <div class="p-8">
                     <span
-                        class="bg-red-50 text-red-600 text-[10px] font-black px-2 py-1 rounded uppercase tracking-widest mb-3 inline-block">Luxury
+                        class="bg-orange-50 text-orange-600 text-[10px] font-black px-2 py-1 rounded uppercase tracking-widest mb-3 inline-block">Luxury
                         Venue</span>
-                    <h3 class="text-2xl font-black mb-2 group-hover:text-red-600 transition-colors uppercase tracking-tighter"
+                    <h3 class="text-2xl font-black mb-2 group-hover:text-orange-600 transition-colors uppercase tracking-tighter"
                         style="color:var(--text-dark)">
                         Royal Grand Palace</h3>
                     <p class="text-gray-500 font-bold text-xs uppercase tracking-widest mb-6"><i
-                            class="fa-solid fa-location-dot text-red-500 mr-2"></i> Salem Main Road</p>
+                            class="fa-solid fa-location-dot text-orange-500 mr-2"></i> Salem Main Road</p>
                     <div class="flex gap-2 mb-6">
                         <span
                             class="bg-gray-50 text-gray-500 text-[9px] font-black px-2.5 py-1.5 rounded-lg uppercase tracking-widest">AC</span>
@@ -154,7 +174,7 @@
                             <div class="text-2xl font-black" style="color:var(--text-dark)">₹40,000</div>
                         </div>
                         <button onclick="bookHall('Royal Grand Palace')"
-                            class="bg-red-500 text-white px-8 py-3 rounded-xl font-black text-xs uppercase tracking-widest hover:bg-red-600 active:scale-95 transition-all shadow-lg shadow-red-500/20">Book</button>
+                            class="bg-orange-500 text-white px-8 py-3 rounded-xl font-black text-xs uppercase tracking-widest hover:bg-orange-600 active:scale-95 transition-all shadow-lg shadow-orange-500/20">Book</button>
                     </div>
                 </div>
             </div>
@@ -167,18 +187,18 @@
                         class="w-full h-full object-cover hall-img transition duration-700 group-hover:scale-110">
                     <div
                         class="absolute top-4 right-4 bg-white/95 text-gray-900 px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest shadow-xl border border-gray-100">
-                        <i class="fa-solid fa-user-group text-red-500 mr-1.5"></i> 50 Guests
+                        <i class="fa-solid fa-user-group text-orange-500 mr-1.5"></i> 50 Guests
                     </div>
                 </div>
                 <div class="p-8">
                     <span
-                        class="bg-red-50 text-red-600 text-[10px] font-black px-2 py-1 rounded uppercase tracking-widest mb-3 inline-block">Cozy
+                        class="bg-orange-50 text-orange-600 text-[10px] font-black px-2 py-1 rounded uppercase tracking-widest mb-3 inline-block">Cozy
                         Space</span>
-                    <h3 class="text-2xl font-black mb-2 group-hover:text-red-600 transition-colors uppercase tracking-tighter"
+                    <h3 class="text-2xl font-black mb-2 group-hover:text-orange-600 transition-colors uppercase tracking-tighter"
                         style="color:var(--text-dark)">
                         Mini Party Roof</h3>
                     <p class="text-gray-500 font-bold text-xs uppercase tracking-widest mb-6"><i
-                            class="fa-solid fa-location-dot text-red-500 mr-2"></i> Erode Bypass</p>
+                            class="fa-solid fa-location-dot text-orange-500 mr-2"></i> Erode Bypass</p>
                     <div class="flex justify-between items-center pt-6 border-t border-gray-50">
                         <div>
                             <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">Per Session
@@ -186,7 +206,7 @@
                             <div class="text-2xl font-black" style="color:var(--text-dark)">₹8,000</div>
                         </div>
                         <button onclick="bookHall('Mini Party Roof')"
-                            class="bg-red-500 text-white px-8 py-3 rounded-xl font-black text-xs uppercase tracking-widest hover:bg-red-600 active:scale-95 transition-all shadow-lg shadow-red-500/20">Book</button>
+                            class="bg-orange-500 text-white px-8 py-3 rounded-xl font-black text-xs uppercase tracking-widest hover:bg-orange-600 active:scale-95 transition-all shadow-lg shadow-orange-500/20">Book</button>
                     </div>
                 </div>
             </div>
@@ -199,18 +219,18 @@
                         class="w-full h-full object-cover hall-img transition duration-700 group-hover:scale-110">
                     <div
                         class="absolute top-4 right-4 bg-white/95 text-gray-900 px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest shadow-xl border border-gray-100">
-                        <i class="fa-solid fa-user-group text-red-500 mr-1.5"></i> 1000 Guests
+                        <i class="fa-solid fa-user-group text-orange-500 mr-1.5"></i> 1000 Guests
                     </div>
                 </div>
                 <div class="p-8">
                     <span
-                        class="bg-red-50 text-red-600 text-[10px] font-black px-2 py-1 rounded uppercase tracking-widest mb-3 inline-block">Grand
+                        class="bg-orange-50 text-orange-600 text-[10px] font-black px-2 py-1 rounded uppercase tracking-widest mb-3 inline-block">Grand
                         Venue</span>
                     <h3
-                        class="text-2xl font-black text-gray-900 mb-2 group-hover:text-red-600 transition-colors uppercase tracking-tighter">
+                        class="text-2xl font-black text-gray-900 mb-2 group-hover:text-orange-600 transition-colors uppercase tracking-tighter">
                         Grand Wedding Palace</h3>
                     <p class="text-gray-500 font-bold text-xs uppercase tracking-widest mb-6"><i
-                            class="fa-solid fa-location-dot text-red-500 mr-2"></i> ECR, Chennai</p>
+                            class="fa-solid fa-location-dot text-orange-500 mr-2"></i> ECR, Chennai</p>
                     <div class="flex justify-between items-center pt-6 border-t border-gray-50">
                         <div>
                             <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">Per Session
@@ -218,7 +238,7 @@
                             <div class="text-2xl font-black" style="color:var(--text-dark)">₹1,50,000</div>
                         </div>
                         <button onclick="bookHall('Grand Wedding Palace')"
-                            class="bg-red-500 text-white px-8 py-3 rounded-xl font-black text-xs uppercase tracking-widest hover:bg-red-600 active:scale-95 transition-all shadow-lg shadow-red-500/20">Book</button>
+                            class="bg-orange-500 text-white px-8 py-3 rounded-xl font-black text-xs uppercase tracking-widest hover:bg-orange-600 active:scale-95 transition-all shadow-lg shadow-orange-500/20">Book</button>
                     </div>
                 </div>
             </div>
@@ -231,18 +251,18 @@
                         class="w-full h-full object-cover hall-img transition duration-700 group-hover:scale-110">
                     <div
                         class="absolute top-4 right-4 bg-white/95 text-gray-900 px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest shadow-xl border border-gray-100">
-                        <i class="fa-solid fa-user-group text-red-500 mr-1.5"></i> 100 Guests
+                        <i class="fa-solid fa-user-group text-orange-500 mr-1.5"></i> 100 Guests
                     </div>
                 </div>
                 <div class="p-8">
                     <span
-                        class="bg-red-50 text-red-600 text-[10px] font-black px-2 py-1 rounded uppercase tracking-widest mb-3 inline-block">Great
+                        class="bg-orange-50 text-orange-600 text-[10px] font-black px-2 py-1 rounded uppercase tracking-widest mb-3 inline-block">Great
                         for Kids</span>
                     <h3
-                        class="text-2xl font-black text-gray-900 mb-2 group-hover:text-red-600 transition-colors uppercase tracking-tighter">
+                        class="text-2xl font-black text-gray-900 mb-2 group-hover:text-orange-600 transition-colors uppercase tracking-tighter">
                         Skyline Party Suite</h3>
                     <p class="text-gray-500 font-bold text-xs uppercase tracking-widest mb-6"><i
-                            class="fa-solid fa-location-dot text-red-500 mr-2"></i> Saravanampatti, Coimbatore</p>
+                            class="fa-solid fa-location-dot text-orange-500 mr-2"></i> Saravanampatti, Coimbatore</p>
                     <div class="flex justify-between items-center pt-6 border-t border-gray-50">
                         <div>
                             <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">Per Session
@@ -250,7 +270,7 @@
                             <div class="text-2xl font-black" style="color:var(--text-dark)">₹12,000</div>
                         </div>
                         <button onclick="bookHall('Skyline Party Suite')"
-                            class="bg-red-500 text-white px-8 py-3 rounded-xl font-black text-xs uppercase tracking-widest hover:bg-red-600 active:scale-95 transition-all shadow-lg shadow-red-500/20">Book</button>
+                            class="bg-orange-500 text-white px-8 py-3 rounded-xl font-black text-xs uppercase tracking-widest hover:bg-orange-600 active:scale-95 transition-all shadow-lg shadow-orange-500/20">Book</button>
                     </div>
                 </div>
             </div>
@@ -263,18 +283,18 @@
                         class="w-full h-full object-cover hall-img transition duration-700 group-hover:scale-110">
                     <div
                         class="absolute top-4 right-4 bg-white/95 text-gray-900 px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest shadow-xl border border-gray-100">
-                        <i class="fa-solid fa-user-group text-red-500 mr-1.5"></i> 300 Guests
+                        <i class="fa-solid fa-user-group text-orange-500 mr-1.5"></i> 300 Guests
                     </div>
                 </div>
                 <div class="p-8">
                     <span
-                        class="bg-red-50 text-red-600 text-[10px] font-black px-2 py-1 rounded uppercase tracking-widest mb-3 inline-block">Business
+                        class="bg-orange-50 text-orange-600 text-[10px] font-black px-2 py-1 rounded uppercase tracking-widest mb-3 inline-block">Business
                         Elite</span>
                     <h3
-                        class="text-2xl font-black text-gray-900 mb-2 group-hover:text-red-600 transition-colors uppercase tracking-tighter">
+                        class="text-2xl font-black text-gray-900 mb-2 group-hover:text-orange-600 transition-colors uppercase tracking-tighter">
                         Elite Corporate Hub</h3>
                     <p class="text-gray-500 font-bold text-xs uppercase tracking-widest mb-6"><i
-                            class="fa-solid fa-location-dot text-red-500 mr-2"></i> OMR, Chennai</p>
+                            class="fa-solid fa-location-dot text-orange-500 mr-2"></i> OMR, Chennai</p>
                     <div class="flex justify-between items-center pt-6 border-t border-gray-50">
                         <div>
                             <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">Per Session
@@ -282,7 +302,7 @@
                             <div class="text-2xl font-black" style="color:var(--text-dark)">₹25,000</div>
                         </div>
                         <button onclick="bookHall('Elite Corporate Hub')"
-                            class="bg-red-500 text-white px-8 py-3 rounded-xl font-black text-xs uppercase tracking-widest hover:bg-red-600 active:scale-95 transition-all shadow-lg shadow-red-500/20">Book</button>
+                            class="bg-orange-500 text-white px-8 py-3 rounded-xl font-black text-xs uppercase tracking-widest hover:bg-orange-600 active:scale-95 transition-all shadow-lg shadow-orange-500/20">Book</button>
                     </div>
                 </div>
             </div>
@@ -295,18 +315,18 @@
                         class="w-full h-full object-cover hall-img transition duration-700 group-hover:scale-110">
                     <div
                         class="absolute top-4 right-4 bg-white/95 text-gray-900 px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest shadow-xl border border-gray-100">
-                        <i class="fa-solid fa-user-group text-red-500 mr-1.5"></i> 800 Guests
+                        <i class="fa-solid fa-user-group text-orange-500 mr-1.5"></i> 800 Guests
                     </div>
                 </div>
                 <div class="p-8">
                     <span
-                        class="bg-red-50 text-red-600 text-[10px] font-black px-2 py-1 rounded uppercase tracking-widest mb-3 inline-block">Outdoor
+                        class="bg-orange-50 text-orange-600 text-[10px] font-black px-2 py-1 rounded uppercase tracking-widest mb-3 inline-block">Outdoor
                         Luxury</span>
                     <h3
-                        class="text-2xl font-black text-gray-900 mb-2 group-hover:text-red-600 transition-colors uppercase tracking-tighter">
+                        class="text-2xl font-black text-gray-900 mb-2 group-hover:text-orange-600 transition-colors uppercase tracking-tighter">
                         Green Garden Lawn</h3>
                     <p class="text-gray-500 font-bold text-xs uppercase tracking-widest mb-6"><i
-                            class="fa-solid fa-location-dot text-red-500 mr-2"></i> Bypass Road, Madurai</p>
+                            class="fa-solid fa-location-dot text-orange-500 mr-2"></i> Bypass Road, Madurai</p>
                     <div class="flex justify-between items-center pt-6 border-t border-gray-50">
                         <div>
                             <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">Per Session
@@ -314,7 +334,7 @@
                             <div class="text-2xl font-black" style="color:var(--text-dark)">₹60,000</div>
                         </div>
                         <button onclick="bookHall('Green Garden Lawn')"
-                            class="bg-red-500 text-white px-8 py-3 rounded-xl font-black text-xs uppercase tracking-widest hover:bg-red-600 active:scale-95 transition-all shadow-lg shadow-red-500/20">Book</button>
+                            class="bg-orange-500 text-white px-8 py-3 rounded-xl font-black text-xs uppercase tracking-widest hover:bg-orange-600 active:scale-95 transition-all shadow-lg shadow-orange-500/20">Book</button>
                     </div>
                 </div>
             </div>
@@ -327,18 +347,18 @@
                         class="w-full h-full object-cover hall-img transition duration-700 group-hover:scale-110">
                     <div
                         class="absolute top-4 right-4 bg-white/95 text-gray-900 px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest shadow-xl border border-gray-100">
-                        <i class="fa-solid fa-user-group text-red-500 mr-1.5"></i> 300 Guests
+                        <i class="fa-solid fa-user-group text-orange-500 mr-1.5"></i> 300 Guests
                     </div>
                 </div>
                 <div class="p-8">
                     <span
-                        class="bg-red-50 text-red-600 text-[10px] font-black px-2 py-1 rounded uppercase tracking-widest mb-3 inline-block">Elite
+                        class="bg-orange-50 text-orange-600 text-[10px] font-black px-2 py-1 rounded uppercase tracking-widest mb-3 inline-block">Elite
                         Event</span>
                     <h3
-                        class="text-2xl font-black text-gray-900 mb-2 group-hover:text-red-600 transition-colors uppercase tracking-tighter">
+                        class="text-2xl font-black text-gray-900 mb-2 group-hover:text-orange-600 transition-colors uppercase tracking-tighter">
                         Sapphire Convention</h3>
                     <p class="text-gray-500 font-bold text-xs uppercase tracking-widest mb-6"><i
-                            class="fa-solid fa-location-dot text-red-500 mr-2"></i> Cantonment, Trichy</p>
+                            class="fa-solid fa-location-dot text-orange-500 mr-2"></i> Cantonment, Trichy</p>
                     <div class="flex justify-between items-center pt-6 border-t border-gray-50">
                         <div>
                             <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">Per Session
@@ -346,7 +366,7 @@
                             <div class="text-2xl font-black" style="color:var(--text-dark)">₹45,000</div>
                         </div>
                         <button onclick="bookHall('Sapphire Convention')"
-                            class="bg-red-500 text-white px-8 py-3 rounded-xl font-black text-xs uppercase tracking-widest hover:bg-red-600 active:scale-95 transition-all shadow-lg shadow-red-500/20">Book</button>
+                            class="bg-orange-500 text-white px-8 py-3 rounded-xl font-black text-xs uppercase tracking-widest hover:bg-orange-600 active:scale-95 transition-all shadow-lg shadow-orange-500/20">Book</button>
                     </div>
                 </div>
             </div>
@@ -359,18 +379,18 @@
                         class="w-full h-full object-cover hall-img transition duration-700 group-hover:scale-110">
                     <div
                         class="absolute top-4 right-4 bg-white/95 text-gray-900 px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest shadow-xl border border-gray-100">
-                        <i class="fa-solid fa-user-group text-red-500 mr-1.5"></i> 80 Guests
+                        <i class="fa-solid fa-user-group text-orange-500 mr-1.5"></i> 80 Guests
                     </div>
                 </div>
                 <div class="p-8">
                     <span
-                        class="bg-red-50 text-red-600 text-[10px] font-black px-2 py-1 rounded uppercase tracking-widest mb-3 inline-block">Sky
+                        class="bg-orange-50 text-orange-600 text-[10px] font-black px-2 py-1 rounded uppercase tracking-widest mb-3 inline-block">Sky
                         View</span>
                     <h3
-                        class="text-2xl font-black text-gray-900 mb-2 group-hover:text-red-600 transition-colors uppercase tracking-tighter">
+                        class="text-2xl font-black text-gray-900 mb-2 group-hover:text-orange-600 transition-colors uppercase tracking-tighter">
                         Moonlit Roof Deck</h3>
                     <p class="text-gray-500 font-bold text-xs uppercase tracking-widest mb-6"><i
-                            class="fa-solid fa-location-dot text-red-500 mr-2"></i> Besant Nagar, Chennai</p>
+                            class="fa-solid fa-location-dot text-orange-500 mr-2"></i> Besant Nagar, Chennai</p>
                     <div class="flex justify-between items-center pt-6 border-t border-gray-50">
                         <div>
                             <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">Per Session
@@ -378,14 +398,14 @@
                             <div class="text-2xl font-black" style="color:var(--text-dark)">₹12,000</div>
                         </div>
                         <button onclick="bookHall('Moonlit Roof Deck')"
-                            class="bg-red-500 text-white px-8 py-3 rounded-xl font-black text-xs uppercase tracking-widest hover:bg-red-600 active:scale-95 transition-all shadow-lg shadow-red-500/20">Book</button>
+                            class="bg-orange-500 text-white px-8 py-3 rounded-xl font-black text-xs uppercase tracking-widest hover:bg-orange-600 active:scale-95 transition-all shadow-lg shadow-orange-500/20">Book</button>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Booking Modal (Red & White Theme) -->
+    <!-- Booking Modal (Orange & White Theme) -->
     <div id="bookingModal"
         class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[2000] hidden items-center justify-center p-4">
         <div class="w-full max-w-lg rounded-[2.5rem] overflow-hidden shadow-2xl animate-fade-in-up"
@@ -396,7 +416,7 @@
                     Hall</h2>
                 <p class="text-gray-500 font-bold uppercase tracking-widest text-xs">Secure your event date and time</p>
                 <button onclick="closeModal()"
-                    class="absolute top-8 right-8 text-gray-400 hover:text-red-500 transition-colors">
+                    class="absolute top-8 right-8 text-gray-400 hover:text-orange-500 transition-colors">
                     <i class="fa-solid fa-xmark text-2xl"></i>
                 </button>
             </div>
@@ -406,7 +426,7 @@
                     <label class="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Event
                         Date</label>
                     <input type="date" id="bookingDate" onchange="checkAvailability()" required
-                        class="w-full bg-gray-50 border border-gray-100 p-4 rounded-2xl outline-none focus:border-red-500 font-bold text-gray-800 transition-all">
+                        class="w-full bg-gray-50 border border-gray-100 p-4 rounded-2xl outline-none focus:border-orange-500 font-bold text-gray-800 transition-all">
                     <p id="dateMessage" class="text-[10px] font-bold uppercase tracking-tight mt-1"></p>
                 </div>
 
@@ -415,13 +435,13 @@
                         <label class="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Your
                             Name</label>
                         <input type="text" placeholder="Full Name" required
-                            class="w-full bg-gray-50 border border-gray-100 p-4 rounded-2xl outline-none focus:border-red-500 font-bold text-gray-800 transition-all">
+                            class="w-full bg-gray-50 border border-gray-100 p-4 rounded-2xl outline-none focus:border-orange-500 font-bold text-gray-800 transition-all">
                     </div>
                     <div class="space-y-2">
                         <label class="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Mobile
                             Number</label>
                         <input type="tel" placeholder="+91 XXXX XXXX XX" required
-                            class="w-full bg-gray-50 border border-gray-100 p-4 rounded-2xl outline-none focus:border-red-500 font-bold text-gray-800 transition-all">
+                            class="w-full bg-gray-50 border border-gray-100 p-4 rounded-2xl outline-none focus:border-orange-500 font-bold text-gray-800 transition-all">
                     </div>
                 </div>
 
@@ -429,7 +449,7 @@
                     <label class="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Event
                         Type</label>
                     <select
-                        class="w-full bg-gray-50 border border-gray-100 p-4 rounded-2xl outline-none focus:border-red-500 font-bold text-gray-800 transition-all appearance-none cursor-pointer">
+                        class="w-full bg-gray-50 border border-gray-100 p-4 rounded-2xl outline-none focus:border-orange-500 font-bold text-gray-800 transition-all appearance-none cursor-pointer">
                         <option>Wedding Ceremony</option>
                         <option>Birthday Celebration</option>
                         <option>Corporate Seminar</option>
@@ -439,7 +459,7 @@
 
                 <div class="pt-4">
                     <button type="button" onclick="confirmBooking()"
-                        class="w-full bg-red-500 text-white p-5 rounded-[1.5rem] font-black text-sm uppercase tracking-widest hover:bg-red-600 shadow-xl shadow-red-500/20 active:scale-[0.98] transition-all">
+                        class="w-full bg-orange-500 text-white p-5 rounded-[1.5rem] font-black text-sm uppercase tracking-widest hover:bg-orange-600 shadow-xl shadow-orange-500/20 active:scale-[0.98] transition-all">
                         Request Booking
                     </button>
                     <p class="text-center text-gray-400 text-[9px] font-black uppercase tracking-[0.2em] mt-6">Secure
@@ -505,9 +525,9 @@
                     btn.innerText.toLowerCase().includes(category);
 
                 if (isMatch) {
-                    btn.className = "filter-btn bg-red-500 text-white px-8 py-2.5 rounded-lg whitespace-nowrap shadow-lg font-bold transition-all";
+                    btn.className = "filter-btn filter-btn-active px-8 py-2.5 rounded-lg whitespace-nowrap font-bold transition-all";
                 } else {
-                    btn.className = "filter-btn bg-white border border-gray-200 text-gray-600 px-8 py-2.5 rounded-lg whitespace-nowrap hover:border-red-400 hover:text-red-500 shadow-sm font-bold transition-all";
+                    btn.className = "filter-btn filter-btn-inactive px-8 py-2.5 rounded-lg whitespace-nowrap font-bold transition-all";
                 }
             });
 

@@ -21,8 +21,8 @@ function initVoiceSearch(inputId) {
 
     btn.addEventListener('click', () => {
         recognition.start();
-        btn.classList.add('animate-pulse', 'text-red-500');
-        btn.innerHTML = '<i class="fa-solid fa-microphone-lines text-red-500"></i>';
+        btn.classList.add('animate-pulse', 'text-orange-500');
+        btn.innerHTML = '<i class="fa-solid fa-microphone-lines text-orange-500"></i>';
         showToast('🎤 Listening... Speak now!', 'info');
     });
 
@@ -34,12 +34,12 @@ function initVoiceSearch(inputId) {
             input.dispatchEvent(new Event('keyup'));
         }
         showToast(`🎤 Searching: "${transcript}"`, 'success');
-        btn.classList.remove('animate-pulse', 'text-red-500');
+        btn.classList.remove('animate-pulse', 'text-orange-500');
         btn.innerHTML = '<i class="fa-solid fa-microphone text-gray-400"></i>';
     };
 
     recognition.onerror = () => {
-        btn.classList.remove('animate-pulse', 'text-red-500');
+        btn.classList.remove('animate-pulse', 'text-orange-500');
         btn.innerHTML = '<i class="fa-solid fa-microphone text-gray-400"></i>';
         showToast('❌ Could not hear you. Try again!', 'error');
     };
@@ -96,7 +96,7 @@ function generatePDFReceipt(orderData) {
     const { jsPDF } = window.jspdf || window;
     const doc = new jsPDF({ unit: 'mm', format: 'a5' });
 
-    const primary = [226, 55, 68];
+    const primary = [255, 107, 0];
     const dark = [30, 30, 30];
     const gray = [120, 120, 120];
 
@@ -218,14 +218,14 @@ function generatePDFReceipt(orderData) {
    4. 🎰 SPIN WHEEL
    ────────────────────────────────────────────────────────── */
 const SPIN_REWARDS = [
-    { label: '10% OFF', color: '#e23744', value: 'SPIN10' },
+    { label: '10% OFF', color: '#ff6b00', value: 'SPIN10' },
     { label: 'Try Again', color: '#6b7280', value: null },
     { label: 'Free\nDelivery', color: '#10b981', value: 'FREEDEL' },
     { label: '5% OFF', color: '#f59e0b', value: 'SPIN5' },
     { label: 'Try Again', color: '#6b7280', value: null },
     { label: '₹50 OFF', color: '#8b5cf6', value: 'FLAT50' },
     { label: 'Try Again', color: '#6b7280', value: null },
-    { label: '15% OFF', color: '#ef4444', value: 'SPIN15' },
+    { label: '15% OFF', color: '#ff8533', value: 'SPIN15' },
 ];
 
 let spinAngle = 0;
@@ -288,12 +288,12 @@ function drawWheel(angle) {
     ctx.arc(cx, cy, 22, 0, 2 * Math.PI);
     ctx.fillStyle = '#fff';
     ctx.fill();
-    ctx.strokeStyle = '#e23744';
+    ctx.strokeStyle = '#ff6b00';
     ctx.lineWidth = 3;
     ctx.stroke();
 
     ctx.font = 'bold 9px Outfit';
-    ctx.fillStyle = '#e23744';
+    ctx.fillStyle = '#ff6b00';
     ctx.textAlign = 'center';
     ctx.fillText('SPIN!', cx, cy + 3);
 }
@@ -345,7 +345,7 @@ function spinWheel() {
             <p class="text-xs text-gray-400 mt-2">Applied automatically on your next order!</p>
           </div>`;
                 if (typeof confetti !== 'undefined') {
-                    confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 }, colors: ['#e23744', '#10b981', '#f59e0b'] });
+                    confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 }, colors: ['#ff6b00', '#10b981', '#f59e0b'] });
                 }
             } else {
                 document.getElementById('spinResult').innerHTML =

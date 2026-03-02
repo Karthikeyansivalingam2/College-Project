@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Partner with Foodie Zone</title>
+    <title>Partner with Foodiee</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -16,16 +16,33 @@
         }
 
         .hero-pattern {
-            background-color: #e23744;
-            background-image: url("https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=1920&auto=format&fit=crop");
-            background-blend-mode: multiply;
-            background-size: cover;
-            background-position: center;
+            background: linear-gradient(135deg, #1a0a00 0%, #2d1200 40%, #1a1a1a 100%);
+            background-image: none;
+            position: relative;
+        }
+
+        .hero-pattern::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at 20% 50%, rgba(255, 107, 0, 0.25) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 20%, rgba(255, 107, 0, 0.12) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .hero-pattern>* {
+            position: relative;
+            z-index: 1;
         }
 
         body.light-mode .hero-pattern {
-            background-color: #ffffff !important;
-            background-image: none;
+            background: #ffffff !important;
+            background-image: none !important;
+        }
+
+        body.light-mode .hero-pattern::before {
+            display: none;
         }
     </style>
 </head>
@@ -45,8 +62,9 @@
                     class="bg-white/10 border border-white/20 text-white px-5 py-2 rounded-xl text-sm font-black backdrop-blur-md uppercase tracking-[0.2em]">🚀
                     Empowering 500+ Outlets</span>
                 <h1 class="text-6xl lg:text-8xl font-black leading-[0.9] tracking-tighter">Grow your business with <span
-                        class="text-white/40">Foodie Zone</span></h1>
-                <p class="text-2xl text-red-50 leading-relaxed font-medium max-w-2xl">Partner with Tamil Nadu's fastest
+                        class="text-white/40">Foodiee</span></h1>
+                <p class="text-2xl text-orange-50 leading-relaxed font-medium max-w-2xl">Partner with Tamil Nadu's
+                    fastest
                     growing food network. Reach thousands of new customers daily.</p>
 
                 <div class="flex flex-wrap gap-6 pt-6">
@@ -55,7 +73,7 @@
                         <i class="fa-solid fa-store text-white text-3xl"></i>
                         <div>
                             <p class="text-3xl font-black">0%</p>
-                            <p class="text-xs font-bold text-red-100 uppercase tracking-widest">First Month Comm</p>
+                            <p class="text-xs font-bold text-orange-100 uppercase tracking-widest">First Month Comm</p>
                         </div>
                     </div>
                     <div
@@ -63,7 +81,8 @@
                         <i class="fa-solid fa-users text-white text-3xl"></i>
                         <div>
                             <p class="text-3xl font-black">10k+</p>
-                            <p class="text-xs font-bold text-red-100 uppercase tracking-widest">Daily Active Users</p>
+                            <p class="text-xs font-bold text-orange-100 uppercase tracking-widest">Daily Active Users
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -74,9 +93,9 @@
                 <!-- Tab Headers -->
                 <div class="flex border-b border-[var(--border-light)]">
                     <button onclick="switchPartnerTab('register')" id="tabRegister"
-                        class="flex-1 py-6 font-black uppercase tracking-widest text-xs transition-all border-b-2 border-red-500 text-red-500">Register</button>
+                        class="flex-1 py-6 font-black uppercase tracking-widest text-xs transition-all border-b-2 border-orange-500 text-orange-500">Register</button>
                     <button onclick="switchPartnerTab('login')" id="tabLogin"
-                        class="flex-1 py-6 font-black uppercase tracking-widest text-xs transition-all border-b-2 border-transparent text-gray-400 hover:text-red-500">Login</button>
+                        class="flex-1 py-6 font-black uppercase tracking-widest text-xs transition-all border-b-2 border-transparent text-gray-400 hover:text-orange-500">Login</button>
                 </div>
 
                 <div class="p-10 lg:p-12">
@@ -93,7 +112,7 @@
                                 <div class="relative">
                                     <i class="fa-solid fa-shop absolute left-4 top-4 text-gray-300"></i>
                                     <input type="text" id="businessName" required
-                                        class="w-full pl-12 pr-4 py-4 border border-[var(--border-light)] rounded-2xl focus:outline-none focus:ring-4 focus:ring-red-500/10 focus:border-red-500 transition-all bg-[var(--bg-secondary)] font-bold text-[var(--text-main)] text-base placeholder-gray-500"
+                                        class="w-full pl-12 pr-4 py-4 border border-[var(--border-light)] rounded-2xl focus:outline-none focus:ring-4 focus:ring-orange-500/10 focus:border-orange-500 transition-all bg-[var(--bg-secondary)] font-bold text-[var(--text-main)] text-base placeholder-gray-500"
                                         placeholder="e.g. Tasty Kitchen">
                                 </div>
                             </div>
@@ -104,7 +123,7 @@
                                 <div class="relative">
                                     <i class="fa-solid fa-phone absolute left-4 top-4 text-gray-300"></i>
                                     <input type="tel" id="mobile" required
-                                        class="w-full pl-12 pr-4 py-4 border border-[var(--border-light)] rounded-2xl focus:outline-none focus:ring-4 focus:ring-red-500/10 focus:border-red-500 transition-all bg-[var(--bg-secondary)] font-bold text-[var(--text-main)] text-base placeholder-gray-500"
+                                        class="w-full pl-12 pr-4 py-4 border border-[var(--border-light)] rounded-2xl focus:outline-none focus:ring-4 focus:ring-orange-500/10 focus:border-orange-500 transition-all bg-[var(--bg-secondary)] font-bold text-[var(--text-main)] text-base placeholder-gray-500"
                                         placeholder="98765 43210">
                                 </div>
                             </div>
@@ -114,7 +133,7 @@
                                 <div class="relative">
                                     <i class="fa-solid fa-lock absolute left-4 top-4 text-gray-300"></i>
                                     <input type="password" id="regPassword" required
-                                        class="w-full pl-12 pr-4 py-4 border border-[var(--border-light)] rounded-2xl focus:outline-none focus:ring-4 focus:ring-red-500/10 focus:border-red-500 transition-all bg-[var(--bg-secondary)] font-bold text-[var(--text-main)] text-base placeholder-gray-500"
+                                        class="w-full pl-12 pr-4 py-4 border border-[var(--border-light)] rounded-2xl focus:outline-none focus:ring-4 focus:ring-orange-500/10 focus:border-orange-500 transition-all bg-[var(--bg-secondary)] font-bold text-[var(--text-main)] text-base placeholder-gray-500"
                                         placeholder="Create strong password">
                                 </div>
                             </div>
@@ -125,7 +144,7 @@
                                 <div class="relative">
                                     <i class="fa-solid fa-location-dot absolute left-4 top-4 text-gray-300"></i>
                                     <select id="city"
-                                        class="w-full pl-12 pr-4 py-4 border border-[var(--border-light)] rounded-2xl focus:outline-none focus:ring-4 focus:ring-red-500/10 focus:border-red-500 transition-all bg-[var(--bg-secondary)] font-bold text-[var(--text-main)] text-base appearance-none cursor-pointer">
+                                        class="w-full pl-12 pr-4 py-4 border border-[var(--border-light)] rounded-2xl focus:outline-none focus:ring-4 focus:ring-orange-500/10 focus:border-orange-500 transition-all bg-[var(--bg-secondary)] font-bold text-[var(--text-main)] text-base appearance-none cursor-pointer">
                                         <option>Chennai</option>
                                         <option>Madurai</option>
                                         <option>Coimbatore</option>
@@ -136,14 +155,14 @@
                                 </div>
                             </div>
                             <button type="button" onclick="registerPartner()"
-                                class="w-full bg-red-600 text-white font-black py-5 rounded-2xl hover:bg-red-700 transition-all shadow-2xl shadow-red-500/20 active:scale-[0.98] mt-4 text-lg uppercase tracking-widest">Register
+                                class="w-full bg-orange-600 text-white font-black py-5 rounded-2xl hover:bg-orange-700 transition-all shadow-2xl shadow-orange-500/20 active:scale-[0.98] mt-4 text-lg uppercase tracking-widest">Register
                                 Now</button>
                             <p class="text-[10px] text-center text-gray-400 mt-6 font-bold uppercase tracking-widest">
                                 Safe &
-                                Secure • <a href="#" class="text-red-500 hover:underline">Terms of Service</a></p>
+                                Secure • <a href="#" class="text-orange-500 hover:underline">Terms of Service</a></p>
                             <p class="text-center text-[10px] font-black text-gray-400 uppercase tracking-widest mt-4">
                                 Already a partner? <a href="javascript:void(0)" onclick="switchPartnerTab('login')"
-                                    class="text-red-500 hover:text-red-600 transition-colors">Merchant Login</a>
+                                    class="text-orange-500 hover:text-orange-600 transition-colors">Merchant Login</a>
                             </p>
                         </form>
                     </div>
@@ -162,7 +181,7 @@
                                 <div class="relative">
                                     <i class="fa-solid fa-id-card absolute left-4 top-4 text-gray-300"></i>
                                     <input type="text" id="partnerId" required
-                                        class="w-full pl-12 pr-4 py-4 border border-[var(--border-light)] rounded-2xl focus:outline-none focus:ring-4 focus:ring-red-500/10 focus:border-red-500 transition-all bg-[var(--bg-secondary)] font-bold text-[var(--text-main)] text-base placeholder-gray-500"
+                                        class="w-full pl-12 pr-4 py-4 border border-[var(--border-light)] rounded-2xl focus:outline-none focus:ring-4 focus:ring-orange-500/10 focus:border-orange-500 transition-all bg-[var(--bg-secondary)] font-bold text-[var(--text-main)] text-base placeholder-gray-500"
                                         placeholder="PTR-####">
                                 </div>
                             </div>
@@ -172,16 +191,16 @@
                                 <div class="relative">
                                     <i class="fa-solid fa-lock absolute left-4 top-4 text-gray-300"></i>
                                     <input type="password" id="loginPassword" required
-                                        class="w-full pl-12 pr-12 py-4 border border-[var(--border-light)] rounded-2xl focus:outline-none focus:ring-4 focus:ring-red-500/10 focus:border-red-500 transition-all bg-[var(--bg-secondary)] font-bold text-[var(--text-main)] text-base placeholder-gray-500"
+                                        class="w-full pl-12 pr-12 py-4 border border-[var(--border-light)] rounded-2xl focus:outline-none focus:ring-4 focus:ring-orange-500/10 focus:border-orange-500 transition-all bg-[var(--bg-secondary)] font-bold text-[var(--text-main)] text-base placeholder-gray-500"
                                         placeholder="••••••••">
                                 </div>
                             </div>
                             <button type="submit"
-                                class="w-full bg-red-600 text-white font-black py-5 rounded-2xl hover:bg-red-700 transition-all shadow-2xl shadow-red-500/20 active:scale-[0.98] mt-4 text-lg uppercase tracking-widest">Enter
+                                class="w-full bg-orange-600 text-white font-black py-5 rounded-2xl hover:bg-orange-700 transition-all shadow-2xl shadow-orange-500/20 active:scale-[0.98] mt-4 text-lg uppercase tracking-widest">Enter
                                 Dashboard</button>
                             <p class="text-center text-[10px] font-black text-gray-400 uppercase tracking-widest mt-6">
                                 New here? <a href="javascript:void(0)" onclick="switchPartnerTab('register')"
-                                    class="text-red-500 hover:text-red-600">Start application</a>
+                                    class="text-orange-500 hover:text-orange-600">Start application</a>
                             </p>
                         </form>
                     </div>
@@ -195,13 +214,13 @@
         <div class="container mx-auto px-4 text-center max-w-6xl">
             <h2 class="text-4xl md:text-5xl font-black mb-16 tracking-tighter" style="color:var(--text-dark)">Get
                 Live
-                in <span class="text-red-500">3
+                in <span class="text-orange-500">3
                     Easy Steps</span></h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-16">
                 <div class="space-y-6 group">
                     <div
-                        class="w-24 h-24 mx-auto bg-red-50 rounded-[2rem] flex items-center justify-center shadow-xl border border-red-100 group-hover:scale-110 transition-transform duration-500">
-                        <i class="fa-solid fa-file-signature text-red-500 text-4xl"></i>
+                        class="w-24 h-24 mx-auto bg-orange-50 rounded-[2rem] flex items-center justify-center shadow-xl border border-orange-100 group-hover:scale-110 transition-transform duration-500">
+                        <i class="fa-solid fa-file-signature text-orange-500 text-4xl"></i>
                     </div>
                     <h3 class="text-2xl font-black" style="color:var(--text-dark)">1. Register</h3>
                     <p class="text-gray-500 font-medium px-4">Fill in your business details and set your dashboard
@@ -209,8 +228,8 @@
                 </div>
                 <div class="space-y-6 group">
                     <div
-                        class="w-24 h-24 mx-auto bg-red-50 rounded-[2rem] flex items-center justify-center shadow-xl border border-red-100 group-hover:scale-110 transition-transform duration-500">
-                        <i class="fa-solid fa-utensils text-red-500 text-4xl"></i>
+                        class="w-24 h-24 mx-auto bg-orange-50 rounded-[2rem] flex items-center justify-center shadow-xl border border-orange-100 group-hover:scale-110 transition-transform duration-500">
+                        <i class="fa-solid fa-utensils text-orange-500 text-4xl"></i>
                     </div>
                     <h3 class="text-2xl font-black" style="color:var(--text-dark)">2. Setup</h3>
                     <p class="text-gray-500 font-medium px-4">Upload your brand photos and menu items to your
@@ -219,8 +238,8 @@
                 </div>
                 <div class="space-y-6 group">
                     <div
-                        class="w-24 h-24 mx-auto bg-red-50 rounded-[2rem] flex items-center justify-center shadow-xl border border-red-100 group-hover:scale-110 transition-transform duration-500">
-                        <i class="fa-solid fa-rocket text-red-500 text-4xl"></i>
+                        class="w-24 h-24 mx-auto bg-orange-50 rounded-[2rem] flex items-center justify-center shadow-xl border border-orange-100 group-hover:scale-110 transition-transform duration-500">
+                        <i class="fa-solid fa-rocket text-orange-500 text-4xl"></i>
                     </div>
                     <h3 class="text-2xl font-black" style="color:var(--text-dark)">3. Go Live</h3>
                     <p class="text-gray-500 font-medium px-4">Start receiving orders instantly and watch your brand
@@ -274,16 +293,16 @@
             if (tab === 'login') {
                 regSection.classList.add('hidden');
                 logSection.classList.remove('hidden');
-                tabLog.classList.add('border-red-500', 'text-red-500');
+                tabLog.classList.add('border-orange-500', 'text-orange-500');
                 tabLog.classList.remove('border-transparent', 'text-gray-400');
-                tabReg.classList.remove('border-red-500', 'text-red-500');
+                tabReg.classList.remove('border-orange-500', 'text-orange-500');
                 tabReg.classList.add('border-transparent', 'text-gray-400');
             } else {
                 regSection.classList.remove('hidden');
                 logSection.classList.add('hidden');
-                tabReg.classList.add('border-red-500', 'text-red-500');
+                tabReg.classList.add('border-orange-500', 'text-orange-500');
                 tabReg.classList.remove('border-transparent', 'text-gray-400');
-                tabLog.classList.remove('border-red-500', 'text-red-500');
+                tabLog.classList.remove('border-orange-500', 'text-orange-500');
                 tabLog.classList.add('border-transparent', 'text-gray-400');
             }
         }

@@ -96,11 +96,11 @@ function updateAuthUI() {
       const icon = document.getElementById('navUserIcon');
       if (icon) icon.classList.add('hidden');
 
-      // Red-theme color mapping for profile initial
-      const colors = ['bg-red-500', 'bg-orange-500', 'bg-blue-500', 'bg-rose-500', 'bg-amber-500', 'bg-indigo-500'];
+      // Theme color mapping for profile initial (avoiding red)
+      const colors = ['bg-orange-500', 'bg-blue-500', 'bg-rose-500', 'bg-amber-500', 'bg-indigo-500', 'bg-emerald-500'];
       const colorIndex = initial.charCodeAt(0) % colors.length;
       if (profileBtn) {
-        profileBtn.classList.remove('bg-white/10', 'bg-red-500', 'bg-orange-500', 'bg-blue-500', 'bg-rose-500', 'bg-amber-500', 'bg-indigo-500');
+        profileBtn.classList.remove('bg-white/10', 'bg-red-500', 'bg-orange-500', 'bg-blue-500', 'bg-rose-500', 'bg-amber-500', 'bg-indigo-500', 'bg-emerald-500');
         profileBtn.classList.add(colors[colorIndex]);
       }
     }

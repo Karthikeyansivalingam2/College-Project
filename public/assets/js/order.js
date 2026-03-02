@@ -22,20 +22,20 @@ function switchMode(mode) {
     retail.classList.remove("hidden")
     corporate.classList.add("hidden")
 
-    rBtn.classList.add("bg-orange-600", "text-white", "shadow-xl")
-    rBtn.classList.remove("bg-transparent", "text-gray-500")
+    rBtn.classList.add("active-filter")
+    rBtn.classList.remove("inactive-filter")
 
-    cBtn.classList.add("bg-transparent", "text-gray-500")
-    cBtn.classList.remove("bg-orange-600", "text-white", "shadow-xl")
+    cBtn.classList.add("inactive-filter")
+    cBtn.classList.remove("active-filter")
   } else {
     corporate.classList.remove("hidden")
     retail.classList.add("hidden")
 
-    cBtn.classList.add("bg-orange-600", "text-white", "shadow-xl")
-    cBtn.classList.remove("bg-transparent", "text-gray-500")
+    cBtn.classList.add("active-filter")
+    cBtn.classList.remove("inactive-filter")
 
-    rBtn.classList.add("bg-transparent", "text-gray-500")
-    rBtn.classList.remove("bg-orange-600", "text-white", "shadow-xl")
+    rBtn.classList.add("inactive-filter")
+    rBtn.classList.remove("active-filter")
 
     renderPackages()
   }
@@ -115,20 +115,21 @@ let selectedCategory = null;
 
 let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
 
-function selectCategory(category) {
+function selectCategory(category, clickedBtn) {
   selectedCategory = category;
 
+  // Reset all filter buttons to inactive
   document.querySelectorAll(".typeBtn").forEach(btn => {
-    btn.classList.remove("bg-orange-600", "text-white");
-    btn.classList.add("bg-white/5");
+    btn.classList.remove("active-filter");
+    btn.classList.add("inactive-filter");
   });
 
-  // Safe way to handle event target
-  if (window.event && window.event.target) {
-    const btn = window.event.target;
-    btn.classList.remove("bg-white/5");
-    btn.classList.add("bg-orange-600", "text-white");
+  // Set clicked button as active
+  if (clickedBtn) {
+    clickedBtn.classList.remove("inactive-filter");
+    clickedBtn.classList.add("active-filter");
   }
+
   renderMenu();
 }
 let foodMenu = [];
@@ -403,9 +404,11 @@ function filterPackages(type) {
   const buttons = document.querySelectorAll('.pkg-tab-btn');
   buttons.forEach(btn => {
     if (btn.innerText.includes(type)) {
-      btn.className = "pkg-tab-btn active px-8 py-2.5 bg-orange-600 text-white rounded-xl font-bold transition-all shadow-xl shadow-orange-600/20";
+      btn.classList.add('active-filter');
+      btn.classList.remove('inactive-filter');
     } else {
-      btn.className = "pkg-tab-btn px-8 py-2.5 bg-white/5 border border-white/10 text-gray-400 rounded-xl font-bold hover:border-orange-500 hover:text-orange-500 transition-all shadow-sm";
+      btn.classList.remove('active-filter');
+      btn.classList.add('inactive-filter');
     }
   });
   renderPackages(type);

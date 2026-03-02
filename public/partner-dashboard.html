@@ -4,20 +4,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Partner Dashboard - Foodie Zone</title>
+    <title>Partner Dashboard - Foodiee</title>
     <link href="assets/css/common.css?v=2" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         .sidebar-link.active {
-            background: rgba(239, 68, 68, 0.1);
-            color: #ef4444;
-            border-right: 4px solid #ef4444;
+            background: rgba(255, 107, 0, 0.1);
+            color: #ff6b00;
+            border-right: 4px solid #ff6b00;
         }
 
         body.light-mode .sidebar-link.active {
-            background: #fef2f2;
+            background: #fff7ed;
         }
 
         /* Custom scrollbar for tables */
@@ -45,12 +45,12 @@
         <div class="p-8 border-b border-gray-50 flex justify-between items-center">
             <h1 class="text-2xl font-black text-gray-900 flex items-center gap-3 uppercase tracking-tighter">
                 <div
-                    class="w-10 h-10 bg-red-500 rounded-xl flex items-center justify-center text-white shadow-lg shadow-red-500/20">
+                    class="w-10 h-10 bg-orange-500 rounded-xl flex items-center justify-center text-white shadow-lg shadow-orange-500/20">
                     <i class="fa-solid fa-utensils text-lg"></i>
                 </div>
                 Partner
             </h1>
-            <button onclick="togglePartnerSidebar()" class="lg:hidden text-gray-400 hover:text-red-500">
+            <button onclick="togglePartnerSidebar()" class="lg:hidden text-gray-400 hover:text-orange-500">
                 <i class="fa-solid fa-xmark text-xl"></i>
             </button>
         </div>
@@ -80,7 +80,7 @@
 
         <div class="p-6 border-t border-gray-50">
             <button onclick="logout()"
-                class="flex items-center gap-4 w-full p-4 rounded-2xl hover:bg-red-50 text-gray-400 hover:text-red-500 transition-all font-bold uppercase tracking-widest text-[10px]">
+                class="flex items-center gap-4 w-full p-4 rounded-2xl hover:bg-orange-50 text-gray-400 hover:text-orange-500 transition-all font-bold uppercase tracking-widest text-[10px]">
                 <i class="fa-solid fa-right-from-bracket"></i> Logout
             </button>
         </div>
@@ -105,18 +105,18 @@
                         id="businessName">Loading...
                     </h2>
                     <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest mt-0.5">Partner ID: <span
-                            id="partnerIdDisplay" class="text-red-500">...</span></p>
+                            id="partnerIdDisplay" class="text-orange-500">...</span></p>
                 </div>
             </div>
 
             <div class="flex items-center gap-6">
                 <div class="text-right hidden sm:block">
                     <p class="text-[9px] text-gray-400 uppercase tracking-widest font-black mb-1">Store Status</p>
-                    <p class="text-xs font-black text-red-500 uppercase flex items-center justify-end gap-2">
+                    <p class="text-xs font-black text-orange-500 uppercase flex items-center justify-end gap-2">
                         <span class="relative flex h-2 w-2">
                             <span
-                                class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-                            <span class="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
+                                class="animate-ping absolute inline-flex h-full w-full rounded-full bg-orange-400 opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-2 w-2 bg-orange-500"></span>
                         </span>
                         Online
                     </p>
@@ -147,14 +147,14 @@
                     <div
                         class="bg-white p-8 rounded-[2rem] border border-gray-100 shadow-sm relative overflow-hidden group hover:shadow-xl transition-all duration-300">
                         <div
-                            class="absolute -right-4 -top-4 w-20 h-20 bg-red-50 rounded-full group-hover:scale-150 transition-all duration-500">
+                            class="absolute -right-4 -top-4 w-20 h-20 bg-orange-50 rounded-full group-hover:scale-150 transition-all duration-500">
                         </div>
                         <p class="text-gray-400 text-[10px] mb-4 uppercase tracking-widest font-black relative z-10">
                             Today's Orders</p>
                         <div class="flex items-center gap-3 relative z-10">
                             <span class="text-5xl font-black text-gray-900 tracking-tighter" id="statOrders">0</span>
                             <span
-                                class="text-red-500 text-[10px] font-black bg-red-50 px-2 py-1 rounded-lg uppercase tracking-widest">+12%</span>
+                                class="text-orange-500 text-[10px] font-black bg-orange-50 px-2 py-1 rounded-lg uppercase tracking-widest">+12%</span>
                         </div>
                     </div>
                     <div
@@ -183,13 +183,13 @@
                     <div
                         class="bg-white p-8 rounded-[2rem] border border-gray-100 shadow-sm relative overflow-hidden group hover:shadow-xl transition-all duration-300">
                         <div
-                            class="absolute -right-4 -top-4 w-20 h-20 bg-red-50 rounded-full group-hover:scale-150 transition-all duration-500">
+                            class="absolute -right-4 -top-4 w-20 h-20 bg-orange-50 rounded-full group-hover:scale-150 transition-all duration-500">
                         </div>
                         <p class="text-gray-400 text-[10px] mb-4 uppercase tracking-widest font-black relative z-10">
                             Average Rating</p>
                         <div class="flex items-center gap-3 relative z-10">
                             <span class="text-5xl font-black text-gray-900 tracking-tighter" id="statRating">0.0</span>
-                            <i class="fa-solid fa-star text-red-500 text-2xl"></i>
+                            <i class="fa-solid fa-star text-orange-500 text-2xl"></i>
                         </div>
                     </div>
                 </div>
@@ -201,7 +201,7 @@
                         <div class="p-8 border-b border-gray-50 flex justify-between items-center">
                             <h3 class="font-black text-gray-900 tracking-tighter uppercase text-xl">Recent Activity</h3>
                             <button onclick="showSection('live-orders')"
-                                class="text-[10px] font-black text-red-500 hover:text-red-700 uppercase tracking-widest transition-colors">View
+                                class="text-[10px] font-black text-orange-500 hover:text-orange-700 uppercase tracking-widest transition-colors">View
                                 Queue</button>
                         </div>
                         <div class="overflow-x-auto">
@@ -236,7 +236,8 @@
                     <div class="bg-white p-8 rounded-[2.5rem] border border-gray-100 shadow-sm">
                         <h3
                             class="font-black text-gray-900 mb-8 flex items-center gap-3 text-xl tracking-tighter uppercase">
-                            <div class="w-10 h-10 rounded-xl bg-red-50 flex items-center justify-center text-red-500">
+                            <div
+                                class="w-10 h-10 rounded-xl bg-orange-50 flex items-center justify-center text-orange-500">
                                 <i class="fa-solid fa-store text-sm"></i>
                             </div>
                             Store Info
@@ -246,9 +247,10 @@
                             <div class="group">
                                 <p class="text-[10px] text-gray-400 uppercase tracking-widest font-black mb-3 px-1">
                                     Verification Status</p>
-                                <div class="bg-red-50 p-4 rounded-2xl border border-red-100 flex items-center gap-3">
-                                    <div class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></div>
-                                    <span class="text-xs font-black text-red-600 uppercase tracking-widest"
+                                <div
+                                    class="bg-orange-50 p-4 rounded-2xl border border-orange-100 flex items-center gap-3">
+                                    <div class="w-2 h-2 rounded-full bg-orange-500 animate-pulse"></div>
+                                    <span class="text-xs font-black text-orange-600 uppercase tracking-widest"
                                         id="partnerStatus">Active Partner</span>
                                 </div>
                             </div>
@@ -333,7 +335,7 @@
                             storefront items</p>
                     </div>
                     <button onclick="addNewItem()"
-                        class="bg-red-500 text-white px-8 py-4 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-red-600 transition-all shadow-xl shadow-red-500/20 flex items-center gap-3">
+                        class="bg-orange-500 text-white px-8 py-4 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-orange-600 transition-all shadow-xl shadow-orange-500/20 flex items-center gap-3">
                         <i class="fa-solid fa-plus text-[10px]"></i> New Product
                     </button>
                 </div>
@@ -347,21 +349,21 @@
                 <div
                     class="bg-white p-10 rounded-[3rem] border border-gray-100 shadow-sm relative overflow-hidden group">
                     <div
-                        class="absolute top-0 right-0 w-64 h-64 bg-red-50 rounded-bl-[10rem] opacity-40 -mr-20 -mt-20 group-hover:scale-110 transition-transform duration-700">
+                        class="absolute top-0 right-0 w-64 h-64 bg-orange-50 rounded-bl-[10rem] opacity-40 -mr-20 -mt-20 group-hover:scale-110 transition-transform duration-700">
                     </div>
 
                     <h3 class="font-black text-gray-900 text-3xl tracking-tighter uppercase mb-10 relative z-10">
                         Financial Health</h3>
                     <div
-                        class="h-80 bg-gray-50/50 rounded-[2.5rem] flex flex-col items-center justify-center text-gray-400 font-medium border border-gray-100 border-dashed relative z-10 transition-colors hover:bg-white hover:border-red-100">
+                        class="h-80 bg-gray-50/50 rounded-[2.5rem] flex flex-col items-center justify-center text-gray-400 font-medium border border-gray-100 border-dashed relative z-10 transition-colors hover:bg-white hover:border-orange-100">
                         <div class="text-center p-8 bg-white rounded-3xl shadow-sm border border-gray-50 scale-110">
-                            <i class="fa-solid fa-chart-line text-4xl mb-4 text-red-500 opacity-20"></i>
+                            <i class="fa-solid fa-chart-line text-4xl mb-4 text-orange-500 opacity-20"></i>
                             <p class="text-xs font-black uppercase tracking-widest text-gray-400">Interaction Chart
                                 Coming Soon</p>
                         </div>
                     </div>
                     <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8 relative z-10">
-                        <div class="p-8 bg-red-500 rounded-[2.2rem] shadow-xl shadow-red-500/20 text-white">
+                        <div class="p-8 bg-orange-500 rounded-[2.2rem] shadow-xl shadow-orange-500/20 text-white">
                             <p class="text-[10px] font-black uppercase tracking-widest mb-4 opacity-80">This Month's
                                 Gross</p>
                             <p class="text-4xl font-black tracking-tighter uppercase">₹42,940</p>
@@ -374,7 +376,7 @@
                         <div class="p-8 bg-white border border-gray-100 rounded-[2.2rem] shadow-sm">
                             <p class="text-[10px] text-gray-400 font-black uppercase tracking-widest mb-4">Flat
                                 Commision</p>
-                            <p class="text-4xl font-black text-red-500 tracking-tighter uppercase">₹12,840</p>
+                            <p class="text-4xl font-black text-orange-500 tracking-tighter uppercase">₹12,840</p>
                         </div>
                     </div>
                 </div>
@@ -446,7 +448,7 @@
             const tbody = document.getElementById('ordersTableBody');
             tbody.innerHTML = dashboardData.recentOrders.slice(0, 5).map(order => `
                 <tr class="hover:bg-gray-50/50 transition duration-300 cursor-pointer group">
-                    <td class="px-8 py-5 font-black text-red-500 text-xs tracking-tighter group-hover:pl-10 transition-all">#${order.id}</td>
+                    <td class="px-8 py-5 font-black text-orange-500 text-xs tracking-tighter group-hover:pl-10 transition-all">#${order.id}</td>
                     <td class="px-8 py-5 text-gray-900 uppercase tracking-tighter text-sm font-black">${order.customer}</td>
                     <td class="px-8 py-5 text-gray-900 text-base font-black">₹${order.total}</td>
                     <td class="px-8 py-5 text-center">
@@ -473,7 +475,7 @@
                 document.getElementById('businessName').innerText = dashboardData.businessName;
                 document.getElementById('partnerIdDisplay').innerText = dashboardData.partnerId;
                 document.getElementById('partnerAvatar').src =
-                    `https://ui-avatars.com/api/?name=${encodeURIComponent(dashboardData.businessName)}&background=ef4444&color=fff&rounded=true`;
+                    `https://ui-avatars.com/api/?name=${encodeURIComponent(dashboardData.businessName)}&background=ff6b00&color=fff&rounded=true`;
 
                 // Update Stats
                 document.getElementById('statOrders').innerText = dashboardData.stats.todayOrders;
@@ -505,7 +507,7 @@
 
             tbody.innerHTML = dashboardData.recentOrders.map(order => `
                 <tr class="hover:bg-gray-50/50 transition duration-300">
-                    <td class="px-8 py-6 font-black text-red-500 text-xs tracking-tighter">#${order.id}</td>
+                    <td class="px-8 py-6 font-black text-orange-500 text-xs tracking-tighter">#${order.id}</td>
                     <td class="px-8 py-6 text-gray-900 uppercase tracking-tighter text-sm font-black">${order.customer}</td>
                     <td class="px-8 py-6 text-gray-500 text-xs font-bold uppercase tracking-tight max-w-xs truncate">${order.itemsSummary || 'Multiple Items'}</td>
                     <td class="px-8 py-6 text-gray-900 text-base font-black">₹${order.total}</td>
@@ -518,13 +520,13 @@
                         <div class="flex justify-center gap-3">
                             ${order.status === 'Pending' ? `
                             <button onclick="updateOrderStatus('${order.id}', 'Preparing')"
-                                class="bg-red-500 text-white px-6 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-red-600 transition shadow-lg shadow-red-500/10 active:scale-95">Accept</button>
+                                class="bg-orange-500 text-white px-6 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-orange-600 transition shadow-lg shadow-orange-500/10 active:scale-95">Accept</button>
                             ` : (order.status === 'Preparing' ? `
                             <button onclick="updateOrderStatus('${order.id}', 'Out for Delivery')"
                                 class="bg-gray-900 text-white px-6 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-black transition shadow-lg active:scale-95">Ready</button>
                             ` : (order.status === 'Out for Delivery' ? `
                             <button onclick="updateOrderStatus('${order.id}', 'Completed')"
-                                class="bg-red-50 text-red-500 border border-red-100 px-6 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-red-100 transition active:scale-95">Deliver</button>
+                                class="bg-orange-50 text-orange-500 border border-orange-100 px-6 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-orange-100 transition active:scale-95">Deliver</button>
                             ` : `<span class="text-gray-300 text-[10px] font-black uppercase tracking-widest flex items-center gap-2 justify-center"><i class="fa-solid fa-circle-check"></i> Processed</span>`))}
                         </div>
                     </td>
@@ -535,7 +537,7 @@
         function getStatusColor(status) {
             if (status === 'Completed' || status === 'Delivered') return 'bg-gray-900 text-white shadow-black/20';
             if (status === 'Pending') return 'bg-amber-50 text-amber-600 border border-amber-100';
-            if (status === 'Preparing' || status === 'Accepted') return 'bg-red-600 text-white shadow-red-500/20';
+            if (status === 'Preparing' || status === 'Accepted') return 'bg-orange-600 text-white shadow-orange-500/20';
             if (status === 'Out for Delivery') return 'bg-blue-600 text-white shadow-blue-500/20';
             return 'bg-gray-100 text-gray-500';
         }
@@ -579,11 +581,11 @@
                     
                     <div class="flex-grow space-y-2 mb-8">
                         <div class="flex justify-between items-start">
-                            <h4 class="font-black text-gray-900 text-xl tracking-tighter uppercase leading-tight group-hover:text-red-500 transition-colors">${item.name}</h4>
+                            <h4 class="font-black text-gray-900 text-xl tracking-tighter uppercase leading-tight group-hover:text-orange-500 transition-colors">${item.name}</h4>
                             <span class="text-2xl font-black text-gray-900">₹${item.price}</span>
                         </div>
                         <div class="flex items-center gap-2">
-                             <div class="w-2 h-2 rounded-full ${item.active ? 'bg-red-500' : 'bg-gray-300'}"></div>
+                             <div class="w-2 h-2 rounded-full ${item.active ? 'bg-orange-500' : 'bg-gray-300'}"></div>
                              <span class="text-[10px] font-black uppercase tracking-widest text-gray-400">${item.active ? 'Live' : 'Hidden'}</span>
                         </div>
                     </div>
@@ -591,7 +593,7 @@
                     <div class="flex gap-3">
                         <button onclick="editItem(${item.id})" class="flex-1 bg-gray-50 text-gray-500 py-4 rounded-2xl text-[10px] font-black uppercase tracking-widest hover:bg-gray-100 transition active:scale-95">Price</button>
                         <button onclick="toggleItemStatus(${item.id}, ${item.active})" 
-                            class="flex-1 py-4 rounded-2xl text-[10px] font-black uppercase tracking-widest transition shadow-lg active:scale-95 ${item.active ? 'bg-red-500 text-white shadow-red-500/20 hover:bg-red-600' : 'bg-gray-900 text-white shadow-black/20 hover:bg-black'}">
+                            class="flex-1 py-4 rounded-2xl text-[10px] font-black uppercase tracking-widest transition shadow-lg active:scale-[0.98] ${item.active ? 'bg-orange-500 text-white shadow-orange-500/20 hover:bg-orange-600' : 'bg-gray-900 text-white shadow-black/20 hover:bg-black'}">
                             ${item.active ? 'Disable' : 'Enable'}
                         </button>
                     </div>

@@ -1,7 +1,7 @@
 const toastStyles = `
 #toast-container {
     position: fixed;
-    top: 20px;
+    top: 80px;
     right: 20px;
     z-index: 9999;
     display: flex;
@@ -9,11 +9,12 @@ const toastStyles = `
     gap: 10px;
 }
 .toast {
-    min-width: 250px;
-    padding: 16px;
-    border-radius: 8px;
-    background: white;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    min-width: 280px;
+    max-width: 380px;
+    padding: 14px 18px;
+    border-radius: 14px;
+    background: #1a1a1a;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.4);
     display: flex;
     align-items: center;
     gap: 12px;
@@ -21,15 +22,34 @@ const toastStyles = `
     opacity: 0;
     transform: translateX(100%);
     border-left: 4px solid #333;
+    backdrop-filter: blur(12px);
 }
-.toast.success { border-color: #22c55e; }
-.toast.error { border-color: #ef4444; }
-.toast.info { border-color: #3b82f6; }
+.toast .toast-msg {
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: #ffffff;
+    line-height: 1.4;
+}
+.toast.success { border-color: #22c55e; background: rgba(20, 40, 20, 0.95); }
+.toast.error   { border-color: #ef4444; background: rgba(40, 15, 15, 0.95); }
+.toast.info    { border-color: #ff6b00; background: rgba(30, 20, 10, 0.95); }
 
-.toast i { font-size: 1.2rem; }
+.toast i { font-size: 1.2rem; flex-shrink: 0; }
 .toast.success i { color: #22c55e; }
-.toast.error i { color: #ef4444; }
-.toast.info i { color: #3b82f6; }
+.toast.error   i { color: #ef4444; }
+.toast.info    i { color: #ff6b00; }
+
+/* Light mode overrides */
+body.light-mode .toast {
+    background: #ffffff;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+}
+body.light-mode .toast .toast-msg {
+    color: #111827;
+}
+body.light-mode .toast.success { background: #f0fdf4; }
+body.light-mode .toast.error   { background: #fef2f2; }
+body.light-mode .toast.info    { background: #fff7ed; }
 
 @keyframes slideIn {
     to { opacity: 1; transform: translateX(0); }
@@ -59,7 +79,7 @@ window.showToast = function (message, type = 'info') {
 
     toast.innerHTML = `
         <i class="fa-solid ${icon}"></i>
-        <span class="font-medium text-gray-800 text-sm">${message}</span>
+        <span class="toast-msg">${message}</span>
     `;
 
     toastContainer.appendChild(toast);
@@ -73,7 +93,7 @@ window.showToast = function (message, type = 'info') {
     }, 3000);
 };
 
-// Override alert for quick migration (optional, but requested to "replace alert")
+// Override alert for quick migration
 window.alert = function (msg) {
     showToast(msg, 'info');
 };

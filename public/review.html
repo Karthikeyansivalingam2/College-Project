@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Reviews - Foodie Zone</title>
+  <title>Reviews - Foodiee</title>
 
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
@@ -18,7 +18,7 @@
     }
 
     .hero-pattern {
-      background-color: #e23744;
+      background-color: #ff6b00;
       background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
     }
 
@@ -44,18 +44,18 @@
   <section class="hero-pattern py-24 px-4 text-center text-white relative overflow-hidden">
     <div class="relative z-10 max-w-3xl mx-auto">
       <h1 class="text-4xl md:text-6xl font-extrabold mb-4">Customer Stories</h1>
-      <p class="text-red-50 text-xl font-medium mb-10">See why people love Foodie Zone across Tamil Nadu.</p>
+      <p class="text-orange-50 text-xl font-medium mb-10">See why people love Foodiee across Tamil Nadu.</p>
 
       <div
         class="inline-flex items-center gap-10 bg-white/10 backdrop-blur-md rounded-2xl px-12 py-5 border border-white/20 shadow-2xl">
         <div class="text-center">
           <span class="block text-3xl font-black text-white">4.8</span>
-          <span class="text-xs font-bold text-red-100 uppercase tracking-tighter">Avg Rating</span>
+          <span class="text-xs font-bold text-orange-100 uppercase tracking-tighter">Avg Rating</span>
         </div>
         <div class="w-px h-10 bg-white/20"></div>
         <div class="text-center">
           <span class="block text-3xl font-black text-white">2.5k+</span>
-          <span class="text-xs font-bold text-red-100 uppercase tracking-tighter">Total Reviews</span>
+          <span class="text-xs font-bold text-orange-100 uppercase tracking-tighter">Total Reviews</span>
         </div>
       </div>
     </div>
@@ -70,7 +70,7 @@
       <div class="flex items-center gap-4">
         <span class="text-gray-500 font-bold uppercase text-xs tracking-widest">Filter:</span>
         <select
-          class="border border-gray-100 bg-gray-50 text-gray-700 rounded-xl px-4 py-2.5 text-sm font-bold focus:ring-2 focus:ring-red-500/20 outline-none transition-all">
+          class="border border-gray-100 bg-gray-50 text-gray-700 rounded-xl px-4 py-2.5 text-sm font-bold focus:ring-2 focus:ring-orange-500/20 outline-none transition-all">
           <option>All Locations</option>
           <option>Chennai</option>
           <option>Salem</option>
@@ -78,7 +78,7 @@
         </select>
       </div>
       <button onclick="openModal()"
-        class="bg-red-500 hover:bg-red-600 text-white px-8 py-3 rounded-xl font-extrabold shadow-lg shadow-red-500/20 transition-all flex items-center gap-3 active:scale-95">
+        class="bg-orange-500 hover:bg-orange-600 text-white px-8 py-3 rounded-xl font-extrabold shadow-lg shadow-orange-500/20 transition-all flex items-center gap-3 active:scale-95">
         <i class="fa-solid fa-pen-nib"></i> Write a Review
       </button>
     </div>
@@ -92,7 +92,7 @@
         <div class="flex justify-between items-start mb-6">
           <div class="flex items-center gap-4">
             <img src="https://ui-avatars.com/api/?name=Suresh+Kumar&background=random"
-              class="w-12 h-12 rounded-full border-2 border-red-50 shadow-sm">
+              class="w-12 h-12 rounded-full border-2 border-orange-50 shadow-sm">
             <div>
               <h4 class="font-bold text-gray-900 text-base">Suresh Kumar</h4>
               <p class="text-xs text-gray-500 font-medium">Local Guide • 12 Reviews</p>
@@ -230,7 +230,7 @@
             <i class="fa-solid fa-star" onclick="setRating(4)"></i>
             <i class="fa-solid fa-star" onclick="setRating(5)"></i>
           </div>
-          <p class="text-xs text-red-500 mt-1 hidden" id="rateError">Please select a rating</p>
+          <p class="text-xs text-orange-500 mt-1 hidden" id="rateError">Please select a rating</p>
         </div>
 
         <div class="mb-6">

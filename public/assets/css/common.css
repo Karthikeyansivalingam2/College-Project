@@ -152,18 +152,18 @@ body.light-mode .logo-box * {
 
 /* Ensure hero sections transition to light theme */
 body.light-mode .hero-pattern,
-body.light-mode section.bg-red-600 {
+body.light-mode section.bg-orange-600 {
   background-color: #ffffff !important;
   color: #111827 !important;
 }
 
 body.light-mode .hero-pattern *,
-body.light-mode section.bg-red-600 * {
+body.light-mode section.bg-orange-600 * {
   color: #111827 !important;
 }
 
 body.light-mode .hero-pattern p,
-body.light-mode section.bg-red-600 p,
+body.light-mode section.bg-orange-600 p,
 body.light-mode section.text-white p {
   color: #4b5563 !important;
 }
@@ -205,7 +205,11 @@ body.light-mode [class*="bg-[#0]"] {
 }
 
 body.light-mode .navbar:not(.scrolled) {
-  background: transparent;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.06);
 }
 
 body.light-mode .logo span {
@@ -656,8 +660,15 @@ body:not(.light-mode) .nav-login,
 body:not(.light-mode) button.bg-white,
 body:not(.light-mode) a.bg-white,
 body:not(.light-mode) .bg-white\/95,
-body:not(.light-mode) .logo-box {
+body:not(.light-mode) .logo-box,
+body:not(.light-mode) #navProfile,
+body:not(.light-mode) #installAppBtn {
   background-color: inherit !important;
+}
+
+/* Fix bg-white with opacity modifiers (e.g. bg-white/5, bg-white/10) — keep them transparent */
+body:not(.light-mode) [class*="bg-white/"] {
+  background-color: rgba(255, 255, 255, var(--tw-bg-opacity, 0.05)) !important;
 }
 
 /* Override bg-gray-50 sections/cards */
@@ -800,7 +811,7 @@ body.light-mode #bookingForm select {
 }
 
 /* Filter buttons in light mode */
-body.light-mode .filter-btn:not(.bg-red-500) {
+body.light-mode .filter-btn:not(.bg-orange-500) {
   background-color: #ffffff !important;
   color: #374151 !important;
   border-color: #e5e7eb !important;
@@ -826,7 +837,7 @@ body:not(.light-mode) textarea::placeholder {
 }
 
 /* Filter buttons in halls page */
-body:not(.light-mode) .filter-btn:not(.bg-red-500) {
+body:not(.light-mode) .filter-btn:not(.bg-orange-500) {
   background-color: var(--bg-card) !important;
   color: var(--text-muted) !important;
   border-color: var(--border-light) !important;
@@ -839,18 +850,18 @@ body:not(.light-mode) .shadow-sm.border-gray-100 {
   border-color: var(--border-light) !important;
 }
 
-/* Partner page "How it Works" steps bg-red-50 icon boxes */
-body:not(.light-mode) .bg-red-50 {
+/* Partner page "How it Works" steps bg-orange-50 icon boxes */
+body:not(.light-mode) .bg-orange-50 {
   background-color: rgba(255, 107, 0, 0.1) !important;
 }
 
-body:not(.light-mode) .border-red-100 {
+body:not(.light-mode) .border-orange-100 {
   border-color: rgba(255, 107, 0, 0.2) !important;
 }
 
 /* About page hero bg */
-body:not(.light-mode) .bg-red-600 {
-  background-color: #cc2200 !important;
+body:not(.light-mode) .bg-orange-600 {
+  background-color: #ff6b00 !important;
 }
 
 /* Spin modal bg-white */
@@ -1026,23 +1037,23 @@ body.light-mode .bg-gray-50 {
   color: #374151 !important;
 }
 
-body.light-mode .bg-red-50 {
-  background-color: #fef2f2 !important;
-  color: #991b1b !important;
+body.light-mode .bg-orange-50 {
+  background-color: #fffaf0 !important;
+  color: #92400e !important;
 }
 
 /* Partner page "How it Works" icon boxes in light mode */
-body.light-mode .bg-red-50 {
-  background-color: #fff1f2 !important;
+body.light-mode .bg-orange-50 {
+  background-color: #fff7ed !important;
 }
 
-body.light-mode .border-red-100 {
-  border-color: #fecaca !important;
+body.light-mode .border-orange-100 {
+  border-color: #ffedd5 !important;
 }
 
-/* About page hero bg - keep red in light mode */
-body.light-mode .bg-red-600 {
-  background-color: #dc2626 !important;
+/* About page hero bg - keep orange in light mode */
+body.light-mode .bg-orange-600 {
+  background-color: #ff6b00 !important;
 }
 
 /* Halls filter buttons - light mode ensure white */
