@@ -38,7 +38,7 @@
         <h1 class="text-6xl font-black mb-6 tracking-tighter uppercase italic leading-none">Foodiee<br><span
             class="text-white/80">Elite</span></h1>
         <p class="text-white font-black uppercase tracking-[0.3em] text-[10px] leading-relaxed opacity-80">The Future of
-          Catering & Dining</p>
+          Catering &amp; Dining</p>
       </div>
     </div>
 
@@ -109,7 +109,7 @@
 
         <button type="button" id="loginBtn" onclick="handleLogin()"
           class="w-full bg-orange-600 text-white font-black py-5 rounded-2xl hover:bg-orange-500 transition-all shadow-2xl shadow-orange-600/40 mt-10 active:scale-[0.98] uppercase tracking-[0.2em] text-xs flex items-center justify-center gap-3 group border-none cursor-pointer">
-          Verify & Enter <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+          Verify &amp; Enter <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
         </button>
       </form>
 
@@ -231,17 +231,16 @@
           }
 
           setTimeout(() => {
-            // Redirect based on role if needed, default to index
             window.location.href = data.user.role === 'admin' ? 'admin.html' : 'index.html';
           }, 1500);
         } else {
-          showToast("Authentication Failed: " + data.message, "error");
-          btn.innerHTML = 'Verify & Enter <i class="fa-solid fa-arrow-right"></i>';
+          showToast("Authentication Failed: " + (data.message || "Invalid credentials"), "error");
+          btn.innerHTML = 'Verify &amp; Enter <i class="fa-solid fa-arrow-right"></i>';
           btn.disabled = false;
         }
       } catch (err) {
-        showToast("System Error: Connection Lost", "error");
-        btn.innerHTML = 'Verify & Enter <i class="fa-solid fa-arrow-right"></i>';
+        showToast("System Error: Connection Lost. Check your network.", "error");
+        btn.innerHTML = 'Verify &amp; Enter <i class="fa-solid fa-arrow-right"></i>';
         btn.disabled = false;
       }
     }
@@ -272,10 +271,10 @@
           showToast("Creation Success: New Identity Formed", "success");
           setTimeout(() => switchTab('login'), 2000);
         } else {
-          showToast("Initialization Refused: " + data.message, "error");
+          showToast("Initialization Refused: " + (data.message || "Please try again"), "error");
         }
       } catch (err) {
-        showToast("System Error: Registry Timeout", "error");
+        showToast("Connection Failed: Could not reach server. Please try again.", "error");
       } finally {
         btn.innerHTML = 'Initialize <i class="fa-solid fa-user-plus"></i>';
         btn.disabled = false;

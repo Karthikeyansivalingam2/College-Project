@@ -1,4 +1,5 @@
 const bcrypt = require('bcryptjs');
+const connectDB = require('../config/db');
 const User = require('../models/User');
 const Order = require('../models/Order');
 const Partner = require('../models/Partner');
@@ -40,6 +41,7 @@ exports.login = async (req, res) => {
     const trimmedEmail = (email || '').trim();
     const trimmedPassword = (password || '').trim();
     try {
+        await connectDB();
         const user = await User.findOne({
             $or: [
                 { email: { $regex: new RegExp('^' + trimmedEmail + '$', 'i') } },
@@ -58,7 +60,7 @@ exports.login = async (req, res) => {
             res.json({ success: false, message: "Invalid username or password." });
         }
     } catch (err) {
-        console.error("Login error:", err);
+        console.error("Login error:", err.message);
         res.status(500).json({ success: false, message: "Server error. Please try again." });
     }
 };
@@ -67,6 +69,7 @@ exports.login = async (req, res) => {
 exports.signup = async (req, res) => {
     const { username, email, password } = req.body;
     try {
+        await connectDB();
         const existing = await User.findOne({ $or: [{ username }, { email }] });
         if (existing) return res.status(400).json({ success: false, message: "User already exists!" });
 
@@ -74,12 +77,16 @@ exports.signup = async (req, res) => {
         const newUser = new User({ username, email, password: hashedPassword });
         await newUser.save();
         res.json({ success: true, message: "Registration successful!" });
-    } catch (err) { res.status(500).json({ success: false }); }
+    } catch (err) {
+        console.error("Signup error:", err.message);
+        res.status(500).json({ success: false, message: "Server error during registration. Please try again." });
+    }
 };
 
 // 5. Order
 exports.placeOrder = async (req, res) => {
     try {
+        await connectDB();
         const orderData = req.body;
         const orderId = 'ORD-' + Math.floor(100000 + Math.random() * 900000);
         const newOrder = new Order({ ...orderData, orderId });

@@ -38,9 +38,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 // API Routes
 app.use('/api', apiRoutes);
 
-// Menu Seeding Logic (On Startup)
+// Menu Seeding Logic (Only for local development startup)
 async function seedMenu() {
     try {
+        await connectDB();
         const operations = realMenu.map(item => ({
             updateOne: {
                 filter: { id: item.id },
@@ -53,10 +54,19 @@ async function seedMenu() {
         await MenuItem.deleteMany({ id: { $nin: validIds } });
         console.log(`✅ ${realMenu.length} Menu Items Synced!`);
     } catch (err) {
-        console.error("Menu Seed Error:", err);
+        console.error("Menu Seed Error:", err.message);
     }
 }
-seedMenu();
+
+// Health check route (useful for debugging Vercel cold starts)
+app.get('/api/health', async (req, res) => {
+    try {
+        await connectDB();
+        res.json({ status: 'ok', db: 'connected', timestamp: new Date().toISOString() });
+    } catch (err) {
+        res.status(500).json({ status: 'error', db: 'disconnected', message: err.message });
+    }
+});
 
 // Error Handling
 process.on('unhandledRejection', (reason, promise) => {
@@ -66,9 +76,15 @@ process.on('uncaughtException', (err) => {
     console.error('Uncaught Exception:', err);
 });
 
-// Start Server
+// Start Server (local dev only — Vercel handles its own startup)
 if (require.main === module) {
-    app.listen(PORT, () => console.log(`🚀 Server running at http://localhost:${PORT}`));
+    connectDB().then(() => {
+        seedMenu(); // Only seed on local startup
+        app.listen(PORT, () => console.log(`🚀 Server running at http://localhost:${PORT}`));
+    }).catch(err => {
+        console.error('Failed to connect to DB on startup:', err.message);
+        process.exit(1);
+    });
 }
 
 module.exports = app;
