@@ -208,18 +208,17 @@ function showShopList(query) {
 
       box.innerHTML +=
         '<div class="shop-card">' +
-        '<div class="flex justify-between items-start">' +
+        '<div class="card-meta">' +
         '<h3>' + shop.name.replace(/</g, "&lt;") + '</h3>' +
-        '<span class="badge">Open Now</span>' +
+        '<span class="premium-badge">Open Now</span>' +
         '</div>' +
-        '<p class="card-location"><i class="fa-solid fa-location-dot text-orange-500"></i> ' + shop.location + '</p>' +
+        '<p class="card-location"><i class="fa-solid fa-location-dot" style="color: var(--primary-color);"></i> ' + shop.location + '</p>' +
         '<div class="card-tags">' +
-        '<span><i class="fa-solid fa-utensils mr-1"></i> Dine-in</span>' +
-        '<span><i class="fa-solid fa-bag-shopping mr-1"></i> Takeaway</span>' +
-        '<span><i class="fa-solid fa-motorcycle mr-1"></i> Delivery</span>' +
+        '<span><i class="fa-solid fa-utensils"></i> Dine-in</span>' +
+        '<span><i class="fa-solid fa-bolt"></i> Elite Service</span>' +
         '</div>' +
-        '<button class="details-btn" onclick="showShopDetails(\'' + shop.name.replace(/'/g, "\\'") + '\')">' +
-        'Explore Menu <i class="fa-solid fa-arrow-right ml-2"></i>' +
+        '<button class="cta-btn" onclick="showShopDetails(\'' + shop.name.replace(/'/g, "\\'") + '\')">' +
+        'Explore Collection <i class="fa-solid fa-arrow-right-long ml-2"></i>' +
         '</button>' +
         '</div>';
     }

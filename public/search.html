@@ -155,23 +155,69 @@
       letter-spacing: 1px;
       transition: all 0.3s;
       margin-top: auto;
-    }
-
-    .details-btn:hover {
-      background: #e65a00;
-      transform: scale(1.02);
       box-shadow: 0 10px 20px rgba(255, 107, 0, 0.2);
     }
 
-    /* ===== MOBILE ===== */
+    .cta-btn:hover {
+      transform: scale(1.03);
+      box-shadow: 0 15px 30px rgba(255, 107, 0, 0.4);
+      filter: brightness(1.1);
+    }
+
+    /* ===== EMPTY STATE ===== */
+    .empty-state {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 100px 20px;
+      background: var(--bg-card);
+      border-radius: 3rem;
+      border: 1px dashed var(--border-light);
+    }
+
+    .empty-state h3 {
+      font-size: 32px;
+      font-weight: 900;
+      color: var(--text-muted);
+      margin-bottom: 25px;
+      text-transform: uppercase;
+      font-style: italic;
+    }
+
+    /* Hide debug overlay to keep design clean */
+    #debugOverlay {
+      opacity: 0.1;
+      transform: scale(0.8);
+      filter: grayscale(1);
+    }
+
+    #debugOverlay:hover {
+      opacity: 1;
+      filter: none;
+      transform: scale(1);
+    }
+
+    /* ===== MOBILE ADJUSTMENTS ===== */
     @media (max-width: 768px) {
+      .search-container-wrapper {
+        padding-top: 100px;
+      }
+
       #results {
         grid-template-columns: 1fr;
-        padding: 0 16px;
+        padding: 0 20px 80px;
+        gap: 25px;
       }
 
       .search-header h1 {
-        font-size: 32px;
+        font-size: 38px;
+      }
+
+      .results-header-bar {
+        padding: 0 20px;
+      }
+
+      .shop-card {
+        padding: 30px;
       }
     }
   </style>
@@ -183,25 +229,24 @@
   <!-- Global Navbar -->
   <div id="global-navbar"></div>
 
-  <header class="search-header">
-    <h1>Foodiee Near You</h1>
-    <p id="resultTitle">Showing results based on your search</p>
-  </header>
+  <div class="search-container-wrapper">
+    <header class="search-header">
+      <h1>Foodiee Near You</h1>
+      <p id="resultTitle">Finding the best spots for you...</p>
+    </header>
 
+    <!-- Back to Home -->
+    <div class="results-header-bar" id="backToHome" style="display:none;">
+      <button onclick="goHome()" class="back-btn-premium">
+        <i class="fa-solid fa-arrow-left"></i> Back to Explore
+      </button>
+    </div>
 
-  <!-- Back to Home (only for list page) -->
-  <div class="results-header" id="backToHome" style="display:none;">
-    <button onclick="goHome()" class="back-btn">
-      ← Back to Home
-    </button>
+    <!-- Results appear here -->
+    <section id="results">
+      <!-- Skeletons will be injected here via JS -->
+    </section>
   </div>
-
-
-
-  <!-- Results appear here -->
-  <section id="results">
-    <!-- Skeletons will be injected here via JS -->
-  </section>
 
 
   <script src="./assets/js/common.js?v=7"></script>
