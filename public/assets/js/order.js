@@ -207,6 +207,7 @@ let foodMenu = [];
 
 async function fetchMenu() {
   logDebug("Fetching menu from API...");
+  renderSkeletons(); // Show skeletons while loading
   try {
     const res = await fetch('/api/menu?v=' + Date.now());
     foodMenu = await res.json();
@@ -215,7 +216,48 @@ async function fetchMenu() {
   } catch (err) {
     logDebug(`FETCH ERROR: ${err.message}`);
     console.error("Failed to fetch menu", err);
+    // Optionally render an empty menu or error state
+    renderMenu();
   }
+}
+
+function renderSkeletons() {
+  const grids = [
+    "beverageGrid", "breakfastGrid", "lunchGrid",
+    "dinnerGrid", "fastFoodGrid", "dietGrid"
+  ];
+
+  const skeletonCard = `
+    <div class="bg-[var(--bg-card)] border border-[var(--border-light)] p-5 flex justify-between items-center mb-4 rounded-[2rem] overflow-hidden">
+      <div class="flex-1 pr-6">
+        <div class="skeleton skeleton-badge mb-3"></div>
+        <div class="skeleton skeleton-title"></div>
+        <div class="skeleton skeleton-text" style="width: 30%;"></div>
+        <div class="skeleton skeleton-text" style="width: 80%; height: 35px; border-radius: 12px;"></div>
+      </div>
+      <div class="flex flex-col items-center">
+        <div class="skeleton w-32 h-32 rounded-2xl"></div>
+        <div class="skeleton skeleton-text mt-2" style="width: 60px;"></div>
+      </div>
+    </div>
+  `;
+
+  grids.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.innerHTML = skeletonCard.repeat(2); // Show 2 skeletons per category
+    }
+  });
+
+  // Ensure sections are visible while loading skeletons
+  const sections = [
+    "beverageSection", "breakfastSection", "lunchSection",
+    "dinnerSection", "fastFoodSection", "dietSection"
+  ];
+  sections.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.classList.remove('hidden');
+  });
 }
 
 document.addEventListener("DOMContentLoaded", () => {
