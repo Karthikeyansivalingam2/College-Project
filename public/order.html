@@ -9,9 +9,10 @@
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#10b981">
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="./assets/css/common.css?v=2">
+  <link rel="stylesheet" href="./assets/css/common.css?v=3">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./assets/css/order.css">
+  <link rel="stylesheet" href="./assets/css/mobile.css?v=2">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <style>
     /* Category filter button states - overrides dark mode */
@@ -23,9 +24,9 @@
     }
 
     .typeBtn.inactive-filter {
-      background-color: rgba(255, 255, 255, 0.05) !important;
+      background-color: var(--bg-secondary) !important;
       color: var(--text-muted) !important;
-      border-color: rgba(255, 255, 255, 0.10) !important;
+      border-color: var(--border-light) !important;
     }
 
     .typeBtn.inactive-filter:hover {
@@ -35,7 +36,7 @@
   </style>
 </head>
 
-<body class="text-gray-100 bg-[var(--bg-main)]">
+<body class="bg-[var(--bg-main)]" style="color: var(--text-main);">
   <!-- Navbar -->
   <header class="navbar" id="global-navbar"></header>
 
@@ -43,7 +44,7 @@
   <div class="max-w-7xl mx-auto px-4 content-padding">
     <div class="flex flex-col md:flex-row justify-between items-center mb-8 gap-6">
 
-      <div class="flex gap-4 p-1.5 bg-[#1a1a1a] rounded-[1.2rem] border border-white/5">
+      <div class="flex gap-4 p-1.5 bg-[var(--bg-card)] rounded-[1.2rem] border border-[var(--border-light)]">
         <button id="retailBtn" onclick="switchMode('retail')"
           class="typeBtn active-filter px-10 py-3 rounded-2xl font-black uppercase tracking-widest text-[10px] transition-all border-none cursor-pointer">Retail</button>
         <button id="packageBtn" onclick="switchMode('monthly')"
@@ -73,7 +74,7 @@
 
       <div id="retailSearch" class="relative w-full md:w-80">
         <input type="text" id="searchTea" onkeyup="renderMenu()" placeholder="What are you craving?"
-          class="w-full pl-12 pr-16 py-4 border border-white/5 bg-white/5 text-white rounded-2xl focus:outline-none focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 placeholder-gray-500 font-bold text-sm">
+          class="w-full pl-12 pr-16 py-4 border border-[var(--border-light)] bg-[var(--bg-secondary)] text-[var(--text-main)] rounded-2xl focus:outline-none focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 placeholder-gray-500 font-bold text-sm">
         <i class="fa-solid fa-search absolute left-5 top-5 text-gray-500"></i>
         <!-- 🎤 VOICE SEARCH BUTTON -->
         <button id="voiceSearchBtn" title="🎤 Voice Search"
@@ -125,7 +126,7 @@
 
       <!-- Diet -->
       <div id="dietSection">
-        <h3 class="text-xl font-bold text-gray-100 mb-4 border-l-4 border-emerald-600 pl-3">Healthy & Diet Food</h3>
+        <h3 class="text-xl font-bold text-gray-100 mb-4 border-l-4 border-orange-500 pl-3">Healthy & Diet Food</h3>
         <div id="dietGrid" class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-4 mb-8"></div>
       </div>
 
@@ -153,19 +154,100 @@
   </div>
 
   <!-- CART DRAWER -->
-  <div id="cartDrawer" class="fixed inset-0 bg-black bg-opacity-40 hidden z-50" onclick="closeCart()">
-    <div onclick="event.stopPropagation()" class=" bg-gray-800 text-gray-200 p-4 fixed bottom-0 left-0 right-0 md:top-0 md:bottom-0 md:right-0 md:left-auto md:w-96
-      rounded-t-2xl md:rounded-none max-h-[75%] md:max-h-full overflow-y-auto">
+  <div id="cartDrawer" class="fixed inset-0 bg-black bg-opacity-40 hidden z-[2000]" onclick="closeCart()">
+    <div onclick="event.stopPropagation()"
+      class="bg-[var(--bg-card)] text-[var(--text-main)] p-4 fixed bottom-0 left-0 right-0 md:top-0 md:bottom-0 md:right-0 md:left-auto md:w-96
+      rounded-t-2xl md:rounded-none max-h-[75%] md:max-h-full overflow-y-auto border-l border-[var(--border-light)] shadow-2xl">
       <!-- Drag Handle (Mobile only) -->
       <div class="w-12 h-1 bg-gray-300 rounded-full mx-auto mb-3 md:hidden"></div>
-      <h3 class="text-lg font-bold mb-3">Your Cart</h3>
-      <ul id="cartItems" class="space-y-3"></ul>
-      <div class="flex justify-between font-semibold mt-4 border-t pt-3">
-        <span>Total Order</span>
-        <span>₹<span id="total">0</span></span>
+      <h3 class="text-xl font-black mb-6 text-[var(--text-dark)] uppercase italic tracking-tighter">Your Cart</h3>
+      <ul id="cartItems" class="space-y-3 mb-4"></ul>
+
+      <!-- BILL SUMMARY - shown first so user sees their total before offers -->
+      <div class="space-y-2 border-t border-white/10 pt-4 mb-6 mt-2">
+        <div class="flex justify-between items-center text-sm" style="color: var(--text-muted);">
+          <span>Item Total</span>
+          <span>₹<span id="subTotal">0</span></span>
+        </div>
+        <div class="flex justify-between items-center text-sm text-green-500 hidden" id="discountRow">
+          <span>Discount Applied 🎉</span>
+          <span>-₹<span id="totalDiscount">0</span></span>
+        </div>
+        <div class="flex justify-between font-black text-lg pt-2" style="color: var(--text-dark);">
+          <span class="uppercase italic">Total Amount</span>
+          <span class="text-orange-500 font-bold">₹<span id="total">0</span></span>
+        </div>
       </div>
 
+      <!-- IMPROVED OFFER/COUPON SECTION - below bill summary -->
+      <div class="mb-6">
+        <label class="text-[10px] font-black uppercase tracking-[0.2em] mb-4 block" style="color: var(--text-muted);">🎁
+          AVAILABLE OFFERS</label>
+
+        <div class="space-y-3">
+          <!-- Coupon Card 1 -->
+          <div onclick="applyPromoCode('FOODIEE20')"
+            class="group cursor-pointer relative overflow-hidden bg-gradient-to-br from-orange-600/10 to-orange-900/10 border border-orange-500/20 p-4 rounded-2xl hover:border-orange-500/40 transition-all active:scale-95">
+            <div class="flex items-center gap-3">
+              <div
+                class="w-10 h-10 bg-orange-600 rounded-xl flex items-center justify-center shadow-lg shadow-orange-600/20 flex-shrink-0">
+                <i class="fa-solid fa-percent text-white text-base"></i>
+              </div>
+              <div>
+                <h5 class="text-orange-500 font-black text-[11px] uppercase italic">FOODIEE20</h5>
+                <p class="text-[9px] font-bold uppercase tracking-wider mt-0.5" style="color: var(--text-muted);">Flat
+                  20% OFF on order</p>
+              </div>
+            </div>
+            <div
+              class="absolute right-4 top-1/2 -translate-y-1/2 text-[9px] font-black text-orange-500 uppercase tracking-widest group-hover:translate-x-1 transition-transform">
+              Apply <i class="fa-solid fa-chevron-right ml-1"></i></div>
+          </div>
+
+          <!-- Coupon Card 2 -->
+          <div onclick="applyPromoCode('ELITE50')"
+            class="group cursor-pointer relative overflow-hidden bg-gradient-to-br from-purple-600/10 to-purple-900/10 border border-purple-500/20 p-4 rounded-2xl hover:border-purple-500/40 transition-all active:scale-95">
+            <div class="flex items-center gap-3">
+              <div
+                class="w-10 h-10 bg-purple-600 rounded-xl flex items-center justify-center shadow-lg shadow-purple-600/20 flex-shrink-0">
+                <i class="fa-solid fa-crown text-white text-base"></i>
+              </div>
+              <div>
+                <h5 class="text-purple-400 font-black text-[11px] uppercase italic">ELITE50</h5>
+                <p class="text-[9px] font-bold uppercase tracking-wider mt-0.5" style="color: var(--text-muted);">Save
+                  ₹50 instantly</p>
+              </div>
+            </div>
+            <div
+              class="absolute right-4 top-1/2 -translate-y-1/2 text-[9px] font-black text-purple-500 uppercase tracking-widest group-hover:translate-x-1 transition-transform">
+              Apply <i class="fa-solid fa-chevron-right ml-1"></i></div>
+          </div>
+        </div>
+
+        <!-- Manual Entry -->
+        <div class="mt-4 flex gap-2">
+          <input type="text" id="promoCode" placeholder="OTHER CODE"
+            class="flex-1 border rounded-xl px-4 py-2 text-[10px] font-bold uppercase tracking-[0.2em] outline-none focus:border-orange-500 transition-all"
+            style="background: var(--bg-secondary); border-color: var(--border-light); color: var(--text-main);">
+          <button onclick="applyPromo()"
+            class="bg-orange-600 text-white px-4 py-2 rounded-xl font-black text-[10px] uppercase tracking-widest hover:bg-orange-500 transition-all cursor-pointer border-none">Apply</button>
+        </div>
+
+        <div id="promoBadge"
+          class="hidden mt-4 bg-orange-500/10 border border-orange-500/20 text-orange-500 text-[10px] font-black px-4 py-3 rounded-xl flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <i class="fa-solid fa-tag"></i>
+            <span>CODE APPLIED: -₹<span id="discountAmount">0</span> SAVED!</span>
+          </div>
+          <button onclick="removePromo()"
+            class="text-orange-500/50 hover:text-orange-500 border-none bg-transparent cursor-pointer p-1"><i
+              class="fa-solid fa-circle-xmark text-sm"></i></button>
+        </div>
+      </div>
+
+
       <!-- Split Bill Calculator -->
+
       <div class="mt-4 p-3 bg-gray-900/50 rounded-xl border border-white/5">
         <div class="flex items-center justify-between mb-2">
           <span class="text-xs font-bold text-gray-400 uppercase tracking-wider"><i class="fa-solid fa-users mr-1"></i>
@@ -190,7 +272,7 @@
 
         <!-- Saved Address View -->
         <div id="savedAddressView"
-          class="hidden glass-card p-5 border border-orange-500/30 relative overflow-hidden group cursor-pointer hover:border-orange-500/60 transition-all bg-gray-800/50">
+          class="hidden glass-card p-5 border border-orange-500/30 relative overflow-hidden group cursor-pointer hover:border-orange-500/60 transition-all bg-[var(--bg-secondary)]">
           <div
             class="absolute -right-4 -top-4 w-24 h-24 bg-orange-500/10 rounded-full group-hover:scale-110 transition-transform">
           </div>
@@ -417,24 +499,24 @@
       <div class="p-6 space-y-4">
         <p class="text-sm text-gray-400 mb-2">We are currently delivering in:</p>
         <button onclick="setLocation('Chennai')"
-          class="w-full text-left p-4 border border-gray-600 rounded-xl hover:bg-emerald-900/40 hover:border-emerald-500 transition flex justify-between items-center group">
-          <span class="font-bold text-gray-300 group-hover:text-emerald-400">Chennai</span>
-          <i class="fa-solid fa-chevron-right text-gray-500 group-hover:text-emerald-500"></i>
+          class="w-full text-left p-4 border border-gray-600 rounded-xl hover:bg-orange-900/40 hover:border-orange-500 transition flex justify-between items-center group">
+          <span class="font-bold text-gray-300 group-hover:text-orange-400">Chennai</span>
+          <i class="fa-solid fa-chevron-right text-gray-500 group-hover:text-orange-500"></i>
         </button>
         <button onclick="setLocation('Madurai')"
-          class="w-full text-left p-4 border border-gray-600 rounded-xl hover:bg-emerald-900/40 hover:border-emerald-500 transition flex justify-between items-center group">
-          <span class="font-bold text-gray-300 group-hover:text-emerald-400">Madurai</span>
-          <i class="fa-solid fa-chevron-right text-gray-500 group-hover:text-emerald-500"></i>
+          class="w-full text-left p-4 border border-gray-600 rounded-xl hover:bg-orange-900/40 hover:border-orange-500 transition flex justify-between items-center group">
+          <span class="font-bold text-gray-300 group-hover:text-orange-400">Madurai</span>
+          <i class="fa-solid fa-chevron-right text-gray-500 group-hover:text-orange-500"></i>
         </button>
         <button onclick="setLocation('Coimbatore')"
-          class="w-full text-left p-4 border border-gray-600 rounded-xl hover:bg-emerald-900/40 hover:border-emerald-500 transition flex justify-between items-center group">
-          <span class="font-bold text-gray-300 group-hover:text-emerald-400">Coimbatore</span>
-          <i class="fa-solid fa-chevron-right text-gray-500 group-hover:text-emerald-500"></i>
+          class="w-full text-left p-4 border border-gray-600 rounded-xl hover:bg-orange-900/40 hover:border-orange-500 transition flex justify-between items-center group">
+          <span class="font-bold text-gray-300 group-hover:text-orange-400">Coimbatore</span>
+          <i class="fa-solid fa-chevron-right text-gray-500 group-hover:text-orange-500"></i>
         </button>
         <button onclick="setLocation('Salem')"
-          class="w-full text-left p-4 border border-gray-600 rounded-xl hover:bg-emerald-900/40 hover:border-emerald-500 transition flex justify-between items-center group">
-          <span class="font-bold text-gray-300 group-hover:text-emerald-400">Salem</span>
-          <i class="fa-solid fa-chevron-right text-gray-500 group-hover:text-emerald-500"></i>
+          class="w-full text-left p-4 border border-gray-600 rounded-xl hover:bg-orange-900/40 hover:border-orange-500 transition flex justify-between items-center group">
+          <span class="font-bold text-gray-300 group-hover:text-orange-400">Salem</span>
+          <i class="fa-solid fa-chevron-right text-gray-500 group-hover:text-orange-500"></i>
         </button>
       </div>
     </div>
@@ -514,6 +596,10 @@
       </div>
     </div>
   </div>
+
+  
+  <!-- Mobile Bottom Nav -->
+  <div id="mobile-nav-container"></div>
 
 </body>
 

@@ -1,0 +1,32 @@
+<!-- MOBILE BOTTOM NAVIGATION BAR -->
+<!-- This is injected into every page via loadComponents() -->
+<nav class="mobile-bottom-nav" id="mobileBottomNav">
+
+    <a href="index.html" class="mob-nav-item" id="mob-home">
+        <i class="fa-solid fa-house"></i>
+        <span>Home</span>
+    </a>
+
+    <a href="order.html" class="mob-nav-item" id="mob-order">
+        <i class="fa-solid fa-bowl-food"></i>
+        <span>Order</span>
+    </a>
+
+    <button class="mob-nav-item" id="mob-cart"
+        onclick="if(typeof openCart==='function'){openCart()}else{window.location.href='order.html'}">
+        <i class="fa-solid fa-bag-shopping"></i>
+        <span class="mob-cart-badge" id="mobCartBadge">0</span>
+        <span>Cart</span>
+    </button>
+
+    <a href="halls.html" class="mob-nav-item" id="mob-halls">
+        <i class="fa-solid fa-utensils"></i>
+        <span>Halls</span>
+    </a>
+
+    <a href="profile.html" class="mob-nav-item" id="mob-profile">
+        <i class="fa-solid fa-user"></i>
+        <span>Profile</span>
+    </a>
+
+</nav>

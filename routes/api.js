@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const apiController = require('../controllers/apiController');
+const paymentController = require('../controllers/paymentController');
 
 // 1. Shops
 router.get('/shops', apiController.getShops);
@@ -33,5 +34,9 @@ router.get('/admin/data', apiController.getAdminData);
 router.get('/menu', apiController.getMenu);
 router.post('/menu/update', apiController.updateMenu);
 router.post('/menu/add', apiController.addMenu);
+
+// 8. Razorpay Payment
+router.post('/payment/create-order', paymentController.createOrder);
+router.post('/payment/verify', paymentController.verifyPayment);
 
 module.exports = router;

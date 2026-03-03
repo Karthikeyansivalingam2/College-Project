@@ -12,6 +12,7 @@
     "express": "^5.2.1",
     "mongoose": "^9.1.6",
     "nodemon": "^3.1.11",
+    "razorpay": "^2.9.6",
     "tailwindcss": "^4.1.18"
   }
 }

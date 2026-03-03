@@ -60,6 +60,48 @@ function updateCart(name, change) {
   calculateSplit();
 }
 
+let activePromo = null;
+
+function applyPromoCode(code) {
+  document.getElementById("promoCode").value = code;
+  applyPromo();
+}
+
+function applyPromo() {
+  const code = document.getElementById("promoCode").value.toUpperCase();
+  const subTotal = Object.keys(cart).reduce((acc, k) => acc + (cart[k].price * cart[k].qty), 0);
+
+  if (subTotal === 0) {
+    showToast("❌ Cart is empty!", "error");
+    return;
+  }
+
+  if (code === "FOODIEE20") {
+    activePromo = { type: 'percent', value: 0.2, code: "FOODIEE20" };
+    showToast("🎉 20% OFF Applied!", "success");
+  } else if (code === "ELITE50") {
+    if (subTotal < 150) {
+      showToast("❌ Min order ₹150 for ELITE50", "error");
+      return;
+    }
+    activePromo = { type: 'flat', value: 50, code: "ELITE50" };
+    showToast("👑 ₹50 Discount Applied!", "success");
+  } else {
+    showToast("❌ Invalid Promo Code", "error");
+    return;
+  }
+
+  document.getElementById("promoBadge").classList.remove("hidden");
+  document.getElementById("promoCode").value = "";
+  renderCart();
+}
+
+function removePromo() {
+  activePromo = null;
+  document.getElementById("promoBadge").classList.add("hidden");
+  renderCart();
+}
+
 function renderCart() {
   const cartItemsEl = document.getElementById("cartItems");
   const cartBar = document.getElementById("cartBar");
@@ -67,29 +109,58 @@ function renderCart() {
 
   cartItemsEl.innerHTML = "";
 
-  let total = 0;
+  let subtotal = 0;
   let count = 0;
 
   Object.keys(cart).forEach(k => {
     const i = cart[k];
-    total += i.price * i.qty;
+    subtotal += i.price * i.qty;
     count += i.qty;
 
     cartItemsEl.innerHTML += `
-      <li class="flex justify-between mb-2">
-        <span>${k} × ${i.qty}</span>
-        <span>₹${i.price * i.qty}</span>
+      <li class="flex justify-between items-center group mb-4">
+        <div class="flex-1">
+          <p class="text-sm font-black text-white group-hover:text-orange-500 transition-colors uppercase italic">${k}</p>
+          <p class="text-[10px] text-gray-500 font-bold uppercase tracking-widest">Qty: ${i.qty} | ₹${i.price}</p>
+        </div>
+        <div class="text-right">
+           <p class="text-sm font-black text-white italic">₹${i.price * i.qty}</p>
+        </div>
       </li>
     `;
   });
 
+  const subTotalEl = document.getElementById("subTotal");
   const totalEl = document.getElementById("total");
   const cartTotalEl = document.getElementById("cartTotal");
   const cartCountEl = document.getElementById("cartCount");
+  const discRow = document.getElementById("discountRow");
+  const discAmtEl = document.getElementById("totalDiscount");
 
-  if (totalEl) totalEl.innerText = total;
-  if (cartTotalEl) cartTotalEl.innerText = total;
+  let discount = 0;
+  if (activePromo) {
+    if (activePromo.type === 'percent') {
+      discount = Math.round(subtotal * activePromo.value);
+    } else if (activePromo.type === 'flat') {
+      discount = activePromo.value;
+    }
+    if (discRow) discRow.classList.remove("hidden");
+    if (discAmtEl) discAmtEl.innerText = discount;
+    if (document.getElementById("discountAmount")) {
+      document.getElementById("discountAmount").innerText = discount;
+    }
+  } else {
+    if (discRow) discRow.classList.add("hidden");
+  }
+
+  const finalTotal = Math.max(0, subtotal - discount);
+
+  if (subTotalEl) subTotalEl.innerText = subtotal;
+  if (totalEl) totalEl.innerText = finalTotal;
+  if (cartTotalEl) cartTotalEl.innerText = finalTotal;
   if (cartCountEl) cartCountEl.innerText = count;
+
+  calculateSplit(); // Update split amounts
 
   // Show / hide cart bar
   if (count > 0) {
@@ -212,6 +283,20 @@ function renderMenu() {
 
   logDebug(`Filtered items: ${filtered.length}. Rendering...`);
 
+  if (filtered.length === 0 && foodMenu.length > 0) {
+    beverageSection.classList.remove('hidden');
+    beverageGrid.innerHTML = `
+      <div class="col-span-full py-20 text-center">
+        <div class="w-16 h-16 bg-orange-500/10 rounded-full flex items-center justify-center mx-auto mb-4 border border-orange-500/20">
+          <i class="fa-solid fa-utensils text-orange-500 text-2xl"></i>
+        </div>
+        <p class="text-[var(--text-dark)] font-black uppercase italic tracking-widest text-sm">No items found matching your filters</p>
+        <button onclick="resetFilters()" class="mt-4 text-orange-500 font-bold text-xs uppercase tracking-[0.2em] border-none bg-transparent cursor-pointer hover:underline">Reset Filters</button>
+      </div>
+    `;
+    return;
+  }
+
   // Hide all sections initially
   [beverageSection, breakfastSection, lunchSection, dinnerSection, fastFoodSection, dietSection].forEach(s => {
     if (s) s.classList.add('hidden');
@@ -263,7 +348,7 @@ function renderMenu() {
     }
 
     const card = `
-      <div class="bg-[#111] border border-white/5 p-5 flex justify-between items-center group mb-4 relative overflow-hidden rounded-[2rem] shadow-2xl hover:border-orange-500/30 transition-all">
+      <div class="bg-[var(--bg-card)] border border-[var(--border-light)] p-5 flex justify-between items-center group mb-4 relative overflow-hidden rounded-[2rem] hover:border-orange-500/30 transition-all" style="box-shadow: var(--shadow-standard);">
         
         <div class="flex-1 pr-6 relative z-10">
           <div class="flex items-center gap-2 mb-3">
@@ -271,9 +356,9 @@ function renderMenu() {
              ${t.bestseller ? `<span class="bg-orange-500/10 text-orange-500 text-[9px] font-black px-2 py-0.5 rounded uppercase tracking-[0.2em] border border-orange-500/20">Bestseller</span>` : ""}
              ${isHealthyMode && t.calories ? `<span class="bg-orange-500 text-white text-[9px] font-black px-2 py-0.5 rounded uppercase tracking-wider">${t.calories} kcal</span>` : ""}
           </div>
-          <h3 class="font-black text-white text-xl mb-1 uppercase italic tracking-tighter group-hover:text-orange-500 transition-colors">${t.name}</h3>
-          <p class="font-black text-white text-base mb-4">₹${t.price}</p>
-          <div class="flex items-center gap-4 text-[10px] text-gray-400 font-black uppercase tracking-[0.1em] bg-white/5 px-4 py-2 rounded-xl inline-flex border border-white/5">
+          <h3 class="font-black text-[var(--text-dark)] text-xl mb-1 uppercase italic tracking-tighter group-hover:text-orange-500 transition-colors">${t.name}</h3>
+          <p class="font-black text-[var(--text-main)] text-base mb-4">₹${t.price}</p>
+          <div class="flex items-center gap-4 text-[10px] text-[var(--text-muted)] font-black uppercase tracking-[0.1em] bg-[var(--bg-secondary)] px-4 py-2 rounded-xl inline-flex border border-[var(--border-light)]">
             <span><i class="fa-regular fa-clock mr-1 text-orange-500"></i> ${t.prep_time || "15 MINS"}</span>
             <span class="text-white/10">|</span>
             <span><i class="fa-solid fa-star text-orange-500 mr-1"></i> ${t.rating || "4.2"}</span>
@@ -285,18 +370,18 @@ function renderMenu() {
              <img src="${t.image || 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=300'}" 
                   class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-90 group-hover:opacity-100">
              
-             <!-- Add Button (StepUp Style) -->
-             <div class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-[90%]">
+             <!-- Add Button (Swiggy Style) -->
+             <div class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-[85%]">
                 ${cartItem.qty > 0 ? `
-                  <div class="flex items-center justify-between bg-orange-600 text-white rounded-xl shadow-2xl font-black overflow-hidden border border-orange-400/30">
-                    <button onclick="updateCart('${t.name.replace(/'/g, "\\'")}', -1)" class="flex-1 py-2 hover:bg-black/20 transition-colors font-black text-lg">-</button>
-                    <span class="px-3 text-sm">${cartItem.qty}</span>
-                    <button onclick="updateCart('${t.name.replace(/'/g, "\\'")}', 1)" class="flex-1 py-2 hover:bg-black/20 transition-colors font-black text-lg">+</button>
+                  <div class="flex items-center justify-between bg-white rounded-lg shadow-xl font-black overflow-hidden border border-gray-100 h-9" style="color: var(--primary-color)">
+                    <button onclick="updateCart('${t.name.replace(/'/g, "\\'")}', -1)" class="w-10 h-full flex items-center justify-center hover:bg-orange-50 transition-colors font-black text-lg">-</button>
+                    <span class="flex-1 text-center text-sm font-black">${cartItem.qty}</span>
+                    <button onclick="updateCart('${t.name.replace(/'/g, "\\'")}', 1)" class="w-10 h-full flex items-center justify-center hover:bg-orange-50 transition-colors font-black text-lg">+</button>
                   </div>
                 ` : `
                   <button onclick="updateCart('${t.name.replace(/'/g, "\\'")}', 1)" 
-                    class="w-full bg-white text-black py-2.5 rounded-xl font-black text-[10px] shadow-2xl transition-all uppercase tracking-[0.2em] border-none hover:bg-orange-600 hover:text-white cursor-pointer transform active:scale-95">
-                    ADD +
+                    class="w-full bg-white py-2.5 rounded-lg font-black text-xs shadow-xl transition-all uppercase tracking-wider border border-gray-100 hover:bg-orange-50 cursor-pointer transform active:scale-95 h-9 flex items-center justify-center" style="color: var(--primary-color)">
+                    ADD
                   </button>
                 `}
              </div>
@@ -428,15 +513,15 @@ function renderPackages(filterType = "Hostel") {
 
   filtered.forEach(pkg => {
     grid.innerHTML += `
-      <div class="bg-[#111] border border-white/5 rounded-[3rem] p-12 hover:shadow-[0_20px_60px_rgba(0,0,0,0.6)] hover:border-orange-500/20 transition-all duration-700 group relative overflow-hidden">
+      <div class="bg-[var(--bg-card)] border border-[var(--border-light)] rounded-[3rem] p-12 hover:shadow-standard hover:border-orange-500/20 transition-all duration-700 group relative overflow-hidden">
         <div class="absolute top-0 right-0 w-40 h-40 bg-orange-600/5 rounded-bl-[5rem] -mr-10 -mt-10 transition-transform group-hover:scale-125 opacity-40"></div>
         
         <div class="relative z-10">
-          <div class="w-16 h-16 bg-white/5 rounded-2xl flex items-center justify-center mb-8 border border-white/5 group-hover:bg-orange-600 group-hover:text-white transition-all duration-500">
+          <div class="w-16 h-16 bg-[var(--bg-secondary)] rounded-2xl flex items-center justify-center mb-8 border border-[var(--border-light)] group-hover:bg-orange-600 group-hover:text-white transition-all duration-500">
              <i class="fa-solid fa-crown text-2xl text-orange-500 group-hover:text-white"></i>
           </div>
           <span class="text-[9px] font-black uppercase tracking-[0.3em] text-orange-500 mb-2 block">${pkg.type} Elite</span>
-          <h3 class="text-3xl font-black text-white mb-3 group-hover:text-orange-500 transition-colors uppercase italic tracking-tighter leading-none">${pkg.name}</h3>
+          <h3 class="text-3xl font-black text-[var(--text-dark)] mb-3 group-hover:text-orange-500 transition-colors uppercase italic tracking-tighter leading-none">${pkg.name}</h3>
           <p class="text-gray-500 font-black text-[10px] uppercase tracking-widest mb-10 leading-relaxed">${pkg.desc}</p>
           
           <div class="text-3xl font-black text-white mb-10 flex items-baseline gap-2 italic">
@@ -732,4 +817,45 @@ function calculateCatering() {
   document.getElementById("perPlateCost").innerText = perPlate;
 }
 
+function showToast(message, type = "success") {
+  const toast = document.createElement("div");
+  toast.className = `fixed bottom-24 left-1/2 -translate-x-1/2 px-6 py-3 rounded-2xl font-black text-xs uppercase tracking-widest shadow-2xl z-50 animate-fade-in-up flex items-center gap-3 backdrop-blur-md`;
 
+  if (type === "success") {
+    toast.style.background = "rgba(16, 185, 129, 0.9)";
+
+    toast.style.color = "white";
+    toast.innerHTML = `<i class="fa-solid fa-circle-check"></i> ${message}`;
+  } else {
+    toast.style.background = "rgba(239, 68, 68, 0.9)";
+    toast.style.color = "white";
+    toast.innerHTML = `<i class="fa-solid fa-circle-exclamation"></i> ${message}`;
+  }
+
+  document.body.appendChild(toast);
+  setTimeout(() => {
+    toast.classList.add("animate-fade-out-down");
+    setTimeout(() => toast.remove(), 500);
+  }, 3000);
+}
+
+function resetFilters() {
+  const searchInput = document.getElementById("searchTea");
+  if (searchInput) searchInput.value = "";
+
+  const healthyToggle = document.getElementById("healthyModeToggle");
+  if (healthyToggle) healthyToggle.checked = false;
+
+  selectedCategory = null;
+  document.querySelectorAll(".typeBtn").forEach(btn => {
+    btn.classList.remove("active-filter");
+    btn.classList.add("inactive-filter");
+  });
+
+  const allBtn = document.getElementById("btnAll");
+  if (allBtn) {
+    allBtn.classList.remove("inactive-filter");
+    allBtn.classList.add("active-filter");
+  }
+  renderMenu();
+}

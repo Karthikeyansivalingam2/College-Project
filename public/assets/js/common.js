@@ -65,6 +65,19 @@ async function loadComponents() {
       if (res.ok) foot.innerHTML = await res.text();
     } catch (e) { console.error("Error loading footer", e); }
   }
+
+  // Load Mobile Bottom Nav
+  try {
+    const mobileNavContainer = document.getElementById('mobile-nav-container');
+    if (mobileNavContainer) {
+      const res = await fetch('/components/mobile-nav.html');
+      if (res.ok) {
+        mobileNavContainer.innerHTML = await res.text();
+        setMobileActiveLink();
+        updateMobileCartBadge();
+      }
+    }
+  } catch (e) { console.error('Error loading mobile nav', e); }
 }
 
 function setActiveLink() {
@@ -74,6 +87,35 @@ function setActiveLink() {
     if (link.getAttribute('href') === path) link.classList.add('active');
     else link.classList.remove('active');
   });
+}
+
+function setMobileActiveLink() {
+  const path = window.location.pathname.split('/').pop() || 'index.html';
+  const map = {
+    'index.html': 'mob-home',
+    '': 'mob-home',
+    'order.html': 'mob-order',
+    'halls.html': 'mob-halls',
+    'profile.html': 'mob-profile'
+  };
+  const activeId = map[path];
+  if (activeId) {
+    const el = document.getElementById(activeId);
+    if (el) el.classList.add('active');
+  }
+}
+
+function updateMobileCartBadge() {
+  try {
+    const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+    const count = cart.reduce((s, i) => s + (i.qty || 1), 0);
+    const badge = document.getElementById('mobCartBadge');
+    if (badge) {
+      badge.textContent = count;
+      if (count > 0) badge.classList.add('visible');
+      else badge.classList.remove('visible');
+    }
+  } catch (e) { }
 }
 
 function updateAuthUI() {
@@ -103,7 +145,14 @@ function updateAuthUI() {
         profileBtn.classList.remove('bg-white/10', 'bg-red-500', 'bg-orange-500', 'bg-blue-500', 'bg-rose-500', 'bg-amber-500', 'bg-indigo-500', 'bg-emerald-500');
         profileBtn.classList.add(colors[colorIndex]);
       }
+      // Also update mobile top bar profile avatar
+      const mobileInitialEl = document.getElementById('navUserInitialMobile');
+      if (mobileInitialEl) mobileInitialEl.textContent = initial;
     }
+  } else {
+    // Not logged in — mobile top bar profile shows a person icon
+    const mobileInitialEl = document.getElementById('navUserInitialMobile');
+    if (mobileInitialEl) mobileInitialEl.innerHTML = '<i class="fa-solid fa-user" style="font-size:13px;"></i>';
   }
 }
 
@@ -117,15 +166,12 @@ function toggleTheme() {
 }
 
 function updateThemeIcon(isDark) {
-  const icon = document.getElementById('themeIcon');
-  if (!icon) return;
-  if (isDark) {
-    icon.classList.remove('fa-sun');
-    icon.classList.add('fa-moon');
-  } else {
-    icon.classList.remove('fa-moon');
-    icon.classList.add('fa-sun');
-  }
+  const icons = [document.getElementById('themeIcon'), document.getElementById('themeIconMobile')];
+  icons.forEach(icon => {
+    if (!icon) return;
+    if (isDark) { icon.classList.remove('fa-sun'); icon.classList.add('fa-moon'); }
+    else { icon.classList.remove('fa-moon'); icon.classList.add('fa-sun'); }
+  });
 }
 
 // Init Theme Immediately

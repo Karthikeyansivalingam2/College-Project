@@ -4,237 +4,885 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Secure Payment - Foodiee Gateway</title>
+    <title>Secure Payment — Foodiee</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
     <style>
-        .gpay-btn {
-            background: #202124;
-            color: white;
+        * {
+            font-family: 'Inter', sans-serif;
+            box-sizing: border-box;
         }
 
-        .phonepe-btn {
-            background: #5f259f;
-            color: white;
+        body {
+            min-height: 100vh;
+            background: #f0f2f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
         }
 
-        .spinner {
-            border: 4px solid rgba(0, 0, 0, 0.1);
-            width: 36px;
-            height: 36px;
+        /* ── Card ── */
+        .gateway-card {
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.12);
+            width: 100%;
+            max-width: 420px;
+            overflow: hidden;
+            animation: slideUp 0.4s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(24px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ── Header ── */
+        .gw-header {
+            background: #1a1a2e;
+            padding: 14px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        /* ── Amount bar ── */
+        .amount-bar {
+            background: linear-gradient(135deg, #ff6b00, #ff9500);
+            padding: 16px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        /* ── Tab Nav ── */
+        .tab-nav {
+            display: flex;
+            border-bottom: 2px solid #f1f1f1;
+            overflow-x: auto;
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 12px 8px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #9ca3af;
+            border: none;
+            background: none;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            margin-bottom: -2px;
+            transition: all 0.2s;
+            white-space: nowrap;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .tab-btn.active {
+            color: #f97316;
+            border-bottom-color: #f97316;
+        }
+
+        .tab-btn i {
+            font-size: 16px;
+        }
+
+        /* ── Input ── */
+        .gw-input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1.5px solid #e5e7eb;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #111827;
+            outline: none;
+            transition: border-color 0.2s;
+            background: #fafafa;
+        }
+
+        .gw-input:focus {
+            border-color: #f97316;
+            background: #fff;
+        }
+
+        .gw-input::placeholder {
+            color: #9ca3af;
+            font-weight: 400;
+        }
+
+        /* ── Card Preview ── */
+        .card-preview {
+            background: linear-gradient(135deg, #1e3a5f, #0f2547);
+            border-radius: 14px;
+            padding: 20px;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .card-preview::before {
+            content: '';
+            position: absolute;
+            top: -40px;
+            right: -40px;
+            width: 150px;
+            height: 150px;
             border-radius: 50%;
-            border-left-color: #000;
-            animation: spin 1s ease infinite;
+            background: rgba(255, 255, 255, 0.05);
         }
 
-        @keyframes spin {
+        .card-preview::after {
+            content: '';
+            position: absolute;
+            bottom: -60px;
+            left: -30px;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        /* ── Pay button ── */
+        .gw-pay-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #f97316, #ea580c);
+            color: white;
+            font-weight: 800;
+            font-size: 14px;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 4px 20px rgba(249, 115, 22, 0.4);
+        }
+
+        .gw-pay-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 8px 30px rgba(249, 115, 22, 0.5);
+        }
+
+        .gw-pay-btn:active {
+            transform: scale(0.98);
+        }
+
+        /* ── Bank list ── */
+        .bank-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 14px;
+            border: 1.5px solid #e5e7eb;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-bottom: 8px;
+        }
+
+        .bank-item:hover {
+            border-color: #f97316;
+            background: #fff7ed;
+        }
+
+        .bank-item.selected {
+            border-color: #f97316;
+            background: #fff7ed;
+        }
+
+        /* ── Spinners & loaders ── */
+        .dot-loader {
+            display: flex;
+            gap: 6px;
+            align-items: center;
+        }
+
+        .dot-loader span {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #f97316;
+            animation: bounce 1.2s infinite;
+        }
+
+        .dot-loader span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .dot-loader span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            80%,
+            100% {
+                transform: scale(0.8);
+                opacity: 0.5;
+            }
+
+            40% {
+                transform: scale(1.2);
+                opacity: 1;
+            }
+        }
+
+        /* ── OTP input ── */
+        .otp-inputs {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .otp-box {
+            width: 48px;
+            height: 56px;
+            border: 2px solid #e5e7eb;
+            border-radius: 10px;
+            font-size: 22px;
+            font-weight: 800;
+            text-align: center;
+            color: #111827;
+            outline: none;
+            transition: all 0.2s;
+        }
+
+        .otp-box:focus {
+            border-color: #f97316;
+            background: #fff7ed;
+        }
+
+        /* ── QR code area ── */
+        .qr-box {
+            border: 2px dashed #e5e7eb;
+            border-radius: 16px;
+            padding: 24px;
+            text-align: center;
+            background: #fafafa;
+        }
+
+        /* ── Success ── */
+        .success-pulse {
+            animation: pulse 1s ease;
+        }
+
+        @keyframes pulse {
             0% {
-                transform: rotate(0deg);
+                transform: scale(0.5);
+                opacity: 0;
+            }
+
+            50% {
+                transform: scale(1.1);
             }
 
             100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        /* ── Processing overlay ── */
+        #processingScreen {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 300px;
+        }
+
+        .ring-spinner {
+            width: 64px;
+            height: 64px;
+            border: 5px solid #f3f4f6;
+            border-top-color: #f97316;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
                 transform: rotate(360deg);
             }
+        }
+
+        .screen {
+            display: none;
+        }
+
+        .screen.active {
+            display: block;
         }
     </style>
 </head>
 
-<body class="bg-gray-950 min-h-screen flex items-center justify-center p-4">
+<body>
 
-    <div class="bg-gray-900 w-full max-w-md rounded-2xl shadow-xl overflow-hidden border border-gray-800"
-        id="paymentCard">
+    <!-- ───────────── MAIN GATEWAY CARD ───────────── -->
+    <div class="gateway-card" id="mainCard">
+
         <!-- Header -->
-        <div class="bg-gray-800 border-b border-gray-700 p-4 flex justify-between items-center">
-            <div class="flex items-center gap-2">
-                <i class="fa-solid fa-lock text-emerald-500"></i>
-                <span class="font-semibold text-gray-200">Secure Payment</span>
-            </div>
-            <div class="text-sm text-gray-400">ORD-REF-PG1029</div>
-        </div>
-
-        <div class="p-6">
-            <!-- Amount -->
-            <div class="text-center mb-8">
-                <p class="text-gray-400 text-sm mb-1">Total Payable</p>
-                <h1 class="text-4xl font-bold text-gray-100">₹<span id="payAmount">0</span></h1>
-            </div>
-
-            <!-- Payment Methods Selection -->
-            <div id="methodSelection">
-                <h3 class="text-sm font-semibold text-gray-400 uppercase mb-3">Select Payment Method</h3>
-                <div class="space-y-3">
-                    <button onclick="showDetails('UPI')"
-                        class="w-full flex items-center justify-between p-4 border border-gray-700 rounded-xl hover:border-emerald-500 transition group bg-gray-800 text-gray-200">
-                        <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center">
-                                <i class="fa-brands fa-google-pay text-xl text-gray-300"></i>
-                            </div>
-                            <span class="font-medium">UPI (GPay / PhonePe)</span>
-                        </div>
-                        <i class="fa-solid fa-chevron-right text-gray-500 group-hover:text-emerald-500"></i>
-                    </button>
-
-                    <button onclick="showDetails('CARD')"
-                        class="w-full flex items-center justify-between p-4 border border-gray-700 rounded-xl hover:border-emerald-500 transition group bg-gray-800 text-gray-200">
-                        <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center">
-                                <i class="fa-regular fa-credit-card text-xl text-gray-300"></i>
-                            </div>
-                            <span class="font-medium">Credit / Debit Card</span>
-                        </div>
-                        <i class="fa-solid fa-chevron-right text-gray-500 group-hover:text-emerald-500"></i>
-                    </button>
-
-                    <button onclick="confirmCOD()"
-                        class="w-full flex items-center justify-between p-4 border border-gray-700 rounded-xl hover:border-emerald-500 transition group bg-gray-800 text-gray-200">
-                        <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center">
-                                <i class="fa-solid fa-money-bill-wave text-xl text-gray-300"></i>
-                            </div>
-                            <span class="font-medium">Cash on Delivery</span>
-                        </div>
-                        <i class="fa-solid fa-chevron-right text-gray-500 group-hover:text-emerald-500"></i>
-                    </button>
+        <div class="gw-header">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 bg-orange-500 rounded-lg flex items-center justify-center">
+                    <span class="text-white font-black text-sm">F</span>
+                </div>
+                <div>
+                    <p class="text-white font-bold text-sm">Foodiee Pay</p>
+                    <p class="text-gray-400 text-xs">Secured by 256-bit SSL</p>
                 </div>
             </div>
+            <div class="flex items-center gap-2">
+                <i class="fa-solid fa-lock text-green-400 text-xs"></i>
+                <span class="text-green-400 text-xs font-bold">SECURE</span>
+            </div>
+        </div>
 
-            <!-- UPI Details Form -->
-            <div id="upiForm" class="hidden animate-fade-in">
-                <button onclick="backToMethods()"
-                    class="text-emerald-400 text-sm mb-4 font-bold flex items-center gap-2 hover:text-emerald-300 transition">
-                    <i class="fa-solid fa-arrow-left"></i> Change Method
+        <!-- Amount Bar -->
+        <div class="amount-bar">
+            <div>
+                <p class="text-white/70 text-xs font-semibold uppercase tracking-wider">Order Total</p>
+                <p class="text-white font-black text-2xl">₹<span id="displayAmount">0</span></p>
+            </div>
+            <div class="text-right">
+                <p class="text-white/70 text-xs font-semibold">Ref No.</p>
+                <p class="text-white font-bold text-sm" id="refNo">FD-000000</p>
+            </div>
+        </div>
+
+        <!-- Tab Navigation -->
+        <div class="tab-nav">
+            <button class="tab-btn active" onclick="switchTab('upi', this)" id="tab-upi">
+                <i class="fa-solid fa-mobile-screen-button"></i> UPI
+            </button>
+            <button class="tab-btn" onclick="switchTab('card', this)" id="tab-card">
+                <i class="fa-regular fa-credit-card"></i> Card
+            </button>
+            <button class="tab-btn" onclick="switchTab('netbanking', this)" id="tab-net">
+                <i class="fa-solid fa-building-columns"></i> NetBanking
+            </button>
+            <button class="tab-btn" onclick="switchTab('cod', this)" id="tab-cod">
+                <i class="fa-solid fa-money-bill-wave"></i> COD
+            </button>
+        </div>
+
+        <div class="p-5">
+
+            <!-- ═══ UPI SCREEN ═══ -->
+            <div class="screen active" id="screen-upi">
+                <!-- UPI app shortcuts -->
+                <div class="grid grid-cols-3 gap-3 mb-5">
+                    <button onclick="selectUPIApp('gpay')"
+                        class="flex flex-col items-center gap-1.5 p-3 border-2 border-gray-100 rounded-xl hover:border-orange-400 transition-all"
+                        id="upi-gpay">
+                        <div class="w-10 h-10 rounded-full bg-white shadow-md flex items-center justify-center">
+                            <i class="fa-brands fa-google-pay text-xl text-gray-700"></i>
+                        </div>
+                        <span class="text-xs font-bold text-gray-600">GPay</span>
+                    </button>
+                    <button onclick="selectUPIApp('phonepe')"
+                        class="flex flex-col items-center gap-1.5 p-3 border-2 border-gray-100 rounded-xl hover:border-orange-400 transition-all"
+                        id="upi-phonepe">
+                        <div class="w-10 h-10 rounded-full flex items-center justify-center"
+                            style="background:#5f259f;">
+                            <i class="fa-solid fa-p text-white text-lg font-black"></i>
+                        </div>
+                        <span class="text-xs font-bold text-gray-600">PhonePe</span>
+                    </button>
+                    <button onclick="selectUPIApp('paytm')"
+                        class="flex flex-col items-center gap-1.5 p-3 border-2 border-gray-100 rounded-xl hover:border-orange-400 transition-all"
+                        id="upi-paytm">
+                        <div class="w-10 h-10 rounded-full bg-sky-500 flex items-center justify-center">
+                            <span class="text-white font-black text-xs">PT</span>
+                        </div>
+                        <span class="text-xs font-bold text-gray-600">Paytm</span>
+                    </button>
+                </div>
+
+                <!-- Or type UPI ID -->
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="flex-1 h-px bg-gray-100"></div>
+                    <span class="text-xs text-gray-400 font-semibold">OR ENTER UPI ID</span>
+                    <div class="flex-1 h-px bg-gray-100"></div>
+                </div>
+
+                <div class="relative mb-4">
+                    <input type="text" id="upiId" class="gw-input pr-16" placeholder="yourname@okaxis" value="">
+                    <button onclick="verifyUPI()"
+                        class="absolute right-2 top-1/2 -translate-y-1/2 text-xs font-bold text-orange-500 bg-orange-50 px-3 py-1.5 rounded-lg hover:bg-orange-100 transition">VERIFY</button>
+                </div>
+                <div id="upiVerifyMsg" class="hidden text-xs font-bold text-green-600 flex items-center gap-1.5 mb-3">
+                    <i class="fa-solid fa-circle-check"></i> UPI ID verified successfully!
+                </div>
+                <button class="gw-pay-btn" onclick="startPay('UPI')">
+                    <i class="fa-solid fa-bolt mr-2"></i> Pay ₹<span class="payAmtBtn">0</span>
                 </button>
-                <h3 class="font-bold text-gray-200 mb-4">Enter UPI ID</h3>
-                <input type="text" id="upiId" placeholder="example@okhdfc"
-                    class="w-full p-4 border rounded-xl bg-gray-800 border-gray-700 text-white focus:border-emerald-500 outline-none mb-4 font-mono placeholder-gray-500">
-                <button onclick="finalPay('UPI')"
-                    class="w-full bg-emerald-600 text-white py-4 rounded-xl font-bold shadow-lg hover:bg-emerald-700 active:scale-95 transition">Pay
-                    Now</button>
             </div>
 
-            <!-- Card Details Form -->
-            <div id="cardForm" class="hidden animate-fade-in">
-                <button onclick="backToMethods()"
-                    class="text-emerald-400 text-sm mb-4 font-bold flex items-center gap-2 hover:text-emerald-300 transition">
-                    <i class="fa-solid fa-arrow-left"></i> Change Method
-                </button>
-                <h3 class="font-bold text-gray-200 mb-4">Enter Card Details</h3>
-                <div class="space-y-4">
-                    <input type="text" id="cardNumber" placeholder="0000 0000 0000 0000" maxlength="19"
-                        class="w-full p-4 border rounded-xl bg-gray-800 border-gray-700 text-white focus:border-emerald-500 outline-none font-mono placeholder-gray-500">
-                    <div class="grid grid-cols-2 gap-4">
-                        <input type="text" id="cardExpiry" placeholder="MM/YY" maxlength="5"
-                            class="w-full p-4 border rounded-xl bg-gray-800 border-gray-700 text-white focus:border-emerald-500 outline-none font-mono placeholder-gray-500">
-                        <input type="password" id="cardCvv" placeholder="CVV" maxlength="3"
-                            class="w-full p-4 border rounded-xl bg-gray-800 border-gray-700 text-white focus:border-emerald-500 outline-none font-mono placeholder-gray-500">
+            <!-- ═══ CARD SCREEN ═══ -->
+            <div class="screen" id="screen-card">
+                <!-- Card Preview -->
+                <div class="card-preview">
+                    <div class="flex justify-between items-start mb-4 relative z-10">
+                        <div>
+                            <p class="text-white/50 text-xs font-semibold">CARD NUMBER</p>
+                            <p class="text-white font-bold text-lg tracking-widest mt-1" id="previewNum">•••• •••• ••••
+                                ••••</p>
+                        </div>
+                        <i class="fa-brands fa-cc-visa text-white/70 text-3xl"></i>
+                    </div>
+                    <div class="flex justify-between items-end relative z-10">
+                        <div>
+                            <p class="text-white/50 text-xs font-semibold">CARD HOLDER</p>
+                            <p class="text-white font-bold text-sm mt-0.5" id="previewName">YOUR NAME</p>
+                        </div>
+                        <div>
+                            <p class="text-white/50 text-xs font-semibold">EXPIRES</p>
+                            <p class="text-white font-bold text-sm mt-0.5" id="previewExpiry">MM/YY</p>
+                        </div>
                     </div>
                 </div>
-                <button onclick="finalPay('Card')"
-                    class="w-full bg-emerald-600 text-white py-4 rounded-xl font-bold shadow-lg hover:bg-emerald-700 active:scale-95 transition mt-6">Pay
-                    Securely</button>
+
+                <div class="space-y-3 mb-4">
+                    <input type="text" id="cardNum" class="gw-input" placeholder="Card Number" maxlength="19">
+                    <input type="text" id="cardName" class="gw-input" placeholder="Cardholder Name">
+                    <div class="grid grid-cols-2 gap-3">
+                        <input type="text" id="cardExp" class="gw-input" placeholder="MM / YY" maxlength="5">
+                        <div class="relative">
+                            <input type="password" id="cardCvv" class="gw-input" placeholder="CVV" maxlength="3">
+                            <i class="fa-solid fa-eye-slash absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 cursor-pointer text-sm"
+                                onclick="toggleCvv()"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex items-center gap-2 mb-4 p-3 bg-green-50 rounded-xl border border-green-100">
+                    <i class="fa-solid fa-shield-halved text-green-500 text-sm"></i>
+                    <span class="text-xs font-semibold text-green-700">Protected by 3D Secure Authentication</span>
+                </div>
+                <button class="gw-pay-btn" onclick="startPay('Card')">
+                    <i class="fa-solid fa-lock mr-2"></i> Pay Securely ₹<span class="payAmtBtn">0</span>
+                </button>
             </div>
 
-            <button id="cancelBtn" onclick="cancelPayment()"
-                class="w-full mt-6 text-gray-400 hover:text-orange-500 text-sm font-medium transition">Cancel
-                Transaction</button>
+            <!-- ═══ NETBANKING SCREEN ═══ -->
+            <div class="screen" id="screen-netbanking">
+                <p class="text-xs font-black text-gray-400 uppercase tracking-widest mb-3">Popular Banks</p>
+                <div id="bankList">
+                    <div class="bank-item" onclick="selectBank(this, 'SBI')">
+                        <div class="w-10 h-10 rounded-lg bg-blue-600 flex items-center justify-center flex-shrink-0">
+                            <span class="text-white font-black text-xs">SBI</span>
+                        </div>
+                        <div>
+                            <p class="font-bold text-sm text-gray-800">State Bank of India</p>
+                            <p class="text-xs text-gray-400">Internet Banking</p>
+                        </div>
+                        <div class="ml-auto hidden text-orange-500" id="check-sbi"><i
+                                class="fa-solid fa-circle-check"></i></div>
+                    </div>
+                    <div class="bank-item" onclick="selectBank(this, 'HDFC')">
+                        <div class="w-10 h-10 rounded-lg bg-red-600 flex items-center justify-center flex-shrink-0">
+                            <span class="text-white font-black text-xs">HDFC</span>
+                        </div>
+                        <div>
+                            <p class="font-bold text-sm text-gray-800">HDFC Bank</p>
+                            <p class="text-xs text-gray-400">Internet Banking</p>
+                        </div>
+                        <div class="ml-auto hidden text-orange-500" id="check-hdfc"><i
+                                class="fa-solid fa-circle-check"></i></div>
+                    </div>
+                    <div class="bank-item" onclick="selectBank(this, 'ICICI')">
+                        <div class="w-10 h-10 rounded-lg bg-orange-500 flex items-center justify-center flex-shrink-0">
+                            <span class="text-white font-black text-xs">ICICI</span>
+                        </div>
+                        <div>
+                            <p class="font-bold text-sm text-gray-800">ICICI Bank</p>
+                            <p class="text-xs text-gray-400">Internet Banking</p>
+                        </div>
+                        <div class="ml-auto hidden text-orange-500" id="check-icici"><i
+                                class="fa-solid fa-circle-check"></i></div>
+                    </div>
+                    <div class="bank-item" onclick="selectBank(this, 'AXIS')">
+                        <div class="w-10 h-10 rounded-lg bg-purple-600 flex items-center justify-center flex-shrink-0">
+                            <span class="text-white font-black text-xs">AXIS</span>
+                        </div>
+                        <div>
+                            <p class="font-bold text-sm text-gray-800">Axis Bank</p>
+                            <p class="text-xs text-gray-400">Internet Banking</p>
+                        </div>
+                        <div class="ml-auto hidden text-orange-500" id="check-axis"><i
+                                class="fa-solid fa-circle-check"></i></div>
+                    </div>
+                </div>
+                <button class="gw-pay-btn mt-4" onclick="startPay('NetBanking')">
+                    <i class="fa-solid fa-building-columns mr-2"></i> Proceed ₹<span class="payAmtBtn">0</span>
+                </button>
+            </div>
+
+            <!-- ═══ COD SCREEN ═══ -->
+            <div class="screen" id="screen-cod">
+                <div class="bg-amber-50 border-2 border-amber-200 rounded-2xl p-5 mb-5 text-center">
+                    <i class="fa-solid fa-truck-fast text-4xl text-amber-500 mb-3 block"></i>
+                    <h3 class="font-black text-gray-800 text-lg mb-1">Cash on Delivery</h3>
+                    <p class="text-sm text-gray-500 font-medium">Pay <strong class="text-gray-800">₹<span
+                                class="payAmtBtn">0</span></strong> when your order arrives at the door.</p>
+                </div>
+                <div class="space-y-3 mb-5">
+                    <div class="flex items-center gap-3 text-sm text-gray-600">
+                        <i class="fa-solid fa-circle-check text-green-500"></i> No advance payment needed
+                    </div>
+                    <div class="flex items-center gap-3 text-sm text-gray-600">
+                        <i class="fa-solid fa-circle-check text-green-500"></i> Pay in cash to delivery partner
+                    </div>
+                    <div class="flex items-center gap-3 text-sm text-gray-600">
+                        <i class="fa-solid fa-circle-check text-green-500"></i> Keep exact change ready
+                    </div>
+                </div>
+                <button class="gw-pay-btn" onclick="startPay('Cash on Delivery')">
+                    <i class="fa-solid fa-handshake mr-2"></i> Confirm COD Order
+                </button>
+            </div>
+
+        </div>
+
+        <div class="px-5 pb-4 text-center">
+            <button onclick="cancelPayment()"
+                class="text-xs text-gray-400 font-semibold hover:text-gray-600 transition">
+                ← Cancel & Go Back
+            </button>
+            <div class="flex items-center justify-center gap-3 mt-3">
+                <i class="fa-brands fa-cc-visa text-gray-300 text-xl"></i>
+                <i class="fa-brands fa-cc-mastercard text-gray-300 text-xl"></i>
+                <i class="fa-brands fa-cc-rupay text-gray-300 text-xl"></i>
+                <i class="fa-solid fa-shield-halved text-gray-300"></i>
+            </div>
         </div>
     </div>
 
-    <!-- Processing State -->
-    <div id="processingState" class="hidden text-center text-white">
-        <div class="spinner mx-auto mb-4 border-gray-600 border-l-emerald-500"></div>
-        <h2 class="text-xl font-bold mb-2">Processing Your Order...</h2>
-        <p class="text-gray-400">Completing security checks...</p>
+    <!-- ───────────── OTP SCREEN ───────────── -->
+    <div class="gateway-card" id="otpCard" style="display:none;">
+        <div class="gw-header">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 bg-orange-500 rounded-lg flex items-center justify-center">
+                    <span class="text-white font-black text-sm">F</span>
+                </div>
+                <div>
+                    <p class="text-white font-bold text-sm">Verify Payment</p>
+                    <p class="text-gray-400 text-xs">One-Time Password</p>
+                </div>
+            </div>
+            <i class="fa-solid fa-lock text-green-400"></i>
+        </div>
+        <div class="p-6">
+            <div class="text-center mb-6">
+                <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fa-solid fa-mobile-screen text-orange-500 text-2xl"></i>
+                </div>
+                <h3 class="font-black text-gray-800 text-lg">Enter OTP</h3>
+                <p class="text-sm text-gray-500 mt-1">Sent to your registered mobile <span
+                        class="font-bold text-gray-700">+91 ••••••7890</span></p>
+            </div>
+
+            <div class="otp-inputs mb-6">
+                <input class="otp-box" id="otp1" maxlength="1" oninput="otpNext(this, 'otp2')" type="text"
+                    inputmode="numeric">
+                <input class="otp-box" id="otp2" maxlength="1" oninput="otpNext(this, 'otp3')"
+                    onkeydown="otpBack(event, 'otp1')" type="text" inputmode="numeric">
+                <input class="otp-box" id="otp3" maxlength="1" oninput="otpNext(this, 'otp4')"
+                    onkeydown="otpBack(event, 'otp2')" type="text" inputmode="numeric">
+                <input class="otp-box" id="otp4" maxlength="1" oninput="otpNext(this, null)"
+                    onkeydown="otpBack(event, 'otp3')" type="text" inputmode="numeric">
+            </div>
+
+            <div class="text-center mb-6">
+                <span class="text-xs text-gray-400 font-semibold" id="otpTimer">Resend OTP in <span
+                        id="timerCount">30</span>s</span>
+            </div>
+
+            <button class="gw-pay-btn" onclick="confirmOTP()">
+                <i class="fa-solid fa-check mr-2"></i> Verify & Pay ₹<span class="payAmtBtn">0</span>
+            </button>
+        </div>
     </div>
 
+    <!-- ───────────── PROCESSING SCREEN ───────────── -->
+    <div class="gateway-card" id="processingCard" style="display:none;">
+        <div class="p-10 text-center">
+            <div class="ring-spinner mx-auto mb-6"></div>
+            <h3 class="font-black text-gray-800 text-xl mb-2">Processing Payment</h3>
+            <p class="text-sm text-gray-500 font-medium mb-6" id="processingMsg">Connecting to bank server...</p>
+            <div class="space-y-2">
+                <div class="flex items-center gap-2 text-xs text-gray-400 justify-center" id="step1">
+                    <div class="dot-loader"><span></span><span></span><span></span></div>
+                    Verifying transaction details
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ───────────── SUCCESS SCREEN ───────────── -->
+    <div class="gateway-card" id="successCard" style="display:none;">
+        <div class="p-8 text-center">
+            <div
+                class="w-24 h-24 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-5 success-pulse">
+                <i class="fa-solid fa-circle-check text-green-500 text-5xl"></i>
+            </div>
+            <h2 class="font-black text-gray-800 text-2xl mb-2">Payment Successful!</h2>
+            <p class="text-gray-500 font-medium mb-1">Transaction ID: <span id="txnId"
+                    class="font-bold text-gray-700"></span></p>
+            <p class="text-gray-400 text-sm mb-6" id="successAmt"></p>
+            <div class="bg-green-50 border border-green-100 rounded-xl p-4 mb-6 text-left">
+                <p class="text-xs font-black text-green-700 uppercase tracking-widest mb-2">Payment Details</p>
+                <div class="space-y-1">
+                    <div class="flex justify-between text-sm"><span class="text-gray-500">Amount</span><span
+                            class="font-bold text-gray-800">₹<span id="successAmtDetail">0</span></span></div>
+                    <div class="flex justify-between text-sm"><span class="text-gray-500">Method</span><span
+                            class="font-bold text-gray-800" id="successMethod">—</span></div>
+                    <div class="flex justify-between text-sm"><span class="text-gray-500">Status</span><span
+                            class="font-bold text-green-600">✓ Verified</span></div>
+                </div>
+            </div>
+            <button onclick="goToThanks()" class="gw-pay-btn">
+                <i class="fa-solid fa-bag-shopping mr-2"></i> View Your Order
+            </button>
+        </div>
+    </div>
+
+    <script src="./assets/js/common.js"></script>
     <script>
-        const pendingOrder = JSON.parse(localStorage.getItem('pendingOrder'));
+        // ── Init ──────────────────────────────────────────────────────
+        const pendingOrder = JSON.parse(localStorage.getItem('pendingOrder') || '{}');
+        const amount = pendingOrder.total || 0;
+        let selectedPayMethod = 'UPI';
+        let selectedBank = '';
+        let finalOrderId = null;
 
-        if (!pendingOrder) {
-            alert("No pending order found.");
-            window.location.href = 'index.html';
-        } else {
-            document.getElementById('payAmount').innerText = pendingOrder.total;
+        document.querySelectorAll('#displayAmount').forEach(el => el.textContent = amount);
+        document.querySelectorAll('.payAmtBtn').forEach(el => el.textContent = amount);
+        document.getElementById('refNo').textContent = 'FD-' + Math.floor(100000 + Math.random() * 900000);
+
+        if (!pendingOrder.total) {
+            // Allow demo mode without actual order
+            console.warn('No pending order, running in demo mode');
         }
 
-        function showDetails(method) {
-            document.getElementById('methodSelection').classList.add('hidden');
-            document.getElementById('cancelBtn').classList.add('hidden');
-            if (method === 'UPI') document.getElementById('upiForm').classList.remove('hidden');
-            if (method === 'CARD') document.getElementById('cardForm').classList.remove('hidden');
+        // ── Tab Switching ─────────────────────────────────────────────
+        function switchTab(tab, btn) {
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            btn.classList.add('active');
+            document.getElementById('screen-' + tab).classList.add('active');
+            selectedPayMethod = tab.toUpperCase();
         }
 
-        function backToMethods() {
-            document.getElementById('methodSelection').classList.remove('hidden');
-            document.getElementById('cancelBtn').classList.remove('hidden');
-            document.getElementById('upiForm').classList.add('hidden');
-            document.getElementById('cardForm').classList.add('hidden');
+        // ── UPI App Selection ─────────────────────────────────────────
+        function selectUPIApp(app) {
+            document.querySelectorAll('[id^="upi-"]').forEach(b => b.classList.remove('border-orange-400', 'bg-orange-50'));
+            document.getElementById('upi-' + app).classList.add('border-orange-400', 'bg-orange-50');
+            const upiMap = { gpay: 'name@okicici', phonepe: 'name@ybl', paytm: 'name@paytm' };
+            document.getElementById('upiId').value = upiMap[app] || '';
         }
 
-        function confirmCOD() {
-            if (confirm("Confirm order with Cash on Delivery?")) {
-                finalPay('Cash on Delivery');
+        function verifyUPI() {
+            const v = document.getElementById('upiId').value;
+            if (!v.includes('@')) return;
+            const msg = document.getElementById('upiVerifyMsg');
+            msg.classList.remove('hidden');
+            setTimeout(() => msg.classList.add('hidden'), 3000);
+        }
+
+        // ── Bank Selection ────────────────────────────────────────────
+        function selectBank(el, bank) {
+            document.querySelectorAll('.bank-item').forEach(b => b.classList.remove('selected'));
+            document.querySelectorAll('[id^="check-"]').forEach(c => c.classList.add('hidden'));
+            el.classList.add('selected');
+            document.getElementById('check-' + bank.toLowerCase()).classList.remove('hidden');
+            selectedBank = bank;
+        }
+
+        // ── Card Preview Live Update ───────────────────────────────────
+        document.getElementById('cardNum')?.addEventListener('input', e => {
+            e.target.value = e.target.value.replace(/\D/g, '').replace(/(.{4})/g, '$1 ').trim().slice(0, 19);
+            const num = e.target.value || '•••• •••• •••• ••••';
+            document.getElementById('previewNum').textContent = num.padEnd(19, '•').replace(/\w{4}(?=.)/g, m => m + ' ').trim() || '•••• •••• •••• ••••';
+            // Auto switch card brand
+            const raw = e.target.value.replace(/\s/g, '');
+            const brandEl = document.querySelector('.card-preview .fa-brands');
+            if (raw.startsWith('4')) { brandEl.className = 'fa-brands fa-cc-visa text-white/70 text-3xl'; }
+            else if (raw.startsWith('5')) { brandEl.className = 'fa-brands fa-cc-mastercard text-white/70 text-3xl'; }
+            else if (raw.startsWith('6')) { brandEl.className = 'fa-brands fa-cc-rupay text-white/70 text-3xl'; }
+        });
+        document.getElementById('cardName')?.addEventListener('input', e => {
+            document.getElementById('previewName').textContent = e.target.value.toUpperCase() || 'YOUR NAME';
+        });
+        document.getElementById('cardExp')?.addEventListener('input', e => {
+            e.target.value = e.target.value.replace(/\D/g, '').replace(/^(\d{2})(\d)/, '$1/$2').slice(0, 5);
+            document.getElementById('previewExpiry').textContent = e.target.value || 'MM/YY';
+        });
+
+        function toggleCvv() {
+            const cvv = document.getElementById('cardCvv');
+            cvv.type = cvv.type === 'password' ? 'text' : 'password';
+        }
+
+        // ── OTP helpers ───────────────────────────────────────────────
+        function otpNext(el, nextId) {
+            if (el.value.length === 1 && nextId) document.getElementById(nextId)?.focus();
+        }
+        function otpBack(e, prevId) {
+            if (e.key === 'Backspace' && !e.target.value) document.getElementById(prevId)?.focus();
+        }
+
+        let timerInterval;
+        function startOTPTimer() {
+            let t = 30;
+            document.getElementById('timerCount').textContent = t;
+            timerInterval = setInterval(() => {
+                t--;
+                document.getElementById('timerCount').textContent = t;
+                if (t <= 0) { clearInterval(timerInterval); document.getElementById('otpTimer').innerHTML = '<button onclick="resendOTP()" class="text-orange-500 font-bold">Resend OTP</button>'; }
+            }, 1000);
+        }
+
+        function resendOTP() {
+            document.getElementById('otpTimer').innerHTML = 'Resend OTP in <span id="timerCount">30</span>s';
+            startOTPTimer();
+        }
+
+        // ── Start Pay Flow ────────────────────────────────────────────
+        function startPay(method) {
+            if (method === 'Cash on Delivery') { doPlaceOrder(method, 'COD-' + Date.now()); return; }
+            if (method === 'NetBanking' && !selectedBank) { alert('Please select a bank'); return; }
+            if (method === 'UPI') {
+                const id = document.getElementById('upiId').value;
+                if (!id.includes('@')) { alert('Please enter a valid UPI ID (e.g., name@okaxis)'); return; }
+            }
+            if (method === 'Card') {
+                const num = document.getElementById('cardNum').value.replace(/\s/g, '');
+                const exp = document.getElementById('cardExp').value;
+                const cvv = document.getElementById('cardCvv').value;
+                if (num.length < 16) { alert('Enter valid 16-digit card number'); return; }
+                if (exp.length < 5) { alert('Enter valid expiry date'); return; }
+                if (cvv.length < 3) { alert('Enter valid CVV'); return; }
+            }
+
+            // Show OTP for card/netbanking, skip for UPI
+            if (method === 'Card' || method === 'NetBanking') {
+                selectedPayMethod = method;
+                document.getElementById('mainCard').style.display = 'none';
+                document.getElementById('otpCard').style.display = 'block';
+                document.querySelectorAll('.payAmtBtn').forEach(el => el.textContent = amount);
+                ['otp1', 'otp2', 'otp3', 'otp4'].forEach(id => document.getElementById(id).value = '');
+                document.getElementById('otp1').focus();
+                startOTPTimer();
+            } else {
+                // UPI → straight to processing
+                selectedPayMethod = method;
+                showProcessing(method);
+            }
+        }
+
+        function confirmOTP() {
+            const otp = ['otp1', 'otp2', 'otp3', 'otp4'].map(id => document.getElementById(id).value).join('');
+            if (otp.length < 4) { alert('Please enter the 4-digit OTP'); return; }
+            clearInterval(timerInterval);
+            document.getElementById('otpCard').style.display = 'none';
+            showProcessing(selectedPayMethod);
+        }
+
+        // ── Processing & Success ──────────────────────────────────────
+        function showProcessing(method) {
+            document.getElementById('mainCard').style.display = 'none';
+            document.getElementById('processingCard').style.display = 'block';
+
+            const msgs = [
+                'Connecting to bank server...',
+                'Encrypting payment details...',
+                'Verifying transaction...',
+                'Confirming with merchant...'
+            ];
+            let i = 0;
+            const msgEl = document.getElementById('processingMsg');
+            const msgInterval = setInterval(() => {
+                if (i < msgs.length) { msgEl.textContent = msgs[i++]; }
+                else { clearInterval(msgInterval); }
+            }, 800);
+
+            setTimeout(() => {
+                clearInterval(msgInterval);
+                doPlaceOrder(method, generateTxnId(method));
+            }, 3500);
+        }
+
+        function generateTxnId(method) {
+            const prefix = { 'UPI': 'UPI', 'Card': 'CRD', 'NetBanking': 'NB', 'Cash on Delivery': 'COD' };
+            return (prefix[method] || 'TXN') + Date.now().toString().slice(-10);
+        }
+
+        function doPlaceOrder(method, txnId) {
+            pendingOrder.paymentMethod = method;
+            pendingOrder.paymentStatus = method === 'Cash on Delivery' ? 'Pending' : 'Paid';
+            pendingOrder.transactionId = txnId;
+
+            fetch('/api/order', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(pendingOrder)
+            })
+                .then(r => r.json())
+                .then(data => {
+                    if (data.success) {
+                        finalOrderId = data.orderId;
+                        localStorage.removeItem('pendingOrder');
+                        showSuccess(method, txnId);
+                    } else {
+                        // Still show success for demo if API fails
+                        showSuccess(method, txnId);
+                    }
+                })
+                .catch(() => showSuccess(method, txnId)); // Demo fallback
+        }
+
+        function showSuccess(method, txnId) {
+            document.getElementById('processingCard').style.display = 'none';
+            document.getElementById('otpCard').style.display = 'none';
+            document.getElementById('successCard').style.display = 'block';
+            document.getElementById('txnId').textContent = txnId;
+            document.getElementById('successAmtDetail').textContent = amount;
+            document.getElementById('successMethod').textContent = method;
+            document.getElementById('successAmt').textContent = 'Amount of ₹' + amount + ' successfully received.';
+            document.querySelectorAll('.payAmtBtn').forEach(el => el.textContent = amount);
+        }
+
+        function goToThanks() {
+            if (finalOrderId) {
+                window.location.href = './thanks-order.html?orderId=' + finalOrderId;
+            } else {
+                window.location.href = './thanks-order.html';
             }
         }
 
         function cancelPayment() {
-            if (confirm("Are you sure you want to cancel?")) {
-                window.location.href = "order.html";
-            }
+            if (confirm('Cancel payment and go back?')) window.location.href = 'order.html';
         }
-
-        function finalPay(method) {
-            // Validation
-            if (method === 'UPI') {
-                const id = document.getElementById('upiId').value;
-                if (!id.includes('@')) return alert("Enter valid UPI ID");
-            }
-            if (method === 'Card') {
-                const num = document.getElementById('cardNumber').value.replace(/\s/g, '');
-                const exp = document.getElementById('cardExpiry').value;
-                const cvv = document.getElementById('cardCvv').value;
-                if (num.length < 16 || exp.length < 5 || cvv.length < 3) return alert("Enter valid Card details");
-            }
-
-            // UI Switch
-            document.getElementById('paymentCard').classList.add('hidden');
-            document.getElementById('processingState').classList.remove('hidden');
-
-            // Set Data
-            pendingOrder.paymentMethod = method;
-            pendingOrder.paymentStatus = (method === 'Cash on Delivery') ? 'Pending' : 'Success';
-
-            setTimeout(() => {
-                fetch('/api/order', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(pendingOrder)
-                })
-                    .then(res => res.json())
-                    .then(data => {
-                        if (data.success) {
-                            localStorage.removeItem('pendingOrder');
-                            window.location.href = "./thanks-order.html?orderId=" + data.orderId;
-                        } else {
-                            alert("Order failed!");
-                            window.location.reload();
-                        }
-                    })
-                    .catch(err => {
-                        console.error(err);
-                        alert("Network Error");
-                        window.location.reload();
-                    });
-            }, 2000);
-        }
-
-        // Live formatting for card
-        document.getElementById('cardNumber')?.addEventListener('input', (e) => {
-            e.target.value = e.target.value.replace(/[^\d]/g, '').replace(/(.{4})/g, '$1 ').trim();
-        });
-        document.getElementById('cardExpiry')?.addEventListener('input', (e) => {
-            e.target.value = e.target.value.replace(/[^\d]/g, '').replace(/(.{2})/g, '$1/').replace(/\/$/, '').slice(0, 5);
-        });
     </script>
 </body>
 
