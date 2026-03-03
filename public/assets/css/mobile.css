@@ -9,7 +9,7 @@
 
 /* Mobile top actions — hidden on desktop */
 .mobile-top-actions {
-    display: none;
+    display: none !important;
 }
 
 @media (max-width: 768px) {
@@ -47,6 +47,11 @@
         display: flex !important;
         align-items: center;
         gap: 10px;
+    }
+
+    /* Hide desktop actions on mobile */
+    .nav-actions {
+        display: none !important;
     }
 
     /* ── Bottom Nav Bar ── */
