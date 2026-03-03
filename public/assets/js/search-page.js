@@ -207,18 +207,18 @@ function showShopList(query) {
 
       box.innerHTML +=
         '<div class="shop-card">' +
-        '<div class="card-top">' +
+        '<div class="flex justify-between items-start">' +
         '<h3>' + shop.name.replace(/</g, "&lt;") + '</h3>' +
         '<span class="badge">Open Now</span>' +
         '</div>' +
-        '<p class="card-location">📍 ' + shop.location + '</p>' +
+        '<p class="card-location"><i class="fa-solid fa-location-dot text-orange-500"></i> ' + shop.location + '</p>' +
         '<div class="card-tags">' +
-        '<span>🍽️ Dine-in</span>' +
-        '<span>🥡 Takeaway</span>' +
-        '<span>🚴 Delivery</span>' +
+        '<span><i class="fa-solid fa-utensils mr-1"></i> Dine-in</span>' +
+        '<span><i class="fa-solid fa-bag-shopping mr-1"></i> Takeaway</span>' +
+        '<span><i class="fa-solid fa-motorcycle mr-1"></i> Delivery</span>' +
         '</div>' +
-        '<button class="details-btn" onclick="showShopDetails(\'' + shop.name + '\')">' +
-        'View Details' +
+        '<button class="details-btn" onclick="showShopDetails(\'' + shop.name.replace(/'/g, "\\'") + '\')">' +
+        'Explore Menu <i class="fa-solid fa-arrow-right ml-2"></i>' +
         '</button>' +
         '</div>';
     }
