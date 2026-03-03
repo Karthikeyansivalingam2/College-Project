@@ -151,17 +151,11 @@ function filterResults(query) {
   currentQuery = query;
 
   var box = document.getElementById("results");
-  var loader = document.getElementById("loader");
 
-  if (loader) {
-    loader.classList.remove("hidden");
-    box.innerHTML = "";
-    box.appendChild(loader);
-  }
+  // Show Skeletons
+  displaySkeletons();
 
   setTimeout(function () {
-    if (loader) loader.classList.add("hidden");
-
     history.pushState(
       { view: "LIST", query: query },
       "",
@@ -170,7 +164,25 @@ function filterResults(query) {
 
     updateResultTitle("Popular Spots in " + query.toUpperCase());
     showShopList(query);
-  }, 500);
+  }, 1000); // 1 second delay to let skeletons shine
+}
+
+function displaySkeletons() {
+  var box = document.getElementById("results");
+  if (!box) return;
+
+  var skeletonCard =
+    '<div class="shop-card skeleton-container">' +
+    '<div class="skeleton" style="height: 24px; width: 80%; margin-bottom: 12px;"></div>' +
+    '<div class="skeleton" style="height: 16px; width: 40%; margin-bottom: 20px;"></div>' +
+    '<div class="card-tags">' +
+    '<div class="skeleton" style="height: 22px; width: 60px; border-radius: 12px;"></div>' +
+    '<div class="skeleton" style="height: 22px; width: 60px; border-radius: 12px;"></div>' +
+    '</div>' +
+    '<div class="skeleton" style="height: 40px; width: 100%; border-radius: 8px; margin-top: auto;"></div>' +
+    '</div>';
+
+  box.innerHTML = skeletonCard.repeat(6); // Show 6 skeleton cards
 }
 
 /* ===============================
