@@ -150,9 +150,10 @@ function filterResults(query) {
   query = query.replace(/\+/g, " ").trim().toLowerCase();
   currentQuery = query;
 
-  var box = document.getElementById("results");
+  var resultsContainer = document.getElementById("results");
+  if (!resultsContainer) return;
 
-  // Show Skeletons
+  // Show Skeletons ONLY in the results container
   displaySkeletons();
 
   setTimeout(function () {
@@ -164,7 +165,7 @@ function filterResults(query) {
 
     updateResultTitle("Popular Spots in " + query.toUpperCase());
     showShopList(query);
-  }, 1000); // 1 second delay to let skeletons shine
+  }, 800);
 }
 
 function displaySkeletons() {
