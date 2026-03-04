@@ -1,15 +1,24 @@
 const Razorpay = require('razorpay');
 const crypto = require('crypto');
 
-const razorpay = new Razorpay({
-    key_id: process.env.RAZORPAY_KEY_ID,
-    key_secret: process.env.RAZORPAY_KEY_SECRET,
-});
+let razorpay;
+if (process.env.RAZORPAY_KEY_ID && process.env.RAZORPAY_KEY_SECRET) {
+    razorpay = new Razorpay({
+        key_id: process.env.RAZORPAY_KEY_ID,
+        key_secret: process.env.RAZORPAY_KEY_SECRET,
+    });
+} else {
+    console.warn("⚠️ RAZORPAY_KEY_ID or RAZORPAY_KEY_SECRET is missing. Payment integration will be disabled.");
+}
 
 // POST /api/payment/create-order
 // Creates a Razorpay order and returns the order id + key to the frontend
 exports.createOrder = async (req, res) => {
     try {
+        if (!razorpay) {
+            return res.status(503).json({ success: false, message: 'Payment gateway not configured on server' });
+        }
+
         const { amount, currency = 'INR', receipt } = req.body;
 
         if (!amount || amount <= 0) {
@@ -41,6 +50,10 @@ exports.createOrder = async (req, res) => {
 // Verifies the payment signature after Razorpay checkout completes
 exports.verifyPayment = (req, res) => {
     try {
+        if (!process.env.RAZORPAY_KEY_SECRET) {
+            return res.status(503).json({ success: false, message: 'Payment gateway not configured on server' });
+        }
+
         const { razorpay_order_id, razorpay_payment_id, razorpay_signature } = req.body;
 
         const body = razorpay_order_id + '|' + razorpay_payment_id;
