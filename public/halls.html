@@ -82,19 +82,29 @@
     </section>
 
     <!-- Filter -->
-    <section class="max-w-6xl mx-auto px-4 py-10">
-        <div class="flex gap-4 overflow-x-auto pb-4 justify-center">
+    <style>
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+    <section class="max-w-6xl mx-auto px-4 py-8">
+        <div class="flex gap-3 overflow-x-auto pb-2 no-scrollbar px-1 md:justify-center">
             <button onclick="filterHalls('all')"
-                class="filter-btn filter-btn-active px-8 py-2.5 rounded-lg whitespace-nowrap font-bold transition-all">All
+                class="filter-btn filter-btn-active px-6 py-2 rounded-full whitespace-nowrap font-bold text-sm md:text-base transition-all">All
                 Halls</button>
             <button onclick="filterHalls('wedding')"
-                class="filter-btn filter-btn-inactive px-8 py-2.5 rounded-lg whitespace-nowrap font-bold transition-all">Wedding
+                class="filter-btn filter-btn-inactive px-6 py-2 rounded-full whitespace-nowrap font-bold text-sm md:text-base transition-all">Wedding
                 Halls</button>
             <button onclick="filterHalls('birthday')"
-                class="filter-btn filter-btn-inactive px-8 py-2.5 rounded-lg whitespace-nowrap font-bold transition-all">Birthday
+                class="filter-btn filter-btn-inactive px-6 py-2 rounded-full whitespace-nowrap font-bold text-sm md:text-base transition-all">Birthday
                 Party</button>
             <button onclick="filterHalls('corporate')"
-                class="filter-btn filter-btn-inactive px-8 py-2.5 rounded-lg whitespace-nowrap font-bold transition-all">Corporate
+                class="filter-btn filter-btn-inactive px-6 py-2 rounded-full whitespace-nowrap font-bold text-sm md:text-base transition-all">Corporate
                 Events</button>
         </div>
     </section>
@@ -564,9 +574,9 @@
                     btn.innerText.toLowerCase().includes(category);
 
                 if (isMatch) {
-                    btn.className = "filter-btn filter-btn-active px-8 py-2.5 rounded-lg whitespace-nowrap font-bold transition-all";
+                    btn.className = "filter-btn filter-btn-active px-6 py-2 rounded-full whitespace-nowrap font-bold text-sm md:text-base transition-all";
                 } else {
-                    btn.className = "filter-btn filter-btn-inactive px-8 py-2.5 rounded-lg whitespace-nowrap font-bold transition-all";
+                    btn.className = "filter-btn filter-btn-inactive px-6 py-2 rounded-full whitespace-nowrap font-bold text-sm md:text-base transition-all";
                 }
             });
 
