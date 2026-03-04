@@ -206,6 +206,26 @@
     #cartDrawer>div {
         max-height: 90vh;
     }
+
+    /* ── Footer adjustments for mobile ── */
+    .footer {
+        padding: 4rem 1.5rem 2rem !important;
+        margin-top: 4rem !important;
+    }
+
+    .footer-container {
+        gap: 2.5rem !important;
+    }
+
+    .footer-box a,
+    .footer-box p {
+        margin-bottom: 0.5rem !important;
+    }
+
+    .footer-box h3,
+    .footer-box h4 {
+        margin-bottom: 1rem !important;
+    }
 }
 
 /* ── Desktop: hide mobile-only elements ── */
