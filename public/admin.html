@@ -555,7 +555,7 @@
                             </td>
                             <td class="p-6">
                                 <ul class="space-y-1">
-                                    ${Object.keys(order.items).map(k => `<li class="text-xs font-bold text-gray-600 uppercase tracking-tight flex items-center gap-2"><div class="w-1 h-1 bg-orange-400 rounded-full"></div> ${k} <span class="text-gray-400">x${order.items[k].qty}</span></li>`).join('')}
+                                    ${Object.keys(order.items || {}).map(k => `<li class="text-xs font-bold text-gray-600 uppercase tracking-tight flex items-center gap-2"><div class="w-1 h-1 bg-orange-400 rounded-full"></div> ${k} <span class="text-gray-400">x${(order.items || {})[k].qty}</span></li>`).join('')}
                                 </ul>
                             </td>
                             <td class="p-6 text-gray-500 text-xs font-black tracking-widest uppercase">${order.city || 'GLOBAL'}</td>

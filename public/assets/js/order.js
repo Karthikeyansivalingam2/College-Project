@@ -184,7 +184,16 @@ function closeCart() {
 
 let selectedCategory = null;
 
-let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+let favorites = [];
+try {
+  const storedFav = localStorage.getItem("favorites");
+  if (storedFav) {
+    const parsedFav = JSON.parse(storedFav);
+    if (Array.isArray(parsedFav)) favorites = parsedFav;
+  }
+} catch (e) {
+  console.error("Failed to parse favorites", e);
+}
 
 function selectCategory(category, clickedBtn) {
   selectedCategory = category;
@@ -299,35 +308,36 @@ function renderMenu() {
   const fastFoodSection = document.getElementById("fastFoodSection");
   const dietSection = document.getElementById("dietSection");
 
-  // Safely clear
-  [beverageGrid, breakfastGrid, lunchGrid, dinnerGrid, fastFoodGrid, dietGrid].forEach(el => {
-    if (el) el.innerHTML = "";
-  });
+  try {
+    // Safely clear
+    [beverageGrid, breakfastGrid, lunchGrid, dinnerGrid, fastFoodGrid, dietGrid].forEach(el => {
+      if (el) el.innerHTML = "";
+    });
 
-  const searchInput = document.getElementById("searchTea");
-  const search = searchInput ? searchInput.value.toLowerCase() : "";
-  const healthyToggle = document.getElementById("healthyModeToggle");
-  const isHealthyMode = healthyToggle ? healthyToggle.checked : false;
+    const searchInput = document.getElementById("searchTea");
+    const search = searchInput ? searchInput.value.toLowerCase() : "";
+    const healthyToggle = document.getElementById("healthyModeToggle");
+    const isHealthyMode = healthyToggle ? healthyToggle.checked : false;
 
-  logDebug(`Rendering menu: ${foodMenu.length} items fetched.`);
-  logDebug(`Mode: Healthy=${isHealthyMode}, Category=${selectedCategory}`);
+    logDebug(`Rendering menu: ${foodMenu.length} items fetched.`);
+    logDebug(`Mode: Healthy=${isHealthyMode}, Category=${selectedCategory}`);
 
-  // Filter by category, search AND active status
-  const filtered = foodMenu.filter(t => {
-    // case-insensitive matching for category
-    const matchesCategory = !selectedCategory || (t.category && t.category.toLowerCase() === selectedCategory.toLowerCase());
-    const matchesSearch = !search || (t.name && t.name.toLowerCase().includes(search));
-    const matchesHealthy = !isHealthyMode || t.category === 'Healthy' || (t.calories && t.calories < 300);
-    const isActive = t.active !== false;
+    // Filter by category, search AND active status
+    const filtered = foodMenu.filter(t => {
+      // case-insensitive matching for category
+      const matchesCategory = !selectedCategory || (t.category && t.category.toLowerCase() === selectedCategory.toLowerCase());
+      const matchesSearch = !search || (t.name && t.name.toLowerCase().includes(search));
+      const matchesHealthy = !isHealthyMode || t.category === 'Healthy' || (t.calories && t.calories < 300);
+      const isActive = t.active !== false;
 
-    return isActive && matchesCategory && matchesSearch && matchesHealthy;
-  });
+      return isActive && matchesCategory && matchesSearch && matchesHealthy;
+    });
 
-  logDebug(`Filtered items: ${filtered.length}. Rendering...`);
+    logDebug(`Filtered items: ${filtered.length}. Rendering...`);
 
-  if (filtered.length === 0 && foodMenu.length > 0) {
-    beverageSection.classList.remove('hidden');
-    beverageGrid.innerHTML = `
+    if (filtered.length === 0 && foodMenu.length > 0) {
+      beverageSection.classList.remove('hidden');
+      beverageGrid.innerHTML = `
       <div class="col-span-full py-20 text-center">
         <div class="w-16 h-16 bg-orange-500/10 rounded-full flex items-center justify-center mx-auto mb-4 border border-orange-500/20">
           <i class="fa-solid fa-utensils text-orange-500 text-2xl"></i>
@@ -336,60 +346,72 @@ function renderMenu() {
         <button onclick="resetFilters()" class="mt-4 text-orange-500 font-bold text-xs uppercase tracking-[0.2em] border-none bg-transparent cursor-pointer hover:underline">Reset Filters</button>
       </div>
     `;
-    return;
-  }
-
-  // Hide all sections initially
-  [beverageSection, breakfastSection, lunchSection, dinnerSection, fastFoodSection, dietSection].forEach(s => {
-    if (s) s.classList.add('hidden');
-  });
-
-  logDebug(`Rendering ${filtered.length} items to grids...`);
-
-  filtered.forEach(t => {
-    const isFav = favorites.includes(t.name);
-    const cartItem = cart[t.name] || { qty: 0 };
-
-    // Determine Grid
-    let targetGrid = null;
-    let targetSection = null;
-    const cat = (t.category || "").toLowerCase();
-
-    if (["tea", "coffee", "milk special", "popular", "cold", "premium", "beverage"].includes(cat)) {
-      targetGrid = beverageGrid;
-      targetSection = beverageSection;
-    }
-    else if (cat === "breakfast") {
-      targetGrid = breakfastGrid;
-      targetSection = breakfastSection;
-    }
-    else if (cat === "lunch") {
-      targetGrid = lunchGrid;
-      targetSection = lunchSection;
-    }
-    else if (cat === "dinner") {
-      targetGrid = dinnerGrid;
-      targetSection = dinnerSection;
-    }
-    else if (cat === "diet" || cat === "healthy") {
-      targetGrid = dietGrid;
-      targetSection = dietSection;
-    }
-    else {
-      targetGrid = fastFoodGrid;
-      targetSection = fastFoodSection;
-    }
-
-    if (!targetGrid) {
-      logDebug(`WARNING: No grid for item ${t.name} (cat: ${cat})`);
+      return;
+    } else if (foodMenu.length === 0) {
+      beverageSection.classList.remove('hidden');
+      beverageGrid.innerHTML = `
+      <div class="col-span-full py-10 text-center">
+        <div class="w-12 h-12 bg-red-500/10 rounded-full flex items-center justify-center mx-auto mb-4 border border-red-500/20">
+          <i class="fa-solid fa-cloud-arrow-down text-red-500 text-lg"></i>
+        </div>
+        <p class="text-gray-400 font-bold uppercase tracking-widest text-xs">Could not load menu items from the server.</p>
+        <button onclick="fetchMenu()" class="mt-4 text-orange-500 font-bold text-xs uppercase tracking-widest border-none bg-transparent cursor-pointer hover:underline"><i class="fa-solid fa-rotate-right mr-1"></i> Try Again</button>
+      </div>
+    `;
       return;
     }
 
-    if (targetSection) {
-      targetSection.classList.remove('hidden');
-    }
+    // Hide all sections initially
+    [beverageSection, breakfastSection, lunchSection, dinnerSection, fastFoodSection, dietSection].forEach(s => {
+      if (s) s.classList.add('hidden');
+    });
 
-    const card = `
+    logDebug(`Rendering ${filtered.length} items to grids...`);
+
+    filtered.forEach(t => {
+      const isFav = favorites.includes(t.name);
+      const cartItem = cart[t.name] || { qty: 0 };
+
+      // Determine Grid
+      let targetGrid = null;
+      let targetSection = null;
+      const cat = (t.category || "").toLowerCase();
+
+      if (["tea", "coffee", "milk special", "popular", "cold", "premium", "beverage"].includes(cat)) {
+        targetGrid = beverageGrid;
+        targetSection = beverageSection;
+      }
+      else if (cat === "breakfast") {
+        targetGrid = breakfastGrid;
+        targetSection = breakfastSection;
+      }
+      else if (cat === "lunch") {
+        targetGrid = lunchGrid;
+        targetSection = lunchSection;
+      }
+      else if (cat === "dinner") {
+        targetGrid = dinnerGrid;
+        targetSection = dinnerSection;
+      }
+      else if (cat === "diet" || cat === "healthy") {
+        targetGrid = dietGrid;
+        targetSection = dietSection;
+      }
+      else {
+        targetGrid = fastFoodGrid;
+        targetSection = fastFoodSection;
+      }
+
+      if (!targetGrid) {
+        logDebug(`WARNING: No grid for item ${t.name} (cat: ${cat})`);
+        return;
+      }
+
+      if (targetSection) {
+        targetSection.classList.remove('hidden');
+      }
+
+      const card = `
       <div class="bg-[var(--bg-card)] border border-[var(--border-light)] p-5 flex justify-between items-center group mb-4 relative overflow-hidden rounded-[2rem] hover:border-orange-500/30 transition-all" style="box-shadow: var(--shadow-standard);">
         
         <div class="flex-1 pr-6 relative z-10">
@@ -439,8 +461,16 @@ function renderMenu() {
       </div>
     `;
 
-    targetGrid.innerHTML += card;
-  });
+      targetGrid.innerHTML += card;
+    });
+
+  } catch (err) {
+    console.error("RenderMenu Error:", err);
+    if (beverageGrid) {
+      beverageSection.classList.remove('hidden');
+      beverageGrid.innerHTML = `<div class="p-8 text-center border border-red-500 bg-red-50 rounded-2xl"><h4 class="text-red-500 font-bold mb-2">Error rendering menu items</h4><p class="text-xs text-gray-500">${err.message}</p></div>`;
+    }
+  }
 }
 
 

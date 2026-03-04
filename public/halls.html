@@ -57,7 +57,7 @@
             color: var(--primary-color) !important;
         }
     </style>
-  <link rel="stylesheet" href="./assets/css/mobile.css?v=2">
+    <link rel="stylesheet" href="./assets/css/mobile.css?v=2">
 </head>
 
 <body>
@@ -422,7 +422,7 @@
                 </button>
             </div>
 
-            <form id="bookingForm" class="p-8 space-y-6">
+            <form id="bookingForm" onsubmit="confirmBooking(event)" class="p-8 space-y-6">
                 <div class="space-y-2">
                     <label class="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Event
                         Date</label>
@@ -435,13 +435,13 @@
                     <div class="space-y-2">
                         <label class="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Your
                             Name</label>
-                        <input type="text" placeholder="Full Name" required
+                        <input type="text" id="bookingName" placeholder="Full Name" required
                             class="w-full bg-gray-50 border border-gray-100 p-4 rounded-2xl outline-none focus:border-orange-500 font-bold text-gray-800 transition-all">
                     </div>
                     <div class="space-y-2">
                         <label class="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Mobile
                             Number</label>
-                        <input type="tel" placeholder="+91 XXXX XXXX XX" required
+                        <input type="tel" id="bookingMobile" placeholder="+91 XXXX XXXX XX" required
                             class="w-full bg-gray-50 border border-gray-100 p-4 rounded-2xl outline-none focus:border-orange-500 font-bold text-gray-800 transition-all">
                     </div>
                 </div>
@@ -449,7 +449,7 @@
                 <div class="space-y-2">
                     <label class="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Event
                         Type</label>
-                    <select
+                    <select id="bookingType"
                         class="w-full bg-gray-50 border border-gray-100 p-4 rounded-2xl outline-none focus:border-orange-500 font-bold text-gray-800 transition-all appearance-none cursor-pointer">
                         <option>Wedding Ceremony</option>
                         <option>Birthday Celebration</option>
@@ -459,7 +459,7 @@
                 </div>
 
                 <div class="pt-4">
-                    <button type="button" onclick="confirmBooking()"
+                    <button type="submit"
                         class="w-full bg-orange-500 text-white p-5 rounded-[1.5rem] font-black text-sm uppercase tracking-widest hover:bg-orange-600 shadow-xl shadow-orange-500/20 active:scale-[0.98] transition-all">
                         Request Booking
                     </button>
@@ -488,9 +488,47 @@
             modal.classList.replace('flex', 'hidden');
         }
 
-        function confirmBooking() {
-            const hallId = 'HAL-' + Math.floor(Math.random() * 9000 + 1000);
-            window.location.href = `thanks.html?type=hall&id=${hallId}`;
+        async function confirmBooking(event) {
+            event.preventDefault();
+
+            const btn = document.querySelector('#bookingForm button[type="submit"]');
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-2"></i> Processing...';
+            btn.disabled = true;
+
+            const date = document.getElementById('bookingDate').value;
+            const name = document.getElementById('bookingName').value;
+            const mobile = document.getElementById('bookingMobile').value;
+            const eventType = document.getElementById('bookingType').value;
+            const hallName = document.getElementById('hallNameDisplay').innerText;
+
+            try {
+                const response = await fetch('/api/enquire', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        name: name,
+                        mobile: mobile,
+                        email: "Not provided",
+                        company: eventType,
+                        package: hallName + ' (Date: ' + date + ')',
+                        guests: 0
+                    })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    window.location.href = `thanks.html?type=hall&id=${data.enquiryId}`;
+                } else {
+                    alert("Failed to submit enquiry. Please try again.");
+                }
+            } catch (err) {
+                console.error(err);
+                alert("An error occurred during booking.");
+            } finally {
+                btn.innerHTML = 'Request Booking';
+                btn.disabled = false;
+            }
         }
 
         function checkAvailability() {
@@ -538,8 +576,8 @@
             });
         }
     </script>
-  <!-- Mobile Bottom Nav -->
-  <div id="mobile-nav-container"></div>
+    <!-- Mobile Bottom Nav -->
+    <div id="mobile-nav-container"></div>
 
 </body>
 
