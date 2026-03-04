@@ -11,8 +11,7 @@ const realMenu = require('./config/menuData');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Connect to Database
-connectDB();
+// Connect to Database (Removed from top level for Vercel support)
 
 // Middleware
 app.use(cors());
@@ -35,8 +34,16 @@ app.use((req, res, next) => {
 // Serve static files
 app.use(express.static(path.join(__dirname, 'public')));
 
-// API Routes
-app.use('/api', apiRoutes);
+// API Routes - Always ensure DB is connected before routing
+app.use('/api', async (req, res, next) => {
+    try {
+        await connectDB();
+        next();
+    } catch (err) {
+        console.error("DB Middleware Error:", err);
+        res.status(500).json({ success: false, message: "Database connection failed" });
+    }
+}, apiRoutes);
 
 // Menu Seeding Logic (Only for local development startup)
 async function seedMenu() {
