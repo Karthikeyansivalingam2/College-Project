@@ -28,9 +28,9 @@
     <!-- Clean Background Image -->
     <div class="absolute inset-0 z-0 bg-black">
       <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=1920"
-        class="w-full h-full object-cover brightness-[0.5] contrast-[1.1] opacity-90" alt="Premium Food Platter">
+        class="w-full h-full object-cover brightness-[0.5] contrast-[1.1]" alt="Premium Food Platter">
       <div class="absolute top-0 w-full h-40 bg-gradient-to-b from-black/60 to-transparent"></div>
-      <div class="absolute bottom-0 w-full h-48 bg-gradient-to-t from-[var(--bg-main)] to-transparent"></div>
+      <div class="absolute bottom-0 w-full h-32 bg-gradient-to-t from-black/80 to-transparent"></div>
     </div>
 
     <!-- Content Area -->
@@ -75,9 +75,9 @@
     </div>
   </section>
 
-  <!-- Quick Stats (Dark Mode) -->
+  <!-- Quick Stats (Glass Style) -->
   <div
-    class="mt-[-60px] relative z-20 grid grid-cols-3 gap-4 md:gap-8 max-w-4xl mx-auto bg-[var(--bg-secondary)] p-10 rounded-[2.5rem] border border-[var(--border-light)] shadow-2xl">
+    class="mt-[-110px] relative z-20 grid grid-cols-3 gap-4 md:gap-8 max-w-5xl mx-auto bg-white/5 backdrop-blur-3xl p-12 rounded-[3.5rem] border border-white/10 shadow-2xl">
     <div class="text-center">
       <p class="text-4xl md:text-5xl font-black text-orange-500 tracking-tighter italic">10k+</p>
       <p class="text-[9px] md:text-[10px] text-gray-500 uppercase tracking-[0.2em] font-black mt-2">Active Members</p>
@@ -91,7 +91,6 @@
       <p class="text-[9px] md:text-[10px] text-gray-500 uppercase tracking-[0.2em] font-black mt-2">Global Rating</p>
     </div>
   </div>
-  </section>
 
   <!-- Features Section (StepUp Dark) -->
   <section class="py-24 bg-[var(--bg-main)]">
@@ -199,71 +198,80 @@
     </div>
   </section>
 
-  <!-- Locations Section -->
-  <section class="max-w-6xl mx-auto py-16 px-4">
-    <div class="flex justify-between items-end mb-10">
-      <div>
-        <h2 class="text-3xl font-bold text-gray-800">Popular Cities</h2>
-        <p class="text-gray-500 mt-2">Find us in your neighborhood</p>
+  <!-- Locations Section (Redesigned) -->
+  <section class="max-w-[1400px] mx-auto py-24 px-6">
+    <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-6">
+      <div class="space-y-4">
+        <div class="flex items-center gap-4">
+          <div class="w-12 h-1 bg-orange-500 rounded-full"></div>
+          <span class="text-xs font-black uppercase tracking-[0.4em] text-orange-600">Our Presence</span>
+        </div>
+        <h2 class="text-5xl md:text-6xl font-black text-[var(--text-dark)] tracking-tighter uppercase">Popular <span class="text-orange-500">Cities</span></h2>
+        <p class="text-gray-500 font-medium max-w-md">Experience culinary excellence across South India's most vibrant urban centers.</p>
       </div>
-      <a href="#" class="text-amber-700 font-bold hover:underline hidden md:block">View all cities <i
-          class="fa-solid fa-arrow-right ml-1"></i></a>
+      <a href="#" class="group flex items-center gap-3 bg-gray-100 hover:bg-orange-500 px-8 py-4 rounded-2xl transition-all duration-500">
+        <span class="font-black text-xs uppercase tracking-widest text-gray-900 group-hover:text-white">View All Cities</span>
+        <i class="fa-solid fa-arrow-right text-gray-400 group-hover:text-white transition-colors"></i>
+      </a>
     </div>
 
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-      <!-- City Card -->
-      <!-- City Card -->
-      <a href="#"
-        onclick="selectCity('Chennai'); document.querySelector('.hero-bg').scrollIntoView({behavior:'smooth'})"
-        class="group relative h-64 rounded-2xl overflow-hidden cursor-pointer shadow-lg">
-        <img src="https://images.unsplash.com/photo-1582510003544-5243788c942e?q=80&w=800"
-          class="w-full h-full object-cover transition duration-700 group-hover:scale-110 group-hover:rotate-1">
-        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
-        <div class="absolute bottom-0 left-0 w-full p-6">
-          <h3 class="text-white text-xl font-bold group-hover:text-amber-300 transition">Chennai</h3>
-          <p class="text-gray-300 text-xs">50+ Locations</p>
+    <!-- Masonry-style Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+      
+      <!-- Chennai -->
+      <a href="#" onclick="selectCity('Chennai')" class="group relative h-[450px] rounded-[2.5rem] overflow-hidden shadow-2xl transition-all duration-700 hover:-translate-y-4">
+        <img src="./assets/images/chennai_premium.png" class="w-full h-full object-cover transition duration-1000 group-hover:scale-110">
+        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent opacity-80"></div>
+        <div class="absolute bottom-10 left-10 right-10 p-8 bg-white/10 backdrop-blur-2xl rounded-3xl border border-white/20 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+          <h3 class="text-white text-3xl font-black tracking-tighter uppercase">Chennai</h3>
+          <div class="flex items-center justify-between mt-4">
+            <span class="text-orange-400 text-[10px] font-black uppercase tracking-widest">50+ Hubs</span>
+            <i class="fa-solid fa-circle-arrow-right text-white text-xl"></i>
+          </div>
         </div>
       </a>
 
-      <!-- City Card -->
-      <a href="#"
-        onclick="selectCity('Madurai'); document.querySelector('.hero-bg').scrollIntoView({behavior:'smooth'})"
-        class="group relative h-72 rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 block mt-0 md:mt-8">
-        <img src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?q=80&w=1200"
-          class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
-        <div class="absolute bottom-0 left-0 w-full p-6">
-          <h3 class="text-white text-xl font-bold group-hover:text-amber-300 transition">Madurai</h3>
-          <p class="text-gray-300 text-xs">35+ Locations</p>
+      <!-- Madurai -->
+      <a href="#" onclick="selectCity('Madurai')" class="group relative h-[450px] rounded-[2.5rem] overflow-hidden shadow-2xl transition-all duration-700 hover:-translate-y-4 md:mt-12">
+        <img src="./assets/images/madurai_premium.png" class="w-full h-full object-cover transition duration-1000 group-hover:scale-110">
+        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent opacity-80"></div>
+        <div class="absolute bottom-10 left-10 right-10 p-8 bg-white/10 backdrop-blur-2xl rounded-3xl border border-white/20 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+          <h3 class="text-white text-3xl font-black tracking-tighter uppercase">Madurai</h3>
+          <div class="flex items-center justify-between mt-4">
+            <span class="text-orange-400 text-[10px] font-black uppercase tracking-widest">35+ Hubs</span>
+            <i class="fa-solid fa-circle-arrow-right text-white text-xl"></i>
+          </div>
         </div>
       </a>
 
-      <!-- City Card -->
-      <a href="#"
-        onclick="selectCity('Coimbatore'); document.querySelector('.hero-bg').scrollIntoView({behavior:'smooth'})"
-        class="group relative h-64 rounded-2xl overflow-hidden cursor-pointer shadow-lg">
-        <img src="https://images.unsplash.com/photo-1621243912629-28f58b0907a2?q=80&w=800"
-          class="w-full h-full object-cover transition duration-700 group-hover:scale-110 group-hover:rotate-1">
-        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
-        <div class="absolute bottom-0 left-0 w-full p-6">
-          <h3 class="text-white text-xl font-bold group-hover:text-amber-300 transition">Coimbatore</h3>
-          <p class="text-gray-300 text-xs">20+ Locations</p>
+      <!-- Coimbatore -->
+      <a href="#" onclick="selectCity('Coimbatore')" class="group relative h-[450px] rounded-[2.5rem] overflow-hidden shadow-2xl transition-all duration-700 hover:-translate-y-4">
+        <img src="./assets/images/coimbatore_premium.png" class="w-full h-full object-cover transition duration-1000 group-hover:scale-110">
+        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent opacity-80"></div>
+        <div class="absolute bottom-10 left-10 right-10 p-8 bg-white/10 backdrop-blur-2xl rounded-3xl border border-white/20 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+          <h3 class="text-white text-3xl font-black tracking-tighter uppercase">Coimbatore</h3>
+          <div class="flex items-center justify-between mt-4">
+            <span class="text-orange-400 text-[10px] font-black uppercase tracking-widest">20+ Hubs</span>
+            <i class="fa-solid fa-circle-arrow-right text-white text-xl"></i>
+          </div>
         </div>
       </a>
 
-      <!-- City Card -->
-      <a href="#" onclick="selectCity('Salem'); document.querySelector('.hero-bg').scrollIntoView({behavior:'smooth'})"
-        class="group relative h-64 rounded-2xl overflow-hidden cursor-pointer shadow-lg mt-0 md:mt-8">
-        <img src="https://images.unsplash.com/photo-1590449557762-b9d9c2273185?q=80&w=800"
-          class="w-full h-full object-cover transition duration-700 group-hover:scale-110 group-hover:rotate-1">
-        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
-        <div class="absolute bottom-0 left-0 w-full p-6">
-          <h3 class="text-white text-xl font-bold group-hover:text-amber-300 transition">Salem</h3>
-          <p class="text-gray-300 text-xs">15+ Locations</p>
+      <!-- Salem -->
+      <a href="#" onclick="selectCity('Salem')" class="group relative h-[450px] rounded-[2.5rem] overflow-hidden shadow-2xl transition-all duration-700 hover:-translate-y-4 md:mt-12">
+        <img src="./assets/images/salem_premium.png" class="w-full h-full object-cover transition duration-1000 group-hover:scale-110">
+        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent opacity-80"></div>
+        <div class="absolute bottom-10 left-10 right-10 p-8 bg-white/10 backdrop-blur-2xl rounded-3xl border border-white/20 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+          <h3 class="text-white text-3xl font-black tracking-tighter uppercase">Salem</h3>
+          <div class="flex items-center justify-between mt-4">
+            <span class="text-orange-400 text-[10px] font-black uppercase tracking-widest">15+ Hubs</span>
+            <i class="fa-solid fa-circle-arrow-right text-white text-xl"></i>
+          </div>
         </div>
       </a>
 
     </div>
+  </section>
   </section>
 
   <!-- Footer -->
