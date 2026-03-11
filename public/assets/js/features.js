@@ -301,7 +301,13 @@ function drawWheel(angle) {
 function spinWheel() {
     if (isSpinning) return;
 
-    const lastSpun = localStorage.getItem('lastSpinDate');
+    let spinKey = 'lastSpinDate_guest';
+    try {
+        const u = JSON.parse(localStorage.getItem('currentUser'));
+        if (u && u.username) spinKey = 'lastSpinDate_' + u.username;
+    } catch(e) {}
+    
+    const lastSpun = localStorage.getItem(spinKey);
     const today = new Date().toDateString();
     if (lastSpun === today) {
         showToast('🎰 Already spun today! Come back tomorrow.', 'info');
@@ -315,18 +321,26 @@ function spinWheel() {
     const sliceAngle = 360 / SPIN_REWARDS.length;
     const extraSpins = 5 * 360;
     const winIndex = Math.floor(Math.random() * SPIN_REWARDS.length);
-    const targetDeg = extraSpins + (360 - winIndex * sliceAngle - sliceAngle / 2);
-    const totalDeg = (spinAngle * 180 / Math.PI) + targetDeg;
+    let startAngleDeg = (spinAngle * 180 / Math.PI) || 0;
+    
+    // We want the middle of winIndex slice to end up at exactly 270 degrees (top pointer).
+    // Final angle + slice offset = 270
+    // We add a realistic random offset so it doesn't land perfectly dead-center every time.
+    const randomOffset = (Math.random() - 0.5) * (sliceAngle * 0.8);
+    let delta = 270 - (startAngleDeg % 360) - (winIndex * sliceAngle) - (sliceAngle / 2) + randomOffset;
+    while (delta < 0) delta += 360;
+    const targetDeg = extraSpins + delta;
+    const totalDeg = startAngleDeg + targetDeg;
 
-    let current = spinAngle * 180 / Math.PI;
-    const duration = 4000;
+    const duration = 5000; // Increased duration for a more realistic spin
     const start = performance.now();
 
     function animate(now) {
         const elapsed = now - start;
         const t = Math.min(elapsed / duration, 1);
-        const ease = 1 - Math.pow(1 - t, 4);
-        current = (spinAngle * 180 / Math.PI) + (totalDeg - spinAngle * 180 / Math.PI) * ease;
+        // Cubic ease-out for a very realistic wheel deceleration
+        const ease = 1 - Math.pow(1 - t, 3);
+        let current = startAngleDeg + (totalDeg - startAngleDeg) * ease;
         spinAngle = (current * Math.PI) / 180;
         drawWheel(spinAngle);
         if (t < 1) { requestAnimationFrame(animate); }
@@ -334,7 +348,14 @@ function spinWheel() {
             isSpinning = false;
             document.getElementById('spinBtn').disabled = false;
             const winner = SPIN_REWARDS[winIndex];
-            localStorage.setItem('lastSpinDate', today);
+            
+            let saveKey = 'lastSpinDate_guest';
+            try {
+                const u = JSON.parse(localStorage.getItem('currentUser'));
+                if (u && u.username) saveKey = 'lastSpinDate_' + u.username;
+            } catch(e) {}
+            localStorage.setItem(saveKey, today);
+            
             if (winner.value) {
                 localStorage.setItem('spinCoupon', winner.value);
                 document.getElementById('spinResult').innerHTML =

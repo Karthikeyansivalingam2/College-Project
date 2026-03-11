@@ -164,12 +164,13 @@ body.light-mode .shadow-orange-500\/40 {
 }
 
 /* Explicitly reset page backgrounds in light mode */
-body.light-mode section,
+body.light-mode section:not(.relative.h-\[700px\]),
 body.light-mode main,
 body.light-mode .footer {
   background-color: var(--bg-main) !important;
   color: var(--text-main);
 }
+
 
 body.light-mode .logo-box,
 body.light-mode .logo-box * {
@@ -188,20 +189,13 @@ body.light-mode section.bg-orange-600 * {
   color: #111827 !important;
 }
 
-body.light-mode .hero-pattern p,
-body.light-mode section.bg-orange-600 p,
-body.light-mode section.text-white p {
-  color: #4b5563 !important;
+/* Keep hero text and paragraph bright white in light mode because the background is still a dark image */
+body.light-mode section.relative.h-\[700px\] h1,
+body.light-mode section.relative.h-\[700px\] p {
+  color: #ffffff !important;
 }
 
-/* Generic hero text white-to-dark transition */
-body.light-mode section.text-white h1,
-body.light-mode section.text-white h2,
-body.light-mode section.text-white h3,
-body.light-mode section.text-white span:not(.bg-orange-600),
-body.light-mode section.text-white div:not(.bg-orange-600) {
-  color: #111827 !important;
-}
+/* Generic hero text white-to-dark transition * REMOVED to keep hero readable */
 
 /* Ensure logo text and links are readable on dark heroes when navbar is transparent */
 .navbar:not(.scrolled) .logo span,
@@ -289,21 +283,6 @@ body.light-mode .bg-white\/5 {
   background-color: var(--bg-card) !important;
 }
 
-body.light-mode section img {
-  filter: brightness(1) contrast(1.1) !important;
-}
-
-body.light-mode .absolute.inset-0.bg-gradient-to-b,
-body.light-mode .absolute.inset-0.bg-gradient-to-t,
-body.light-mode .absolute.inset-0.bg-black\/60 {
-  display: none !important;
-}
-
-body.light-mode .brightness-\[0\.4\],
-body.light-mode .brightness-\[0\.5\],
-body.light-mode .brightness-\[0\.6\] {
-  filter: brightness(0.9) !important;
-}
 
 /* Feature card light mode */
 body.light-mode .feature-card {

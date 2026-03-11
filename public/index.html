@@ -26,10 +26,11 @@
   <!-- Hero Section (StepUp Style) -->
   <section class="relative h-[700px] flex items-center justify-center text-center text-white overflow-hidden">
     <!-- Clean Background Image -->
-    <div class="absolute inset-0 z-0">
+    <div class="absolute inset-0 z-0 bg-black">
       <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=1920"
-        class="w-full h-full object-cover brightness-[0.4] contrast-125" alt="Premium Food Platter">
-      <div class="absolute inset-0 bg-gradient-to-b from-transparent via-[var(--bg-main)]/50 to-[var(--bg-main)]"></div>
+        class="w-full h-full object-cover brightness-[0.5] contrast-[1.1] opacity-90" alt="Premium Food Platter">
+      <div class="absolute top-0 w-full h-40 bg-gradient-to-b from-black/60 to-transparent"></div>
+      <div class="absolute bottom-0 w-full h-48 bg-gradient-to-t from-[var(--bg-main)] to-transparent"></div>
     </div>
 
     <!-- Content Area -->
@@ -97,7 +98,7 @@
     <div class="max-w-7xl mx-auto px-4">
       <div class="max-w-2xl mb-20">
         <h2 class="text-orange-500 font-black tracking-[0.3em] uppercase text-xs mb-4">The Evolution</h2>
-        <h3 class="text-5xl md:text-6xl font-black text-white italic uppercase tracking-tighter leading-none">More than
+        <h3 class="text-5xl md:text-6xl font-black text-gray-100 italic uppercase tracking-tighter leading-none">More than
           just <br> delivery service</h3>
       </div>
 
@@ -135,7 +136,7 @@
   <section class="max-w-7xl mx-auto py-32 px-4 bg-[var(--bg-main)]">
     <div class="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">
       <div class="max-w-2xl">
-        <h2 class="text-6xl md:text-7xl font-black text-white italic uppercase tracking-tighter leading-none mb-6">
+        <h2 class="text-6xl md:text-7xl font-black text-gray-100 italic uppercase tracking-tighter leading-none mb-6">
           Explore <br>Our Collections</h2>
         <p class="text-gray-500 text-xl font-medium">Precision-crafted food experiences for every moment of your life.
         </p>
@@ -459,7 +460,12 @@
     window.alert = function (msg) { showToast(msg, msg.includes('success') || msg.includes('Success') ? 'success' : 'info'); };
     // Auto-show spin wheel for first-time visitors
     window.addEventListener('load', () => {
-      const lastSpun = localStorage.getItem('lastSpinDate');
+      let spinKey = 'lastSpinDate_guest';
+      try {
+        const u = JSON.parse(localStorage.getItem('currentUser'));
+        if (u && u.username) spinKey = 'lastSpinDate_' + u.username;
+      } catch(e) {}
+      const lastSpun = localStorage.getItem(spinKey);
       const today = new Date().toDateString();
       if (lastSpun !== today) {
         setTimeout(openSpinWheel, 3000);
