@@ -1,4 +1,7 @@
+const cacheLog = console.log;
+console.log = () => {};
 require('dotenv').config();
+console.log = cacheLog;
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
