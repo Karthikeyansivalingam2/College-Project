@@ -7,38 +7,40 @@
     <title>Secure Payment — Foodiee</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap"
         rel="stylesheet">
     <style>
         * {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Outfit', sans-serif;
             box-sizing: border-box;
         }
 
         body {
             min-height: 100vh;
-            background: #f0f2f5;
+            background: radial-gradient(circle at top left, #1a1a1a, #0a0a0a);
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 1rem;
+            padding: 1.5rem;
+            color: #ffffff;
         }
 
-        /* ── Card ── */
+        /* ── Gateway Card ── */
         .gateway-card {
-            background: #fff;
-            border-radius: 16px;
-            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.12);
+            background: #161616;
+            border-radius: 24px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
             width: 100%;
-            max-width: 420px;
+            max-width: 440px;
             overflow: hidden;
-            animation: slideUp 0.4s ease;
+            animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            border: 1px solid rgba(255, 255, 255, 0.08);
         }
 
         @keyframes slideUp {
             from {
                 opacity: 0;
-                transform: translateY(24px);
+                transform: translateY(30px);
             }
 
             to {
@@ -49,280 +51,191 @@
 
         /* ── Header ── */
         .gw-header {
-            background: #1a1a2e;
-            padding: 14px 20px;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 20px;
             display: flex;
             align-items: center;
             justify-content: space-between;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         /* ── Amount bar ── */
         .amount-bar {
-            background: linear-gradient(135deg, #ff6b00, #ff9500);
-            padding: 16px 24px;
+            background: linear-gradient(135deg, #ff6b00, #ff8500);
+            padding: 24px;
             display: flex;
             align-items: center;
             justify-content: space-between;
+            box-shadow: inset 0 2px 10px rgba(0,0,0,0.1);
         }
 
         /* ── Tab Nav ── */
         .tab-nav {
             display: flex;
-            border-bottom: 2px solid #f1f1f1;
-            overflow-x: auto;
+            background: rgba(255, 255, 255, 0.02);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 0 10px;
         }
 
         .tab-btn {
             flex: 1;
-            padding: 12px 8px;
-            font-size: 11px;
-            font-weight: 700;
+            padding: 16px 8px;
+            font-size: 10px;
+            font-weight: 800;
             text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: #9ca3af;
+            letter-spacing: 0.1em;
+            color: #666;
             border: none;
             background: none;
             cursor: pointer;
-            border-bottom: 2px solid transparent;
-            margin-bottom: -2px;
-            transition: all 0.2s;
-            white-space: nowrap;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 4px;
+            gap: 6px;
         }
 
         .tab-btn.active {
-            color: #f97316;
-            border-bottom-color: #f97316;
+            color: #ff6b00;
+            border-bottom-color: #ff6b00;
+            background: rgba(255, 107, 0, 0.05);
         }
 
         .tab-btn i {
-            font-size: 16px;
+            font-size: 18px;
         }
 
         /* ── Input ── */
         .gw-input {
             width: 100%;
-            padding: 12px 16px;
-            border: 1.5px solid #e5e7eb;
-            border-radius: 10px;
-            font-size: 14px;
+            padding: 14px 18px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 14px;
+            font-size: 15px;
             font-weight: 600;
-            color: #111827;
+            color: #ffffff;
             outline: none;
-            transition: border-color 0.2s;
-            background: #fafafa;
+            transition: all 0.3s;
+            background: rgba(255, 255, 255, 0.03);
         }
 
         .gw-input:focus {
-            border-color: #f97316;
-            background: #fff;
+            border-color: #ff6b00;
+            background: rgba(255, 255, 255, 0.05);
+            box-shadow: 0 0 0 4px rgba(255, 107, 0, 0.1);
         }
 
         .gw-input::placeholder {
-            color: #9ca3af;
+            color: #555;
             font-weight: 400;
         }
 
         /* ── Card Preview ── */
         .card-preview {
-            background: linear-gradient(135deg, #1e3a5f, #0f2547);
-            border-radius: 14px;
-            padding: 20px;
+            background: linear-gradient(135deg, #2a2a2a, #111);
+            border-radius: 20px;
+            padding: 24px;
             color: white;
             position: relative;
             overflow: hidden;
-            margin-bottom: 20px;
+            margin-bottom: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.4);
         }
 
-        .card-preview::before {
-            content: '';
-            position: absolute;
-            top: -40px;
-            right: -40px;
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.05);
-        }
-
-        .card-preview::after {
-            content: '';
-            position: absolute;
-            bottom: -60px;
-            left: -30px;
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.03);
+        .card-preview .chip {
+            width: 40px;
+            height: 30px;
+            background: linear-gradient(135deg, #f0d060, #b08020);
+            border-radius: 4px;
+            margin-bottom: 15px;
+            position: relative;
         }
 
         /* ── Pay button ── */
         .gw-pay-btn {
             width: 100%;
-            padding: 15px;
-            background: linear-gradient(135deg, #f97316, #ea580c);
+            padding: 18px;
+            background: linear-gradient(135deg, #ff6b00, #ff8500);
             color: white;
             font-weight: 800;
-            font-size: 14px;
-            letter-spacing: 0.05em;
+            font-size: 15px;
+            letter-spacing: 0.1em;
             text-transform: uppercase;
             border: none;
-            border-radius: 10px;
+            border-radius: 16px;
             cursor: pointer;
-            transition: all 0.2s;
-            box-shadow: 0 4px 20px rgba(249, 115, 22, 0.4);
+            transition: all 0.3s;
+            box-shadow: 0 10px 25px rgba(255, 107, 0, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
         }
 
         .gw-pay-btn:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 8px 30px rgba(249, 115, 22, 0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 15px 35px rgba(255, 107, 0, 0.4);
+            filter: brightness(1.1);
         }
 
         .gw-pay-btn:active {
-            transform: scale(0.98);
+            transform: scale(0.97);
         }
 
         /* ── Bank list ── */
         .bank-item {
             display: flex;
             align-items: center;
-            gap: 12px;
-            padding: 12px 14px;
-            border: 1.5px solid #e5e7eb;
-            border-radius: 10px;
+            gap: 15px;
+            padding: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
             cursor: pointer;
-            transition: all 0.2s;
-            margin-bottom: 8px;
+            transition: all 0.3s;
+            margin-bottom: 10px;
+            background: rgba(255, 255, 255, 0.02);
         }
 
         .bank-item:hover {
-            border-color: #f97316;
-            background: #fff7ed;
+            border-color: rgba(255, 107, 0, 0.3);
+            background: rgba(255, 107, 0, 0.05);
         }
 
         .bank-item.selected {
-            border-color: #f97316;
-            background: #fff7ed;
+            border-color: #ff6b00;
+            background: rgba(255, 107, 0, 0.1);
         }
 
-        /* ── Spinners & loaders ── */
-        .dot-loader {
-            display: flex;
-            gap: 6px;
-            align-items: center;
-        }
-
-        .dot-loader span {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: #f97316;
-            animation: bounce 1.2s infinite;
-        }
-
-        .dot-loader span:nth-child(2) {
-            animation-delay: 0.2s;
-        }
-
-        .dot-loader span:nth-child(3) {
-            animation-delay: 0.4s;
-        }
-
-        @keyframes bounce {
-
-            0%,
-            80%,
-            100% {
-                transform: scale(0.8);
-                opacity: 0.5;
-            }
-
-            40% {
-                transform: scale(1.2);
-                opacity: 1;
-            }
-        }
-
-        /* ── OTP input ── */
-        .otp-inputs {
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-        }
-
+        /* ── OTP ── */
         .otp-box {
-            width: 48px;
-            height: 56px;
-            border: 2px solid #e5e7eb;
-            border-radius: 10px;
-            font-size: 22px;
+            width: 54px;
+            height: 64px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 14px;
+            font-size: 24px;
             font-weight: 800;
             text-align: center;
-            color: #111827;
+            color: #ffffff;
             outline: none;
-            transition: all 0.2s;
+            transition: all 0.3s;
+            background: rgba(255, 255, 255, 0.03);
         }
 
         .otp-box:focus {
-            border-color: #f97316;
-            background: #fff7ed;
+            border-color: #ff6b00;
+            background: rgba(255, 107, 0, 0.05);
         }
 
-        /* ── QR code area ── */
-        .qr-box {
-            border: 2px dashed #e5e7eb;
-            border-radius: 16px;
-            padding: 24px;
-            text-align: center;
-            background: #fafafa;
-        }
-
-        /* ── Success ── */
+        /* ── Success Pulse ── */
         .success-pulse {
-            animation: pulse 1s ease;
+            animation: pulse 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         @keyframes pulse {
-            0% {
-                transform: scale(0.5);
-                opacity: 0;
-            }
-
-            50% {
-                transform: scale(1.1);
-            }
-
-            100% {
-                transform: scale(1);
-                opacity: 1;
-            }
-        }
-
-        /* ── Processing overlay ── */
-        #processingScreen {
-            display: none;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 300px;
-        }
-
-        .ring-spinner {
-            width: 64px;
-            height: 64px;
-            border: 5px solid #f3f4f6;
-            border-top-color: #f97316;
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-        }
-
-        @keyframes spin {
-            to {
-                transform: rotate(360deg);
-            }
+            0% { transform: scale(0.5); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
         }
 
         .screen {
@@ -331,6 +244,41 @@
 
         .screen.active {
             display: block;
+            animation: fadeIn 0.4s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .dot-loader span {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #ff6b00;
+            animation: bounce 1.2s infinite;
+        }
+
+        .dot-loader span:nth-child(2) { animation-delay: 0.2s; }
+        .dot-loader span:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes bounce {
+            0%, 80%, 100% { transform: scale(0.8); opacity: 0.4; }
+            40% { transform: scale(1.3); opacity: 1; }
+        }
+
+        .ring-spinner {
+            width: 70px;
+            height: 70px;
+            border: 5px solid rgba(255, 255, 255, 0.05);
+            border-top-color: #ff6b00;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
         }
     </style>
 </head>
@@ -343,29 +291,29 @@
         <!-- Header -->
         <div class="gw-header">
             <div class="flex items-center gap-3">
-                <div class="w-8 h-8 bg-orange-500 rounded-lg flex items-center justify-center">
-                    <span class="text-white font-black text-sm">F</span>
+                <div class="w-10 h-10 bg-orange-600 rounded-xl flex items-center justify-center shadow-lg shadow-orange-600/20">
+                    <span class="text-white font-black text-lg">F</span>
                 </div>
                 <div>
-                    <p class="text-white font-bold text-sm">Foodiee Pay</p>
-                    <p class="text-gray-400 text-xs">Secured by 256-bit SSL</p>
+                    <p class="text-white font-bold text-base leading-tight">Foodiee Pay</p>
+                    <p class="text-gray-500 text-[10px] uppercase font-black tracking-widest mt-0.5">256-bit Secure</p>
                 </div>
             </div>
-            <div class="flex items-center gap-2">
-                <i class="fa-solid fa-lock text-green-400 text-xs"></i>
-                <span class="text-green-400 text-xs font-bold">SECURE</span>
+            <div class="flex items-center gap-2 bg-green-500/10 px-3 py-1.5 rounded-full border border-green-500/20">
+                <i class="fa-solid fa-shield-check text-green-500 text-xs"></i>
+                <span class="text-green-500 text-[10px] font-black tracking-wider uppercase">Verified</span>
             </div>
         </div>
 
         <!-- Amount Bar -->
         <div class="amount-bar">
             <div>
-                <p class="text-white/70 text-xs font-semibold uppercase tracking-wider">Order Total</p>
-                <p class="text-white font-black text-2xl">₹<span id="displayAmount">0</span></p>
+                <p class="text-white/60 text-[10px] font-black uppercase tracking-[0.2em] mb-1">Total to Pay</p>
+                <p class="text-white font-black text-3xl tracking-tight">₹<span id="displayAmount">0</span></p>
             </div>
             <div class="text-right">
-                <p class="text-white/70 text-xs font-semibold">Ref No.</p>
-                <p class="text-white font-bold text-sm" id="refNo">FD-000000</p>
+                <p class="text-white/60 text-[10px] font-black uppercase tracking-[0.2em] mb-1">Ref ID</p>
+                <p class="text-white font-black text-sm italic opacity-90" id="refNo">FD-000000</p>
             </div>
         </div>
 
@@ -385,194 +333,191 @@
             </button>
         </div>
 
-        <div class="p-5">
+        <div class="p-6">
 
             <!-- ═══ UPI SCREEN ═══ -->
             <div class="screen active" id="screen-upi">
-                <!-- UPI app shortcuts -->
-                <div class="grid grid-cols-3 gap-3 mb-5">
+                <div class="grid grid-cols-3 gap-3 mb-6">
                     <button onclick="selectUPIApp('gpay')"
-                        class="flex flex-col items-center gap-1.5 p-3 border-2 border-gray-100 rounded-xl hover:border-orange-400 transition-all"
+                        class="flex flex-col items-center gap-1.5 p-4 border border-white/5 rounded-2xl hover:border-orange-500/50 transition-all bg-white/2"
                         id="upi-gpay">
-                        <div class="w-10 h-10 rounded-full bg-white shadow-md flex items-center justify-center">
-                            <i class="fa-brands fa-google-pay text-xl text-gray-700"></i>
+                        <div class="w-11 h-11 rounded-full bg-white flex items-center justify-center shadow-lg">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/f/f2/Google_Pay_Logo.svg" class="w-6" alt="GPay">
                         </div>
-                        <span class="text-xs font-bold text-gray-600">GPay</span>
+                        <span class="text-[10px] font-black text-gray-400 mt-1">GPAY</span>
                     </button>
                     <button onclick="selectUPIApp('phonepe')"
-                        class="flex flex-col items-center gap-1.5 p-3 border-2 border-gray-100 rounded-xl hover:border-orange-400 transition-all"
+                        class="flex flex-col items-center gap-1.5 p-4 border border-white/5 rounded-2xl hover:border-orange-500/50 transition-all bg-white/2"
                         id="upi-phonepe">
-                        <div class="w-10 h-10 rounded-full flex items-center justify-center"
-                            style="background:#5f259f;">
-                            <i class="fa-solid fa-p text-white text-lg font-black"></i>
+                        <div class="w-11 h-11 rounded-full bg-[#5f259f] flex items-center justify-center shadow-lg">
+                            <i class="fa-solid fa-p text-white text-xl font-black"></i>
                         </div>
-                        <span class="text-xs font-bold text-gray-600">PhonePe</span>
+                        <span class="text-[10px] font-black text-gray-400 mt-1">PHONEPE</span>
                     </button>
                     <button onclick="selectUPIApp('paytm')"
-                        class="flex flex-col items-center gap-1.5 p-3 border-2 border-gray-100 rounded-xl hover:border-orange-400 transition-all"
+                        class="flex flex-col items-center gap-1.5 p-4 border border-white/5 rounded-2xl hover:border-orange-500/50 transition-all bg-white/2"
                         id="upi-paytm">
-                        <div class="w-10 h-10 rounded-full bg-sky-500 flex items-center justify-center">
-                            <span class="text-white font-black text-xs">PT</span>
+                        <div class="w-11 h-11 rounded-full bg-[#00baf2] flex items-center justify-center shadow-lg">
+                            <span class="text-white font-black text-xs">PAYTM</span>
                         </div>
-                        <span class="text-xs font-bold text-gray-600">Paytm</span>
+                        <span class="text-[10px] font-black text-gray-400 mt-1">PAYTM</span>
                     </button>
                 </div>
 
-                <!-- Or type UPI ID -->
-                <div class="flex items-center gap-3 mb-4">
-                    <div class="flex-1 h-px bg-gray-100"></div>
-                    <span class="text-xs text-gray-400 font-semibold">OR ENTER UPI ID</span>
-                    <div class="flex-1 h-px bg-gray-100"></div>
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="flex-1 h-px bg-white/5"></div>
+                    <span class="text-[10px] text-gray-500 font-black tracking-[0.2em] uppercase">Manual UPI ID</span>
+                    <div class="flex-1 h-px bg-white/5"></div>
                 </div>
 
-                <div class="relative mb-4">
-                    <input type="text" id="upiId" class="gw-input pr-16" placeholder="yourname@okaxis" value="">
+                <div class="relative mb-6">
+                    <input type="text" id="upiId" class="gw-input pr-24" placeholder="example@upi">
                     <button onclick="verifyUPI()"
-                        class="absolute right-2 top-1/2 -translate-y-1/2 text-xs font-bold text-orange-500 bg-orange-50 px-3 py-1.5 rounded-lg hover:bg-orange-100 transition">VERIFY</button>
+                        class="absolute right-2 top-2 bottom-2 text-[10px] font-black text-orange-400 bg-orange-500/10 px-4 rounded-xl border border-orange-500/20 hover:bg-orange-500/20 transition uppercase tracking-widest">Verify</button>
                 </div>
-                <div id="upiVerifyMsg" class="hidden text-xs font-bold text-green-600 flex items-center gap-1.5 mb-3">
-                    <i class="fa-solid fa-circle-check"></i> UPI ID verified successfully!
+                <div id="upiVerifyMsg" class="hidden text-[11px] font-bold text-green-400 flex items-center gap-2 mb-4 bg-green-500/5 p-3 rounded-xl border border-green-500/10">
+                    <i class="fa-solid fa-circle-check text-xs"></i> UPI ID confirmed
                 </div>
                 <button class="gw-pay-btn" onclick="startPay('UPI')">
-                    <i class="fa-solid fa-bolt mr-2"></i> Pay ₹<span class="payAmtBtn">0</span>
+                    <i class="fa-solid fa-bolt-lightning text-sm"></i> Pay ₹<span class="payAmtBtn">0</span>
                 </button>
             </div>
 
             <!-- ═══ CARD SCREEN ═══ -->
             <div class="screen" id="screen-card">
                 <!-- Card Preview -->
-                <div class="card-preview">
-                    <div class="flex justify-between items-start mb-4 relative z-10">
-                        <div>
-                            <p class="text-white/50 text-xs font-semibold">CARD NUMBER</p>
-                            <p class="text-white font-bold text-lg tracking-widest mt-1" id="previewNum">•••• •••• ••••
-                                ••••</p>
-                        </div>
-                        <i class="fa-brands fa-cc-visa text-white/70 text-3xl"></i>
+                <div class="card-preview mb-6">
+                    <div class="flex justify-between items-start mb-6 relative z-10">
+                        <div class="chip"></div>
+                        <i class="fa-brands fa-cc-visa text-white/50 text-4xl" id="cardBrandIcon"></i>
+                    </div>
+                    <div class="relative z-10 mb-6">
+                        <p class="text-white/30 text-[9px] font-bold tracking-widest uppercase mb-1">Card Number</p>
+                        <p class="text-white font-black text-xl tracking-[0.2em]" id="previewNum">•••• •••• •••• ••••</p>
                     </div>
                     <div class="flex justify-between items-end relative z-10">
                         <div>
-                            <p class="text-white/50 text-xs font-semibold">CARD HOLDER</p>
-                            <p class="text-white font-bold text-sm mt-0.5" id="previewName">YOUR NAME</p>
+                            <p class="text-white/30 text-[9px] font-bold tracking-widest uppercase mb-1">Holder Name</p>
+                            <p class="text-white font-black text-sm uppercase" id="previewName">YOUR NAME</p>
                         </div>
-                        <div>
-                            <p class="text-white/50 text-xs font-semibold">EXPIRES</p>
-                            <p class="text-white font-bold text-sm mt-0.5" id="previewExpiry">MM/YY</p>
+                        <div class="text-right">
+                            <p class="text-white/30 text-[9px] font-bold tracking-widest uppercase mb-1">Expiry</p>
+                            <p class="text-white font-black text-sm" id="previewExpiry">MM/YY</p>
                         </div>
                     </div>
+                    <div class="absolute -right-10 -bottom-10 w-40 h-40 bg-orange-500/10 rounded-full blur-3xl"></div>
                 </div>
 
-                <div class="space-y-3 mb-4">
-                    <input type="text" id="cardNum" class="gw-input" placeholder="Card Number" maxlength="19">
-                    <input type="text" id="cardName" class="gw-input" placeholder="Cardholder Name">
-                    <div class="grid grid-cols-2 gap-3">
-                        <input type="text" id="cardExp" class="gw-input" placeholder="MM / YY" maxlength="5">
+                <div class="space-y-4 mb-6">
+                    <div class="relative">
+                        <i class="fa-regular fa-credit-card absolute left-4 top-4 text-gray-500"></i>
+                        <input type="text" id="cardNum" class="gw-input pl-12" placeholder="0000 0000 0000 0000" maxlength="19">
+                    </div>
+                    <div class="relative">
+                        <i class="fa-regular fa-user absolute left-4 top-4 text-gray-500"></i>
+                        <input type="text" id="cardName" class="gw-input pl-12" placeholder="Cardholder Name">
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
                         <div class="relative">
-                            <input type="password" id="cardCvv" class="gw-input" placeholder="CVV" maxlength="3">
-                            <i class="fa-solid fa-eye-slash absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 cursor-pointer text-sm"
-                                onclick="toggleCvv()"></i>
+                            <i class="fa-regular fa-calendar absolute left-4 top-4 text-gray-500"></i>
+                            <input type="text" id="cardExp" class="gw-input pl-12" placeholder="MM / YY" maxlength="5">
+                        </div>
+                        <div class="relative">
+                            <i class="fa-solid fa-lock-keyhole absolute left-4 top-4 text-gray-500"></i>
+                            <input type="password" id="cardCvv" class="gw-input pl-12 pr-12" placeholder="CVV" maxlength="3">
+                            <i class="fa-solid fa-eye-slash absolute right-4 top-4 text-gray-600 cursor-pointer" onclick="toggleCvv()"></i>
                         </div>
                     </div>
                 </div>
-                <div class="flex items-center gap-2 mb-4 p-3 bg-green-50 rounded-xl border border-green-100">
-                    <i class="fa-solid fa-shield-halved text-green-500 text-sm"></i>
-                    <span class="text-xs font-semibold text-green-700">Protected by 3D Secure Authentication</span>
+                <div class="flex items-center gap-3 mb-6 p-4 bg-orange-500/5 rounded-2xl border border-orange-500/10">
+                    <i class="fa-solid fa-shield-halved text-orange-500"></i>
+                    <span class="text-[11px] font-bold text-gray-400 leading-tight">Your data is encrypted by military-grade AES-256 standard and never stored.</span>
                 </div>
                 <button class="gw-pay-btn" onclick="startPay('Card')">
-                    <i class="fa-solid fa-lock mr-2"></i> Pay Securely ₹<span class="payAmtBtn">0</span>
+                    <i class="fa-solid fa-lock text-sm"></i> Pay Securely ₹<span class="payAmtBtn">0</span>
                 </button>
             </div>
 
             <!-- ═══ NETBANKING SCREEN ═══ -->
             <div class="screen" id="screen-netbanking">
-                <p class="text-xs font-black text-gray-400 uppercase tracking-widest mb-3">Popular Banks</p>
-                <div id="bankList">
+                <p class="text-[10px] font-black text-gray-500 uppercase tracking-widest mb-4">Choose Your Bank</p>
+                <div id="bankList" class="space-y-3">
                     <div class="bank-item" onclick="selectBank(this, 'SBI')">
-                        <div class="w-10 h-10 rounded-lg bg-blue-600 flex items-center justify-center flex-shrink-0">
-                            <span class="text-white font-black text-xs">SBI</span>
+                        <div class="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center flex-shrink-0 shadow-lg shadow-blue-600/20">
+                            <span class="text-white font-black text-[10px]">SBI</span>
                         </div>
                         <div>
-                            <p class="font-bold text-sm text-gray-800">State Bank of India</p>
-                            <p class="text-xs text-gray-400">Internet Banking</p>
+                            <p class="font-black text-sm text-white">State Bank of India</p>
+                            <p class="text-[10px] text-gray-500 font-bold uppercase tracking-wider">Fast Login Available</p>
                         </div>
-                        <div class="ml-auto hidden text-orange-500" id="check-sbi"><i
-                                class="fa-solid fa-circle-check"></i></div>
+                        <div class="ml-auto hidden text-orange-500" id="check-sbi"><i class="fa-solid fa-circle-check text-xl"></i></div>
                     </div>
                     <div class="bank-item" onclick="selectBank(this, 'HDFC')">
-                        <div class="w-10 h-10 rounded-lg bg-red-600 flex items-center justify-center flex-shrink-0">
-                            <span class="text-white font-black text-xs">HDFC</span>
+                        <div class="w-10 h-10 rounded-xl bg-[#de1b1b] flex items-center justify-center flex-shrink-0 shadow-lg shadow-red-600/20">
+                            <span class="text-white font-black text-[10px]">HDFC</span>
                         </div>
                         <div>
-                            <p class="font-bold text-sm text-gray-800">HDFC Bank</p>
-                            <p class="text-xs text-gray-400">Internet Banking</p>
+                            <p class="font-black text-sm text-white">HDFC Bank</p>
+                            <p class="text-[10px] text-gray-500 font-bold uppercase tracking-wider">Popular Choice</p>
                         </div>
-                        <div class="ml-auto hidden text-orange-500" id="check-hdfc"><i
-                                class="fa-solid fa-circle-check"></i></div>
+                        <div class="ml-auto hidden text-orange-500" id="check-hdfc"><i class="fa-solid fa-circle-check text-xl"></i></div>
                     </div>
                     <div class="bank-item" onclick="selectBank(this, 'ICICI')">
-                        <div class="w-10 h-10 rounded-lg bg-orange-500 flex items-center justify-center flex-shrink-0">
-                            <span class="text-white font-black text-xs">ICICI</span>
+                        <div class="w-10 h-10 rounded-xl bg-[#ff9933] flex items-center justify-center flex-shrink-0 shadow-lg shadow-orange-600/20">
+                            <span class="text-white font-black text-[10px]">ICICI</span>
                         </div>
                         <div>
-                            <p class="font-bold text-sm text-gray-800">ICICI Bank</p>
-                            <p class="text-xs text-gray-400">Internet Banking</p>
+                            <p class="font-black text-sm text-white">ICICI Bank</p>
+                            <p class="text-[10px] text-gray-500 font-bold uppercase tracking-wider">Secure Connect</p>
                         </div>
-                        <div class="ml-auto hidden text-orange-500" id="check-icici"><i
-                                class="fa-solid fa-circle-check"></i></div>
-                    </div>
-                    <div class="bank-item" onclick="selectBank(this, 'AXIS')">
-                        <div class="w-10 h-10 rounded-lg bg-purple-600 flex items-center justify-center flex-shrink-0">
-                            <span class="text-white font-black text-xs">AXIS</span>
-                        </div>
-                        <div>
-                            <p class="font-bold text-sm text-gray-800">Axis Bank</p>
-                            <p class="text-xs text-gray-400">Internet Banking</p>
-                        </div>
-                        <div class="ml-auto hidden text-orange-500" id="check-axis"><i
-                                class="fa-solid fa-circle-check"></i></div>
+                        <div class="ml-auto hidden text-orange-500" id="check-icici"><i class="fa-solid fa-circle-check text-xl"></i></div>
                     </div>
                 </div>
-                <button class="gw-pay-btn mt-4" onclick="startPay('NetBanking')">
-                    <i class="fa-solid fa-building-columns mr-2"></i> Proceed ₹<span class="payAmtBtn">0</span>
+                <button class="gw-pay-btn mt-6" onclick="startPay('NetBanking')">
+                    <i class="fa-solid fa-building-columns text-sm"></i> Proceed to Login ₹<span class="payAmtBtn">0</span>
                 </button>
             </div>
 
             <!-- ═══ COD SCREEN ═══ -->
             <div class="screen" id="screen-cod">
-                <div class="bg-amber-50 border-2 border-amber-200 rounded-2xl p-5 mb-5 text-center">
-                    <i class="fa-solid fa-truck-fast text-4xl text-amber-500 mb-3 block"></i>
-                    <h3 class="font-black text-gray-800 text-lg mb-1">Cash on Delivery</h3>
-                    <p class="text-sm text-gray-500 font-medium">Pay <strong class="text-gray-800">₹<span
-                                class="payAmtBtn">0</span></strong> when your order arrives at the door.</p>
+                <div class="bg-orange-500/5 border border-orange-500/20 rounded-2xl p-6 text-center mb-6">
+                    <div class="w-16 h-16 bg-orange-500/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fa-solid fa-box-heart text-orange-500 text-3xl"></i>
+                    </div>
+                    <h3 class="font-black text-white text-xl mb-2">Cash on Delivery</h3>
+                    <p class="text-sm text-gray-500 font-medium px-4">Keep ₹<span class="payAmtBtn font-black text-white">0</span> ready. Our delivery associate will collect it from you.</p>
                 </div>
-                <div class="space-y-3 mb-5">
-                    <div class="flex items-center gap-3 text-sm text-gray-600">
-                        <i class="fa-solid fa-circle-check text-green-500"></i> No advance payment needed
+                <div class="space-y-4 mb-8 px-2">
+                    <div class="flex items-center gap-3 text-xs text-gray-400 font-bold uppercase tracking-wider">
+                        <div class="w-6 h-6 rounded-full bg-green-500/10 flex items-center justify-center border border-green-500/20">
+                            <i class="fa-solid fa-check text-green-500 text-[10px]"></i>
+                        </div>
+                        No digital transaction needed
                     </div>
-                    <div class="flex items-center gap-3 text-sm text-gray-600">
-                        <i class="fa-solid fa-circle-check text-green-500"></i> Pay in cash to delivery partner
-                    </div>
-                    <div class="flex items-center gap-3 text-sm text-gray-600">
-                        <i class="fa-solid fa-circle-check text-green-500"></i> Keep exact change ready
+                    <div class="flex items-center gap-3 text-xs text-gray-400 font-bold uppercase tracking-wider">
+                        <div class="w-6 h-6 rounded-full bg-green-500/10 flex items-center justify-center border border-green-500/20">
+                            <i class="fa-solid fa-check text-green-500 text-[10px]"></i>
+                        </div>
+                        Pay after receiving food
                     </div>
                 </div>
                 <button class="gw-pay-btn" onclick="startPay('Cash on Delivery')">
-                    <i class="fa-solid fa-handshake mr-2"></i> Confirm COD Order
+                    <i class="fa-solid fa-hand-holding-dollar text-sm"></i> Confirm COD Order
                 </button>
             </div>
 
         </div>
 
-        <div class="px-5 pb-4 text-center">
+        <div class="px-6 pb-6 text-center">
             <button onclick="cancelPayment()"
-                class="text-xs text-gray-400 font-semibold hover:text-gray-600 transition">
-                ← Cancel & Go Back
+                class="text-[11px] text-gray-600 font-black uppercase tracking-[0.2em] hover:text-orange-500 transition-all flex items-center justify-center gap-2 mx-auto">
+                <i class="fa-solid fa-arrow-left"></i> Cancel Payment
             </button>
-            <div class="flex items-center justify-center gap-3 mt-3">
-                <i class="fa-brands fa-cc-visa text-gray-300 text-xl"></i>
-                <i class="fa-brands fa-cc-mastercard text-gray-300 text-xl"></i>
-                <i class="fa-brands fa-cc-rupay text-gray-300 text-xl"></i>
-                <i class="fa-solid fa-shield-halved text-gray-300"></i>
+            <div class="flex items-center justify-center gap-4 mt-6 opacity-30 grayscale hover:grayscale-0 transition-all duration-700">
+                <i class="fa-brands fa-cc-visa text-2xl"></i>
+                <i class="fa-brands fa-cc-mastercard text-2xl"></i>
+                <i class="fa-brands fa-cc-rupay text-2xl"></i>
+                <i class="fa-solid fa-shield-halved text-xl"></i>
             </div>
         </div>
     </div>
@@ -581,88 +526,77 @@
     <div class="gateway-card" id="otpCard" style="display:none;">
         <div class="gw-header">
             <div class="flex items-center gap-3">
-                <div class="w-8 h-8 bg-orange-500 rounded-lg flex items-center justify-center">
-                    <span class="text-white font-black text-sm">F</span>
+                <div class="w-10 h-10 bg-orange-600 rounded-xl flex items-center justify-center">
+                    <span class="text-white font-black text-lg">F</span>
                 </div>
                 <div>
-                    <p class="text-white font-bold text-sm">Verify Payment</p>
-                    <p class="text-gray-400 text-xs">One-Time Password</p>
+                    <p class="text-white font-bold text-base">OTP Verification</p>
+                    <p class="text-gray-500 text-[10px] uppercase font-black tracking-widest mt-0.5">Secure Step</p>
                 </div>
             </div>
-            <i class="fa-solid fa-lock text-green-400"></i>
+            <i class="fa-solid fa-shield-keyhole text-orange-500 text-xl"></i>
         </div>
-        <div class="p-6">
-            <div class="text-center mb-6">
-                <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <i class="fa-solid fa-mobile-screen text-orange-500 text-2xl"></i>
+        <div class="p-8 pb-10">
+            <div class="text-center mb-8">
+                <div class="w-20 h-20 bg-orange-500/10 rounded-3xl flex items-center justify-center mx-auto mb-6 transform rotate-12">
+                    <i class="fa-solid fa-comment-sms text-orange-500 text-3xl -rotate-12"></i>
                 </div>
-                <h3 class="font-black text-gray-800 text-lg">Enter OTP</h3>
-                <p class="text-sm text-gray-500 mt-1">Sent to your registered mobile <span
-                        class="font-bold text-gray-700">+91 ••••••7890</span></p>
+                <h3 class="font-black text-white text-2xl tracking-tight mb-2">Check Your Mobile</h3>
+                <p class="text-gray-500 font-medium text-sm">We've sent a 4-digit code to your registered number ending in <span class="text-white font-bold tracking-widest">•••7890</span></p>
             </div>
 
-            <div class="otp-inputs mb-6">
-                <input class="otp-box" id="otp1" maxlength="1" oninput="otpNext(this, 'otp2')" type="text"
-                    inputmode="numeric">
-                <input class="otp-box" id="otp2" maxlength="1" oninput="otpNext(this, 'otp3')"
-                    onkeydown="otpBack(event, 'otp1')" type="text" inputmode="numeric">
-                <input class="otp-box" id="otp3" maxlength="1" oninput="otpNext(this, 'otp4')"
-                    onkeydown="otpBack(event, 'otp2')" type="text" inputmode="numeric">
-                <input class="otp-box" id="otp4" maxlength="1" oninput="otpNext(this, null)"
-                    onkeydown="otpBack(event, 'otp3')" type="text" inputmode="numeric">
+            <div class="flex gap-4 justify-center mb-8">
+                <input class="otp-box" id="otp1" maxlength="1" oninput="otpNext(this, 'otp2')" type="text" inputmode="numeric">
+                <input class="otp-box" id="otp2" maxlength="1" oninput="otpNext(this, 'otp3')" onkeydown="otpBack(event, 'otp1')" type="text" inputmode="numeric">
+                <input class="otp-box" id="otp3" maxlength="1" oninput="otpNext(this, 'otp4')" onkeydown="otpBack(event, 'otp2')" type="text" inputmode="numeric">
+                <input class="otp-box" id="otp4" maxlength="1" oninput="otpNext(this, null)" onkeydown="otpBack(event, 'otp3')" type="text" inputmode="numeric">
             </div>
 
-            <div class="text-center mb-6">
-                <span class="text-xs text-gray-400 font-semibold" id="otpTimer">Resend OTP in <span
-                        id="timerCount">30</span>s</span>
+            <div class="text-center mb-8">
+                <span class="text-xs text-gray-600 font-black uppercase tracking-widest" id="otpTimer">Resend available in <span id="timerCount" class="text-orange-500">30</span>s</span>
             </div>
 
             <button class="gw-pay-btn" onclick="confirmOTP()">
-                <i class="fa-solid fa-check mr-2"></i> Verify & Pay ₹<span class="payAmtBtn">0</span>
+                <i class="fa-solid fa-circle-check text-sm"></i> Confirm Payment ₹<span class="payAmtBtn">0</span>
             </button>
         </div>
     </div>
 
     <!-- ───────────── PROCESSING SCREEN ───────────── -->
     <div class="gateway-card" id="processingCard" style="display:none;">
-        <div class="p-10 text-center">
-            <div class="ring-spinner mx-auto mb-6"></div>
-            <h3 class="font-black text-gray-800 text-xl mb-2">Processing Payment</h3>
-            <p class="text-sm text-gray-500 font-medium mb-6" id="processingMsg">Connecting to bank server...</p>
-            <div class="space-y-2">
-                <div class="flex items-center gap-2 text-xs text-gray-400 justify-center" id="step1">
-                    <div class="dot-loader"><span></span><span></span><span></span></div>
-                    Verifying transaction details
-                </div>
+        <div class="p-12 text-center py-20">
+            <div class="ring-spinner mx-auto mb-8"></div>
+            <h3 class="font-black text-white text-2xl tracking-tight mb-3">Gateway Working...</h3>
+            <p class="text-gray-500 font-bold text-sm mb-10" id="processingMsg">Connecting to server</p>
+            <div class="inline-flex items-center gap-3 bg-white/5 px-6 py-3 rounded-2xl border border-white/5" id="step1">
+                <div class="dot-loader"><span></span><span></span><span></span></div>
+                <span class="text-xs font-black text-gray-400 uppercase tracking-widest">Verifying Assets</span>
             </div>
         </div>
     </div>
 
     <!-- ───────────── SUCCESS SCREEN ───────────── -->
     <div class="gateway-card" id="successCard" style="display:none;">
-        <div class="p-8 text-center">
-            <div
-                class="w-24 h-24 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-5 success-pulse">
-                <i class="fa-solid fa-circle-check text-green-500 text-5xl"></i>
+        <div class="p-10 text-center py-12">
+            <div class="w-28 h-28 bg-green-500/10 rounded-full flex items-center justify-center mx-auto mb-8 success-pulse border border-green-500/20 shadow-[0_0_30px_rgba(34,197,94,0.15)]">
+                <i class="fa-solid fa-circle-check text-green-500 text-6xl"></i>
             </div>
-            <h2 class="font-black text-gray-800 text-2xl mb-2">Payment Successful!</h2>
-            <p class="text-gray-500 font-medium mb-1">Transaction ID: <span id="txnId"
-                    class="font-bold text-gray-700"></span></p>
-            <p class="text-gray-400 text-sm mb-6" id="successAmt"></p>
-            <div class="bg-green-50 border border-green-100 rounded-xl p-4 mb-6 text-left">
-                <p class="text-xs font-black text-green-700 uppercase tracking-widest mb-2">Payment Details</p>
-                <div class="space-y-1">
-                    <div class="flex justify-between text-sm"><span class="text-gray-500">Amount</span><span
-                            class="font-bold text-gray-800">₹<span id="successAmtDetail">0</span></span></div>
-                    <div class="flex justify-between text-sm"><span class="text-gray-500">Method</span><span
-                            class="font-bold text-gray-800" id="successMethod">—</span></div>
-                    <div class="flex justify-between text-sm"><span class="text-gray-500">Status</span><span
-                            class="font-bold text-green-600">✓ Verified</span></div>
+            <h2 class="font-black text-white text-3xl tracking-tight mb-2">Order Confirmed!</h2>
+            <p class="text-gray-500 text-sm font-bold uppercase tracking-widest mb-1">TXN ID: <span id="txnId" class="text-gray-300"></span></p>
+            
+            <div class="bg-white/5 rounded-3xl p-6 mt-8 mb-10 text-left border border-white/5 relative overflow-hidden">
+                <div class="absolute -right-6 -bottom-6 w-24 h-24 bg-green-500/5 rounded-full blur-2xl"></div>
+                <p class="text-[10px] font-black text-green-500 uppercase tracking-[0.2em] mb-4">Payment Summary</p>
+                <div class="space-y-4">
+                    <div class="flex justify-between items-center"><span class="text-gray-500 text-sm font-medium">Final Amount</span><span class="font-black text-white text-lg">₹<span id="successAmtDetail">0</span></span></div>
+                    <div class="flex justify-between items-center"><span class="text-gray-500 text-sm font-medium">Pay Mode</span><span class="font-black text-white uppercase text-xs tracking-widest" id="successMethod">—</span></div>
+                    <div class="flex justify-between items-center"><span class="text-gray-500 text-sm font-medium">Service</span><span class="text-green-500 font-black uppercase text-[10px] flex items-center gap-1.5"><i class="fa-solid fa-bolt"></i> Instant</span></div>
                 </div>
             </div>
             <button onclick="goToThanks()" class="gw-pay-btn">
-                <i class="fa-solid fa-bag-shopping mr-2"></i> View Your Order
+                <i class="fa-solid fa-location-dot text-sm"></i> Track My Order
             </button>
+            <p class="text-gray-600 text-[10px] font-black uppercase tracking-widest mt-6">Redirecting in 3 seconds...</p>
         </div>
     </div>
 
@@ -677,10 +611,10 @@
 
         document.querySelectorAll('#displayAmount').forEach(el => el.textContent = amount);
         document.querySelectorAll('.payAmtBtn').forEach(el => el.textContent = amount);
-        document.getElementById('refNo').textContent = 'FD-' + Math.floor(100000 + Math.random() * 900000);
+        const refSeed = Math.floor(100000 + Math.random() * 900000);
+        document.getElementById('refNo').textContent = 'FD-' + refSeed;
 
         if (!pendingOrder.total) {
-            // Allow demo mode without actual order
             console.warn('No pending order, running in demo mode');
         }
 
@@ -689,15 +623,16 @@
             document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
             document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
             btn.classList.add('active');
-            document.getElementById('screen-' + tab).classList.add('active');
+            const target = document.getElementById('screen-' + tab);
+            if(target) target.classList.add('active');
             selectedPayMethod = tab.toUpperCase();
         }
 
         // ── UPI App Selection ─────────────────────────────────────────
         function selectUPIApp(app) {
-            document.querySelectorAll('[id^="upi-"]').forEach(b => b.classList.remove('border-orange-400', 'bg-orange-50'));
-            document.getElementById('upi-' + app).classList.add('border-orange-400', 'bg-orange-50');
-            const upiMap = { gpay: 'name@okicici', phonepe: 'name@ybl', paytm: 'name@paytm' };
+            document.querySelectorAll('[id^="upi-"]').forEach(b => b.classList.remove('border-orange-500/50', 'bg-orange-500/10'));
+            document.getElementById('upi-' + app).classList.add('border-orange-500/50', 'bg-orange-500/10');
+            const upiMap = { gpay: 'foodiee@okaxis', phonepe: 'foodiee@ybl', paytm: 'foodiee@paytm' };
             document.getElementById('upiId').value = upiMap[app] || '';
         }
 
@@ -714,7 +649,8 @@
             document.querySelectorAll('.bank-item').forEach(b => b.classList.remove('selected'));
             document.querySelectorAll('[id^="check-"]').forEach(c => c.classList.add('hidden'));
             el.classList.add('selected');
-            document.getElementById('check-' + bank.toLowerCase()).classList.remove('hidden');
+            const check = document.getElementById('check-' + bank.toLowerCase());
+            if(check) check.classList.remove('hidden');
             selectedBank = bank;
         }
 
@@ -722,13 +658,12 @@
         document.getElementById('cardNum')?.addEventListener('input', e => {
             e.target.value = e.target.value.replace(/\D/g, '').replace(/(.{4})/g, '$1 ').trim().slice(0, 19);
             const num = e.target.value || '•••• •••• •••• ••••';
-            document.getElementById('previewNum').textContent = num.padEnd(19, '•').replace(/\w{4}(?=.)/g, m => m + ' ').trim() || '•••• •••• •••• ••••';
-            // Auto switch card brand
+            document.getElementById('previewNum').textContent = num;
             const raw = e.target.value.replace(/\s/g, '');
-            const brandEl = document.querySelector('.card-preview .fa-brands');
-            if (raw.startsWith('4')) { brandEl.className = 'fa-brands fa-cc-visa text-white/70 text-3xl'; }
-            else if (raw.startsWith('5')) { brandEl.className = 'fa-brands fa-cc-mastercard text-white/70 text-3xl'; }
-            else if (raw.startsWith('6')) { brandEl.className = 'fa-brands fa-cc-rupay text-white/70 text-3xl'; }
+            const brandIcon = document.getElementById('cardBrandIcon');
+            if (raw.startsWith('4')) { brandIcon.className = 'fa-brands fa-cc-visa text-white/50 text-4xl'; }
+            else if (raw.startsWith('5')) { brandIcon.className = 'fa-brands fa-cc-mastercard text-white/50 text-4xl'; }
+            else if (raw.startsWith('6')) { brandIcon.className = 'fa-brands fa-cc-rupay text-orange-500 text-4xl'; }
         });
         document.getElementById('cardName')?.addEventListener('input', e => {
             document.getElementById('previewName').textContent = e.target.value.toUpperCase() || 'YOUR NAME';
@@ -755,15 +690,21 @@
         function startOTPTimer() {
             let t = 30;
             document.getElementById('timerCount').textContent = t;
+            if(timerInterval) clearInterval(timerInterval);
             timerInterval = setInterval(() => {
                 t--;
-                document.getElementById('timerCount').textContent = t;
-                if (t <= 0) { clearInterval(timerInterval); document.getElementById('otpTimer').innerHTML = '<button onclick="resendOTP()" class="text-orange-500 font-bold">Resend OTP</button>'; }
+                const count = document.getElementById('timerCount');
+                if(count) count.textContent = t;
+                if (t <= 0) { 
+                    clearInterval(timerInterval); 
+                    const timerWrap = document.getElementById('otpTimer');
+                    if(timerWrap) timerWrap.innerHTML = '<button onclick="resendOTP()" class="text-orange-500 font-black uppercase tracking-widest text-[10px]">Resend OTP</button>'; 
+                }
             }, 1000);
         }
 
         function resendOTP() {
-            document.getElementById('otpTimer').innerHTML = 'Resend OTP in <span id="timerCount">30</span>s';
+            document.getElementById('otpTimer').innerHTML = 'Resend available in <span id="timerCount" class="text-orange-500">30</span>s';
             startOTPTimer();
         }
 
@@ -784,106 +725,101 @@
                 if (cvv.length < 3) { alert('Enter valid CVV'); return; }
             }
 
-            // Show OTP for card/netbanking, skip for UPI
             if (method === 'Card' || method === 'NetBanking') {
                 selectedPayMethod = method;
                 document.getElementById('mainCard').style.display = 'none';
                 document.getElementById('otpCard').style.display = 'block';
                 document.querySelectorAll('.payAmtBtn').forEach(el => el.textContent = amount);
-                ['otp1', 'otp2', 'otp3', 'otp4'].forEach(id => document.getElementById(id).value = '');
+                ['otp1', 'otp2', 'otp3', 'otp4'].forEach(id => {
+                    const el = document.getElementById(id);
+                    if(el) el.value = '';
+                });
                 document.getElementById('otp1').focus();
                 startOTPTimer();
             } else {
-                // UPI → straight to processing
                 selectedPayMethod = method;
                 showProcessing(method);
             }
         }
 
         function confirmOTP() {
-            const otp = ['otp1', 'otp2', 'otp3', 'otp4'].map(id => document.getElementById(id).value).join('');
-            if (otp.length < 4) { alert('Please enter the 4-digit OTP'); return; }
-            clearInterval(timerInterval);
+            const otpValue = ['otp1', 'otp2', 'otp3', 'otp4'].map(id => document.getElementById(id).value).join('');
+            if (otpValue.length < 4) { alert('Enter 4-digit OTP'); return; }
             document.getElementById('otpCard').style.display = 'none';
             showProcessing(selectedPayMethod);
         }
 
-        // ── Processing & Success ──────────────────────────────────────
         function showProcessing(method) {
             document.getElementById('mainCard').style.display = 'none';
             document.getElementById('processingCard').style.display = 'block';
-
-            const msgs = [
-                'Connecting to bank server...',
-                'Encrypting payment details...',
-                'Verifying transaction...',
-                'Confirming with merchant...'
-            ];
-            let i = 0;
-            const msgEl = document.getElementById('processingMsg');
-            const msgInterval = setInterval(() => {
-                if (i < msgs.length) { msgEl.textContent = msgs[i++]; }
-                else { clearInterval(msgInterval); }
-            }, 800);
-
-            setTimeout(() => {
-                clearInterval(msgInterval);
-                doPlaceOrder(method, generateTxnId(method));
-            }, 3500);
-        }
-
-        function generateTxnId(method) {
-            const prefix = { 'UPI': 'UPI', 'Card': 'CRD', 'NetBanking': 'NB', 'Cash on Delivery': 'COD' };
-            return (prefix[method] || 'TXN') + Date.now().toString().slice(-10);
+            
+            const steps = ["Validating payment details...", "Requesting bank permission...", "Finalizing transaction..."];
+            let s = 0;
+            const stepInterval = setInterval(() => {
+               if(s >= steps.length) {
+                   clearInterval(stepInterval);
+                   doPlaceOrder(method, 'TXN-' + Math.random().toString(36).substr(2, 9).toUpperCase());
+                   return;
+               }
+               document.getElementById('processingMsg').textContent = steps[s++];
+            }, 1200);
         }
 
         function doPlaceOrder(method, txnId) {
-            pendingOrder.paymentMethod = method;
-            pendingOrder.paymentStatus = method === 'Cash on Delivery' ? 'Pending' : 'Paid';
-            pendingOrder.transactionId = txnId;
+            const orderData = {
+                ...pendingOrder,
+                paymentMethod: method,
+                transactionId: txnId,
+                status: 'Pending'
+            };
 
             fetch('/api/order', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(pendingOrder)
+                body: JSON.stringify(orderData)
             })
-                .then(r => r.json())
-                .then(data => {
-                    if (data.success) {
-                        finalOrderId = data.orderId;
-                        localStorage.removeItem('pendingOrder');
-                        showSuccess(method, txnId);
-                    } else {
-                        // Still show success for demo if API fails
-                        showSuccess(method, txnId);
-                    }
-                })
-                .catch(() => showSuccess(method, txnId)); // Demo fallback
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    finalOrderId = data.orderId;
+                    showSuccess(method, txnId);
+                } else {
+                    alert('Order placement failed: ' + data.message);
+                    window.location.href = 'order.html';
+                }
+            })
+            .catch(err => {
+                console.error(err);
+                alert('Server connection error. Payment simulated successfully but order not recorded.');
+                showSuccess(method, txnId);
+            });
         }
 
-        function showSuccess(method, txnId) {
+        function showSuccess(method, id) {
             document.getElementById('processingCard').style.display = 'none';
-            document.getElementById('otpCard').style.display = 'none';
+            document.getElementById('mainCard').style.display = 'none';
             document.getElementById('successCard').style.display = 'block';
-            document.getElementById('txnId').textContent = txnId;
-            document.getElementById('successAmtDetail').textContent = amount;
+            document.getElementById('txnId').textContent = id;
             document.getElementById('successMethod').textContent = method;
-            document.getElementById('successAmt').textContent = 'Amount of ₹' + amount + ' successfully received.';
-            document.querySelectorAll('.payAmtBtn').forEach(el => el.textContent = amount);
+            document.getElementById('successAmtDetail').textContent = amount;
+            
+            // Auto redirect
+            setTimeout(goToThanks, 4000);
         }
 
         function goToThanks() {
             if (finalOrderId) {
-                window.location.href = './thanks-order.html?orderId=' + finalOrderId;
+                window.location.href = `thanks-order.html?orderId=${finalOrderId}`;
             } else {
-                window.location.href = './thanks-order.html';
+                window.location.href = 'index.html';
             }
         }
 
         function cancelPayment() {
-            if (confirm('Cancel payment and go back?')) window.location.href = 'order.html';
+            if (confirm('Cancel payment and return to cart?')) {
+               window.location.href = 'order.html';
+            }
         }
     </script>
 </body>
-
 </html>

@@ -218,13 +218,13 @@ function generatePDFReceipt(orderData) {
    4. 🎰 SPIN WHEEL
    ────────────────────────────────────────────────────────── */
 const SPIN_REWARDS = [
-    { label: '10% OFF', color: '#ff6b00', value: 'SPIN10' },
-    { label: 'Try Again', color: '#6b7280', value: null },
+    { label: '₹100 OFF', color: '#ff6b00', value: 'SPIN100' },
+    { label: 'Try Again', color: '#334155', value: null },
     { label: 'Free\nDelivery', color: '#10b981', value: 'FREEDEL' },
-    { label: '5% OFF', color: '#f59e0b', value: 'SPIN5' },
-    { label: 'Try Again', color: '#6b7280', value: null },
-    { label: '₹50 OFF', color: '#8b5cf6', value: 'FLAT50' },
-    { label: 'Try Again', color: '#6b7280', value: null },
+    { label: '50% OFF', color: '#f59e0b', value: 'SPIN50' },
+    { label: 'Better Luck', color: '#444', value: null },
+    { label: '₹200 OFF', color: '#8b5cf6', value: 'FLAT200' },
+    { label: 'Try Again', color: '#334155', value: null },
     { label: '15% OFF', color: '#ff8533', value: 'SPIN15' },
 ];
 

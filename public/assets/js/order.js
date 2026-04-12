@@ -118,13 +118,16 @@ function renderCart() {
     count += i.qty;
 
     cartItemsEl.innerHTML += `
-      <li class="flex justify-between items-center group mb-4">
-        <div class="flex-1">
-          <p class="text-sm font-black text-white group-hover:text-orange-500 transition-colors uppercase italic">${k}</p>
-          <p class="text-[10px] text-gray-500 font-bold uppercase tracking-widest">Qty: ${i.qty} | ₹${i.price}</p>
+      <li class="flex items-center gap-3 py-3 border-b border-white/5 group last:border-0">
+        <div class="w-8 h-8 bg-orange-500/10 border border-orange-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
+          <span class="text-orange-400 font-black text-sm">${i.qty}</span>
         </div>
-        <div class="text-right">
-           <p class="text-sm font-black text-white italic">₹${i.price * i.qty}</p>
+        <div class="flex-1 min-w-0">
+          <p class="text-sm font-black text-white group-hover:text-orange-400 transition-colors uppercase truncate">${k}</p>
+          <p class="text-[11px] text-gray-500 font-bold">₹${i.price} per item</p>
+        </div>
+        <div class="text-right flex-shrink-0">
+          <p class="text-base font-black text-orange-400">₹${i.price * i.qty}</p>
         </div>
       </li>
     `;
