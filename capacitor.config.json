@@ -3,6 +3,7 @@
   "appName": "Foodie Zone",
   "webDir": "public",
   "server": {
+    "url": "https://foodiezone-ivory.vercel.app",
     "cleartext": true
   }
 }

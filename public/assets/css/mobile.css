@@ -7,6 +7,22 @@
     display: none;
 }
 
+/* Native App touch adjustments */
+@media (max-width: 768px) {
+    * {
+        -webkit-tap-highlight-color: transparent;
+    }
+    body {
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        user-select: none;
+    }
+    input, textarea, [contenteditable="true"] {
+        -webkit-user-select: auto;
+        user-select: auto;
+    }
+}
+
 /* Mobile top actions — hidden on desktop */
 .mobile-top-actions {
     display: none !important;
