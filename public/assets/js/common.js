@@ -1,3 +1,21 @@
+// --- Capacitor API Path Patch ---
+(function() {
+  const originalFetch = window.fetch;
+  // Replace with your live Vercel/Render backend URL (e.g. 'https://foodiee-server.vercel.app')
+  const API_BASE_URL = ''; 
+  
+  const isCapacitor = window.Capacitor || navigator.userAgent.includes('Capacitor');
+  
+  if (isCapacitor && API_BASE_URL) {
+    window.fetch = function(input, init) {
+      if (typeof input === 'string' && input.startsWith('/api')) {
+        input = API_BASE_URL + input;
+      }
+      return originalFetch(input, init);
+    };
+  }
+})();
+
 // --- Global Debug System ---
 function logDebug(msg) {
   console.log(`[DEBUG] ${msg}`);

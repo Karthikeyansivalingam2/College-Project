@@ -322,15 +322,12 @@ function renderMenu() {
     const healthyToggle = document.getElementById("healthyModeToggle");
     const isHealthyMode = healthyToggle ? healthyToggle.checked : false;
 
-    logDebug(`Rendering menu: ${foodMenu.length} items fetched.`);
-    logDebug(`Mode: Healthy=${isHealthyMode}, Category=${selectedCategory}`);
-
     // Filter by category, search AND active status
     const filtered = foodMenu.filter(t => {
       // case-insensitive matching for category
       const matchesCategory = !selectedCategory || (t.category && t.category.toLowerCase() === selectedCategory.toLowerCase());
       const matchesSearch = !search || (t.name && t.name.toLowerCase().includes(search));
-      const matchesHealthy = !isHealthyMode || t.category === 'Healthy' || (t.calories && t.calories < 300);
+      const matchesHealthy = !isHealthyMode || (t.category && t.category.toLowerCase() === 'healthy') || (t.calories && t.calories < 300);
       const isActive = t.active !== false;
 
       return isActive && matchesCategory && matchesSearch && matchesHealthy;
@@ -419,11 +416,11 @@ function renderMenu() {
         
         <div class="flex-1 pr-6 relative z-10">
           <div class="flex items-center gap-2 mb-3">
-             <i class="fa-regular fa-square-caret-up text-[12px] ${t.category === 'Healthy' ? 'text-green-500' : 'text-orange-500'}"></i>
+             <i class="fa-regular fa-square-caret-up text-[12px] ${cat === 'healthy' ? 'text-green-500' : 'text-orange-500'}"></i>
              ${t.bestseller ? `<span class="bg-orange-500/10 text-orange-500 text-[9px] font-black px-2 py-0.5 rounded uppercase tracking-[0.2em] border border-orange-500/20">Bestseller</span>` : ""}
-             ${isHealthyMode && t.calories ? `<span class="bg-orange-500 text-white text-[9px] font-black px-2 py-0.5 rounded uppercase tracking-wider">${t.calories} kcal</span>` : ""}
+             ${(isHealthyMode || cat === 'healthy') && t.calories ? `<span class="bg-green-600 text-white text-[9px] font-black px-2 py-0.5 rounded uppercase tracking-wider flex items-center gap-1"><i class="fa-solid fa-leaf text-[7px]"></i> ${t.calories} kcal</span>` : ""}
           </div>
-          <h3 class="font-black text-[var(--text-dark)] text-xl mb-1 uppercase italic tracking-tighter group-hover:text-orange-500 transition-colors">${t.name}</h3>
+          <h3 class="font-black text-[var(--text-dark)] text-xl mb-1 uppercase italic tracking-tighter group-hover:text-orange-500 transition-colors">${t.name} ${cat === 'healthy' ? '<span class="text-green-500 text-[10px]">🥗</span>' : ''}</h3>
           <p class="font-black text-[var(--text-main)] text-base mb-4">₹${t.price}</p>
           <div class="flex items-center gap-4 text-[10px] text-[var(--text-muted)] font-black uppercase tracking-[0.1em] bg-[var(--bg-secondary)] px-4 py-2 rounded-xl inline-flex border border-[var(--border-light)]">
             <span><i class="fa-regular fa-clock mr-1 text-orange-500"></i> ${t.prep_time || "15 MINS"}</span>

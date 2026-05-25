@@ -1,0 +1,8 @@
+{
+  "appId": "com.foodiezone.app",
+  "appName": "Foodie Zone",
+  "webDir": "public",
+  "server": {
+    "cleartext": true
+  }
+}

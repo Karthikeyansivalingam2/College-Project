@@ -22,7 +22,24 @@ const realMenu = [
     // ── FAST FOOD & SNACKS ───────────────────────────────────
     { id: 51, name: "Chicken Burger", price: 90, category: "Fast Food", bestseller: true, calories: 520, image: "image/chicken_burger_1772726743738.png" },
     { id: 54, name: "French Fries", price: 60, category: "Fast Food", bestseller: true, calories: 380, image: "image/french_fries2_1772726759946.png" },
-    { id: 67, name: "Chicken Fried Rice", price: 120, category: "Fast Food", bestseller: true, calories: 550, image: "image/chicken_fried_rice_1772726157987.png" }
+    { id: 67, name: "Chicken Fried Rice", price: 120, category: "Fast Food", bestseller: true, calories: 550, image: "image/chicken_fried_rice_1772726157987.png" },
+
+    // ── HEALTHY & DIET ───────────────────────────────────────
+    { id: 101, name: "Quinoa Veggie Bowl", price: 180, category: "Healthy", bestseller: true, calories: 185, image: "image/quinoa_bowl_ai.png" },
+    { id: 102, name: "Sprouted Moong Salad", price: 60, category: "Healthy", bestseller: false, calories: 120, image: "image/sprouted_moong_salad.png" },
+    { id: 103, name: "Ragi Malt (Sugarfree)", price: 45, category: "Healthy", bestseller: true, calories: 95, image: "image/ragi_malt_v2.png" },
+    { id: 104, name: "Boiled Egg White (4 pcs)", price: 50, category: "Healthy", bestseller: false, calories: 68, image: "image/boiled_egg.png" },
+    { id: 105, name: "Fresh Seasonal Fruit Bowl", price: 120, category: "Healthy", bestseller: false, calories: 110, image: "image/fruit_bowl.png" },
+    { id: 106, name: "Oats & Carrot Idli", price: 75, category: "Healthy", bestseller: true, calories: 140, image: "image/oats_idli.png" },
+    { id: 107, name: "Brown Rice Chicken Bowl", price: 220, category: "Healthy", bestseller: true, calories: 320, image: "image/brown_rice_chicken.png" },
+    { id: 108, name: "Avocado & Egg Toast", price: 190, category: "Healthy", bestseller: true, calories: 210, image: "image/avocado_toast.png" },
+    { id: 109, name: "Greek Yogurt Parfait", price: 150, category: "Healthy", bestseller: false, calories: 180, image: "image/yogurt_parfait.png" },
+    { id: 110, name: "Steamed Sprouts Bhel", price: 70, category: "Healthy", bestseller: true, calories: 140, image: "image/sprouts_bhel.png" },
+    { id: 111, name: "Millet Masala Dosa", price: 85, category: "Healthy", bestseller: true, calories: 220, image: "image/millet_dosa.png" },
+    { id: 112, name: "Grilled Tofu Salad", price: 180, category: "Healthy", bestseller: false, calories: 195, image: "image/tofu_salad.png" },
+    { id: 113, name: "Vegetable Clear Soup", price: 90, category: "Healthy", bestseller: false, calories: 85, image: "image/clear_soup.png" },
+    { id: 114, name: "Honey Lemon Green Tea", price: 40, category: "Healthy", bestseller: true, calories: 15, image: "image/honey_lemon_tea.png" },
+    { id: 115, name: "Boiled Chana Chat", price: 65, category: "Healthy", bestseller: false, calories: 155, image: "image/chana_chat.png" }
 ];
 
 module.exports = realMenu;
